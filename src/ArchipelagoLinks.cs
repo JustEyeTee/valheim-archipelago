@@ -43,7 +43,7 @@ public static class ArchipelagoLinks
     private static readonly Dictionary<string, string> TrapLinkAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
         { "Ice Trap", "Frost Trap" }, { "Freeze Trap", "Frost Trap" }, { "Frozen Trap", "Frost Trap" },
-        { "Chill Trap", "Frost Trap" }, { "Slow Trap", "Frost Trap" }, { "Slowness Trap", "Frost Trap" },
+        { "Chill Trap", "Frost Trap" }, { "Slow Trap", "Tar Trap" }, { "Slowness Trap", "Tar Trap" },
         { "Stun Trap", "Frost Trap" }, { "Paralyze Trap", "Frost Trap" },
         { "Poison Trap", "Poison Trap" }, { "Poison Mushroom", "Poison Trap" },
         { "Fire Trap", "Burning Trap" }, { "Burn Trap", "Burning Trap" }, { "Bomb", "Burning Trap" },
@@ -52,11 +52,19 @@ public static class ArchipelagoLinks
         { "Monster Trap", "Greydwarf Ambush Trap" }, { "Enemy Trap", "Greydwarf Ambush Trap" },
         { "Spawn Trap", "Greydwarf Ambush Trap" }, { "Ambush Trap", "Greydwarf Ambush Trap" },
         { "Disarm Trap", "Butterfingers Trap" }, { "Drop Trap", "Butterfingers Trap" }, { "Fumble Trap", "Butterfingers Trap" },
-        { "Thunder Trap", "Thunderstorm Trap" }, { "Lightning Trap", "Thunderstorm Trap" },
+        { "Thunder Trap", "Thunderstorm Trap" }, { "Lightning Trap", "Lightning Strike Trap" },
         { "Storm Trap", "Thunderstorm Trap" }, { "Rain Trap", "Thunderstorm Trap" }, { "Weather Trap", "Thunderstorm Trap" },
         { "Hunger Trap", "Famine Trap" }, { "Starvation Trap", "Famine Trap" }, { "Food Trap", "Famine Trap" },
         { "Heavy Trap", "Heavy Load Trap" }, { "Weight Trap", "Heavy Load Trap" }, { "Gravity Trap", "Heavy Load Trap" },
         { "Water Trap", "Soaked Trap" }, { "Wet Trap", "Soaked Trap" }, { "Soak Trap", "Soaked Trap" },
+        { "Lava Trap", "Floor Is Lava Trap" }, { "Floor Is Lava", "Floor Is Lava Trap" },
+        { "Bat Trap", "Bat Swarm Trap" }, { "Swarm Trap", "Bat Swarm Trap" },
+        { "Snow Trap", "Blizzard Trap" }, { "Blizzard", "Blizzard Trap" }, { "Cold Trap", "Blizzard Trap" },
+        { "Sticky Trap", "Tar Trap" }, { "Slime Trap", "Tar Trap" },
+        { "Launch Trap", "Launch Trap" }, { "Jump Trap", "Launch Trap" }, { "Bounce Trap", "Launch Trap" },
+        { "Spring Launch Trap", "Launch Trap" },
+        { "Rust Trap", "Rust Trap" }, { "Break Trap", "Rust Trap" }, { "Durability Trap", "Rust Trap" },
+        { "Horde Trap", "Monster Pack Trap" }, { "Army Trap", "Monster Pack Trap" },
     };
 
     static ArchipelagoLinks()

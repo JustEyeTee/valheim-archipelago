@@ -61,6 +61,23 @@ public static class ArchipelagoExtras
     {
         "Greydwarf Ambush Trap", "Thunderstorm Trap", "Burning Trap", "Soaked Trap", "Famine Trap",
         "Skeleton Ambush Trap", "Poison Trap", "Frost Trap", "Raid Trap", "Butterfingers Trap", "Heavy Load Trap",
+        "Monster Pack Trap", "Bat Swarm Trap", "Lightning Strike Trap", "Floor Is Lava Trap", "Blizzard Trap",
+        "Tar Trap", "Launch Trap", "Rust Trap",
+    };
+
+    // Monster Pack Trap: what lives in each biome (Ocean gets bats, which fly).
+    private static readonly Dictionary<Heightmap.Biome, (string creature, int count)> BiomePacks =
+        new Dictionary<Heightmap.Biome, (string, int)>
+    {
+        { Heightmap.Biome.Meadows, ("Greydwarf", 4) },
+        { Heightmap.Biome.BlackForest, ("Greydwarf_Elite", 2) },
+        { Heightmap.Biome.Swamp, ("Draugr", 3) },
+        { Heightmap.Biome.Mountain, ("Wolf", 3) },
+        { Heightmap.Biome.Plains, ("Goblin", 3) },
+        { Heightmap.Biome.Mistlands, ("Seeker", 3) },
+        { Heightmap.Biome.AshLands, ("Charred_Melee", 3) },
+        { Heightmap.Biome.DeepNorth, ("BlobFrost", 3) },
+        { Heightmap.Biome.Ocean, ("Bat", 6) },
     };
     private static readonly HashSet<string> Traps = new HashSet<string>(TrapNames);
 
@@ -76,15 +93,20 @@ public static class ArchipelagoExtras
 
     private const float TrapSpacingSeconds = 10f;
     private const float StormSeconds = 120f;
+    private const float BlizzardSeconds = 90f;
+    private const float LavaSeconds = 30f;
     private const float ReminderSeconds = 60f;
     private const float ExploreCheckSeconds = 15f;
     private const float WorldRadius = 10000f;
 
+    private static readonly AccessTools.FieldRef<Character, Collider> LastGroundRef =
+        AccessTools.FieldRefAccess<Character, Collider>("m_lastGroundCollider");
     private static readonly AccessTools.FieldRef<Minimap, BitArray> ExploredRef =
         AccessTools.FieldRefAccess<Minimap, BitArray>("m_explored");
 
     private static float nextTrapTime;
     private static float stormEndTime;
+    private static float lavaEndTime;
     private static float nextReminderTime;
     private static float nextExploreTime;
     private static int[] exploredWords;
@@ -190,6 +212,20 @@ public static class ArchipelagoExtras
         {
             nextExploreTime = Time.time + ExploreCheckSeconds;
             CheckExploration(player);
+        }
+
+        if (lavaEndTime > 0f)
+        {
+            if (Time.time >= lavaEndTime || player.IsDead())
+            {
+                lavaEndTime = 0f;
+                player.Message(MessageHud.MessageType.Center, "The floor is no longer lava");
+            }
+            else if (player.IsOnGround() && !OnSafeGround(player) &&
+                     AddEffect(player, "Burning") is SE_Burning lava)
+            {
+                lava.AddFireDamage(player.GetMaxHealth() * 0.05f);
+            }
         }
 
         if (stormEndTime > 0f && Time.time >= stormEndTime)
@@ -366,11 +402,66 @@ public static class ArchipelagoExtras
         return inventory.AddItem(prefab, amount);
     }
 
+    // A trap that throws must not stop item processing (bundles and later traps).
     public static void FireTrap(Player player, string trap)
+    {
+        try { FireTrapUnsafe(player, trap); }
+        catch (Exception ex) { ValheimRandomizer.Log.LogError($"[AP] Trap '{trap}' failed: {ex}"); }
+    }
+
+    // Floor Is Lava: standing on something built (or a boat) is safe.
+    private static bool OnSafeGround(Player player)
+    {
+        if (player.GetStandingOnShip() != null) return true;
+        var ground = LastGroundRef(player);
+        return ground != null && ground.GetComponentInParent<Piece>() != null;
+    }
+
+    private static void ForceEnvironment(string environment, float seconds)
+    {
+        if (EnvMan.instance != null && EnvMan.instance.m_environments.Any(env => env.m_name == environment))
+        {
+            EnvMan.instance.SetForceEnvironment(environment);
+            stormEndTime = Time.time + seconds;
+        }
+        else ValheimRandomizer.Log.LogWarning($"[AP] Environment '{environment}' not found");
+    }
+
+    private static void FireTrapUnsafe(Player player, string trap)
     {
         ValheimRandomizer.Log.LogInfo("[AP] Trap: " + trap);
         switch (trap)
         {
+            case "Monster Pack Trap":
+                (string creature, int count) pack = BiomePacks.TryGetValue(player.GetCurrentBiome(), out var p) ? p : ("Greydwarf", 4);
+                SpawnAround(player, pack.creature, pack.count, 12f);
+                break;
+            case "Bat Swarm Trap":
+                SpawnAround(player, "Bat", 6, 6f);
+                break;
+            case "Lightning Strike Trap":
+                var bolt = ZNetScene.instance ? ZNetScene.instance.GetPrefab("lightningAOE") : null;
+                if (bolt) UnityEngine.Object.Instantiate(bolt, player.transform.position, Quaternion.identity);
+                else ValheimRandomizer.Log.LogWarning("[AP] 'lightningAOE' not found");
+                break;
+            case "Floor Is Lava Trap":
+                lavaEndTime = Time.time + LavaSeconds;
+                break;
+            case "Blizzard Trap":
+                ForceEnvironment("SnowStorm", BlizzardSeconds);
+                break;
+            case "Tar Trap":
+                AddEffect(player, "Tared");
+                break;
+            case "Launch Trap":
+                player.ForceJump(Vector3.up * 12f, true);
+                break;
+            case "Rust Trap":
+                foreach (var item in player.GetInventory().GetEquippedItems())
+                {
+                    if (item.m_shared.m_useDurability) item.m_durability *= 0.5f;
+                }
+                break;
             case "Greydwarf Ambush Trap":
                 SpawnAround(player, "Greydwarf", 3, 10f);
                 break;
@@ -394,12 +485,7 @@ public static class ArchipelagoExtras
                 if (stone) player.GetInventory().AddItem(stone, 50);
                 break;
             case "Thunderstorm Trap":
-                if (EnvMan.instance != null && EnvMan.instance.m_environments.Any(env => env.m_name == "ThunderStorm"))
-                {
-                    EnvMan.instance.SetForceEnvironment("ThunderStorm");
-                    stormEndTime = Time.time + StormSeconds;
-                }
-                else ValheimRandomizer.Log.LogWarning("[AP] Environment 'ThunderStorm' not found");
+                ForceEnvironment("ThunderStorm", StormSeconds);
                 break;
             case "Burning Trap":
                 if (AddEffect(player, "Burning") is SE_Burning burning) burning.AddFireDamage(player.GetMaxHealth() * 0.25f);
@@ -411,7 +497,9 @@ public static class ArchipelagoExtras
                 player.ClearFood();
                 break;
         }
-        player.Message(MessageHud.MessageType.Center, $"Archipelago: {trap}!");
+        player.Message(MessageHud.MessageType.Center, trap == "Floor Is Lava Trap"
+            ? "Archipelago: The floor is lava! Get onto something you built"
+            : $"Archipelago: {trap}!");
     }
 
     // A raid the player is ready for (by the game's own rules) in the biome they're in. Only
