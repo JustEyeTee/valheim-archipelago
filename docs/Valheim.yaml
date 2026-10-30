@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.11.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.12.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -95,6 +95,7 @@ Valheim:
     # Explorer: uncover explorer_percent of the world map.
     # Skill Master: raise skill_master_count skills to skill_master_level (from the skills you can
     #   train in the era).
+    # Great Hall: reach great_hall_comfort comfort (lowered to the most the era allows).
     # Hildir's Quests: return each chest Hildir asks for that's in the era (from The Elder's era
     #   on: the Smouldering Tomb; then the Howling Cavern in the Mountains; then the Sealed Tower in
     #   the Plains).
@@ -187,6 +188,19 @@ Valheim:
     random-low: 0 # random value weighted towards lower values
     random-high: 0 # random value weighted towards higher values
     random-range-1-100: 0 # random value between 1 and 100
+
+  great_hall_comfort:
+    # Great Hall: the comfort level you have to reach (see comfort_checks). Lowered to the most the goal's
+    # era allows if it's more.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 2
+    # Maximum value is 14
+    10: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-2-14: 0 # random value between 2 and 14
 
   research_cost_percent:
     # Scales how many materials each research costs at the Research Bench, as a percentage.
@@ -295,6 +309,21 @@ Valheim:
     every_10: 50
     every_20: 0
     every_25: 0
+
+  comfort_checks:
+    # Adds a check for each comfort level you reach, from 2 up to this level (0 turns them off). Comfort is
+    # what the Rested effect shows: 1, plus 1 under a roof, plus the best piece of each kind (fire, bed,
+    # chair, table, banner, rug...) within 10 m. Logic counts the pieces you can build with the researches
+    # you've received. Levels past what the goal's era allows are left out.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 14
+    14: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-14: 0 # random value between 0 and 14
 
   discovery_checks:
     # Adds a check for reaching each kind of dungeon and landmark for the first time: Burial

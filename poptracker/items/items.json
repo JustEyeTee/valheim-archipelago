@@ -162,6 +162,12 @@
   "codes": "bed_tier_2"
  },
  {
+  "name": "Bed Tier 3",
+  "type": "toggle",
+  "img": "images/items/bed_tier_3.png",
+  "codes": "bed_tier_3"
+ },
+ {
   "name": "Beekeping",
   "type": "toggle",
   "img": "images/items/beekeping.png",
@@ -1180,6 +1186,12 @@
   "type": "toggle",
   "img": "images/items/wolf_armor.png",
   "codes": "wolf_armor"
+ },
+ {
+  "name": "Wooden Roofs",
+  "type": "toggle",
+  "img": "images/items/wooden_roofs.png",
+  "codes": "wooden_roofs"
  },
  {
   "name": "Workbench Upgrade 1",

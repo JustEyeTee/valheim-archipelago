@@ -8,7 +8,9 @@ Needs UnityPy (pip install UnityPy). Takes 20-30 minutes on the 1.9 GB of game d
 Sections, all keyed by prefab (GameObject) name where there is one:
   items        ItemDrop: display token, item type, food values, tool tier, skill
   recipes      crafted item, amount, station and level, ingredients
-  pieces       building pieces: token, category, station, ingredients
+  pieces       building pieces: token, category, station, ingredients, comfort and comfort group
+               (Piece.ComfortGroup: 0 None, 1 Fire, 2 Bed, 3 Banner, 4 Chair, 5 Table, 6 Carpet, 7 Display,
+               8 Decor, 9 Garland, 10 Lantern, 11 Leisure)
   stations     crafting stations: token
   creatures    Character: token, boss, health, faction, defeat key, boss event
   drops        CharacterDrop: what each creature drops (with chances)
@@ -161,7 +163,8 @@ for kind, cab, pid, ex, t in kept:
             "ingredients": ingredients(t, cab, ex)}
     elif kind == "piece":
         db["pieces"][owner] = {"name": t.get("m_name"), "category": t.get("m_category"), "enabled": t.get("m_enabled", 1),
-                               "station": resolve(t.get("m_craftingStation"), cab, ex), "ingredients": ingredients(t, cab, ex)}
+                               "station": resolve(t.get("m_craftingStation"), cab, ex), "ingredients": ingredients(t, cab, ex),
+                               "comfort": t.get("m_comfort", 0), "comfort_group": t.get("m_comfortGroup", 0)}
     elif kind == "station":
         db["stations"][owner] = {"name": t.get("m_name")}
     elif kind == "character":

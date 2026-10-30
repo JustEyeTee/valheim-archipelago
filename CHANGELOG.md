@@ -2,6 +2,18 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.12.0
+
+- **Comfort checks** (`comfort_checks`, on by default): a check for each comfort level you reach, up to 14.
+  Logic adds up the best comfort piece of each kind (fire, bed, chair, table, banner, rug, bathtub) among
+  the pieces you can build with the researches you've received, under a roof, the way the game does; levels
+  past what your goal's era allows are left out (5 in an Eikthyr or The Elder game, 10 by Bonemass).
+- **Great Hall** goal condition: reach comfort `great_hall_comfort` (lowered to your era's most).
+- Comfort data comes from the game files (`tools/scan_game_data.py` records each piece's comfort;
+  `tools/gen_comfort_data.py` builds the table, leaving out pieces you can't build: copies placed in world
+  locations, camp decoration and seasonal pieces). Pieces needing nails, chains, jute or Frostwood aren't
+  counted yet, so logic expects a little less comfort than you can reach.
+
 ## 0.11.0
 
 - **Goal conditions** (`goal_conditions`): pick any combination of Goal Boss (the default), All Bosses, Relic

@@ -179,8 +179,8 @@ pre.yaml .k { color: var(--code-key); }
   // Goal conditions and the options that only matter with them.
   const CONDITION_OPTIONS = { relic_hunt_total: "Relic Hunt", relic_hunt_percent: "Relic Hunt",
     trophy_hunt_percent: "Trophy Hunt", researcher_percent: "Researcher", explorer_percent: "Explorer",
-    skill_master_count: "Skill Master", skill_master_level: "Skill Master" };
-  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks", ...Object.keys(CONDITION_OPTIONS)];
+    skill_master_count: "Skill Master", skill_master_level: "Skill Master", great_hall_comfort: "Great Hall" };
+  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks", "comfort_checks", ...Object.keys(CONDITION_OPTIONS)];
   const goalData = () => data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
   // The same rules as the APWorld (ValheimWorld.wanted).
   const SKILL_STEP = { every_10: 10, every_20: 20, every_25: 25 };
@@ -196,8 +196,9 @@ pre.yaml .k { color: var(--code-key); }
       : (p === 0.5 || p === 1 || (Number.isInteger(p) && p % 2 === 0));
     return kept && p <= values.exploration_checks;
   }
+  const comfortLevels = b => b.comfort.filter(level => level <= values.comfort_checks);
   function totalFor(b) {
-    let t = b.base + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length;
+    let t = b.base + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length + comfortLevels(b).length;
     for (const o of CHECK_OPTIONS) if (values[o]) t += b[o] || 0;
     return t;
   }
@@ -223,6 +224,9 @@ pre.yaml .k { color: var(--code-key); }
     setOption("exploration_checks", !b.explore.length ? "none for this goal" : `+${checks(explore.length)}` +
               (values.exploration_checks > top ? ` (up to ${top}% in this goal)` : ""), explore.length > 0, !b.explore.length);
     setOption("exploration_check_spacing", "", false, !b.explore.length || values.exploration_checks === 0);
+    const comfort = comfortLevels(b), comfortTop = b.comfort.length ? b.comfort[b.comfort.length - 1] : 0;
+    setOption("comfort_checks", !b.comfort.length ? "none for this goal" : `+${checks(comfort.length)}` +
+              (values.comfort_checks > comfortTop ? ` (up to comfort ${comfortTop} in this goal)` : ""), comfort.length > 0, !b.comfort.length);
     updateConditions(g);
     updateSummary(g);
     $("total").innerHTML = "";
@@ -236,11 +240,11 @@ pre.yaml .k { color: var(--code-key); }
   const CHECK_KINDS = [["research", "Researches"], ["trophy", "Trophies"], ["biome_checks", "Biomes"],
     ["obtain_checks", "Obtain"], ["kill_checks", "Kills"], ["discovery_checks", "Discoveries"], ["build_checks", "Build"],
     ["eat_checks", "Eat"], ["fishing_checks", "Fishing"], ["taming_checks", "Taming"], ["trader_checks", "Trader"],
-    ["skills", "Skills"], ["explore", "Exploration"]];
+    ["skills", "Skills"], ["explore", "Exploration"], ["comfort", "Comfort"]];
   function summary(g) {
     const b = g.breakdown, total = totalFor(b);
     const kinds = { research: b.research, trophy: b.trophy, skills: b.skills_available * skillLevels().length,
-                    explore: b.explore.filter(exploreWanted).length };
+                    explore: b.explore.filter(exploreWanted).length, comfort: comfortLevels(b).length };
     for (const o of CHECK_OPTIONS) kinds[o] = values[o] ? b[o] || 0 : 0;
     let boss = values.boss_items ? b.boss_drops : 0, gear = values.gear_items ? b.gear : 0, relics = 0;
     let missing = total - (b.research + b.trophy + boss + gear);
@@ -287,6 +291,8 @@ pre.yaml .k { color: var(--code-key); }
       case "Explorer": return c[key] ? `${Math.min(v.explorer_percent, c[key])}% of the map` +
         (v.explorer_percent > c[key] ? ` (the most in this era)` : "") : "nothing in this era";
       case "Skill Master": return `${Math.min(v.skill_master_count, c[key])} of ${plural(c[key], "skill")} to level ${v.skill_master_level}`;
+      case "Great Hall": return c[key] ? `comfort ${Math.min(v.great_hall_comfort, c[key])}` +
+        (v.great_hall_comfort > c[key] ? ` (the most in this era)` : "") : "nothing in this era";
       case "Hildir's Quests": return c[key] ? plural(c[key], "chest") + " to return" : "nothing in this era";
     }
     return "";

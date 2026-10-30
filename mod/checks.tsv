@@ -10,6 +10,7 @@
 # tame: key = creature prefab, sent when one is tamed near you
 # buy: key = item prefab, sent when you buy it from a trader
 # explore: key = percent of the world map you have explored
+# comfort: key = comfort level, sent when your comfort (what the Rested effect shows) reaches it
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
 obtain	Flint	Obtain: Flint	0	
@@ -629,3 +630,16 @@ explore	18.5	Explore: 18.5% of the World	11
 explore	19	Explore: 19% of the World	11	
 explore	19.5	Explore: 19.5% of the World	11	
 explore	20	Explore: 20% of the World	11	
+comfort	2	Comfort: Level 2	1	
+comfort	3	Comfort: Level 3	1	
+comfort	4	Comfort: Level 4	1	
+comfort	5	Comfort: Level 5	1	
+comfort	6	Comfort: Level 6	5	
+comfort	7	Comfort: Level 7	5	
+comfort	8	Comfort: Level 8	5	
+comfort	9	Comfort: Level 9	5	
+comfort	10	Comfort: Level 10	6	
+comfort	11	Comfort: Level 11	7	
+comfort	12	Comfort: Level 12	7	
+comfort	13	Comfort: Level 13	8	
+comfort	14	Comfort: Level 14	8	

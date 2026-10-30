@@ -11,7 +11,7 @@ AutoWorldRegister.world_types.pop("Valheim", None)
 import valheimapworld as vw
 PREFIXES = {"Biome: ": "Biomes", "Obtain: ": "Obtain", "Kill: ": "Kills", "Discover: ": "Discoveries", "Build: ": "Build",
             "Eat: ": "Eat", "Catch: ": "Fishing", "Tame: ": "Taming", "Buy: ": "Trader", "Skill: ": "Skills",
-            "Explore: ": "Exploration", "Trophy: ": "Trophies"}
+            "Explore: ": "Exploration", "Trophy: ": "Trophies", "Comfort: ": "Comfort"}
 def item_kind(n):
     if n in vw.RESEARCH_PREREQS: return "Researches"
     if n.startswith("Trophy: "): return "Trophy boosts"

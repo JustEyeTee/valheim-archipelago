@@ -69,6 +69,7 @@ public static class ArchipelagoExtras
     private static readonly Dictionary<string, string> ObtainLocations = new Dictionary<string, string>();
     private static readonly Dictionary<string, string> KillLocations = new Dictionary<string, string>();
     private static readonly List<(float percent, string location)> ExploreLocations = new List<(float, string)>();
+    private static readonly List<(int level, string location)> ComfortLocations = new List<(int, string)>();
 
     private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
         new List<(Skills.SkillType, int, string)>();
@@ -136,6 +137,7 @@ public static class ArchipelagoExtras
     public static IEnumerable<string> LocationNames => BiomeLocations.Values
         .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location))
         .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location))
+        .Concat(ComfortLocations.Select(e => e.location))
         .Concat(EatLocations.Values).Concat(BuildLocations.Values).Concat(BuyLocations.Values).Concat(TameLocations.Values);
 
     static ArchipelagoExtras()
@@ -166,6 +168,7 @@ public static class ArchipelagoExtras
                             int.Parse(parts[1], CultureInfo.InvariantCulture), cols[2]));
                         break;
                     case "discover": DiscoverLocations.Add((cols[1], cols[2])); break;
+                    case "comfort": ComfortLocations.Add((int.Parse(cols[1], CultureInfo.InvariantCulture), cols[2])); break;
                 }
             }
         }
@@ -224,6 +227,16 @@ public static class ArchipelagoExtras
             if (player.GetSkills().GetSkillLevel(skill) >= level) ArchipelagoConnection.SendLocationOnce(skillLocation);
         }
         ArchipelagoGoal.MarkSkills(player);
+
+        // Comfort checks: the level the game would give the Rested effect where you stand.
+        if (ComfortLocations.Count > 0)
+        {
+            int comfort = SE_Rested.CalculateComfortLevel(player);
+            foreach (var (level, comfortLocation) in ComfortLocations)
+            {
+                if (comfort >= level) ArchipelagoConnection.SendLocationOnce(comfortLocation);
+            }
+        }
 
         var here = Location.GetLocation(player.transform.position);
         if (here != null)

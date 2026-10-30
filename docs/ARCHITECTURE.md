@@ -194,6 +194,9 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
 4. **`set_rules`** adds the logic: research prerequisites, the stations some checks need, and **boss
    gates**: a location or tier that needs a boss's drop needs "<Boss> Defeated" **or** that drop as an
    item (Haldor's boss-unlocked stock needs the kill itself).
+   Comfort checks and the Great Hall goal get a rule that adds up the comfort you can build
+   (`ValheimWorld.comfort`: `comfort_data.py`'s pieces whose researches you have and whose materials' obtain
+   checks you can reach, under a roof, best piece per comfort group).
 5. **`fill_slot_data`** sends the mod the goal (conditions, targets, counts), research cost, link settings and, for Universal
    Tracker, the options that decide which locations exist.
 
@@ -205,11 +208,13 @@ flowchart LR
     RT["mod/research.tsv"] -- gen_apworld_data.py --> RD["research_data.py"]
     CT["mod/checks.tsv"] -- gen_apworld_data.py --> CD["check_data.py"]
     DB -- gen_boss_gates.py --> BD["boss_data.py"]
+    DB -- gen_comfort_data.py --> CF["comfort_data.py<br/>+ comfort rows in checks.tsv"]
     DB -.->|verify_game_data.py| V{{"every name exists"}}
     DB -.->|audit_tiers.py| A{{"no check before<br/>its materials"}}
     RD --> APW["APWorld<br/>(valheimapworld/)"]
     CD --> APW
     BD --> APW
+    CF --> APW
     APW -- gen_poptracker.py --> PT["poptracker/"]
     APW -- build.sh --> Z["dist/ zips: mod, APWorld,<br/>PopTracker, Thunderstore"]
     PT -- build.sh --> Z
@@ -221,6 +226,7 @@ flowchart LR
 | `verify_game_data.py` | checks every name the randomizer uses against the database | after a Valheim update, or editing the tables |
 | `gen_apworld_data.py` | writes `research_data.py` and `check_data.py` | after editing `research.tsv` or `checks.tsv` |
 | `gen_boss_gates.py` | writes `boss_data.py`: which bosses each research and check needs | after editing the tables |
+| `gen_comfort_data.py` | writes `comfort_data.py` (each buildable comfort piece and what it needs) and the comfort rows of `checks.tsv` | after a Valheim update, or editing `research.tsv` or the obtain checks (then run `gen_apworld_data.py`) |
 | `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
 | `gen_poptracker.py` | writes the PopTracker pack from the APWorld's own tables | before a release |
 | `gen_options_page.py` | builds the Options Builder web page (`docs/options/`, served by GitHub Pages) from the APWorld's options, counting each goal's checks | before a release |
@@ -230,6 +236,7 @@ flowchart LR
 | `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten | after any APWorld change |
 | `ap_tests.sh` | runs Archipelago's own test suites for this world | before a release |
 | `net_test.sh` | runs the mod's network code against a live server | after changing the links or connection code |
+| `options_page_test.sh` | checks the Options Builder's counts of checks and items against real generation | after changing options, checks or the item pool |
 
 ## Adding a check: an example
 

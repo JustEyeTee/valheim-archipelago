@@ -84,15 +84,17 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | Option | Default | |
 |---|---|---|
 | `goal` | `kall_fimbulbringer` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer (the full game, through the Deep North). Checks and items past the goal are left out. |
-| `goal_conditions` | Goal Boss | What you have to do to win, any combination (all of them): Goal Boss, All Bosses, Relic Hunt, Trophy Hunt, Researcher, Explorer, Skill Master, Hildir's Quests. Counted within the goal's era; a condition with nothing to do in it is dropped. |
+| `goal_conditions` | Goal Boss | What you have to do to win, any combination (all of them): Goal Boss, All Bosses, Relic Hunt, Trophy Hunt, Researcher, Explorer, Skill Master, Great Hall, Hildir's Quests. Counted within the goal's era; a condition with nothing to do in it is dropped. |
 | `relic_hunt_total`, `relic_hunt_percent` | 20, 75 | Relic Hunt: Forsaken Relics placed, and the share you need. |
 | `trophy_hunt_percent`, `researcher_percent` | 50, 75 | Share of the era's trophies or researches you need. |
 | `explorer_percent` | 5 | Share of the world map to uncover (lowered to the most the era allows). |
 | `skill_master_count`, `skill_master_level` | 5, 50 | How many skills, to what level. |
+| `great_hall_comfort` | 10 | Great Hall: the comfort level to reach (lowered to the most the era allows). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
 | `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |
 | `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks` | on | Extra kinds of checks. |
 | `exploration_checks`, `exploration_check_spacing` | 6, one_percent | Checks for exploring up to this % of the map (0-20), every half, one or two percent. |
+| `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |

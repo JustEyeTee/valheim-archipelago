@@ -97,7 +97,7 @@ def goal_info(goal):
     explore = targets["Explorer"]
     return {"All Bosses": len(built.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
             "Researcher": len(targets["Researcher"]), "Skill Master": len(targets["Skill Master"]),
-            "Hildir's Quests": len(targets["Hildir's Quests"]),
+            "Hildir's Quests": len(targets["Hildir's Quests"]), "Great Hall": built.max_comfort if targets["Great Hall"] else 0,
             "Explorer": int(float(explore[0][len("Explore: "):].split("%")[0])) if explore else 0}
 
 
@@ -110,9 +110,10 @@ def breakdown(goal):
     """How many checks each option adds for this goal: with every kind of check on, each location is
     counted under the option that adds it. Skills: how many can be trained in this goal (every level of a
     skill comes with it); exploration: the percentages available. The rest are always there."""
-    out = {"base": 0, "research": 0, "trophy": 0, "skills_available": 0, "explore": []}
+    out = {"base": 0, "research": 0, "trophy": 0, "skills_available": 0, "explore": [], "comfort": []}
     for name in locations({"goal": goal, "kill_checks": 1, "skill_checks": 10, "skill_check_spacing": "every_10",
-                           "exploration_checks": 20, "exploration_check_spacing": "half_percent"}):
+                           "exploration_checks": 20, "exploration_check_spacing": "half_percent",
+                           "comfort_checks": hints["comfort_checks"].range_end}):
         option = next((o for prefix, o in CHECK_OPTIONS.items() if name.startswith(prefix)), None)
         if option:
             out[option] = out.get(option, 0) + 1
@@ -120,10 +121,13 @@ def breakdown(goal):
             out["skills_available"] += 1
         elif name.startswith("Explore: "):
             out["explore"].append(float(name[len("Explore: "):].split("%")[0]))
+        elif name.startswith(world.COMFORT):
+            out["comfort"].append(world.comfort_level(name))
         else:
             out["base"] += 1
             out["trophy" if name.startswith("Trophy: ") else "research"] += 1
     out["explore"].sort()
+    out["comfort"].sort()
     out.update(pool_info(goal))
     return out
 

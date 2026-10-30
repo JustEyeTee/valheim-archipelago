@@ -7675,5 +7675,156 @@
     "y": 786
    }
   ]
+ },
+ {
+  "name": "Comfort - Tier 1",
+  "sections": [
+   {
+    "name": "Comfort: Level 2",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,$comfort|2"
+    ]
+   },
+   {
+    "name": "Comfort: Level 3",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,$comfort|3"
+    ]
+   },
+   {
+    "name": "Comfort: Level 4",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,$comfort|4"
+    ]
+   },
+   {
+    "name": "Comfort: Level 5",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,$comfort|5"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1575,
+    "y": 146
+   }
+  ]
+ },
+ {
+  "name": "Comfort - Tier 5",
+  "sections": [
+   {
+    "name": "Comfort: Level 6",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest,$comfort|6"
+    ]
+   },
+   {
+    "name": "Comfort: Level 7",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest,$comfort|7"
+    ]
+   },
+   {
+    "name": "Comfort: Level 8",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest,$comfort|8"
+    ]
+   },
+   {
+    "name": "Comfort: Level 9",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest,$comfort|9"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1575,
+    "y": 402
+   }
+  ]
+ },
+ {
+  "name": "Comfort - Tier 6",
+  "sections": [
+   {
+    "name": "Comfort: Level 10",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest,$comfort|10"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1575,
+    "y": 466
+   }
+  ]
+ },
+ {
+  "name": "Comfort - Tier 7",
+  "sections": [
+   {
+    "name": "Comfort: Level 11",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron,$comfort|11"
+    ]
+   },
+   {
+    "name": "Comfort: Level 12",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron,$comfort|12"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1575,
+    "y": 530
+   }
+  ]
+ },
+ {
+  "name": "Comfort - Tier 8",
+  "sections": [
+   {
+    "name": "Comfort: Level 13",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver,$comfort|13"
+    ]
+   },
+   {
+    "name": "Comfort: Level 14",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver,$comfort|14"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1575,
+    "y": 594
+   }
+  ]
  }
 ]

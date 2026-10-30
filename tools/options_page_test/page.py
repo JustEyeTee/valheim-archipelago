@@ -8,7 +8,7 @@ cases = [
     ("kall_fimbulbringer", []),
     ("eikthyr", [("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "50"),
                  ("num", "#opt-trap_percentage", "33"), ("num", "#opt-boost_percentage", "50")]),
-    ("the_elder", [("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",),
+    ("the_elder", [("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",), ("num", "#opt-comfort_checks", "3"),
                    ("uncheck", "#opt-starter_kit")]),
     ("yagluth", [("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
                  ("num", "#opt-exploration_checks", "20"), ("click", "label[for=opt-exploration_check_spacing-half_percent]")]),

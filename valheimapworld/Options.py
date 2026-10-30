@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from .comfort_data import MAX_COMFORT
 from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionGroup, OptionSet, PerGameCommonOptions, Range, Toggle
 
 
@@ -49,6 +50,7 @@ class GoalConditions(OptionSet):
     Explorer: uncover explorer_percent of the world map.
     Skill Master: raise skill_master_count skills to skill_master_level (from the skills you can
       train in the era).
+    Great Hall: reach great_hall_comfort comfort (lowered to the most the era allows).
     Hildir's Quests: return each chest Hildir asks for that's in the era (from The Elder's era
       on: the Smouldering Tomb; then the Howling Cavern in the Mountains; then the Sealed Tower in
       the Plains).
@@ -56,7 +58,7 @@ class GoalConditions(OptionSet):
     """
     display_name = "Goal Conditions"
     valid_keys = ["Goal Boss", "All Bosses", "Relic Hunt", "Trophy Hunt", "Researcher", "Explorer",
-                  "Skill Master", "Hildir's Quests"]
+                  "Skill Master", "Great Hall", "Hildir's Quests"]
     default = frozenset({"Goal Boss"})
 
 
@@ -133,6 +135,17 @@ class SkillMasterLevel(Range):
     default = 50
 
 
+class GreatHallComfort(Range):
+    """
+    Great Hall: the comfort level you have to reach (see comfort_checks). Lowered to the most the goal's
+    era allows if it's more.
+    """
+    display_name = "Great Hall Comfort"
+    range_start = 2
+    range_end = MAX_COMFORT
+    default = 10
+
+
 class ResearchCostPercent(NamedRange):
     """
     Scales how many materials each research costs at the Research Bench, as a percentage.
@@ -195,6 +208,19 @@ class ExplorationCheckSpacing(Choice):
     option_one_percent = 1
     option_two_percent = 2
     default = option_one_percent
+
+
+class ComfortChecks(Range):
+    """
+    Adds a check for each comfort level you reach, from 2 up to this level (0 turns them off). Comfort is
+    what the Rested effect shows: 1, plus 1 under a roof, plus the best piece of each kind (fire, bed,
+    chair, table, banner, rug...) within 10 m. Logic counts the pieces you can build with the researches
+    you've received. Levels past what the goal's era allows are left out.
+    """
+    display_name = "Comfort Checks"
+    range_start = 0
+    range_end = MAX_COMFORT
+    default = MAX_COMFORT
 
 
 class KillChecks(Toggle):
@@ -424,12 +450,14 @@ class ValheimOptions(PerGameCommonOptions):
     explorer_percent: ExplorerPercent
     skill_master_count: SkillMasterCount
     skill_master_level: SkillMasterLevel
+    great_hall_comfort: GreatHallComfort
     research_cost_percent: ResearchCostPercent
     combat_logic: CombatLogic
     biome_checks: BiomeChecks
     obtain_checks: ObtainChecks
     exploration_checks: ExplorationChecks
     exploration_check_spacing: ExplorationCheckSpacing
+    comfort_checks: ComfortChecks
     kill_checks: KillChecks
     skill_checks: SkillChecks
     skill_check_spacing: SkillCheckSpacing
@@ -454,9 +482,10 @@ class ValheimOptions(PerGameCommonOptions):
 # How the options are grouped on the website and in generated templates.
 option_groups = [
     OptionGroup("Goal", [Goal, GoalConditions, RelicHuntTotal, RelicHuntPercent, TrophyHuntPercent, ResearcherPercent,
-                         ExplorerPercent, SkillMasterCount, SkillMasterLevel, ResearchCostPercent, CombatLogic]),
+                         ExplorerPercent, SkillMasterCount, SkillMasterLevel, GreatHallComfort, ResearchCostPercent,
+                         CombatLogic]),
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
-                           SkillChecks, SkillCheckSpacing, DiscoveryChecks,
+                           SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
     OptionGroup("Items", [BossItems, GearItems, StarterKit, BoostPercentage]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),

@@ -40,6 +40,61 @@ function combat(era)
   if not gear then return true end
   return any_of(gear.armor) and any_of(gear.weapons) and (COMBAT_MODE < 2 or any_of(gear.ranged))
 end
+
+-- Comfort (what the Rested effect shows): 1, plus 1 under a roof, plus the best piece of each comfort group
+-- among those you can build. A piece needs its researches and the tier gates of the tier its materials are from.
+local function has_all(list)
+  for _, item in ipairs(list) do
+    if not has(item) then return false end
+  end
+  return true
+end
+
+function comfort(level)
+  level = tonumber(level)
+  if not has_all(SHELTER) then return level <= 1 end
+  local best, total = {}, 2
+  for _, piece in ipairs(COMFORT_PIECES) do
+    if piece.comfort > (best[piece.key] or 0) and has_all(piece.needs) then best[piece.key] = piece.comfort end
+  end
+  for _, c in pairs(best) do total = total + c end
+  return total >= level
+end
+SHELTER = {"crafting", "wooden_roofs"}
+COMFORT_PIECES = {
+  { key = "Bed", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates", "bed_tier_3"} },
+  { key = "Bed", comfort = 1, needs = {"crafting", "bed_tier_1"} },
+  { key = "Fire", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "bonfire"} },
+  { key = "Fire", comfort = 1, needs = {"crafting", "warmth_tier_1"} },
+  { key = "Fire", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "hearth", "stonecutter"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Banner", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Leisure", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Chair", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Chair", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "stonecutter"} },
+  { key = "Table", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "stonecutter"} },
+  { key = "Chair", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates"} },
+  { key = "Chair", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates"} },
+  { key = "Chair", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Chair", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Table", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2"} },
+  { key = "Chair", comfort = 3, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "stonecutter"} },
+  { key = "Carpet", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates"} },
+  { key = "Carpet", comfort = 1, needs = {"crafting"} },
+  { key = "Carpet", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Carpet", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates", "black_forge_upgrade_4", "flametal_armor"} },
+  { key = "Carpet", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace", "axes_tier_4", "forge_upgrade_2", "forge_upgrade_3", "spinning_wheel", "wisp_fountain", "wisplight", "pickaxes_tier_4", "artisan_press", "boat_tier_4", "ceramic_plates", "black_forge_upgrade_4", "flametal_armor"} },
+  { key = "Carpet", comfort = 1, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3", "artisan_table", "blast_furnace"} },
+  { key = "Carpet", comfort = 2, needs = {"crafting", "axes_tier_1", "bed_tier_1", "cooking_station", "troll_armor", "warmth_tier_1", "boat_tier_1", "forge", "pickaxes_tier_1", "smelter", "bronze", "axes_tier_2", "pickaxes_tier_2", "forge_upgrade_1", "nails_tier_2", "pickaxes_tier_3"} },
+}
 COMBAT_ERAS = {
   meadows = { armor = {}, weapons = {"clubs_tier_1", "axes_tier_1", "blades_tier_1", "spears_tier_1", "knuckles_tier_1", "short_blades_tier_1"}, ranged = {"bows_tier_1"} },
   black_forest = { armor = {"leather_armor", "rag_armor", "troll_armor", "bear_armor"}, weapons = {"clubs_tier_1", "axes_tier_1", "blades_tier_1", "spears_tier_1", "knuckles_tier_1", "short_blades_tier_1", "sledgehammers_tier_1"}, ranged = {"bows_tier_1"} },

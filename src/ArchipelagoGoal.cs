@@ -142,6 +142,9 @@ internal static class ArchipelagoGoal
             if (count >= condition.Needed) line += " (done)";
             else if (condition.Name == "Skill Master") line += $" skills at level {skillLevel}";
             else if (condition.Name == "Explorer") line += $" ({condition.Targets[0].Replace("Explore: ", "")})";
+            else if (condition.Name == "Great Hall")
+                line += $" (comfort {condition.Targets[0].Replace("Comfort: Level ", "")}; here: " +
+                        (Player.m_localPlayer ? SE_Rested.CalculateComfortLevel(Player.m_localPlayer).ToString() : "?") + ")";
             else if (condition.Name == "Hildir's Quests")
                 line += " left: " + string.Join(", ", condition.Targets.Where(k => !ZoneSystem.instance.GetGlobalKey(k))
                     .Select(k => HildirQuests.TryGetValue(k, out var place) ? place : k));

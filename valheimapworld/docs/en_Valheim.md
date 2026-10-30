@@ -31,6 +31,7 @@ counted within your goal's era:
 - **Researcher**: craft a share of the era's researches.
 - **Explorer**: uncover a share of the world map.
 - **Skill Master**: raise a number of skills to a level.
+- **Great Hall**: reach a comfort level (what the Rested effect shows) at your base.
 - **Hildir's Quests**: return the chests Hildir asks for (from The Elder's era on).
 
 Type `/ap goal` in the in-game chat to see your progress.

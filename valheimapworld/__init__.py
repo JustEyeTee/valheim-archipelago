@@ -14,6 +14,7 @@ from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, Goal
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_PREREQS
 from .check_data import CHECKS
+from .comfort_data import COMFORT_PIECES, SHELTER
 from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CHECK_BOSSES
 
 # Location -> research items it needs beyond its tier: research prerequisites, and the
@@ -67,7 +68,7 @@ LOGIC_ITEMS = frozenset(
 )
 
 
-TRACKER_OPTIONS = ("goal", "goal_conditions", "explorer_percent", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -138,6 +139,23 @@ HILDIR_QUESTS = {
     "Hildir3": ("Discover: Hildir's Camp", "Discover: Sealed Tower"),
 }
 RELIC = "Forsaken Relic"
+COMFORT = "Comfort: Level "
+
+
+def comfort_level(name: str) -> int:
+    return int(name[len(COMFORT):])  # "Comfort: Level 7" -> 7
+
+
+def best_comfort(pieces) -> int:
+    """
+    The comfort of standing sheltered among these pieces (the game's SE_Rested.CalculateComfortLevel): 1, plus
+    1 for the shelter, plus the best piece of each comfort group and every differently-named ungrouped piece.
+    """
+    groups: Dict[str, int] = {}
+    for _, name, comfort, group, *_ in pieces:
+        key = name if group == "None" else group
+        groups[key] = max(groups.get(key, 0), comfort)
+    return 2 + sum(groups.values())
 
 
 class ValheimWeb(WebWorld):
@@ -210,6 +228,13 @@ class ValheimWorld(World):
         # Kall Fimbulbringer's game runs through the Deep North (tier 12); every other goal ends before it.
         scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
         self.scope = goal_scope(scope_tier, self.goal_boss)
+        # Comfort: the pieces this era can build, and the levels past what they add up to are left out.
+        era = self.scope
+        self.comfort_pieces = [p for p in COMFORT_PIECES
+                               if p[-1] <= scope_tier and all(n in era for n in p[4] + p[5])]
+        shelter_ok = all(n in era for n in SHELTER[0] + SHELTER[1])
+        self.max_comfort = best_comfort(self.comfort_pieces) if shelter_ok else 1
+        self.scope = frozenset(n for n in self.scope if not n.startswith(COMFORT) or comfort_level(n) <= self.max_comfort)
         self.era_scope = self.scope  # before the options below take checks out
         self.scope_tier = scope_tier
         # With combat logic, armor and weapons gate fights, so logic has to count them.
@@ -246,6 +271,8 @@ class ValheimWorld(World):
             "Skill Master": sorted(name for name in era if name.startswith("Skill: ") and name.endswith(" 10")),
             "Hildir's Quests": [quest for quest, places in HILDIR_QUESTS.items() if all(p in era for p in places)],
             "Explorer": [max(explore, key=lambda n: float(n[len("Explore: "):].split("%")[0]))] if explore else [],
+            "Great Hall": [f"{COMFORT}{level}" for level in [min(self.options.great_hall_comfort.value, self.max_comfort)]
+                           if f"{COMFORT}{level}" in era],
         }
         percent = {"Trophy Hunt": self.options.trophy_hunt_percent.value,
                    "Researcher": self.options.researcher_percent.value}
@@ -255,6 +282,7 @@ class ValheimWorld(World):
                                                len(self.goal_targets["Skill Master"]))
         self.goal_needed["Hildir's Quests"] = len(self.goal_targets["Hildir's Quests"])
         self.goal_needed["Explorer"] = len(self.goal_targets["Explorer"])
+        self.goal_needed["Great Hall"] = len(self.goal_targets["Great Hall"])
 
         conditions = set(self.options.goal_conditions.value) or {"Goal Boss"}
         for name in sorted(conditions):
@@ -262,6 +290,9 @@ class ValheimWorld(World):
                 logging.warning(f"Valheim: {self.player_name} has nothing to do for {name} in "
                                 f"{self.goal_boss}'s era, so it isn't a goal condition.")
                 conditions.discard(name)
+        if "Great Hall" in conditions and self.options.great_hall_comfort.value > self.max_comfort:
+            logging.warning(f"Valheim: {self.player_name}'s Great Hall goal is lowered to comfort "
+                            f"{self.max_comfort}, the most in {self.goal_boss}'s era.")
         if "Explorer" in conditions:
             reached = self.goal_targets["Explorer"][0]
             if reached != f"Explore: {self.options.explorer_percent.value}% of the World":
@@ -270,6 +301,9 @@ class ValheimWorld(World):
         self.goal_conditions = [name for name in GoalConditions.valid_keys if name in conditions] or ["Goal Boss"]
         # Relics are counted in create_items, once it's known how many fit.
         self.relics = 0
+        # Comfort logic counts the researches that unlock comfort pieces, roofs and their stations.
+        if "Great Hall" in self.goal_conditions or any(n.startswith(COMFORT) for n in self.scope):
+            self.logic_items = self.logic_items | {n for p in self.comfort_pieces for n in p[4]} | set(SHELTER[0])
 
     def wanted(self, name: str) -> bool:
         """Whether a skill or exploration check is in by its level or percentage and the spacing options."""
@@ -288,6 +322,8 @@ class ValheimWorld(World):
             else:
                 kept = percent in (0.5, 1) or (percent.is_integer() and percent % 2 == 0)
             return kept and percent <= self.options.exploration_checks.value
+        if name.startswith(COMFORT):
+            return comfort_level(name) <= self.options.comfort_checks.value
         return True
 
     def create_regions(self):
@@ -410,7 +446,19 @@ class ValheimWorld(World):
             rules.append(boss_rule(bosses, self.player))
         if name in self.combat_rules:
             rules.append(self.combat_rules[name])
+        if name.startswith(COMFORT):
+            rules.append(lambda state, level=comfort_level(name): self.comfort(state) >= level)
         return rules
+
+    def comfort(self, state) -> int:
+        """The most comfort you can build: pieces whose researches you have and whose materials you can get."""
+        def can_build(items, obtains):
+            return state.has_all(items, self.player) and all(
+                state.can_reach_region(region, self.player) and all(rule(state) for rule in rules)
+                for region, rules in (self.obtain_rules[o] for o in obtains))
+        if not can_build(*SHELTER[:2]):
+            return 1
+        return best_comfort([p for p in self.comfort_pieces if can_build(p[4], p[5])])
 
     def set_rules(self):
         # Combat readiness: armor, a weapon (and with strict, a bow or crossbow) from the era each fight
@@ -424,6 +472,11 @@ class ValheimWorld(World):
                 if needs:
                     self.combat_rules[gate] = lambda state, needs=needs: \
                         all(state.has_any(names, self.player) for names in needs)
+
+        # Comfort: where each material is obtained and that check's rules (whether or not it's in the seed).
+        region_of = {location.user_friendly_name: location.region for location in location_data_table}
+        self.obtain_rules = {o: (region_of[o], self.location_rules(o))
+                             for p in self.comfort_pieces + [(None,) * 4 + SHELTER[:2]] for o in p[5]}
 
         for location_name in self.scope:
             for rule in self.location_rules(location_name):
