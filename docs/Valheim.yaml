@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.7.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.8.1 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -65,9 +65,13 @@ Valheim:
     full: 50
     minimal: 0
 
+  ########
+  # Goal #
+  ########
   goal:
-    # The boss you must defeat to win. You win when you pick up that boss's trophy.
-    # Earlier bosses make a shorter game; Fader is the full game.
+    # The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
+    # has none: you win when you pick up his Sacrificial Blood). Earlier bosses make a shorter game;
+    # Fader is the full game, and Kall Fimbulbringer adds the Deep North.
     eikthyr: 0
     the_elder: 0
     bonemass: 0
@@ -75,6 +79,15 @@ Valheim:
     yagluth: 0
     the_queen: 0
     fader: 50
+    kall_fimbulbringer: 0
+
+  include_deep_north:
+    # Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
+    # there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
+    # upgrades) and 8 Deep North trophies, when the goal is Fader. The Kall Fimbulbringer goal
+    # always includes the Deep North.
+    'false': 50
+    'true': 0
 
   research_cost_percent:
     # Scales how many materials each research costs at the Research Bench, as a percentage.
@@ -93,13 +106,9 @@ Valheim:
     normal: 50 # equivalent to 100
     double: 0 # equivalent to 200
 
-  include_deep_north:
-    # Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
-    # there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    # upgrades) and 8 Deep North trophies. Only applies when the goal is Fader.
-    'false': 50
-    'true': 0
-
+  ##########
+  # Checks #
+  ##########
   biome_checks:
     # Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,
     # Ocean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.
@@ -186,6 +195,9 @@ Valheim:
     'false': 0
     'true': 50
 
+  #########
+  # Items #
+  #########
   boss_items:
     # Puts the drops of the bosses before your goal into the item pool, delivered to your
     # Archipelago Chest: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),
@@ -208,6 +220,23 @@ Valheim:
     'false': 0
     'true': 50
 
+  boost_percentage:
+    # Percentage of the extra items that are boosts instead of resource bundles: Combat,
+    # Woodcutting and Mining Training (+5 skill levels) and Rested, Eikthyr's and Moder's
+    # Blessings (a timed buff). Traps are taken first, then boosts, and the rest are bundles.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 100
+    20: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-100: 0 # random value between 0 and 100
+
+  #########
+  # Traps #
+  #########
   trap_percentage:
     # Percentage of the extra items (the items beyond one per research and trophy) that are
     # traps instead of resource bundles. See excluded_traps for the list.
@@ -241,20 +270,9 @@ Valheim:
     # Fake Item Trap: a message that you received an item; nothing arrives.
     []
 
-  boost_percentage:
-    # Percentage of the extra items that are boosts instead of resource bundles: Combat,
-    # Woodcutting and Mining Training (+5 skill levels) and Rested, Eikthyr's and Moder's
-    # Blessings (a timed buff). Traps are taken first, then boosts, and the rest are bundles.
-    #
-    # You can define additional values between the minimum and maximum values.
-    # Minimum value is 0
-    # Maximum value is 100
-    20: 50
-    random: 0
-    random-low: 0 # random value weighted towards lower values
-    random-high: 0 # random value weighted towards higher values
-    random-range-0-100: 0 # random value between 0 and 100
-
+  #########
+  # Links #
+  #########
   death_link:
     # When you die, everyone who enabled death link dies. Of course, the reverse is true too.
     'false': 50
