@@ -126,7 +126,7 @@ Demister	researchWisplight	Wisplight		researchWispFountain	BjornPaw:1|Barley:3	D
 Copper	researchForgeUpgrade2	Forge Upgrade 2		researchForgeUpgrade1|researchBoatTier1	LoxPelt:1	forge_ext1	8	Progression	Tier 8 to Tier 9
 Copper	researchForgeUpgrade3	Forge Upgrade 3		researchForgeUpgrade2|researchBronze	Cloudberry:5	forge_ext2	8	Progression	Tier 8 to Tier 9
 LinenThread	researchSpinningWheel	Spinning Wheel		researchArtisanTable|researchNailsTier2	Cloudberry:9	piece_spinningwheel	8	Progression	Tier 8 to Tier 9
-CapeLinen	researchCapeTier3	Cape Tier 3		researchCapeTier2|researchPickaxeTier3|researchWarhmth1	UndeadBjornRibcage:9	CapeLinen	8	Useful	
+CapeLinen	researchCapeTier3	Cape Tier 3		researchCapeTier2|researchPickaxeTier3|researchWarmthTier1	UndeadBjornRibcage:9	CapeLinen	8	Useful	
 CapeLox	researchCapeTier4	Cape Tier 4		researchCapeTier3	Barley:9	CapeLox	8	Useful	
 CapeWolf	researchCapeTier5	Cape Tier 5		researchCapeTier4	Barley:8	CapeWolf	8	Useful	
 HelmetBerserkerUndead	researchVileboneArmor	Vilebone Armor		researchSpinningWheel|researchForgeUpgrade1	BlackMetalScrap:10	HelmetBerserkerUndead|ArmorBerserkerUndeadChest|ArmorBerserkerUndeadLegs	8	Useful	

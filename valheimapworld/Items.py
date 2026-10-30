@@ -332,14 +332,17 @@ for line in items_txt.strip().splitlines():
     current_id += 1
 
 
-def create_items(world: "ValheimWorld"):
+def create_items(world: "ValheimWorld", logic_items: frozenset = frozenset()):
     """
     Dynamically create items for the game world using BaseClasses.Item.
+    Items in `logic_items` (research prerequisites and tier gates) are made progression
+    whatever the table says, since logic can only count progression items.
     """
     for item in item_data_table:
+        classification = ItemClassification.progression if item.item_name in logic_items else item.classification
         for _ in range(item.count):  # Create as many instances as specified by `count`
             # Create the item using Archipelago's Item class
-            game_item = Item(item.item_name, item.classification, item.id, world.player)
+            game_item = Item(item.item_name, classification, item.id, world.player)
             world.multiworld.itempool.append(game_item)
             
             
