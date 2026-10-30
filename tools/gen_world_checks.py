@@ -6,11 +6,13 @@ tools/gen_apworld_data.py afterwards.
 read:     each biome's lore rune stones (a Runestone_* world location), sent when you read one there.
 vegvisir: each boss's Vegvisir, sent when you read one; keyed by the boss location it reveals.
 plant:    planting each crop and tree with the Cultivator (a sapling piece).
+brew:     tapping each mead from a Fermenter (keyed by the mead), with the Mead ketill and the Fermenter.
 loot:     opening a dungeon's treasure chest (Burial Chamber, Troll Cave, Sunken Crypt, Frost Cave,
           Infested Mine, Charred Fortress), keyed by the chest prefab, which only those dungeons have.
 
 Tiers follow the rest of the logic: a biome's entry check, a boss altar's discover check, a dungeon's
-discover check, and for planting the latest of the seed's obtain check, the Cultivator and the biome.
+discover check, for planting the latest of the seed's obtain check, the Cultivator and the biome, and for
+brewing the latest of the ingredients' obtain checks, the Mead ketill and the Fermenter.
 """
 import csv
 import json
@@ -22,7 +24,8 @@ db = json.load(open(sys.argv[1]))
 
 check_rows = [r for r in csv.reader(open(root / "mod" / "checks.tsv", newline=""), delimiter="\t")]
 tier_of = {r[2]: int(r[3]) for r in check_rows if r and not r[0].startswith("#")}
-obtain = {r[1]: r[2] for r in check_rows if r and r[0] == "obtain"}  # item prefab -> location name
+# Item prefab -> the check for getting it (obtain checks, and catch checks for fish).
+obtain = {r[1]: r[2] for r in check_rows if r and r[0] in ("obtain", "catch")}
 research = {}  # piece prefab -> (research name, tier)
 for r in csv.reader(open(root / "mod" / "research.tsv", newline=""), delimiter="\t"):
     if r and not r[0].startswith("#"):
@@ -35,19 +38,20 @@ BIOME_NAMES = {1: "Meadows", 8: "Black Forest", 2: "Swamp", 4: "Mountains", 16: 
                32: "Ashlands", 64: "Deep North"}
 
 def replace_rows(rows, kinds, new):
-    """rows with those kinds' rows replaced by new ones: in place (where the first of each kind was), so
-    location ids, which follow the order of checks.tsv, don't move; new kinds go at the end."""
-    out, placed = [], set()
+    """rows with those kinds' rows replaced by new ones. Location ids follow the order of checks.tsv, so a row
+    that's already there keeps its place (updated), one that's gone is dropped, and a new one goes at the end."""
+    by_key = {(n[0], n[1]): n for n in new}
+    out, kept = [], set()
     for r in rows:
         if r and r[0] in kinds:
-            if r[0] not in placed:
-                placed.add(r[0])
-                out += [n for n in new if n[0] == r[0]]
+            if (r[0], r[1]) in by_key:
+                out.append(by_key[(r[0], r[1])])
+                kept.add((r[0], r[1]))
             continue
         out.append(r)
     while out and not out[-1]:
         out.pop()
-    return out + [n for n in new if n[0] not in placed]
+    return out + [n for n in new if (n[0], n[1]) not in kept]
 
 
 rows = []
@@ -82,8 +86,8 @@ PLANT_NAMES = {"sapling_carrot": "Carrot", "sapling_seedcarrot": "Carrot (for se
                "sapling_seedturnip": "Turnip (for seeds)", "sapling_onion": "Onion", "sapling_seedonion": "Onion (for seeds)",
                "sapling_barley": "Barley", "sapling_flax": "Flax", "sapling_magecap": "Magecap",
                "sapling_jotunpuffs": "Jotun Puffs", "sapling_oat": "Oats", "sapling_poteitr": "Poteitr",
-               "sapling_Kale": "Kale", "sapling_seedkale": "Kale (for seeds)", "VineAsh_sapling": "Ashvine",
-               "VineGreen_sapling": "Vineberry", "Beech_Sapling": "Beech", "Birch_Sapling": "Birch",
+               "sapling_Kale": "Kale", "sapling_seedkale": "Kale (for seeds)", "VineAsh_sapling": "Vineberry",
+               "VineGreen_sapling": "Ashvine", "Beech_Sapling": "Beech", "Birch_Sapling": "Birch",
                "FirTree_Sapling": "Fir", "PineTree_Sapling": "Pine", "Oak_Sapling": "Oak"}
 cultivator = research["Cultivator"]
 skipped = []
@@ -102,6 +106,30 @@ for prefab, label in PLANT_NAMES.items():
                + ([research[prefab][1]] if prefab in research else []))
     rows.append(["plant", prefab, f"Plant: {label}", str(tier), "|".join(reqs)])
 
+# ---------- Brewing: each mead tapped from a Fermenter ----------
+MEAD_NAMES = {"MeadBugRepellent": "Anti-Sting Concoction", "MeadBzerker": "Berserkir Mead",
+              "MeadEitrLingering": "Lingering Eitr Mead", "MeadEitrMinor": "Minor Eitr Mead",
+              "MeadFrostResist": "Frost Resistance Mead", "MeadHasty": "Tonic of Ratatosk",
+              "MeadHealthLingering": "Lingering Healing Mead", "MeadHealthMajor": "Major Healing Mead",
+              "MeadHealthMedium": "Medium Healing Mead", "MeadHealthMinor": "Minor Healing Mead",
+              "MeadLightfoot": "Lightfoot Mead", "MeadPoisonResist": "Poison Resistance Mead",
+              "MeadStaminaLingering": "Lingering Stamina Mead", "MeadStaminaMedium": "Medium Stamina Mead",
+              "MeadStaminaMinor": "Minor Stamina Mead", "MeadStrength": "Mead of Troll Endurance",
+              "MeadSwimmer": "Draught of Vananidir", "MeadTamer": "Brew of Animal Whispers", "MeadTasty": "Tasty Mead"}
+brewing = [research["piece_MeadCauldron"], research["fermenter"]]
+meads = {m.lower(): m for m in MEAD_NAMES}
+for recipe in sorted(db["recipes"].values(), key=lambda r: r["item"] or ""):
+    base = recipe["item"] or ""
+    mead = meads.get(base.replace("MeadBase", "Mead").lower()) if base.startswith("MeadBase") else None
+    if not mead:
+        continue
+    materials = [i["item"] for i in recipe["ingredients"]]
+    if any(m not in obtain for m in materials):
+        skipped.append((mead, f"no obtain check for {[m for m in materials if m not in obtain]}"))
+        continue
+    tier = max([tier_of[obtain[m]] for m in materials] + [t for _, t in brewing])
+    rows.append(["brew", mead, f"Brew: {MEAD_NAMES[mead]}", str(tier), "|".join(name for name, _ in brewing)])
+
 # ---------- Dungeon loot: the treasure chests only these dungeons have ----------
 LOOT = {"TreasureChest_forestcrypt": ("Burial Chamber", "Discover: Burial Chamber"),
         "TreasureChest_trollcave": ("Troll Cave", "Discover: Troll Cave"),
@@ -116,7 +144,7 @@ for chest, (label, discover) in LOOT.items():
         continue
     rows.append(["loot", chest, f"Loot: {label}", str(tier_of[discover]), ""])
 
-KINDS = ("read", "vegvisir", "plant", "loot")
+KINDS = ("read", "vegvisir", "plant", "brew", "loot")
 with open(root / "mod" / "checks.tsv", "w", newline="") as f:
     csv.writer(f, delimiter="\t", lineterminator="\n").writerows(replace_rows(check_rows, KINDS, rows))
 

@@ -47,19 +47,20 @@ obtain = {r[1]: (r[2], int(r[3])) for r in check_rows if r and r[0] == "obtain"}
 
 
 def replace_rows(rows, kinds, new):
-    """rows with those kinds' rows replaced by new ones: in place (where the first of each kind was), so
-    location ids, which follow the order of checks.tsv, don't move; new kinds go at the end."""
-    out, placed = [], set()
+    """rows with those kinds' rows replaced by new ones. Location ids follow the order of checks.tsv, so a row
+    that's already there keeps its place (updated), one that's gone is dropped, and a new one goes at the end."""
+    by_key = {(n[0], n[1]): n for n in new}
+    out, kept = [], set()
     for r in rows:
         if r and r[0] in kinds:
-            if r[0] not in placed:
-                placed.add(r[0])
-                out += [n for n in new if n[0] == r[0]]
+            if (r[0], r[1]) in by_key:
+                out.append(by_key[(r[0], r[1])])
+                kept.add((r[0], r[1]))
             continue
         out.append(r)
     while out and not out[-1]:
         out.pop()
-    return out + [n for n in new if n[0] not in placed]
+    return out + [n for n in new if (n[0], n[1]) not in kept]
 
 
 def needs(prefab):

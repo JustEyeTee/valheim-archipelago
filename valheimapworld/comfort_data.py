@@ -23,6 +23,7 @@ COMFORT_PIECES = (
     ('piece_banner07', '$piece_banner07', 1, 'Banner', ('Crafting',), ('Obtain: Blueberries', 'Obtain: Cloudberries', 'Obtain: Finewood', 'Obtain: Leather Scraps'), 8),
     ('piece_banner08', '$piece_banner08', 1, 'Banner', ('Crafting',), ('Obtain: Coal', 'Obtain: Dandelion', 'Obtain: Finewood', 'Obtain: Leather Scraps'), 5),
     ('piece_banner09', '$piece_banner09', 1, 'Banner', ('Crafting',), ('Obtain: Blueberries', 'Obtain: Finewood', 'Obtain: Leather Scraps', 'Obtain: Raspberries'), 5),
+    ('piece_banner10', '$piece_banner10', 1, 'Banner', ('Crafting',), ('Obtain: Carrot', 'Obtain: Cloudberries', 'Obtain: Finewood', 'Obtain: Leather Scraps'), 8),
     ('piece_banner11', '$piece_banner11', 1, 'Banner', ('Crafting',), ('Obtain: Cloudberries', 'Obtain: Coal', 'Obtain: Finewood', 'Obtain: Leather Scraps'), 8),
     ('piece_bathtub', '$piece_bathtub', 2, 'Leisure', ('Crafting',), ('Obtain: Iron', 'Obtain: Stone', 'Obtain: Tar', 'Obtain: Wood'), 8),
     ('piece_bench01', '$piece_bench01', 1, 'Chair', ('Crafting',), ('Obtain: Finewood',), 5),

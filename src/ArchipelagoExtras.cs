@@ -86,6 +86,7 @@ public static class ArchipelagoExtras
     private static readonly List<(string prefix, string location)> ReadLocations = new List<(string, string)>();
     private static readonly Dictionary<string, string> VegvisirLocations = new Dictionary<string, string>();
     private static readonly Dictionary<string, string> LootLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> BrewLocations = new Dictionary<string, string>();
 
     private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
         new List<(Skills.SkillType, int, string)>();
@@ -154,7 +155,7 @@ public static class ArchipelagoExtras
         .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location))
         .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location))
         .Concat(ComfortLocations.Select(e => e.location)).Concat(ReadLocations.Select(e => e.location))
-        .Concat(VegvisirLocations.Values).Concat(LootLocations.Values)
+        .Concat(VegvisirLocations.Values).Concat(LootLocations.Values).Concat(BrewLocations.Values)
         .Concat(EatLocations.Values).Concat(BuildLocations.Values).Concat(BuyLocations.Values).Concat(TameLocations.Values);
 
     static ArchipelagoExtras()
@@ -177,6 +178,7 @@ public static class ArchipelagoExtras
                     case "read": ReadLocations.Add((cols[1], cols[2])); break;
                     case "vegvisir": VegvisirLocations[cols[1]] = cols[2]; break;
                     case "loot": LootLocations[cols[1]] = cols[2]; break;
+                    case "brew": BrewLocations[cols[1]] = cols[2]; break;
                     case "buy": BuyLocations[cols[1]] = cols[2]; break;
                     case "tame": TameLocations[cols[1]] = cols[2]; break;
                     case "kill": KillLocations[cols[1]] = cols[2]; break;
@@ -347,6 +349,20 @@ public static class ArchipelagoExtras
     public static void OnVegvisirRead(Vegvisir vegvisir)
     {
         foreach (var target in vegvisir.m_locations) SendFrom(VegvisirLocations, target.m_locationName);
+    }
+
+    // Brewing checks: tapping a ready Fermenter, by the mead it makes (read from its private state).
+    private static readonly System.Reflection.MethodInfo FermenterStatus = AccessTools.Method(typeof(Fermenter), "GetStatus");
+    private static readonly System.Reflection.MethodInfo FermenterContent = AccessTools.Method(typeof(Fermenter), "GetContent");
+    private static readonly System.Reflection.MethodInfo FermenterConversion = AccessTools.Method(typeof(Fermenter), "GetItemConversion");
+
+    public static void OnFermenterTapped(Fermenter fermenter)
+    {
+        if (fermenter == null || FermenterStatus == null || FermenterContent == null || FermenterConversion == null) return;
+        if (FermenterStatus.Invoke(fermenter, null)?.ToString() != "Ready") return;
+        var content = FermenterContent.Invoke(fermenter, null);
+        var conversion = FermenterConversion.Invoke(fermenter, new[] { content }) as Fermenter.ItemConversion;
+        if (conversion?.m_to != null) SendFrom(BrewLocations, conversion.m_to.gameObject.name);
     }
 
     // Dungeon checks: opening a treasure chest only that kind of dungeon has.

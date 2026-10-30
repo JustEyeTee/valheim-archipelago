@@ -423,6 +423,17 @@ public static class Patches
         }
     }
 
+    // Before the tap empties it: what the Fermenter made.
+    [HarmonyPatch(typeof(Fermenter), nameof(Fermenter.Interact))]
+    private static class Fermenter_Interact_Brew_Patch
+    {
+        private static void Prefix(Fermenter __instance, Humanoid user, bool hold)
+        {
+            if (!hold && ValheimRandomizer.Randomized && user == Player.m_localPlayer && PrivateArea.CheckAccess(__instance.transform.position, 0f, false))
+                ArchipelagoExtras.OnFermenterTapped(__instance);
+        }
+    }
+
     // The container screen opens only once the chest is really yours to open (not locked by a ward or in use).
     [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Show))]
     private static class InventoryGui_Show_Loot_Patch

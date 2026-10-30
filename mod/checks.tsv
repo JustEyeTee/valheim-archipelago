@@ -15,6 +15,7 @@
 # vegvisir: key = the boss location a Vegvisir reveals, sent when you read one
 # plant: key = sapling piece prefab, sent when you plant one (with the Cultivator)
 # loot: key = treasure chest prefab, sent when you open one
+# brew: key = mead prefab, sent when you tap it from a Fermenter
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
 obtain	Flint	Obtain: Flint	0	
@@ -679,3 +680,43 @@ loot	TreasureChest_sunkencrypt	Loot: Sunken Crypt	4
 loot	TreasureChest_mountaincave	Loot: Frost Cave	7	
 loot	TreasureChest_dvergrtown	Loot: Infested Mine	9	
 loot	TreasureChest_charredfortress	Loot: Charred Fortress	11	
+obtain	BeechSeeds	Obtain: Beech Seeds	2	
+obtain	PineCone	Obtain: Pine Cone	2	
+obtain	FirCone	Obtain: Fir Cone	2	
+obtain	BirchSeeds	Obtain: Birch Seeds	5	
+obtain	Acorn	Obtain: Acorn	5	
+obtain	VineGreenSeeds	Obtain: Ashvine Seeds	4	
+obtain	KaleSeeds	Obtain: Kale Seeds	12	
+obtain	Carrot	Obtain: Carrot	4	Cultivator
+obtain	Turnip	Obtain: Turnip	4	Cultivator
+obtain	Onion	Obtain: Onion	7	Cultivator
+plant	sapling_seedcarrot	Plant: Carrot (for seeds)	4	Cultivator
+plant	sapling_seedturnip	Plant: Turnip (for seeds)	4	Cultivator
+plant	sapling_seedonion	Plant: Onion (for seeds)	7	Cultivator
+plant	sapling_Kale	Plant: Kale	12	Cultivator|Northern Crops
+plant	sapling_seedkale	Plant: Kale (for seeds)	12	Cultivator|Northern Crops
+plant	VineGreen_sapling	Plant: Ashvine	4	Cultivator
+plant	Beech_Sapling	Plant: Beech	4	Cultivator
+plant	Birch_Sapling	Plant: Birch	5	Cultivator
+plant	FirTree_Sapling	Plant: Fir	4	Cultivator
+plant	PineTree_Sapling	Plant: Pine	4	Cultivator
+plant	Oak_Sapling	Plant: Oak	5	Cultivator
+brew	MeadFrostResist	Brew: Frost Resistance Mead	5	Mead ketill|Fermenter
+brew	MeadHealthMedium	Brew: Medium Healing Mead	5	Mead ketill|Fermenter
+brew	MeadHealthMinor	Brew: Minor Healing Mead	5	Mead ketill|Fermenter
+brew	MeadPoisonResist	Brew: Poison Resistance Mead	5	Mead ketill|Fermenter
+brew	MeadStaminaMedium	Brew: Medium Stamina Mead	8	Mead ketill|Fermenter
+brew	MeadStaminaMinor	Brew: Minor Stamina Mead	5	Mead ketill|Fermenter
+brew	MeadTasty	Brew: Tasty Mead	5	Mead ketill|Fermenter
+obtain	Feathers	Obtain: Feathers	1	
+obtain	ScaleHide	Obtain: Scale Hide	9	
+obtain	RoyalJelly	Obtain: Royal Jelly	9	
+obtain	GiantBloodSack	Obtain: Bloodclot	9	
+obtain	MushroomSmokePuff	Obtain: Smoke Puff	11	
+obtain	Sap	Obtain: Sap	9	Sap Extractor
+brew	MeadEitrLingering	Brew: Lingering Eitr Mead	11	Mead ketill|Fermenter
+brew	MeadEitrMinor	Brew: Minor Eitr Mead	9	Mead ketill|Fermenter
+brew	MeadHealthLingering	Brew: Lingering Healing Mead	11	Mead ketill|Fermenter
+brew	MeadHealthMajor	Brew: Major Healing Mead	9	Mead ketill|Fermenter
+brew	MeadLightfoot	Brew: Lightfoot Mead	9	Mead ketill|Fermenter
+brew	MeadStaminaLingering	Brew: Lingering Stamina Mead	9	Mead ketill|Fermenter

@@ -319,10 +319,18 @@ class LoreChecks(DefaultOnToggle):
 
 class FarmingChecks(DefaultOnToggle):
     """
-    Adds a check for planting each crop with the Cultivator: carrot, turnip, onion, barley, flax, magecap and
-    jotun puffs, up to the goal's era.
+    Adds a check for planting each crop and tree with the Cultivator: carrot, turnip, onion (and each for seeds),
+    barley, flax, magecap, jotun puffs, kale, ashvine, beech, birch, fir, pine and oak, up to the goal's era.
     """
     display_name = "Farming Checks"
+
+
+class BrewingChecks(DefaultOnToggle):
+    """
+    Adds a check for brewing each mead (tapping it from a Fermenter): healing, stamina, eitr, resistance and other
+    meads, up to the goal's era.
+    """
+    display_name = "Brewing Checks"
 
 
 class DungeonChecks(DefaultOnToggle):
@@ -544,6 +552,7 @@ class ValheimOptions(PerGameCommonOptions):
     trader_checks: TraderChecks
     lore_checks: LoreChecks
     farming_checks: FarmingChecks
+    brewing_checks: BrewingChecks
     dungeon_checks: DungeonChecks
     boss_items: BossItems
     gear_items: GearItems
@@ -570,7 +579,7 @@ option_groups = [
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
-                           FarmingChecks, DungeonChecks]),
+                           FarmingChecks, BrewingChecks, DungeonChecks]),
     OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
                           HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),

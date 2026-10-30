@@ -77,6 +77,21 @@ internal static class ArchipelagoConnection
         connected = true;
     }
 
+    // Disconnects from the room (the connection window's Disconnect button). Checks done meanwhile wait in the
+    // world as pending keys and are sent on the next connect.
+    public static void Disconnect()
+    {
+        if (session != null)
+        {
+            session.Items.ItemReceived -= OnApItemReceived;
+            try { session.Socket?.DisconnectAsync(); } catch (Exception) { }
+        }
+        ArchipelagoLinks.OnDisconnected();
+        session = null;
+        connected = false;
+        ValheimRandomizer.Log.LogInfo("[AP] Disconnected");
+    }
+
     // Global keys are "key value" pairs split at the first space, so a location name with
     // spaces can't be a key as it is: "ap_sent:clubs tier 1" would be stored as key
     // "ap_sent:clubs" (lookups of the whole name never match, and "Clubs Tier 2" would replace

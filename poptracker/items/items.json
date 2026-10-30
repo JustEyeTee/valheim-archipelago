@@ -810,6 +810,12 @@
   "codes": "nord_weapons_tier_2"
  },
  {
+  "name": "Northern Crops",
+  "type": "toggle",
+  "img": "images/items/northern_crops.png",
+  "codes": "northern_crops"
+ },
+ {
   "name": "Padded Armor",
   "type": "toggle",
   "img": "images/items/padded_armor.png",

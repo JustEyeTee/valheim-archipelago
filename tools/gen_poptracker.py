@@ -121,7 +121,7 @@ def category(name):
 
 
 categories = ["Research", "Trophy", "Biome", "Discover", "Obtain", "Eat", "Catch", "Build", "Buy", "Tame", "Kill",
-              "Skill", "Explore", "Comfort", "Read", "Vegvisir", "Plant", "Loot"]
+              "Skill", "Explore", "Comfort", "Read", "Vegvisir", "Plant", "Brew", "Loot"]
 tiers = sorted({int(l.region[len("Tier"):]) for l in location_data_table})
 CELL_W, CELL_H, LEFT, TOP = 110, 64, 90, 50
 groups = {}

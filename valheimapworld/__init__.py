@@ -77,7 +77,7 @@ TRACKER_OPTIONS = ("goal", "progressive_items", "boss_altar_keys", "goal_conditi
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks", "lore_checks", "farming_checks",
-                   "dungeon_checks")
+                   "brewing_checks", "dungeon_checks")
 
 # Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
@@ -266,6 +266,7 @@ class ValheimWorld(World):
                                                   ("Read: ", self.options.lore_checks),
                                                   ("Vegvisir: ", self.options.lore_checks),
                                                   ("Plant: ", self.options.farming_checks),
+                                                  ("Brew: ", self.options.brewing_checks),
                                                   ("Loot: ", self.options.dungeon_checks)) if not option)
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))

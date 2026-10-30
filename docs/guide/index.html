@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valheim Archipelago Guide</title>
+<meta name="description" content="How to play the Valheim randomizer for Archipelago: setup, goals, checks, items, commands and co-op.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* The Options Builder's look: fjord stone, pine ink, mead amber. One readable column. */
+:root {
+  --bg: #edf0ee; --surface: #fbfcfb; --ink: #1c2723; --muted: #56655f; --line: #d2d9d5;
+  --accent: #965a08; --accent-soft: #f2e5cc; --code-bg: #1d2522; --code-ink: #dfe7e3;
+  --font-display: "Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+    --accent: #e3a540; --accent-soft: #3a2e18; --code-bg: #0c110f; --code-ink: #d6e0db; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+  --accent: #e3a540; --accent-soft: #3a2e18; --code-bg: #0c110f; --code-ink: #d6e0db; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.6 var(--font-body); margin: 0;
+  padding: 24px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 860px; margin: 0 auto; display: grid; gap: 22px; }
+.wrap > * { min-width: 0; }  /* a wide table scrolls inside its box instead of widening the page */
+header { display: grid; gap: 6px; }
+h1 { font: 700 2.1rem/1.1 var(--font-display); margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; }
+.version { font: 500 0.8rem var(--font-mono); color: var(--muted); }
+nav { display: flex; flex-wrap: wrap; gap: 6px 16px; font-weight: 700; }
+a { color: var(--accent); }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; }
+h2 { font: 700 1.35rem var(--font-display); margin: 0 0 8px; letter-spacing: 0.02em; }
+h3 { font: 700 1.05rem var(--font-body); margin: 16px 0 4px; }
+p, li { max-width: 72ch; }
+ol, ul { padding-left: 22px; margin: 6px 0; }
+code, kbd { font: 500 0.85em var(--font-mono); background: var(--accent-soft); border-radius: 4px; padding: 1px 5px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-top: 1px solid var(--line); }
+th { font-weight: 700; color: var(--muted); border-top: 0; }
+td.n { font: 500 0.85rem var(--font-mono); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.scroll { overflow-x: auto; }
+.note { color: var(--muted); font-size: 0.92rem; }
+footer { color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Valheim Archipelago Guide</h1>
+    <p class="sub">How to play Valheim as part of an <a href="https://archipelago.gg/" target="_blank" rel="noopener">Archipelago</a> multiworld randomizer.</p>
+    <span class="version" id="version"></span>
+    <nav>
+      <a href="../options/">Options Builder</a>
+      <a href="https://github.com/JustEyeTee/valheim-archipelago/releases" target="_blank" rel="noopener">Downloads</a>
+      <a href="https://github.com/JustEyeTee/valheim-archipelago" target="_blank" rel="noopener">Source</a>
+      <a href="https://github.com/JustEyeTee/valheim-archipelago/blob/main/docs/TROUBLESHOOTING.md" target="_blank" rel="noopener">Troubleshooting</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>What it is</h2>
+    <p>Recipes and building pieces are locked. You unlock them by receiving <strong>researches</strong>, which come
+      from the multiworld: your own checks and other players'. Crafting a research at the <strong>Research Bench</strong>,
+      picking up a trophy and many other things you do in Valheim are <strong>checks</strong> that send items to you or
+      to other players. You win by finishing your goal.</p>
+  </section>
+
+  <section>
+    <h2>Getting started</h2>
+    <ol>
+      <li><strong>Install</strong> BepInEx and Jotunn, then the mod (the release zip, or with a mod manager). Put the
+        <code>.apworld</code> in Archipelago's <code>custom_worlds</code> folder.</li>
+      <li><strong>Make your options file</strong> with the <a href="../options/">Options Builder</a> and put it in
+        Archipelago's <code>Players</code> folder.</li>
+      <li><strong>Generate and host</strong> the room as usual (Archipelago 0.6.8 or newer).</li>
+      <li><strong>Connect</strong> from the Archipelago window on Valheim's main menu (host, port, slot), then load
+        your world. The window is also in the pause menu, to reconnect mid-game.</li>
+      <li><strong>Build</strong> the Research Bench and an Archipelago Chest (Hammer &gt; Randomizer). Resource bundles,
+        tools, maps and boss drops sent to you arrive in the chest.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Goals</h2>
+    <p>Your <strong>goal boss</strong> sets how far the game goes: only checks and items up to its era are in the
+      game. By default you win by defeating it. <code>goal_conditions</code> changes or adds to what you have to do;
+      pick any combination, and you win once all are done. <code>/ap goal</code> shows your progress.</p>
+    <div class="scroll"><table id="goals"><tr><th>Goal boss</th><th>Era</th><th class="n">Checks (defaults)</th></tr></table></div>
+    <div class="scroll"><table>
+      <tr><th>Condition</th><th>You win when</th></tr>
+      <tr><td>Goal Boss</td><td>you defeat the goal boss (the default)</td></tr>
+      <tr><td>All Bosses</td><td>you've defeated every boss of the era, in any order</td></tr>
+      <tr><td>Relic Hunt</td><td>you've received enough of the Forsaken Relics spread through the multiworld</td></tr>
+      <tr><td>Trophy Hunt</td><td>you've collected a share of the era's trophies</td></tr>
+      <tr><td>Researcher</td><td>you've crafted a share of the era's researches</td></tr>
+      <tr><td>Explorer</td><td>you've uncovered a share of the world map</td></tr>
+      <tr><td>Skill Master</td><td>a number of skills reach a level</td></tr>
+      <tr><td>Great Hall</td><td>you reach a comfort level</td></tr>
+      <tr><td>Hildir's Quests</td><td>you've returned the chests Hildir asks for</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Checks</h2>
+    <p>Each kind can be turned on or off in your options. The counts are for the full game (Kall Fimbulbringer)
+      with every kind on and the most skill, exploration and comfort checks.</p>
+    <div class="scroll"><table id="checks"><tr><th>Kind</th><th>A check for</th><th>Option</th><th class="n">Checks</th></tr></table></div>
+  </section>
+
+  <section>
+    <h2>Items</h2>
+    <ul>
+      <li><strong>Researches</strong> unlock recipes and pieces; with <code>progressive_items</code>, tiered ones come as
+        progressive items (each Progressive Axes unlocks the next axe tier).</li>
+      <li><strong>Trophy researches</strong> give permanent boosts.</li>
+      <li><strong>Boss drops</strong> (Hard Antler, Swamp Key, Wishbone...) open the next part of the game without the fight.</li>
+      <li><strong>Altar keys</strong>, with <code>boss_altar_keys</code>: a boss's altar takes offerings only once you have its key.</li>
+      <li><strong>Maps</strong>: a Map to each boss pins its altar; a Map Fragment uncovers part of the map.</li>
+      <li><strong>Tools, resource bundles and boosts</strong> (skill training, blessings), and <strong>Forsaken Relics</strong> in a Relic Hunt.</li>
+      <li><strong>Traps</strong>: ambushes, raids, storms, Floor Is Lava, Butterfingers and more.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>In game</h2>
+    <div class="scroll"><table>
+      <tr><th>Key or command</th><th>What it does</th></tr>
+      <tr><td><kbd>F8</kbd></td><td>Panel of the checks you can do now (in logic), by kind</td></tr>
+      <tr><td><kbd>F9</kbd></td><td>Full list of checks in logic, with the mouse free, and a Hint button for each</td></tr>
+      <tr><td><code>/ap status</code></td><td>Connection, co-op mode, Death Link and Trap Link</td></tr>
+      <tr><td><code>/ap goal</code></td><td>Your goal and how far along each condition is</td></tr>
+      <tr><td><code>/ap logic [kind]</code></td><td>The checks in logic, in chat</td></tr>
+      <tr><td><code>/ap shop hint [kind]</code></td><td>By a trader (Haldor, Hildir, the Bog Witch): pay Coins to reveal one of your checks in logic as a hint</td></tr>
+      <tr><td><code>/ap checks</code>, <code>/ap missing &lt;kind&gt;</code></td><td>Checks done, and what's left</td></tr>
+      <tr><td><code>/ap hint &lt;item&gt;</code>, <code>/ap say &lt;text&gt;</code></td><td>Server hints (hint points) and Archipelago chat</td></tr>
+      <tr><td><code>/ap energy</code>, <code>/ap deposit</code>, <code>/ap withdraw</code></td><td>Energy Link (1 Coin = 1 MJ)</td></tr>
+      <tr><td><code>/ap deathlink on|off</code></td><td>Death Link for this session</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Co-op</h2>
+    <p>Each world has a co-op mode, chosen by the first player who connects in it (the connection window's
+      "Co-op (new worlds)").</p>
+    <ul>
+      <li><strong>Shared slot</strong>: one player connects; the others just join the world with the mod. Everyone's checks count for that one slot.</li>
+      <li><strong>A slot each</strong>: every player connects to their own slot and has their own researches, checks,
+        goal and Archipelago Chest in the same world. Pass boss trophies around so everyone picks them up.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Trackers</h2>
+    <p><strong>Universal Tracker</strong> works without setup. A <strong>PopTracker</strong> pack is in each release;
+      it follows your seed's options when it connects. In game, F8 and F9 show what's in logic too.</p>
+  </section>
+
+  <footer>
+    <p>Based on <a href="https://github.com/Samupo/ValheimArchipelagoRandomizer" target="_blank" rel="noopener">Samupo's Valheim Archipelago Randomizer</a>;
+      the combat logic idea comes from xyzzy44's version. Most of this project's code, tools and documentation,
+      this page included, were written by Claude, an AI model made by Anthropic, at JustEyeTee's direction.
+      Public domain (CC0).</p>
+  </footer>
+</div>
+<script type="application/json" id="data">{"world_version":"0.18.0","game_version":"1.0.21","minimum_ap_version":"0.6.8","goals":[{"boss":"Eikthyr","era":"Meadows","checks":143},{"boss":"The Elder","era":"Black Forest","checks":255},{"boss":"Bonemass","era":"Swamp","checks":333},{"boss":"Moder","era":"Mountains","checks":385},{"boss":"Yagluth","era":"Plains","checks":463},{"boss":"The Queen","era":"Mistlands","checks":565},{"boss":"Fader","era":"Ashlands","checks":646},{"boss":"Kall Fimbulbringer","era":"Deep North","checks":695}],"kinds":[{"kind":"Research","what":"crafting each research at the Research Bench","option":"always","count":243},{"kind":"Trophy","what":"picking up each creature's and boss's trophy","option":"always","count":66},{"kind":"Biome","what":"entering each biome","option":"biome_checks","count":8},{"kind":"Obtain","what":"getting each material for the first time","option":"obtain_checks","count":111},{"kind":"Kill","what":"the first kill of each creature","option":"kill_checks","count":53},{"kind":"Discover","what":"reaching each kind of place: dungeons, camps, altars","option":"discovery_checks","count":22},{"kind":"Build","what":"placing each kind of station and piece","option":"build_checks","count":29},{"kind":"Eat","what":"eating each food","option":"eat_checks","count":51},{"kind":"Catch","what":"catching each fish","option":"fishing_checks","count":12},{"kind":"Tame","what":"taming each creature","option":"taming_checks","count":6},{"kind":"Buy","what":"buying from the traders","option":"trader_checks","count":22},{"kind":"Read, Vegvisir","what":"reading each biome's rune stones and each boss's Vegvisir","option":"lore_checks","count":19},{"kind":"Plant","what":"planting each crop and tree","option":"farming_checks","count":18},{"kind":"Brew","what":"tapping each mead from a Fermenter","option":"brewing_checks","count":13},{"kind":"Loot","what":"opening each kind of dungeon's treasure chest","option":"dungeon_checks","count":6},{"kind":"Skill","what":"each skill reaching 10, 20... 100","option":"skill_checks","count":240},{"kind":"Explore","what":"uncovering the map, up to 20%","option":"exploration_checks","count":41},{"kind":"Comfort","what":"reaching each comfort level","option":"comfort_checks","count":13}]}</script>
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById("data").textContent);
+  document.getElementById("version").textContent =
+    `Valheim ${data.game_version} · APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
+  const row = (table, cells) => {
+    const tr = document.createElement("tr");
+    for (const [text, cls] of cells) {
+      const td = document.createElement("td"); td.textContent = text; if (cls) td.className = cls; tr.append(td);
+    }
+    document.getElementById(table).append(tr);
+  };
+  for (const g of data.goals) row("goals", [[g.boss], [g.era], [String(g.checks), "n"]]);
+  for (const k of data.kinds) row("checks", [[k.kind], [k.what], [k.option], [String(k.count), "n"]]);
+})();
+</script>
+</body>
+</html>

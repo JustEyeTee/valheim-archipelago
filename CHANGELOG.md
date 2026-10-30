@@ -2,6 +2,20 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.18.0
+
+- **Brewing checks** (`brewing_checks`, on): tapping each mead from a Fermenter (13 meads, from Minor Healing to
+  Lingering Eitr), with the Mead ketill and the Fermenter researched and the ingredients in logic.
+- **Farming** now covers trees (beech, birch, fir, pine, oak), kale, ashvine and planting carrots, turnips and
+  onions for seeds; new obtain checks for their seeds and for feathers, sap, scale hide, royal jelly, blood clot
+  and smoke puff.
+- **Connect from the pause menu**: the Archipelago window also shows in game while the menu is open, to connect,
+  reconnect or disconnect mid-game. Disconnect now works (checks done meanwhile are sent on the next connect).
+- New check rows always go at the end of `checks.tsv`, so existing location ids never move.
+- **Player guide** (https://justeyetee.github.io/valheim-archipelago/guide/): setup, goals, every kind of check
+  (with counts from the APWorld), items, the in-game keys and commands, co-op and trackers; built with the
+  Options Builder by `tools/gen_options_page.py`.
+
 ## 0.17.0
 
 - **Boss altar keys** (`boss_altar_keys`, off by default): every boss altar is sealed until you receive that

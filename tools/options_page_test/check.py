@@ -12,7 +12,7 @@ import valheimapworld as vw
 PREFIXES = {"Biome: ": "Biomes", "Obtain: ": "Obtain", "Kill: ": "Kills", "Discover: ": "Discoveries", "Build: ": "Build",
             "Eat: ": "Eat", "Catch: ": "Fishing", "Tame: ": "Taming", "Buy: ": "Trader", "Skill: ": "Skills",
             "Explore: ": "Exploration", "Trophy: ": "Trophies", "Comfort: ": "Comfort", "Read: ": "Lore",
-            "Vegvisir: ": "Lore", "Plant: ": "Farming", "Loot: ": "Dungeons"}
+            "Vegvisir: ": "Lore", "Plant: ": "Farming", "Brew: ": "Brewing", "Loot: ": "Dungeons"}
 def item_kind(n):
     if n in vw.RESEARCH_PREREQS or n in vw.PROGRESSIVE_FAMILIES: return "Researches"
     if n.startswith("Trophy: "): return "Trophy boosts"

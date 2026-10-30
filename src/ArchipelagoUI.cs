@@ -49,9 +49,10 @@ public class ArchipelagoUI : MonoBehaviour
         return UnityEngine.Object.FindFirstObjectByType<FejdStartup>() != null;
     }
 
+    // On the main menu, and in game while the pause menu is open (to connect, reconnect or disconnect mid-game).
     private void OnGUI()
     {
-        if (!_inMainMenu) return;
+        if (!_inMainMenu && !Menu.IsVisible()) return;
 
         // Pause UI scaling for different resolutions
         var oldColor = GUI.color;
@@ -105,7 +106,8 @@ public class ArchipelagoUI : MonoBehaviour
 
         GUILayout.BeginHorizontal();
 
-        bool clientConnected = false;
+        bool clientConnected = ArchipelagoConnection.IsConnected;
+        if (clientConnected && !_connecting) _status = $"Connected as {ArchipelagoConnection.SlotName}";
         GUI.enabled = !_connecting && !clientConnected && ValidInputs();
         if (GUILayout.Button("Connect", GUILayout.Height(28)))
         {
@@ -176,6 +178,7 @@ public class ArchipelagoUI : MonoBehaviour
 
     private void Disconnect()
     {
-
+        ArchipelagoConnection.Disconnect();
+        _status = "Disconnected";
     }
 }

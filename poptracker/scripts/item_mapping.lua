@@ -135,6 +135,7 @@ ITEM_MAPPING = {
   [2296] = "nord_staffs",
   [2286] = "nord_weapons_tier_1",
   [2287] = "nord_weapons_tier_2",
+  [2300] = "northern_crops",
   [2131] = "padded_armor",
   [2034] = "pickaxes_tier_1",
   [2065] = "pickaxes_tier_2",

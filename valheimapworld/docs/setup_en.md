@@ -30,7 +30,8 @@ put the file in your Archipelago `Players` folder.
    there is one, then click Connect.
 3. Start a new world (a new character is recommended too).
 
-Type `/ap status` in the in-game chat to check the connection, and `/ap` for the list of commands.
+Type `/ap status` in the in-game chat to check the connection, and `/ap` for the list of commands. The
+Archipelago window also shows in the pause menu (Esc), to connect, reconnect or disconnect mid-game.
 
 ## Playing together
 

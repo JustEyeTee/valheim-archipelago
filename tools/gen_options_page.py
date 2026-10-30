@@ -1,5 +1,6 @@
 """Builds the options builder web page from the APWorld's own option definitions, so it can't drift out of
-date: docs/options/index.html (for GitHub Pages) and, with --fragment, the page body alone.
+date: docs/options/index.html (for GitHub Pages) and, with --fragment, the page body alone. Also builds the
+player guide, docs/guide/index.html, whose check counts come from the same worlds.
 
 Needs Archipelago's Python (for the World and its options):
     ~/projects/archipelago-0.6.8/.venv/bin/python tools/gen_options_page.py ~/projects/archipelago-0.6.8 [--fragment out.html]
@@ -65,7 +66,8 @@ groups.append({"name": "Archipelago", "options": [describe(n, hints[n]) for n in
 CHECK_OPTIONS = {"Biome: ": "biome_checks", "Obtain: ": "obtain_checks",
                  "Kill: ": "kill_checks", "Discover: ": "discovery_checks", "Build: ": "build_checks",
                  "Eat: ": "eat_checks", "Catch: ": "fishing_checks", "Tame: ": "taming_checks", "Buy: ": "trader_checks",
-                 "Read: ": "lore_checks", "Vegvisir: ": "lore_checks", "Plant: ": "farming_checks", "Loot: ": "dungeon_checks"}
+                 "Read: ": "lore_checks", "Vegvisir: ": "lore_checks", "Plant: ": "farming_checks", "Brew: ": "brewing_checks",
+                 "Loot: ": "dungeon_checks"}
 
 
 def build(options):
@@ -160,15 +162,47 @@ data = {
     "trap_count": len(world.TRAP_ITEMS),
 }
 
-page = (root / "tools" / "options_page.html").read_text()
-body = page.replace("/*DATA*/", json.dumps(data, separators=(",", ":")).replace("</", "<\\/"))
-head, _, rest = body.partition("<!--BODY-->")
-full = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
-        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
-        + head + "</head>\n<body>\n" + rest + "</body>\n</html>\n")
+def write_page(template, page_data, out):
+    """A page from its template (head, then <!--BODY-->, then the body) with page_data as its /*DATA*/."""
+    page = (root / "tools" / template).read_text()
+    body = page.replace("/*DATA*/", json.dumps(page_data, separators=(",", ":")).replace("</", "<\\/"))
+    head, _, rest = body.partition("<!--BODY-->")
+    full = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
+            + head + "</head>\n<body>\n" + rest + "</body>\n</html>\n")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(full)
+    return head, rest
+
+
 out = root / "docs" / "options" / "index.html"
-out.parent.mkdir(parents=True, exist_ok=True)
-out.write_text(full)
+head, rest = write_page("options_page.html", data, out)
+
+# The guide's table of check kinds: what each is, its option, and how many the full game has with all of them on.
+full_game = next(g["breakdown"] for g in goals if g["key"] == "kall_fimbulbringer")
+KINDS = [("Research", "crafting each research at the Research Bench", "always", full_game["research"]),
+         ("Trophy", "picking up each creature's and boss's trophy", "always", full_game["trophy"])]
+KINDS += [(kind, what, option, full_game.get(option, 0)) for kind, what, option in [
+    ("Biome", "entering each biome", "biome_checks"),
+    ("Obtain", "getting each material for the first time", "obtain_checks"),
+    ("Kill", "the first kill of each creature", "kill_checks"),
+    ("Discover", "reaching each kind of place: dungeons, camps, altars", "discovery_checks"),
+    ("Build", "placing each kind of station and piece", "build_checks"),
+    ("Eat", "eating each food", "eat_checks"),
+    ("Catch", "catching each fish", "fishing_checks"),
+    ("Tame", "taming each creature", "taming_checks"),
+    ("Buy", "buying from the traders", "trader_checks"),
+    ("Read, Vegvisir", "reading each biome's rune stones and each boss's Vegvisir", "lore_checks"),
+    ("Plant", "planting each crop and tree", "farming_checks"),
+    ("Brew", "tapping each mead from a Fermenter", "brewing_checks"),
+    ("Loot", "opening each kind of dungeon's treasure chest", "dungeon_checks")]]
+KINDS += [("Skill", "each skill reaching 10, 20... 100", "skill_checks", full_game["skills_available"] * 10),
+          ("Explore", "uncovering the map, up to 20%", "exploration_checks", len(full_game["explore"])),
+          ("Comfort", "reaching each comfort level", "comfort_checks", len(full_game["comfort"]))]
+guide = {k: data[k] for k in ("world_version", "game_version", "minimum_ap_version")}
+guide["goals"] = [{"boss": g["boss"], "era": g["era"], "checks": g["checks"]} for g in goals]
+guide["kinds"] = [{"kind": k, "what": w, "option": o if o == "always" else o, "count": n} for k, w, o, n in KINDS]
+write_page("guide_page.html", guide, root / "docs" / "guide" / "index.html")
 print(f"wrote {out}: {sum(len(g['options']) for g in groups)} options, goals {[(g['key'], g['checks']) for g in goals]}")
 if "--fragment" in sys.argv:
     pathlib.Path(sys.argv[sys.argv.index("--fragment") + 1]).write_text(head + rest)

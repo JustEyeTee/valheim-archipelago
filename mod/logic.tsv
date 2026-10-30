@@ -1001,6 +1001,46 @@ location	Loot: Sunken Crypt	4	boss:The Elder
 location	Loot: Frost Cave	7	
 location	Loot: Infested Mine	9	
 location	Loot: Charred Fortress	11	
+location	Obtain: Beech Seeds	2	
+location	Obtain: Pine Cone	2	
+location	Obtain: Fir Cone	2	
+location	Obtain: Birch Seeds	5	
+location	Obtain: Acorn	5	
+location	Obtain: Ashvine Seeds	4	
+location	Obtain: Kale Seeds	12	
+location	Obtain: Carrot	4	Cultivator
+location	Obtain: Turnip	4	Cultivator
+location	Obtain: Onion	7	Cultivator
+location	Plant: Carrot (for seeds)	4	Cultivator
+location	Plant: Turnip (for seeds)	4	Cultivator
+location	Plant: Onion (for seeds)	7	Cultivator
+location	Plant: Kale	12	Cultivator|Northern Crops
+location	Plant: Kale (for seeds)	12	Cultivator|Northern Crops
+location	Plant: Ashvine	4	Cultivator
+location	Plant: Beech	4	Cultivator
+location	Plant: Birch	5	Cultivator
+location	Plant: Fir	4	Cultivator
+location	Plant: Pine	4	Cultivator
+location	Plant: Oak	5	Cultivator
+location	Brew: Frost Resistance Mead	5	Mead ketill|Fermenter
+location	Brew: Medium Healing Mead	5	Mead ketill|Fermenter
+location	Brew: Minor Healing Mead	5	Mead ketill|Fermenter
+location	Brew: Poison Resistance Mead	5	Mead ketill|Fermenter
+location	Brew: Medium Stamina Mead	8	Mead ketill|Fermenter
+location	Brew: Minor Stamina Mead	5	Mead ketill|Fermenter
+location	Brew: Tasty Mead	5	Mead ketill|Fermenter
+location	Obtain: Feathers	1	
+location	Obtain: Scale Hide	9	
+location	Obtain: Royal Jelly	9	
+location	Obtain: Bloodclot	9	
+location	Obtain: Smoke Puff	11	
+location	Obtain: Sap	9	Sap Extractor
+location	Brew: Lingering Eitr Mead	11	Mead ketill|Fermenter
+location	Brew: Minor Eitr Mead	9	Mead ketill|Fermenter
+location	Brew: Lingering Healing Mead	11	Mead ketill|Fermenter
+location	Brew: Major Healing Mead	9	Mead ketill|Fermenter
+location	Brew: Lightfoot Mead	9	Mead ketill|Fermenter
+location	Brew: Lingering Stamina Mead	9	Mead ketill|Fermenter
 combat	Meadows	armor	
 combat	Meadows	weapons	Clubs Tier 1|Axes Tier 1|Blades Tier 1|Spears Tier 1|Knuckles Tier 1|Short Blades Tier 1
 combat	Meadows	ranged	Bows Tier 1
@@ -1042,6 +1082,7 @@ comfort	Banner	1	tier:8|Crafting
 comfort	Banner	1	tier:8|Crafting
 comfort	Banner	1	tier:5|Crafting
 comfort	Banner	1	tier:5|Crafting
+comfort	Banner	1	tier:8|Crafting
 comfort	Banner	1	tier:8|Crafting
 comfort	Leisure	2	tier:8|Crafting
 comfort	Chair	1	tier:5|Crafting

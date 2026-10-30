@@ -9,7 +9,8 @@ or to other players in the multiworld.
 
 Based on [Samupo's Valheim Archipelago Randomizer](https://github.com/Samupo/ValheimArchipelagoRandomizer),
 updated for Valheim 1.0.21 ("Deep North") and current Archipelago, with many additions (see
-[CHANGELOG.md](CHANGELOG.md)). Made with the help of an AI assistant (Claude).
+[CHANGELOG.md](CHANGELOG.md)). Most of this project's code, tools and documentation were written by Claude,
+an AI model made by Anthropic, at JustEyeTee's direction.
 
 > **Status: beta.** Generation is tested for every goal; in-game testing is ongoing. Back up your
 > characters and worlds, and please report problems with your `BepInEx/LogOutput.log`.
@@ -39,6 +40,9 @@ The APWorld (`valheimapworld.apworld`) is in the GitHub release and in the Thund
 folder, found with r2modman's Settings > Browse profile folder).
 
 ## Setting up a game
+
+New to it? The **[player guide](https://justeyetee.github.io/valheim-archipelago/guide/)** covers setup, goals, every
+kind of check, the in-game keys and commands, and co-op.
 
 1. Make your options file with the **[Options Builder](https://justeyetee.github.io/valheim-archipelago/options/)**
    (pick your options, then copy or download the YAML), or copy [docs/Valheim.yaml](docs/Valheim.yaml) and edit it.
@@ -101,7 +105,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `great_hall_comfort` | 10 | Great Hall: the comfort level to reach (lowered to the most the era allows). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
 | `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |
-| `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks`, `lore_checks`, `farming_checks`, `dungeon_checks` | on | Extra kinds of checks (lore: rune stones and Vegvisirs; farming: planting crops; dungeons: opening each kind of dungeon's treasure chest). |
+| `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks`, `lore_checks`, `farming_checks`, `brewing_checks`, `dungeon_checks` | on | Extra kinds of checks (lore: rune stones and Vegvisirs; farming: planting crops and trees; brewing: tapping each mead; dungeons: opening each kind of dungeon's treasure chest). |
 | `exploration_checks`, `exploration_check_spacing` | 6, one_percent | Checks for exploring up to this % of the map (0-20), every half, one or two percent. |
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |

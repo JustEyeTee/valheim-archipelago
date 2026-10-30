@@ -77,6 +77,17 @@ public static class ArchipelagoLinks
 
     public static bool Connected => session != null;
 
+    public static void OnDisconnected()
+    {
+        if (session != null)
+        {
+            session.Socket.PacketReceived -= OnPacketReceived;
+            session.MessageLog.OnMessageReceived -= OnMessageReceived;
+        }
+        session = null;
+        deathLinkService = null;
+    }
+
     public static void OnConnected(ArchipelagoSession newSession, string slotName, Dictionary<string, object> slotData)
     {
         session = newSession;

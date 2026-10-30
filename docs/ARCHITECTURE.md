@@ -243,7 +243,7 @@ flowchart LR
 | `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
 | `gen_mod_logic.py` | writes `mod/logic.tsv`, the rules the mod's logic panel uses | after any logic change (`test_generate.sh` checks it's current) |
 | `gen_poptracker.py` | writes the PopTracker pack from the APWorld's own tables | before a release |
-| `gen_options_page.py` | builds the Options Builder web page (`docs/options/`, served by GitHub Pages) from the APWorld's options, counting each goal's checks | before a release |
+| `gen_options_page.py` | builds the Options Builder (`docs/options/`) and the player guide (`docs/guide/`), served by GitHub Pages, from the APWorld's options, counting each goal's checks | before a release |
 | `gen_template.sh` | regenerates `docs/Valheim.yaml`, the options template, with Archipelago's own generator | before a release |
 | `make_icon.py` | draws the Thunderstore icon | when changing the icon |
 | `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction, and the English names | for English names |
