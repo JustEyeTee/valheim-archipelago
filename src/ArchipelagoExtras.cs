@@ -290,7 +290,11 @@ public static class ArchipelagoExtras
         }
 
         ArchipelagoLinks.Tick(player);
-        if (trapCreatures.Count > 0) DespawnTrapCreatures(player.IsDead());
+        if (player.IsDead() || Time.time >= nextTrapCreatureCheck)
+        {
+            nextTrapCreatureCheck = Time.time + 5f;
+            DespawnTrapCreatures(player.IsDead());
+        }
 
         if (Time.time >= nextExploreTime)
         {
@@ -786,24 +790,48 @@ public static class ArchipelagoExtras
             var offset = Quaternion.Euler(0f, 360f * i / count, 0f) * Vector3.forward * distance;
             var pos = player.transform.position + offset;
             pos.y = ZoneSystem.instance.GetGroundHeight(pos) + 0.5f;
-            trapCreatures.Add((UnityEngine.Object.Instantiate(prefab, pos, Quaternion.identity), Time.time + TrapCreatureSeconds));
+            var creature = UnityEngine.Object.Instantiate(prefab, pos, Quaternion.identity);
+            // Marked on the creature itself (saved with the world), so it still leaves after a reload or an update.
+            var zdo = creature.GetComponent<ZNetView>()?.GetZDO();
+            zdo?.Set(TrapUntilKey, (long)(ZNet.instance.GetTimeSeconds() + TrapCreatureSeconds));
         }
     }
 
     // Creatures a trap summons leave after a few minutes, or when you die, so you don't respawn into them.
     private const float TrapCreatureSeconds = 180f;
-    private static readonly List<(GameObject creature, float until)> trapCreatures = new List<(GameObject, float)>();
+    private const string TrapUntilKey = "ap_trap_until";
+    private static float nextTrapCreatureCheck;
 
     private static void DespawnTrapCreatures(bool all)
     {
-        for (int i = trapCreatures.Count - 1; i >= 0; i--)
+        double now = ZNet.instance.GetTimeSeconds();
+        foreach (var character in Character.GetAllCharacters().ToList())
         {
-            var (creature, until) = trapCreatures[i];
-            if (creature && !all && Time.time < until) continue;
-            if (creature && creature.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid() && nview.IsOwner())
-                ZNetScene.instance.Destroy(creature);
-            trapCreatures.RemoveAt(i);
+            var nview = character ? character.GetComponent<ZNetView>() : null;
+            if (nview == null || !nview.IsValid() || character.IsPlayer()) continue;
+            long until = nview.GetZDO().GetLong(TrapUntilKey, 0L);
+            if (until == 0L || (!all && now < until)) continue;
+            if (!nview.IsOwner()) nview.ClaimOwnership();
+            ZNetScene.instance.Destroy(character.gameObject);
         }
+    }
+
+    // /ap clear: removes the bats around you (bats never live in the open, so these came from a trap), for
+    // creatures summoned before trap creatures were marked to leave.
+    public static int ClearNearbyBats(Player player, float radius = 60f)
+    {
+        int removed = 0;
+        foreach (var character in Character.GetAllCharacters().ToList())
+        {
+            if (!character || character.IsPlayer() || PrefabName(character.gameObject) != "Bat") continue;
+            if (Vector3.Distance(character.transform.position, player.transform.position) > radius) continue;
+            var nview = character.GetComponent<ZNetView>();
+            if (nview == null || !nview.IsValid()) continue;
+            if (!nview.IsOwner()) nview.ClaimOwnership();
+            ZNetScene.instance.Destroy(character.gameObject);
+            removed++;
+        }
+        return removed;
     }
 
     // How many bosses this world has seen defeated (the keys the game sets).

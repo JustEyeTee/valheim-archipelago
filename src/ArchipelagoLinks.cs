@@ -504,7 +504,7 @@ public class ArchipelagoCommand : ConsoleCommand
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
-        if (!ArchipelagoLinks.Connected) { Reply("Not connected to Archipelago."); return; }
+        if (!ArchipelagoLinks.Connected && sub != "clear") { Reply("Not connected to Archipelago."); return; }
         var player = Player.m_localPlayer;
         int amount = args.Length > 1 && int.TryParse(args[1], out var n) ? n : 0;
         string rest = string.Join(" ", args.Skip(1));
@@ -513,6 +513,13 @@ public class ArchipelagoCommand : ConsoleCommand
             case "goal":
                 foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
                 break;
+            case "clear":
+            {
+                if (player == null) { Reply("Load your world first."); return; }
+                int removed = ArchipelagoExtras.ClearNearbyBats(player);
+                Reply(removed == 0 ? "No bats around you." : $"Removed {removed} bats around you.");
+                break;
+            }
             case "give":
             {
                 // /ap give [count] <item>: for testing, through the server's item cheat.

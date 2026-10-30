@@ -67,6 +67,7 @@ kind of check, the in-game keys and commands, and co-op.
 | `/ap status` | Connection, Death Link and Trap Link settings |
 | `/ap goal` | Your goal and how far along each condition is |
 | `/ap logic`, `/ap logic <kind>` | The checks you can do now (in logic); **F8** shows them in a panel, **F9** opens the full list (mouse free, with a Hint button per check) |
+| `/ap clear` | Removes bats around you (from a Bat Swarm Trap) |
 | `/ap give [n] <item>`, `/ap items [search]` | Testing: get any item through the server's item cheat (rooms you host; see [docs/TESTING.md](docs/TESTING.md)) |
 | `/ap shop`, `/ap shop hint [kind]` | Haldor's hint shop: by a trader, pay Coins to reveal one of your checks in logic as a hint |
 | `/ap checks` | Checks done, and what's left by category |

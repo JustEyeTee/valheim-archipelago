@@ -14,7 +14,8 @@ From the first playtest:
 - A Map Fragment pins the spot it uncovers on your map.
 - Traps: the Lightning Strike no longer kills a new character outright (the bolt lands beside you; you take a
   third of your health); Bat Swarm is 2 bats plus one per boss defeated (6 killed you at spawn over and over);
-  the Launch Trap throws you higher; creatures a trap summons leave after 3 minutes or when you die.
+  the Launch Trap throws you higher; creatures a trap summons leave after 3 minutes or when you die (marked on the
+  creature, so this holds across reloads); `/ap clear` removes bats around you.
 - The F8 panel hides while the inventory, the menu, a store or the map is open.
 
 ## 0.21.0
