@@ -2,6 +2,17 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.21.1
+
+From the first playtest:
+- The Research Bench and the Archipelago Chest cost scales with `research_cost_percent` too (at 1%: 1 Wood and
+  1 Stone, and 1 Wood).
+- The Starter Kit has no Raspberries any more: they were a check, and the kit sent "Obtain: Raspberries" on arrival.
+- F8 is simpler and sits below the minimap: how many checks you can do now, the best thing to get next, and how
+  many of each kind. F9 hides skill, exploration and comfort checks unless you ask (they come as you play), sorts
+  its tabs by size and drops the repeated "Obtain:" inside a tab.
+- A Map Fragment pins the spot it uncovers on your map.
+
 ## 0.21.0
 
 - **Testing with any item**: `/ap give [count] <item>` asks the server for any item through its item cheat (on in

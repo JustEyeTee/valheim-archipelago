@@ -74,9 +74,10 @@ public static class ArchipelagoExtras
     private static readonly System.Reflection.MethodInfo MinimapExplore =
         AccessTools.Method(typeof(Minimap), "Explore", new[] { typeof(Vector3), typeof(float) });
 
-    // Starter Kit: straight into the inventory, since there's no chest yet.
+    // Starter Kit: straight into the inventory, since there's no chest yet. Nothing in it is a check (Raspberries
+    // were, and the kit sent "Obtain: Raspberries" on arrival).
     private static readonly (string prefab, int amount)[] StarterKit =
-        { ("Club", 1), ("AxeStone", 1), ("Torch", 1), ("Raspberry", 10) };
+        { ("Club", 1), ("AxeStone", 1), ("Torch", 1) };
 
     // From checks.tsv (embedded in the DLL; the APWorld is generated from the same file).
     private static readonly Dictionary<string, string> ObtainLocations = new Dictionary<string, string>();
@@ -235,7 +236,11 @@ public static class ArchipelagoExtras
             Description = "Resource bundles sent to you through Archipelago are delivered here.",
             PieceTable = "Hammer",
             Category = "Randomizer",
+#if FASTTEST
+            Requirements = new[] { new RequirementConfig("Wood", 1, recover: true) }
+#else
             Requirements = new[] { new RequirementConfig("Wood", 10, recover: true) }
+#endif
         };
         PieceManager.Instance.AddPiece(new CustomPiece(clone, true, pieceCfg));
         ValheimRandomizer.Log.LogInfo("Archipelago Chest registered");
@@ -449,9 +454,25 @@ public static class ArchipelagoExtras
         float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f), distance = UnityEngine.Random.Range(500f, 2500f);
         var spot = player.transform.position + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * distance;
         MinimapExplore?.Invoke(Minimap.instance, new object[] { spot, FragmentRadius });
+        AddPin(spot, Minimap.PinType.Icon3, "Map Fragment");
+        ValheimRandomizer.Log.LogInfo($"[AP] Map Fragment: uncovered {spot} ({distance:0} m away)");
         string direction = new[] { "east", "northeast", "north", "northwest", "west", "southwest", "south", "southeast" }
             [Mathf.RoundToInt(angle / (Mathf.PI / 4f)) % 8];
-        player.Message(MessageHud.MessageType.Center, $"Archipelago: a Map Fragment! It shows land {distance / 1000f:0.0} km {direction} of here.");
+        player.Message(MessageHud.MessageType.Center, $"Archipelago: a Map Fragment! It shows land {distance / 1000f:0.0} km {direction} of here (pinned on your map).");
+    }
+
+    // Minimap.AddPin by reflection: its last parameter's type (PlatformUserID) lives in an assembly this mod
+    // doesn't build against. Optional parameters get their defaults.
+    private static readonly System.Reflection.MethodInfo MinimapAddPin = AccessTools.Method(typeof(Minimap), "AddPin");
+
+    private static void AddPin(Vector3 pos, Minimap.PinType type, string name)
+    {
+        if (MinimapAddPin == null || Minimap.instance == null) return;
+        var given = new object[] { pos, type, name, true, false };
+        var args = MinimapAddPin.GetParameters().Select((p, i) => i < given.Length ? given[i]
+            : p.HasDefaultValue && p.DefaultValue != null ? p.DefaultValue
+            : p.ParameterType.IsValueType ? Activator.CreateInstance(p.ParameterType) : null).ToArray();
+        MinimapAddPin.Invoke(Minimap.instance, args);
     }
 
     private static int PopCount(uint v)

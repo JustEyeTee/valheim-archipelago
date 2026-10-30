@@ -150,7 +150,8 @@ public static class ArchipelagoLogic
     // The things that would each put the most checks in logic on their own: (what, how many checks).
     public static List<(string what, int checks)> Next { get; private set; } = new List<(string, int)>();
 
-    public static string NextLine() => "Next: " + string.Join(", ", Next.Select(n => $"{Describe(n.what)} ({n.checks} {(n.checks == 1 ? "check" : "checks")})"));
+    public static string NextLine() => "Best to get next: " + string.Join(", ", Next.Select(n =>
+        $"{Describe(n.what)} (opens {n.checks} more)"));
 
     public static string Describe(string token)
     {
@@ -163,7 +164,7 @@ public static class ArchipelagoLogic
             case "combat": return $"{arg} gear (armor and a weapon)";
             case "comfort": return $"comfort {arg}";
             case "altarkey": return $"{arg}'s Altar Key";
-            default: return token;
+            default: return ValheimRandomizer.archipelagoToResearch.ContainsKey(token) ? $"{token} research" : token;
         }
     }
 
@@ -203,7 +204,6 @@ public static class ArchipelagoLogic
 // The logic panel: the checks in logic now, by category, on the right of the screen while a world is loaded.
 public class ArchipelagoLogicPanel : MonoBehaviour
 {
-    private const int NamesPerCategory = 6;
     private const float RefreshSeconds = 2f;
 
     private bool open;
@@ -226,19 +226,16 @@ public class ArchipelagoLogicPanel : MonoBehaviour
         }
     }
 
+    // A glance: how many checks you can do now, what to get to open up the most, and how many of each kind.
     private static string Build()
     {
-        if (!ArchipelagoLinks.Connected) return "Archipelago: not connected.";
-        var (inLogic, outOfLogic) = ArchipelagoLogic.Missing();
-        var lines = new List<string> { $"In logic now: {inLogic.Count}   (not yet: {outOfLogic})" };
+        if (!ArchipelagoLinks.Connected) return "Not connected.";
+        var (inLogic, _) = ArchipelagoLogic.Missing();
+        var lines = new List<string> { $"{inLogic.Count} checks you can do now" };
         if (ArchipelagoLogic.Next.Count > 0) lines.Add(ArchipelagoLogic.NextLine());
-        foreach (var group in inLogic.GroupBy(ArchipelagoLinks.Category).OrderBy(g => g.Key))
-        {
-            var names = group.Select(n => n.Contains(": ") ? n.Substring(n.IndexOf(": ", StringComparison.Ordinal) + 2) : n).ToList();
-            lines.Add($"{group.Key} ({names.Count}): " + string.Join(", ", names.Take(NamesPerCategory)) +
-                      (names.Count > NamesPerCategory ? $", +{names.Count - NamesPerCategory} more" : ""));
-        }
-        lines.Add($"{ValheimRandomizer.logicWindowKey.Value} opens the full list.");
+        lines.Add(string.Join(" · ", inLogic.GroupBy(ArchipelagoLinks.Category).OrderByDescending(g => g.Count())
+            .ThenBy(g => g.Key).Select(g => $"{g.Key} {g.Count()}")));
+        lines.Add($"{ValheimRandomizer.logicWindowKey.Value}: the full list");
         return string.Join("\n", lines);
     }
 
@@ -250,10 +247,11 @@ public class ArchipelagoLogicPanel : MonoBehaviour
             style = new GUIStyle(GUI.skin.box) { alignment = TextAnchor.UpperLeft, wordWrap = true, fontSize = 14 };
             style.normal.textColor = Color.white;
         }
-        float width = Mathf.Min(520f, Screen.width * 0.4f);
-        var content = new GUIContent("Archipelago logic (" + ValheimRandomizer.logicPanelKey.Value + ")\n" + text);
+        // On the right, below the minimap and the status effects beside it.
+        float width = Mathf.Min(420f, Screen.width * 0.3f);
+        var content = new GUIContent("Archipelago (" + ValheimRandomizer.logicPanelKey.Value + ")\n" + text);
         float height = style.CalcHeight(content, width);
-        GUI.Box(new Rect(Screen.width - width - 16f, 80f, width, height), content, style);
+        GUI.Box(new Rect(Screen.width - width - 16f, Screen.height * 0.30f, width, height), content, style);
     }
 }
 
@@ -273,6 +271,10 @@ public class ArchipelagoLogicWindow : MonoBehaviour
     private int outOfLogic;
     private string message = "";
     private string nextCategory, nextMessage;
+    private bool showPassive, nextShowPassive;
+
+    // Checks that come by themselves as you play (skill levels, exploring, comfort), hidden unless asked for.
+    private static readonly HashSet<string> Passive = new HashSet<string> { "Skill", "Explore", "Comfort" };
 
     private void Update()
     {
@@ -285,6 +287,7 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         // Clicks change what's drawn only from the next frame, so IMGUI's layout and draw passes agree.
         if (nextCategory != null) { category = nextCategory; nextCategory = null; scroll = Vector2.zero; }
         if (nextMessage != null) { message = nextMessage; nextMessage = null; }
+        if (nextShowPassive != showPassive) { showPassive = nextShowPassive; category = "All"; scroll = Vector2.zero; }
         if (IsOpen && Time.unscaledTime >= nextRefresh)
         {
             nextRefresh = Time.unscaledTime + RefreshSeconds;
@@ -315,7 +318,7 @@ public class ArchipelagoLogicWindow : MonoBehaviour
     private void OnGUI()
     {
         if (!IsOpen) return;
-        window = GUILayout.Window(GetInstanceID(), window, Draw, $"Archipelago: in logic now ({inLogic.Count}, not yet {outOfLogic})");
+        window = GUILayout.Window(GetInstanceID(), window, Draw, $"Archipelago: {inLogic.Count} checks you can do now");
     }
 
     private void Draw(int id)
@@ -326,17 +329,22 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         }
         else
         {
-            var categories = new[] { "All" }.Concat(inLogic.Select(ArchipelagoLinks.Category).Distinct().OrderBy(c => c)).ToArray();
+            var shown = inLogic.Where(n => showPassive || !Passive.Contains(ArchipelagoLinks.Category(n))).ToList();
+            var categories = new[] { "All" }.Concat(shown.GroupBy(ArchipelagoLinks.Category).OrderByDescending(g => g.Count())
+                .ThenBy(g => g.Key).Select(g => g.Key)).ToArray();
             int selected = Math.Max(0, Array.IndexOf(categories, category));
-            int clicked = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({inLogic.Count})" :
-                $"{c} ({inLogic.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 4);
+            int clicked = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({shown.Count})" :
+                $"{c} ({shown.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 5);
             if (clicked != selected) nextCategory = categories[clicked];
+            bool passive = GUILayout.Toggle(showPassive, $" Also show skill, exploration and comfort checks ({inLogic.Count - inLogic.Count(n => !Passive.Contains(ArchipelagoLinks.Category(n)))}; they come as you play)");
+            if (passive != showPassive) nextShowPassive = passive;
 
-            scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(440));
-            foreach (var name in inLogic.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
+            scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(420));
+            foreach (var name in shown.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(name);
+                // In a kind's own tab, "Obtain: Flint" reads as "Flint".
+                GUILayout.Label(category != "All" && name.Contains(": ") ? name.Substring(name.IndexOf(": ", StringComparison.Ordinal) + 2) : name);
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Hint", GUILayout.Width(60)))
                 {

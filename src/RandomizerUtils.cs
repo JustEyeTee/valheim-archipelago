@@ -17,6 +17,8 @@ public static class RandomizerUtils
     // Re-applied when a world loads, in case the recipes were rebuilt since connecting.
     public static void ReapplyResearchCostPercent() => ApplyResearchCostPercent(researchCostPercent);
 
+    private static readonly Dictionary<string, int[]> pieceCosts = new Dictionary<string, int[]>();
+
     public static void ApplyResearchCostPercent(int percent)
     {
         researchCostPercent = percent;
@@ -29,7 +31,17 @@ public static class RandomizerUtils
                 resources[i].m_amount = Math.Max(1, (int)Math.Round(amounts[i] * percent / 100.0));
             }
         }
-        ValheimRandomizer.Log.LogInfo($"Research costs set to {percent}% ({researchRecipes.Count} recipes).");
+        // The Research Bench and the Archipelago Chest scale the same way (from their normal costs, kept the first time).
+        foreach (var prefabName in new[] { ValheimRandomizer.ResearchBenchPrefabName, ArchipelagoExtras.ChestPrefabName })
+        {
+            var piece = PrefabManager.Instance.GetPrefab(prefabName)?.GetComponent<Piece>();
+            if (piece?.m_resources == null) continue;
+            if (!pieceCosts.TryGetValue(prefabName, out var normal))
+                pieceCosts[prefabName] = normal = piece.m_resources.Select(r => r.m_amount).ToArray();
+            for (int i = 0; i < piece.m_resources.Length && i < normal.Length; i++)
+                piece.m_resources[i].m_amount = Math.Max(1, (int)Math.Round(normal[i] * percent / 100.0));
+        }
+        ValheimRandomizer.Log.LogInfo($"Research costs set to {percent}% ({researchRecipes.Count} recipes, the Research Bench and the Archipelago Chest).");
     }
 
     public static void RegisterResearchBench()

@@ -104,7 +104,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `explorer_percent` | 5 | Share of the world map to uncover (lowered to the most the era allows). |
 | `skill_master_count`, `skill_master_level` | 5, 50 | How many skills, to what level. |
 | `great_hall_comfort` | 10 | Great Hall: the comfort level to reach (lowered to the most the era allows). |
-| `research_cost_percent` | 100 | Research costs, 1-200%. |
+| `research_cost_percent` | 100 | Research costs, 1-200%; the Research Bench and the Archipelago Chest scale with it. |
 | `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |
 | `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks`, `lore_checks`, `farming_checks`, `brewing_checks`, `dungeon_checks` | on | Extra kinds of checks (lore: rune stones and Vegvisirs; farming: planting crops and trees; brewing: tapping each mead; dungeons: opening each kind of dungeon's treasure chest). |
 | `exploration_checks`, `exploration_check_spacing` | 6, one_percent | Checks for exploring up to this % of the map (0-20), every half, one or two percent. |
@@ -118,7 +118,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
 | `gear_items` | on | Tools from your goal's era. |
-| `starter_kit` | on | Start with a Club, Stone Axe, Torch and Raspberries. |
+| `starter_kit` | on | Start with a Club, Stone Axe and Torch. |
 | `trap_percentage`, `boost_percentage`, `excluded_traps` | 20, 20, none | Traps and boosts among the extra items; 21 traps. |
 | `death_link`, `death_link_mode`, `death_link_amnesty` | off, kill, 0 | Death Link; your deaths can be forgiven, and others' can wound you or set off a trap instead. |
 | `trap_link` | off | Share traps with other Trap Link games. |

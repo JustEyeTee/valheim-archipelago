@@ -148,8 +148,9 @@ class GreatHallComfort(Range):
 
 class ResearchCostPercent(NamedRange):
     """
-    Scales how many materials each research costs at the Research Bench, as a percentage.
-    Every ingredient still costs at least 1, so 1 makes every research cost 1 of each.
+    Scales how many materials each research costs at the Research Bench, as a percentage, and the Research Bench
+    and the Archipelago Chest themselves. Every ingredient still costs at least 1, so 1 makes every research cost 1
+    of each.
     """
     display_name = "Research Cost Percent"
     range_start = 1
@@ -426,7 +427,7 @@ class MapFragments(Range):
 
 class StarterKit(DefaultOnToggle):
     """
-    Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
+    Start with a Club, a Stone Axe and a Torch in your inventory.
     """
     display_name = "Starter Kit"
 
