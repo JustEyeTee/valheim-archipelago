@@ -15,7 +15,8 @@ tools/test_room.sh tools/testing/solo-elder.yaml     # The Elder's era (Hildir, 
 PORT=38282 PASSWORD=secret tools/test_room.sh        # another port, a password to join
 ```
 
-It builds the APWorld, generates a seed from the YAML and hosts it, printing the address to connect to. The server
+`GENERATE_ONLY=1 tools/test_room.sh` only generates (to host the `.zip` elsewhere, e.g. as a separate service
+user). It builds the APWorld, generates a seed from the YAML and hosts it, printing the address to connect to. The server
 runs in that terminal: type its commands there (below), and `/exit` to stop it. Rooms are kept in
 `~/valheim-test-rooms/`.
 

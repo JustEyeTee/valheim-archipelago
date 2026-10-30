@@ -5,6 +5,7 @@
 #   tools/test_room.sh                                   tools/testing/solo-eikthyr.yaml on port 38281
 #   tools/test_room.sh tools/testing/solo-elder.yaml     another YAML (or several: a folder of them)
 #   PORT=38282 PASSWORD=secret tools/test_room.sh        another port; a password to join
+#   GENERATE_ONLY=1 tools/test_room.sh                   only generate (prints the .zip to host elsewhere)
 # The server runs in the foreground: type its commands here (/send TestViking Burning Trap, /send_location ...,
 # /exit to stop). Rooms are kept in ~/valheim-test-rooms/ (the .zip can also be hosted from the Archipelago Launcher).
 set -euo pipefail
@@ -35,5 +36,7 @@ $password_line
   In the game: /ap give <item>, /ap items <search> (see docs/TESTING.md). Here: /send <slot> <item>, /exit.
 
 INFO
+# GENERATE_ONLY=1: stop here (another user or machine hosts the .zip).
+[ "${GENERATE_ONLY:-0}" = 1 ] && { echo "$zip"; exit 0; }
 cd "$ap" && exec env SKIP_REQUIREMENTS_UPDATE=1 .venv/bin/python MultiServer.py --host 0.0.0.0 --port "$port" \
   ${PASSWORD:+--password "$PASSWORD"} "$zip"
