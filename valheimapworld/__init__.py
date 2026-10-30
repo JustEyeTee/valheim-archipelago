@@ -28,6 +28,7 @@ DEEP_NORTH_TIER = 12
 # Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
 TRAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("trap:"))
+BOOST_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("boost:"))
 
 # Location (and same-named item) -> tier number, from its region ("Tier4" -> 4).
 LOCATION_TIERS = {location.user_friendly_name: int(location.region[len("Tier"):])
@@ -77,9 +78,14 @@ class ValheimWorld(World):
         off = tuple(prefix for prefix, option in (("Biome: ", self.options.biome_checks),
                                                   ("Obtain: ", self.options.obtain_checks),
                                                   ("Explore: ", self.options.exploration_checks),
-                                                  ("Kill: ", self.options.kill_checks)) if not option)
+                                                  ("Kill: ", self.options.kill_checks),
+                                                  ("Discover: ", self.options.discovery_checks)) if not option)
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
+        # "Skill: Woodcutting 30" -> level 30
+        max_level = self.options.skill_checks.value
+        self.scope = frozenset(name for name in self.scope
+                               if not name.startswith("Skill: ") or int(name.rsplit(" ", 1)[1]) <= max_level)
 
     def create_regions(self):
         """
@@ -101,13 +107,15 @@ class ValheimWorld(World):
         """
         create_items(self, self.scope, LOGIC_ITEMS)
 
-        # Checks without a same-named item (biome, obtain, explore, kill) are filled with
-        # bundles and traps.
+        # Checks without a same-named item (biome, obtain, explore, kill, skill, discover) are
+        # filled with traps, then boosts, then bundles.
         missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
             sum(1 for item in self.multiworld.itempool if item.player == self.player)
         traps = round(missing * self.options.trap_percentage.value / 100)
+        boosts = min(missing - traps, round(missing * self.options.boost_percentage.value / 100))
         for i in range(missing):
-            name = self.random.choice(TRAP_ITEMS) if i < traps else self.get_filler_item_name()
+            name = self.random.choice(TRAP_ITEMS) if i < traps else \
+                self.random.choice(BOOST_ITEMS) if i < traps + boosts else self.get_filler_item_name()
             self.multiworld.itempool.append(self.create_item(name))
 
     def create_item(self, name: str) -> Item:
@@ -132,4 +140,8 @@ class ValheimWorld(World):
         return {
             "goal_trophy": self.goal_trophy,
             "research_cost_percent": self.options.research_cost_percent.value,
+            "death_link": bool(self.options.death_link.value),
+            "death_link_mode": self.options.death_link_mode.current_key,
+            "death_link_amnesty": self.options.death_link_amnesty.value,
+            "trap_link": bool(self.options.trap_link.value),
         }

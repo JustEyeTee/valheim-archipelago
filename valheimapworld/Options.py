@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DefaultOnToggle, NamedRange, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, PerGameCommonOptions, Range, Toggle
 
 
 class Goal(Choice):
@@ -95,15 +95,91 @@ class KillChecks(Toggle):
     display_name = "Kill Checks"
 
 
+class SkillChecks(NamedRange):
+    """
+    Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) to level 10,
+    20, 30, 40 and 50, up to this level. 0 turns skill checks off. Weapon and tool skills
+    only count once their research is received (Swords needs Blades Tier 1, and so on).
+    """
+    display_name = "Skill Checks"
+    range_start = 0
+    range_end = 50
+    default = 20
+    special_range_names = {
+        "off": 0,
+        "level_10": 10,
+        "level_20": 20,
+        "level_30": 30,
+        "level_40": 40,
+        "level_50": 50,
+    }
+
+
+class DiscoveryChecks(DefaultOnToggle):
+    """
+    Adds a check for reaching each kind of dungeon and landmark for the first time: Burial
+    Chamber, Troll Cave, Sunken Crypt, Frost Cave, Fuling Village, Infested Mine, Charred
+    Fortress, the traders and every boss altar, up to the goal's tier.
+    """
+    display_name = "Discovery Checks"
+
+
 class TrapPercentage(Range):
     """
-    Percentage of the filler items (the items beyond one per research and trophy) that are
-    traps instead of resource bundles: Greydwarf Ambush, Thunderstorm, Burning, Soaked, Famine.
+    Percentage of the extra items (the items beyond one per research and trophy) that are
+    traps instead of resource bundles: Greydwarf and Skeleton Ambush, Raid, Thunderstorm,
+    Burning, Poison, Frost, Soaked, Famine, Butterfingers (unequips everything) and Heavy Load.
     """
     display_name = "Trap Percentage"
     range_start = 0
     range_end = 100
     default = 20
+
+
+class BoostPercentage(Range):
+    """
+    Percentage of the extra items that are boosts instead of resource bundles: Combat,
+    Woodcutting and Mining Training (+5 skill levels) and Rested, Eikthyr's and Moder's
+    Blessings (a timed buff). Traps are taken first, then boosts, and the rest are bundles.
+    """
+    display_name = "Boost Percentage"
+    range_start = 0
+    range_end = 100
+    default = 20
+
+
+class DeathLinkMode(Choice):
+    """
+    What happens to you when someone else's Death Link arrives.
+    kill: you die (and lose skills and drop your items, as with any death).
+    wounded: your health drops to 1.
+    trap: a random trap goes off instead.
+    """
+    display_name = "Death Link Mode"
+    option_kill = 0
+    option_wounded = 1
+    option_trap = 2
+    default = option_kill
+
+
+class DeathLinkAmnesty(Range):
+    """
+    How many of your own deaths are forgiven before one is sent out over Death Link. 0 sends
+    every death; 2 sends every third death.
+    """
+    display_name = "Death Link Amnesty"
+    range_start = 0
+    range_end = 10
+    default = 0
+
+
+class TrapLink(Toggle):
+    """
+    Trap Link: when you receive a trap it is also sent to the other Trap Link games in the
+    multiworld, and their traps reach you (as the closest Valheim trap; unknown traps are
+    ignored).
+    """
+    display_name = "Trap Link"
 
 
 @dataclass
@@ -115,4 +191,11 @@ class ValheimOptions(PerGameCommonOptions):
     obtain_checks: ObtainChecks
     exploration_checks: ExplorationChecks
     kill_checks: KillChecks
+    skill_checks: SkillChecks
+    discovery_checks: DiscoveryChecks
     trap_percentage: TrapPercentage
+    boost_percentage: BoostPercentage
+    death_link: DeathLink
+    death_link_mode: DeathLinkMode
+    death_link_amnesty: DeathLinkAmnesty
+    trap_link: TrapLink

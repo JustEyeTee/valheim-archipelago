@@ -339,6 +339,22 @@ Thunderstorm Trap,trap:storm,1,Trap,Trap
 Burning Trap,trap:burning,1,Trap,Trap
 Soaked Trap,trap:soaked,1,Trap,Trap
 Famine Trap,trap:famine,1,Trap,Trap
+3 Minor Healing Meads,filler:MeadHealthMinor:3,1,Filler,Filler
+3 Minor Stamina Meads,filler:MeadStaminaMinor:3,1,Filler,Filler
+20 Fire Arrows,filler:ArrowFire:20,1,Filler,Filler
+10 Flint,filler:Flint:10,1,Filler,Filler
+Skeleton Ambush Trap,trap:skeletons,1,Trap,Trap
+Poison Trap,trap:poison,1,Trap,Trap
+Frost Trap,trap:frost,1,Trap,Trap
+Raid Trap,trap:raid,1,Trap,Trap
+Butterfingers Trap,trap:butterfingers,1,Trap,Trap
+Heavy Load Trap,trap:heavy,1,Trap,Trap
+Combat Training,boost:combat,1,Boost,Useful
+Woodcutting Training,boost:woodcutting,1,Boost,Useful
+Mining Training,boost:mining,1,Boost,Useful
+Rested Blessing,boost:rested,1,Boost,Useful
+Eikthyr's Blessing,boost:eikthyr,1,Boost,Useful
+Moder's Blessing,boost:moder,1,Boost,Useful
 '''
 
 # Map string classifications to `ItemClassification`
