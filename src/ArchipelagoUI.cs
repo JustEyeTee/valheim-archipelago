@@ -72,7 +72,11 @@ public class ArchipelagoUI : MonoBehaviour
         GUILayout.Label("Connect to an Archipelago room to enable item/location randomization.");
         GUILayout.Space(6);
 
-        _randomized = GUILayout.Toggle(_randomized, "Randomized?");
+        // Co-op: only one player connects; the others tick this without connecting, and their
+        // checks are passed to the server through the world by the connected player.
+        bool randomizedBefore = _randomized;
+        _randomized = GUILayout.Toggle(_randomized, "Randomized? (co-op players: tick this, don't connect)");
+        if (_randomized != randomizedBefore) ValheimRandomizer.randomized.Value = _randomized;
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Host", GUILayout.Width(60));

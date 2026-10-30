@@ -6,6 +6,7 @@ using System.Linq;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
 using HarmonyLib;
@@ -88,6 +89,7 @@ public static class ArchipelagoLinks
         SetDeathLink(GetInt(slotData, "death_link") != 0);
         if (trapLink) AddTag("TrapLink");
         session.Socket.PacketReceived += OnPacketReceived;
+        session.MessageLog.OnMessageReceived += OnMessageReceived;
 
         ValheimRandomizer.Log.LogInfo($"[AP] Death Link: {(deathLink ? deathLinkMode : "off")}, amnesty {deathLinkAmnesty}; Trap Link: {(trapLink ? "on" : "off")}");
     }
@@ -162,6 +164,76 @@ public static class ArchipelagoLinks
                 break;
         }
     }
+
+    // ---------- Item feed ----------
+
+    private static void OnMessageReceived(LogMessage message)
+    {
+        switch (message)
+        {
+            case HintItemSendLogMessage hint when hint.IsRelatedToActivePlayer:
+                if (ValheimRandomizer.showItemFeed.Value) messages.Enqueue("Hint: " + hint);
+                break;
+            case ItemSendLogMessage send when send.IsRelatedToActivePlayer:
+                if (!ValheimRandomizer.showItemFeed.Value) break;
+                var item = send.Item.ItemDisplayName ?? send.Item.ItemName;
+                if (send.IsSenderTheActivePlayer && send.IsReceiverTheActivePlayer)
+                    messages.Enqueue($"Found your own {item}");
+                else if (send.IsReceiverTheActivePlayer)
+                    messages.Enqueue($"Received {item} from {send.Sender.Alias}");
+                else
+                    messages.Enqueue($"Sent {item} to {send.Receiver.Alias}");
+                break;
+            case ChatLogMessage chat:
+                if (ValheimRandomizer.showChat.Value && chat.Player.Slot != session.ConnectionInfo.Slot) messages.Enqueue(chat.ToString());
+                break;
+            default:
+                // Replies to /ap hint and /ap say commands, and server announcements.
+                var type = message.GetType().Name;
+                if (type == "CommandResultLogMessage" || type == "ServerChatLogMessage") messages.Enqueue(message.ToString());
+                break;
+        }
+    }
+
+    private static readonly string[] FakeItems =
+        { "Swamp Key", "Wishbone", "Smelter", "Forge", "Iron Armor", "Pickaxes Tier 2", "Artisan Table", "Torn Spirit" };
+
+    public static string FakeItemMessage()
+    {
+        var item = FakeItems[UnityEngine.Random.Range(0, FakeItems.Length)];
+        var others = session?.Players.AllPlayers.Where(p => p.Slot > 0 && p.Slot != session.ConnectionInfo.Slot).ToList();
+        var sender = others != null && others.Count > 0 ? others[UnityEngine.Random.Range(0, others.Count)].Alias : "Archipelago";
+        return $"Received {item} from {sender}";
+    }
+
+    // ---------- Checks and hints ----------
+
+    private static string Category(string location)
+    {
+        int colon = location.IndexOf(':');
+        return colon > 0 ? location.Substring(0, colon) : "Research";
+    }
+
+    public static string CheckSummary()
+    {
+        var missing = session.Locations.AllMissingLocations
+            .Select(id => session.Locations.GetLocationNameFromId(id, "Valheim") ?? id.ToString()).ToList();
+        int total = session.Locations.AllLocations.Count;
+        var byCategory = missing.GroupBy(Category).OrderBy(g => g.Key)
+            .Select(g => $"{g.Key} {g.Count()}");
+        return $"{total - missing.Count}/{total} checks done. Left: " + string.Join(", ", byCategory) +
+               ". /ap missing <category> lists them.";
+    }
+
+    public static IEnumerable<string> MissingIn(string category)
+    {
+        return session.Locations.AllMissingLocations
+            .Select(id => session.Locations.GetLocationNameFromId(id, "Valheim") ?? id.ToString())
+            .Where(name => string.Equals(Category(name), category, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(name => name);
+    }
+
+    public static void Say(string text) => session.Say(text);
 
     // ---------- Trap Link ----------
 
@@ -286,11 +358,13 @@ public static class ArchipelagoLinks
     }
 }
 
-// Chat command (type /ap in chat): /ap status | energy | deposit <coins> | withdraw <coins> | deathlink on|off
+// Chat command (type /ap in chat): /ap status | checks | missing <category> | hint <item> | say <text> |
+// energy | deposit <coins> | withdraw <coins> | deathlink on|off
 public class ArchipelagoCommand : ConsoleCommand
 {
     public override string Name => "ap";
-    public override string Help => "Archipelago: status, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
+    public override string Help =>
+        "Archipelago: status, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
 
     public override void Run(string[] args, Terminal context)
     {
@@ -299,14 +373,33 @@ public class ArchipelagoCommand : ConsoleCommand
         if (sub == "status" || sub == "help")
         {
             Reply(ArchipelagoLinks.Status());
-            Reply("Commands: /ap status, /ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
+            Reply("Commands: /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
+                  "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
         if (!ArchipelagoLinks.Connected) { Reply("Not connected to Archipelago."); return; }
         var player = Player.m_localPlayer;
         int amount = args.Length > 1 && int.TryParse(args[1], out var n) ? n : 0;
+        string rest = string.Join(" ", args.Skip(1));
         switch (sub)
         {
+            case "checks":
+                Reply(ArchipelagoLinks.CheckSummary());
+                break;
+            case "missing":
+                if (rest.Length == 0) { Reply("Usage: /ap missing <category>, e.g. /ap missing obtain (see /ap checks)"); return; }
+                var names = ArchipelagoLinks.MissingIn(rest).ToList();
+                Reply(names.Count == 0 ? $"Nothing left in '{rest}'." : $"{names.Count} left: " + string.Join(", ", names.Take(40)) +
+                      (names.Count > 40 ? ", ..." : ""));
+                break;
+            case "hint":
+                if (rest.Length == 0) { Reply("Usage: /ap hint <item name>"); return; }
+                ArchipelagoLinks.Say("!hint " + rest);
+                break;
+            case "say":
+                if (rest.Length == 0) { Reply("Usage: /ap say <text>"); return; }
+                ArchipelagoLinks.Say(rest);
+                break;
             case "energy":
                 ArchipelagoLinks.ShowEnergy();
                 break;

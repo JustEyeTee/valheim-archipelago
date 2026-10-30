@@ -20,6 +20,8 @@ public class ValheimRandomizer : BaseUnityPlugin
     public const string ModVersion = "0.0.0";
 
     internal static BepInEx.Configuration.ConfigEntry<bool> randomized;
+    internal static BepInEx.Configuration.ConfigEntry<bool> showItemFeed;
+    internal static BepInEx.Configuration.ConfigEntry<bool> showChat;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoHostname;
     internal static BepInEx.Configuration.ConfigEntry<int> archipelagoPort;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoSlot;
@@ -62,6 +64,8 @@ public class ValheimRandomizer : BaseUnityPlugin
     private void Awake()
     {
         randomized = Config.Bind("Archipelago", "Randomized", false, "Uses Archipelago?");
+        showItemFeed = Config.Bind("Archipelago", "ShowItemFeed", true, "Show items you send and receive, and hints, on screen and in chat");
+        showChat = Config.Bind("Archipelago", "ShowChat", true, "Show other players' Archipelago chat in the game chat");
         archipelagoHostname = Config.Bind("Archipelago", "Host", "localhost", "Archipelago server host");
         archipelagoPort = Config.Bind("Archipelago", "Port", 38281, "Archipelago server port");
         archipelagoSlot = Config.Bind("Archipelago", "Slot", "Player", "Your Archipelago slot name");

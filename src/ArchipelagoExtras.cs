@@ -42,7 +42,28 @@ public static class ArchipelagoExtras
         { "3 Minor Stamina Meads", ("MeadStaminaMinor", 3) },
         { "20 Fire Arrows", ("ArrowFire", 20) },
         { "10 Flint", ("Flint", 10) },
+        // Era bundles (the APWorld only places those up to the goal's tier)
+        { "10 Copper", ("Copper", 10) }, { "10 Tin", ("Tin", 10) }, { "10 Coal", ("Coal", 10) },
+        { "3 Surtling Cores", ("SurtlingCore", 3) }, { "10 Bronze", ("Bronze", 10) },
+        { "10 Finewood", ("FineWood", 10) }, { "10 Ancient Bark", ("ElderBark", 10) }, { "10 Iron", ("Iron", 10) },
+        { "10 Silver", ("Silver", 10) }, { "5 Obsidian", ("Obsidian", 5) }, { "10 Black Metal", ("BlackMetal", 10) },
+        { "10 Linen Thread", ("LinenThread", 10) }, { "10 Yggdrasil Wood", ("YggdrasilWood", 10) },
+        { "10 Black Marble", ("BlackMarble", 10) }, { "5 Refined Eitr", ("Eitr", 5) },
+        { "10 Flametal", ("FlametalNew", 10) }, { "10 Ashwood", ("Blackwood", 10) }, { "5 Bloodgold", ("Gold", 5) },
+        // Boss drops
+        { "Hard Antler", ("HardAntler", 1) }, { "Swamp Key", ("CryptKey", 1) }, { "Wishbone", ("Wishbone", 1) },
+        { "3 Dragon Tears", ("DragonTear", 3) }, { "Torn Spirit", ("YagluthDrop", 1) },
+        { "Majestic Carapace", ("QueenDrop", 1) },
+        // Tools
+        { "Flint Axe", ("AxeFlint", 1) }, { "Antler Pickaxe", ("PickaxeAntler", 1) },
+        { "Bronze Axe", ("AxeBronze", 1) }, { "Bronze Pickaxe", ("PickaxeBronze", 1) },
+        { "Iron Axe", ("AxeIron", 1) }, { "Iron Pickaxe", ("PickaxeIron", 1) },
+        { "Black Metal Axe", ("AxeBlackMetal", 1) }, { "Black Metal Pickaxe", ("PickaxeBlackMetal", 1) },
     };
+
+    // Starter Kit: straight into the inventory, since there's no chest yet.
+    private static readonly (string prefab, int amount)[] StarterKit =
+        { ("Club", 1), ("AxeStone", 1), ("Torch", 1), ("Raspberry", 10) };
 
     // From checks.tsv (embedded in the DLL; the APWorld is generated from the same file).
     private static readonly Dictionary<string, string> ObtainLocations = new Dictionary<string, string>();
@@ -62,7 +83,7 @@ public static class ArchipelagoExtras
         "Greydwarf Ambush Trap", "Thunderstorm Trap", "Burning Trap", "Soaked Trap", "Famine Trap",
         "Skeleton Ambush Trap", "Poison Trap", "Frost Trap", "Raid Trap", "Butterfingers Trap", "Heavy Load Trap",
         "Monster Pack Trap", "Bat Swarm Trap", "Lightning Strike Trap", "Floor Is Lava Trap", "Blizzard Trap",
-        "Tar Trap", "Launch Trap", "Rust Trap",
+        "Tar Trap", "Launch Trap", "Rust Trap", "Meteor Shower Trap", "Fake Item Trap",
     };
 
     // Monster Pack Trap: what lives in each biome (Ocean gets bats, which fly).
@@ -94,6 +115,7 @@ public static class ArchipelagoExtras
     private const float TrapSpacingSeconds = 10f;
     private const float StormSeconds = 120f;
     private const float BlizzardSeconds = 90f;
+    private const float MeteorSeconds = 60f;
     private const float LavaSeconds = 30f;
     private const float ReminderSeconds = 60f;
     private const float ExploreCheckSeconds = 15f;
@@ -149,7 +171,8 @@ public static class ArchipelagoExtras
         }
     }
 
-    public static bool IsExtraItem(string name) => Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name);
+    public static bool IsExtraItem(string name) =>
+        Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name) || name == "Starter Kit";
 
     public static void RegisterChest()
     {
@@ -324,7 +347,8 @@ public static class ArchipelagoExtras
         int bundlesDone = GetCount(player, progressKey + ":bundles");
         int trapsDone = GetCount(player, progressKey + ":traps");
         int boostsDone = GetCount(player, progressKey + ":boosts");
-        int bundleIndex = 0, trapIndex = 0, boostIndex = 0, waiting = 0;
+        int kitsDone = GetCount(player, progressKey + ":kits");
+        int bundleIndex = 0, trapIndex = 0, boostIndex = 0, kitIndex = 0, waiting = 0;
         bool bundlesBlocked = false;
         Container chest = null;
         bool chestFull = false;
@@ -355,6 +379,17 @@ public static class ArchipelagoExtras
                 SetCount(player, progressKey + ":traps", ++trapsDone);
                 nextTrapTime = Time.time + TrapSpacingSeconds;
                 ArchipelagoLinks.SendTrapLink(name);
+            }
+            else if (name == "Starter Kit")
+            {
+                if (kitIndex++ < kitsDone || player.IsDead()) continue;
+                foreach (var (prefab, amount) in StarterKit)
+                {
+                    var item = ObjectDB.instance ? ObjectDB.instance.GetItemPrefab(prefab) : null;
+                    if (item) player.GetInventory().AddItem(item, amount);
+                }
+                SetCount(player, progressKey + ":kits", ++kitsDone);
+                player.Message(MessageHud.MessageType.Center, "Archipelago: Starter Kit!");
             }
             else if (Boosts.Contains(name))
             {
@@ -450,6 +485,13 @@ public static class ArchipelagoExtras
             case "Blizzard Trap":
                 ForceEnvironment("SnowStorm", BlizzardSeconds);
                 break;
+            case "Meteor Shower Trap":
+                ForceEnvironment("Ashlands_meteorshower", MeteorSeconds);
+                break;
+            case "Fake Item Trap":
+                // Looks like a real delivery message; nothing arrives.
+                player.Message(MessageHud.MessageType.TopLeft, ArchipelagoLinks.FakeItemMessage());
+                return;
             case "Tar Trap":
                 AddEffect(player, "Tared");
                 break;
