@@ -2,6 +2,14 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.7.1
+
+- Passes Archipelago's own test suites (run with `tools/ap_tests.sh`).
+- Fixed: item links crashed generation.
+- The APWorld's manifest follows the current spec (no container fields in the source).
+- Game info and setup pages for the Archipelago website, option groups, presets, and item and location
+  name groups (hint or item-link "Boss Drops", "Traps", "Tier 4"...).
+
 ## 0.7.0
 
 - Boss drops as items (`boss_items`): Hard Antler, Swamp Key, Wishbone, 3 Dragon Tears, Torn Spirit and
