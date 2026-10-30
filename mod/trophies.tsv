@@ -1,4 +1,4 @@
-researchItemID	researchID	boostType	tier
+# researchItemID	researchID	boostType	tier
 TrophyNeck	researchTrophyNeck	HP	0
 TrophyBoar	researchTrophyBoar	Load	0
 TrophyDeer	researchTrophyDeer	Stamina	0

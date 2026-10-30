@@ -142,10 +142,17 @@ public class ArchipelagoUI : MonoBehaviour
 
 
         _connecting = true;
-        _status = "Connected";
+        _status = "Connecting...";
         try
         {
             ArchipelagoConnection.Connect(_host, _port, _slot, _password);
+
+            // Connecting to a room always means a randomized game. Without this, an unticked
+            // "Randomized?" box left the mod in vanilla mode: researches unlocked locally and
+            // no checks were ever sent, while the server still showed the slot as connected.
+            _randomized = true;
+            ValheimRandomizer.randomized.Value = true;
+            _status = $"Connected as {_slot}";
         }
         catch (OperationCanceledException)
         {
