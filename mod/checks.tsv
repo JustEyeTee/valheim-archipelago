@@ -4,6 +4,11 @@
 # kill: key = trophy prefab the creature drops, sent when you kill one
 # skill: key = SkillType:level, sent when the skill reaches that level
 # discover: key = location prefab name prefix, sent when you first reach one
+# build: key = piece prefab, sent when you place one
+# eat: key = food prefab, sent when you eat it
+# catch: key = fish prefab, sent when it enters your inventory
+# tame: key = creature prefab, sent when one is tamed near you
+# buy: key = item prefab, sent when you buy it from a trader
 # explore: key = percent of the world map you have explored
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
@@ -300,3 +305,115 @@ discover	Mistlands_DvergrBossEntrance	Discover: Infested Citadel	9
 discover	CharredFortress	Discover: Charred Fortress	11	
 discover	MorgenHole	Discover: Putrid Hole	11	
 discover	FaderLocation	Discover: Fader's Altar	11	
+build	piece_workbench	Build: Workbench	0	Crafting
+build	piece_cookingstation	Build: Cooking Station	1	Cooking Station
+build	charcoal_kiln	Build: Charcoal Kiln	1	Charcoal Kiln
+build	piece_beehive	Build: Beehive	1	Beekeping
+build	Raft	Build: Raft	2	Boat Tier 1
+build	smelter	Build: Smelter	2	Smelter
+build	forge	Build: Forge	2	Forge
+build	Karve	Build: Karve	4	Boat Tier 2
+build	piece_cauldron	Build: Cauldron	3	Cauldron
+build	piece_MeadCauldron	Build: Mead Ketill	3	Mead ketill
+build	fermenter	Build: Fermenter	5	Fermenter
+build	portal_wood	Build: Portal	4	Transportation Tier 2
+build	piece_stonecutter	Build: Stonecutter	6	Stonecutter
+build	piece_cookingstation_iron	Build: Iron Cooking Station	6	Iron Cooking Station
+build	piece_preptable	Build: Food Preparation Table	6	Food Preparation Table
+build	VikingShip	Build: Longship	6	Boat Tier 3
+build	windmill	Build: Windmill	6	Windmill
+build	piece_artisanstation	Build: Artisan Table	7	Artisan Table
+build	blastfurnace	Build: Blast Furnace	7	Blast Furnace
+build	piece_spinningwheel	Build: Spinning Wheel	8	Spinning Wheel
+build	piece_oven	Build: Stone Oven	8	Stone Oven
+build	piece_wisplure	Build: Wisp Fountain	8	Wisp Fountain
+build	piece_sapcollector	Build: Sap Extractor	9	Sap Extractor
+build	eitrrefinery	Build: Eitr Refinery	9	Eitr Refinery
+build	blackforge	Build: Black Forge	9	Black Forge
+build	piece_magetable	Build: Galdr Table	10	Galdr Table
+build	portal_stone	Build: Stone Portal	11	Transportation Tier 3
+build	VikingShip_Ashlands	Build: Drakkar	10	Boat Tier 4
+build	piece_FrostFoundry	Build: Frost Foundry	12	Frost Foundry
+eat	Raspberry	Eat: Raspberries	0	
+eat	Mushroom	Eat: Mushroom	0	
+eat	Honey	Eat: Honey	0	
+eat	Blueberries	Eat: Blueberries	1	
+eat	MushroomYellow	Eat: Yellow Mushroom	2	
+eat	CookedMeat	Eat: Cooked Boar Meat	1	Cooking Station
+eat	CookedDeerMeat	Eat: Cooked Deer Meat	1	Cooking Station
+eat	NeckTailGrilled	Eat: Grilled Neck Tail	1	Cooking Station
+eat	CookedBjornMeat	Eat: Cooked Bear Meat	1	Cooking Station
+eat	FishCooked	Eat: Cooked Fish	2	Cooking Station
+eat	QueensJam	Eat: Queen's Jam	3	Cauldron
+eat	Carrot	Eat: Carrot	4	Cultivator
+eat	CarrotSoup	Eat: Carrot Soup	4	Cauldron|Cultivator
+eat	DeerStew	Eat: Deer Stew	4	Cauldron|Cooking Station|Cultivator
+eat	Sausages	Eat: Sausages	4	Cauldron
+eat	SerpentMeatCooked	Eat: Cooked Serpent Meat	4	Cooking Station
+eat	SerpentStew	Eat: Serpent Stew	4	Cauldron|Cooking Station
+eat	BlackSoup	Eat: Black Soup	5	Cauldron|Cultivator
+eat	TurnipStew	Eat: Turnip Stew	5	Cauldron|Cooking Station|Cultivator
+eat	CookedWolfMeat	Eat: Cooked Wolf Meat	7	Cooking Station
+eat	WolfJerky	Eat: Wolf Jerky	7	Cauldron
+eat	WolfMeatSkewer	Eat: Wolf Skewer	7	Cauldron|Cultivator
+eat	OnionSoup	Eat: Onion Soup	7	Cauldron|Cultivator
+eat	Eyescream	Eat: Eyescream	7	Cauldron
+eat	Cloudberry	Eat: Cloudberries	8	
+eat	CookedLoxMeat	Eat: Cooked Lox Meat	8	Iron Cooking Station
+eat	BloodPudding	Eat: Blood Pudding	8	Cauldron|Windmill
+eat	Bread	Eat: Bread	8	Windmill|Stone Oven
+eat	FishWraps	Eat: Fish Wraps	8	Cauldron|Cooking Station|Windmill
+eat	LoxPie	Eat: Lox Meat Pie	8	Windmill|Stone Oven|Iron Cooking Station
+eat	MushroomJotunPuffs	Eat: Jotun Puffs	9	
+eat	MushroomMagecap	Eat: Magecap	9	
+eat	RoyalJelly	Eat: Royal Jelly	9	
+eat	CookedHareMeat	Eat: Cooked Hare Meat	9	Iron Cooking Station
+eat	CookedBugMeat	Eat: Cooked Seeker Meat	9	Iron Cooking Station
+eat	SeekerAspic	Eat: Seeker Aspic	9	Cauldron
+eat	YggdrasilPorridge	Eat: Yggdrasil Porridge	9	Cauldron|Sap Extractor
+eat	Salad	Eat: Salad	9	Cauldron|Cultivator
+eat	MisthareSupreme	Eat: Misthare Supreme	9	Stone Oven|Cultivator
+eat	MagicallyStuffedShroom	Eat: Stuffed Mushroom	9	Stone Oven|Cultivator
+eat	CookedEgg	Eat: Cooked Egg	9	Cauldron
+eat	MushroomOmelette	Eat: Mushroom Omelette	9	Cauldron
+eat	HoneyGlazedChicken	Eat: Honey Glazed Chicken	9	Stone Oven
+eat	Fiddleheadfern	Eat: Fiddlehead	11	
+eat	Vineberry	Eat: Vineberry Cluster	11	
+eat	CookedAsksvinMeat	Eat: Cooked Asksvin Tail	11	Iron Cooking Station
+eat	CookedVoltureMeat	Eat: Cooked Volture Meat	11	Iron Cooking Station
+eat	PiquantPie	Eat: Piquant Pie	11	Stone Oven|Windmill
+eat	RoastedCrustPie	Eat: Roasted Crust Pie	11	Stone Oven|Windmill
+eat	CookedMooseMeat	Eat: Cooked Moose Meat	12	Iron Cooking Station
+eat	CookedSealBlubber	Eat: Cooked Seal Blubber	12	Iron Cooking Station
+catch	Fish1	Catch: Perch	1	
+catch	Fish2	Catch: Pike	2	Food Preparation Table
+catch	Fish5	Catch: Trollfish	4	Food Preparation Table
+catch	Fish3	Catch: Tuna	4	Food Preparation Table
+catch	Fish8	Catch: Coral Cod	4	Food Preparation Table
+catch	Fish6	Catch: Giant Herring	7	Food Preparation Table
+catch	Fish4_cave	Catch: Tetra	7	Food Preparation Table
+catch	Fish7	Catch: Grouper	8	Food Preparation Table
+catch	Fish9	Catch: Anglerfish	9	Food Preparation Table
+catch	Fish12	Catch: Pufferfish	9	Food Preparation Table
+catch	Fish11	Catch: Magmafish	11	Food Preparation Table
+catch	Fish10	Catch: Northern Salmon	12	Food Preparation Table
+tame	Boar	Tame: Boar	0	
+tame	Wolf	Tame: Wolf	7	
+tame	Lox	Tame: Lox	8	
+tame	Hen	Tame: Hen	9	
+tame	Asksvin	Tame: Asksvin	11	
+tame	Moose	Tame: Moose	12	
+buy	FishingRod	Buy: Fishing Rod	1	
+buy	FishingBait	Buy: Fishing Bait	1	
+buy	HelmetYule	Buy: Yule Hat	1	
+buy	BarrelRings	Buy: Barrel Hoops	1	
+buy	HelmetDverger	Buy: Dverger Circlet	1	
+buy	BeltStrength	Buy: Megingjord	1	
+buy	YmirRemains	Buy: Ymir Flesh	4	
+buy	Thunderstone	Buy: Thunder Stone	4	
+buy	ChickenEgg	Buy: Egg	9	
+buy	HelmetHat5	Buy: Simple Red Cap	4	
+buy	HelmetSweatBand	Buy: Headband	4	
+buy	Sparkler	Buy: Sparkler	4	
+buy	Ironpit	Buy: Iron Pit	4	
+buy	BarberKit	Buy: Barber Kit	4	

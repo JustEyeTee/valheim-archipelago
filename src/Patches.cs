@@ -380,6 +380,46 @@ public static class Patches
         }
     }
 
+    // ---------- Eat, build, buy and tame checks ----------
+    [HarmonyPatch(typeof(Player), nameof(Player.EatFood))]
+    private static class Player_EatFood_Check_Patch
+    {
+        private static void Postfix(Player __instance, ItemDrop.ItemData item, bool __result)
+        {
+            if (__result && ValheimRandomizer.randomized.Value && __instance == Player.m_localPlayer) ArchipelagoExtras.OnFoodEaten(item);
+        }
+    }
+
+    [HarmonyPatch(typeof(Player), nameof(Player.PlacePiece))]
+    private static class Player_PlacePiece_Check_Patch
+    {
+        private static void Postfix(Player __instance, Piece piece)
+        {
+            if (ValheimRandomizer.randomized.Value && __instance == Player.m_localPlayer) ArchipelagoExtras.OnPiecePlaced(piece);
+        }
+    }
+
+    [HarmonyPatch(typeof(Trader), nameof(Trader.OnBought))]
+    private static class Trader_OnBought_Check_Patch
+    {
+        private static void Postfix(Trader.TradeItem item)
+        {
+            if (ValheimRandomizer.randomized.Value) ArchipelagoExtras.OnItemBought(item);
+        }
+    }
+
+    // Taming runs on whoever owns the creature; it counts when you're the closest player,
+    // as for the game's own "tamed" message.
+    [HarmonyPatch(typeof(Tameable), "Tame")]
+    private static class Tameable_Tame_Check_Patch
+    {
+        private static void Postfix(Tameable __instance)
+        {
+            if (!ValheimRandomizer.randomized.Value || __instance == null || !__instance.IsTamed()) return;
+            if (Player.GetClosestPlayer(__instance.transform.position, 30f) == Player.m_localPlayer) ArchipelagoExtras.OnTamed(__instance);
+        }
+    }
+
     // ---------- Kill checks ----------
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
     private static class Character_OnDeath_KillCheck_Patch

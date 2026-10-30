@@ -52,6 +52,10 @@ public static class ArchipelagoExtras
     private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
         new List<(Skills.SkillType, int, string)>();
     private static readonly List<(string prefix, string location)> DiscoverLocations = new List<(string, string)>();
+    private static readonly Dictionary<string, string> EatLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> BuildLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> BuyLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> TameLocations = new Dictionary<string, string>();
 
     public static readonly string[] TrapNames =
     {
@@ -87,7 +91,8 @@ public static class ArchipelagoExtras
 
     public static IEnumerable<string> LocationNames => BiomeLocations.Values
         .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location))
-        .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location));
+        .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location))
+        .Concat(EatLocations.Values).Concat(BuildLocations.Values).Concat(BuyLocations.Values).Concat(TameLocations.Values);
 
     static ArchipelagoExtras()
     {
@@ -101,7 +106,12 @@ public static class ArchipelagoExtras
                 var cols = line.Split('\t');
                 switch (cols[0])
                 {
-                    case "obtain": ObtainLocations[cols[1]] = cols[2]; break;
+                    case "obtain":
+                    case "catch": ObtainLocations[cols[1]] = cols[2]; break;
+                    case "eat": EatLocations[cols[1]] = cols[2]; break;
+                    case "build": BuildLocations[cols[1]] = cols[2]; break;
+                    case "buy": BuyLocations[cols[1]] = cols[2]; break;
+                    case "tame": TameLocations[cols[1]] = cols[2]; break;
                     case "kill": KillLocations[cols[1]] = cols[2]; break;
                     case "explore":
                         ExploreLocations.Add((float.Parse(cols[1], CultureInfo.InvariantCulture), cols[2]));
@@ -201,6 +211,23 @@ public static class ArchipelagoExtras
             }
         }
     }
+
+    private static string PrefabName(GameObject go)
+    {
+        var name = go.name;
+        int clone = name.IndexOf("(Clone)", StringComparison.Ordinal);
+        return clone >= 0 ? name.Substring(0, clone) : name;
+    }
+
+    private static void SendFrom(Dictionary<string, string> locations, string prefab)
+    {
+        if (prefab != null && locations.TryGetValue(prefab, out var location)) ArchipelagoConnection.SendLocationOnce(location);
+    }
+
+    public static void OnFoodEaten(ItemDrop.ItemData food) => SendFrom(EatLocations, food?.m_dropPrefab?.name);
+    public static void OnPiecePlaced(Piece piece) => SendFrom(BuildLocations, piece ? PrefabName(piece.gameObject) : null);
+    public static void OnItemBought(Trader.TradeItem item) => SendFrom(BuyLocations, item?.m_prefab ? item.m_prefab.name : null);
+    public static void OnTamed(Tameable tameable) => SendFrom(TameLocations, tameable ? PrefabName(tameable.gameObject) : null);
 
     // Kill checks: creatures are known by the trophy in their drop table, which every
     // variant of a creature shares (a sleeping Draugr or a frozen Greydwarf counts).
