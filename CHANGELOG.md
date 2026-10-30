@@ -2,6 +2,15 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.8.1
+
+- No more "Randomized?" box. A game is randomized while you're connected, or in a world an Archipelago
+  player has connected in, so co-op partners just join the world, and offline play keeps working. A world
+  never connected runs the research system on its own (the original vanilla mode).
+- Research tooltips list what they unlock (and say that in an Archipelago game it unlocks when you receive
+  the research), without the stray trailing comma.
+- Architecture guide diagrams are now proper flowcharts and sequence diagrams.
+
 ## 0.8.0
 
 - New goal: **Kall Fimbulbringer**, the Deep North boss (win by picking up his Sacrificial Blood); it

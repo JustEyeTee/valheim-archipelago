@@ -373,7 +373,7 @@ public static class Patches
     {
         private static void Prefix(Player __instance)
         {
-            if (ValheimRandomizer.randomized.Value && __instance != null && __instance == Player.m_localPlayer)
+            if (ValheimRandomizer.Randomized && __instance != null && __instance == Player.m_localPlayer)
             {
                 ArchipelagoLinks.OnLocalPlayerDied(__instance);
             }
@@ -386,7 +386,7 @@ public static class Patches
     {
         private static void Postfix(Player __instance, ItemDrop.ItemData item, bool __result)
         {
-            if (__result && ValheimRandomizer.randomized.Value && __instance == Player.m_localPlayer) ArchipelagoExtras.OnFoodEaten(item);
+            if (__result && ValheimRandomizer.Randomized && __instance == Player.m_localPlayer) ArchipelagoExtras.OnFoodEaten(item);
         }
     }
 
@@ -395,7 +395,7 @@ public static class Patches
     {
         private static void Postfix(Player __instance, Piece piece)
         {
-            if (ValheimRandomizer.randomized.Value && __instance == Player.m_localPlayer) ArchipelagoExtras.OnPiecePlaced(piece);
+            if (ValheimRandomizer.Randomized && __instance == Player.m_localPlayer) ArchipelagoExtras.OnPiecePlaced(piece);
         }
     }
 
@@ -404,7 +404,7 @@ public static class Patches
     {
         private static void Postfix(Trader.TradeItem item)
         {
-            if (ValheimRandomizer.randomized.Value) ArchipelagoExtras.OnItemBought(item);
+            if (ValheimRandomizer.Randomized) ArchipelagoExtras.OnItemBought(item);
         }
     }
 
@@ -415,7 +415,7 @@ public static class Patches
     {
         private static void Postfix(Tameable __instance)
         {
-            if (!ValheimRandomizer.randomized.Value || __instance == null || !__instance.IsTamed()) return;
+            if (!ValheimRandomizer.Randomized || __instance == null || !__instance.IsTamed()) return;
             if (Player.GetClosestPlayer(__instance.transform.position, 30f) == Player.m_localPlayer) ArchipelagoExtras.OnTamed(__instance);
         }
     }
@@ -428,7 +428,7 @@ public static class Patches
         // by them, so a kill finished by poison or a tame still counts.
         private static void Prefix(Character __instance, HitData ___m_lastHit, bool ___m_localPlayerHasHit)
         {
-            if (!ValheimRandomizer.randomized.Value || __instance == null || __instance.IsPlayer()) return;
+            if (!ValheimRandomizer.Randomized || __instance == null || __instance.IsPlayer()) return;
             if (Player.m_localPlayer == null) return;
             if (___m_localPlayerHasHit || ___m_lastHit?.GetAttacker() == Player.m_localPlayer)
             {

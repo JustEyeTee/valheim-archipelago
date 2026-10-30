@@ -1,7 +1,7 @@
 """Regenerates valheimapworld/boss_data.py: which bosses (or their drops) are needed before each research
 can be crafted, each research's unlocks can be used, and each extra check can be done.
 
-    python3 tools/gen_boss_gates.py <game data json from tools/extract_game_data.py>
+    python3 tools/gen_boss_gates.py <game database from tools/scan_game_data.py>
 
 Each boss drops something later progress is made from: Eikthyr's Hard Antler (the first
 pickaxe, so copper and tin), The Elder's Swamp Key (the Sunken Crypts: iron and the Withered
@@ -15,8 +15,18 @@ import json
 import pathlib
 import sys
 
+
+def load_game_data(path):
+    """Reads tools/scan_game_data.py's database (or the older extract_game_data.py json) as lists of
+    recipes and pieces."""
+    data = json.load(open(path))
+    if isinstance(data["recipes"], dict):
+        data["recipes"] = [dict(recipe=name, **r) for name, r in data["recipes"].items()]
+        data["pieces"] = [dict(piece=name, token=p["name"], **p) for name, p in data["pieces"].items()]
+    return data
+
 root = pathlib.Path(__file__).resolve().parent.parent
-data = json.load(open(sys.argv[1]))
+data = load_game_data(sys.argv[1])
 
 BOSS_ORDER = ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader", "Kall Fimbulbringer"]
 

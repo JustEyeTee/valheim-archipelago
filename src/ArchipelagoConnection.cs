@@ -17,6 +17,12 @@ internal static class ArchipelagoConnection
 
     private static string slotName;
 
+    // Set in a world once an Archipelago player has played in it while connected.
+    private const string WorldKey = "ap_world";
+
+    public static bool IsConnected => connected && session != null;
+    public static bool IsArchipelagoWorld => HasGlobal(WorldKey);
+
     public static void Connect(string host, int port, string slot, string password)
     {
         // Dispose previous session if any
@@ -80,7 +86,7 @@ internal static class ArchipelagoConnection
 
     public static void SendLocation(string locationName)
     {
-        if (!ValheimRandomizer.randomized.Value) return;
+        if (!ValheimRandomizer.Randomized) return;
         if (!WorldLoaded()) return;
         if (string.IsNullOrWhiteSpace(locationName)) return;
 
@@ -130,6 +136,7 @@ internal static class ArchipelagoConnection
     {
         if (!connected || session == null) return;
         if (!WorldLoaded()) return;
+        if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
         TryGetAllItems();
         if (HasGlobal("ap_goal_pending")) CompleteGame();
 

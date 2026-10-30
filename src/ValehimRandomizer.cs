@@ -19,7 +19,10 @@ public class ValheimRandomizer : BaseUnityPlugin
     public const string ModName = "Randomizer";
     public const string ModVersion = "0.0.0";
 
-    internal static BepInEx.Configuration.ConfigEntry<bool> randomized;
+    // Randomized (Archipelago) mode: connected to a room, or in a world an Archipelago player has
+    // connected in (so co-op partners and offline play need no setting). Otherwise the research system
+    // runs on its own: crafting a research unlocks it.
+    public static bool Randomized => ArchipelagoConnection.IsConnected || ArchipelagoConnection.IsArchipelagoWorld;
     internal static BepInEx.Configuration.ConfigEntry<bool> showItemFeed;
     internal static BepInEx.Configuration.ConfigEntry<bool> showChat;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoHostname;
@@ -63,7 +66,6 @@ public class ValheimRandomizer : BaseUnityPlugin
 
     private void Awake()
     {
-        randomized = Config.Bind("Archipelago", "Randomized", false, "Uses Archipelago?");
         showItemFeed = Config.Bind("Archipelago", "ShowItemFeed", true, "Show items you send and receive, and hints, on screen and in chat");
         showChat = Config.Bind("Archipelago", "ShowChat", true, "Show other players' Archipelago chat in the game chat");
         archipelagoHostname = Config.Bind("Archipelago", "Host", "localhost", "Archipelago server host");
@@ -113,13 +115,13 @@ public class ValheimRandomizer : BaseUnityPlugin
         {
             time = 0.0f;
             ArchipelagoConnection.TryFlushPendingLocations();
-            if (randomized.Value) ArchipelagoExtras.Tick();
+            if (Randomized) ArchipelagoExtras.Tick();
         }
     }
 
     private void OnInventoryChanged()
     {
-        if (randomized.Value) ArchipelagoExtras.OnInventoryChanged(currentPlayer.GetInventory());
+        if (Randomized) ArchipelagoExtras.OnInventoryChanged(currentPlayer.GetInventory());
 
         foreach (var researchId in research)
         {
@@ -142,7 +144,7 @@ public class ValheimRandomizer : BaseUnityPlugin
                 var dropName = it?.m_dropPrefab?.name;
                 if (string.IsNullOrEmpty(dropName)) continue;
 
-                if (randomized.Value && dropName == ArchipelagoConnection.GoalTrophy)
+                if (Randomized && dropName == ArchipelagoConnection.GoalTrophy)
                 {
                     ArchipelagoConnection.CompleteGame();
                 }
@@ -166,7 +168,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     public static void UnlockResearch(string research)
     {
         ZoneSystem.instance.SetGlobalKey(research + "_crafted");
-        if (randomized.Value)
+        if (Randomized)
         {
             ArchipelagoConnection.SendLocation(researchToArchipelago[research]);
         }

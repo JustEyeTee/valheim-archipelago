@@ -12,7 +12,6 @@ public class ArchipelagoUI : MonoBehaviour
 
     // UI state
     private Rect _win = new Rect(30, 80, 420, 260);
-    private bool _randomized;
     private string _host, _slot, _password;
     private int _port;
 
@@ -27,7 +26,6 @@ public class ArchipelagoUI : MonoBehaviour
     public void Init()
     {
         // load config values into fields
-        _randomized = ValheimRandomizer.randomized.Value;
         _host = ValheimRandomizer.archipelagoHostname.Value;
         _port = ValheimRandomizer.archipelagoPort.Value;
         _slot = ValheimRandomizer.archipelagoSlot.Value;
@@ -69,14 +67,9 @@ public class ArchipelagoUI : MonoBehaviour
     {
         GUILayout.BeginVertical();
 
-        GUILayout.Label("Connect to an Archipelago room to enable item/location randomization.");
+        GUILayout.Label("Connect to your Archipelago room, then load your world.");
+        GUILayout.Label("Co-op: only one player connects; the others just join that world.");
         GUILayout.Space(6);
-
-        // Co-op: only one player connects; the others tick this without connecting, and their
-        // checks are passed to the server through the world by the connected player.
-        bool randomizedBefore = _randomized;
-        _randomized = GUILayout.Toggle(_randomized, "Randomized? (co-op players: tick this, don't connect)");
-        if (_randomized != randomizedBefore) ValheimRandomizer.randomized.Value = _randomized;
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Host", GUILayout.Width(60));
@@ -133,7 +126,6 @@ public class ArchipelagoUI : MonoBehaviour
 
     private void SaveInputs()
     {
-        ValheimRandomizer.randomized.Value = _randomized;
         ValheimRandomizer.archipelagoHostname.Value = _host ?? "";
         ValheimRandomizer.archipelagoPort.Value = _port;
         ValheimRandomizer.archipelagoSlot.Value = _slot ?? "";
@@ -149,13 +141,9 @@ public class ArchipelagoUI : MonoBehaviour
         _status = "Connecting...";
         try
         {
+            // Being connected makes the game randomized (ValheimRandomizer.Randomized), and marks
+            // the world as an Archipelago world once it's loaded.
             ArchipelagoConnection.Connect(_host, _port, _slot, _password);
-
-            // Connecting to a room always means a randomized game. Without this, an unticked
-            // "Randomized?" box left the mod in vanilla mode: researches unlocked locally and
-            // no checks were ever sent, while the server still showed the slot as connected.
-            _randomized = true;
-            ValheimRandomizer.randomized.Value = true;
             _status = $"Connected as {_slot}";
         }
         catch (OperationCanceledException)

@@ -34,5 +34,5 @@ Type `/ap status` in the in-game chat to check the connection, and `/ap` for the
 
 ## Playing together
 
-Several players can share one slot: one player connects, and the others tick Randomized in the Archipelago window
+Several players can share one slot: one player connects, and the others just join that world with the mod installed,
 without connecting. Their checks are sent through the world.

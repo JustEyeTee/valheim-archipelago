@@ -5,15 +5,19 @@ A guide to the code for anyone maintaining it or helping players with it. For pl
 
 ## The big picture
 
-```
- Archipelago (Python)                          Valheim + BepInEx (C#)
- ─────────────────────                         ──────────────────────
- valheimapworld/  ──Generate──▶  seed (.zip)   src/  (ValheimRandomizer.dll)
-   which checks exist,            │              locks recipes behind researches,
-   what items exist,              ▼              detects checks, applies items
-   the logic between them    MultiServer  ◀──websocket──▶  Archipelago.MultiClient.Net
-                                  ▲
-                                  └── other players' games
+```mermaid
+flowchart LR
+    subgraph AP["Archipelago (Python)"]
+        W["<b>valheimapworld/</b><br/>which checks and items exist,<br/>the logic between them"]
+        S[("seed<br/>(.zip)")]
+        M["MultiServer"]
+        W -- Generate --> S --> M
+    end
+    subgraph G["Valheim + BepInEx (C#)"]
+        D["<b>ValheimRandomizer.dll</b><br/>locks recipes behind researches,<br/>detects checks, applies items"]
+    end
+    M <-- "websocket<br/>(Archipelago.MultiClient.Net)" --> D
+    O["other players' games"] <--> M
 ```
 
 There are two halves:
@@ -58,6 +62,20 @@ example `researchSmelter`). Global keys are saved with the world and shared by e
 
 ### Doing a research sends a check
 
+```mermaid
+sequenceDiagram
+    actor P as You
+    participant G as Valheim (mod)
+    participant W as World keys
+    participant S as Archipelago server
+    participant O as Another player
+    P->>G: craft "Smelter" at the Research Bench
+    G->>W: researchSmelter_crafted, ap_pending:smelter
+    G->>S: check "Smelter" done
+    G->>W: ap_sent:smelter
+    S->>O: the item that was at "Smelter" (maybe theirs, maybe yours)
+```
+
 1. You craft a research at the bench; the research item lands in your inventory.
 2. `OnInventoryChanged` sees it, removes it and calls `UnlockResearch`.
 3. That sets `<research>_crafted` (so the bench shows "(Completed)") and **sends the check**.
@@ -75,10 +93,30 @@ Because they're world keys:
 - checks done while disconnected are sent on the next connect,
 - in co-op, a player who isn't connected sets the pending key and the connected player sends it.
 
+**Randomized mode** (`ValheimRandomizer.Randomized`) is on while connected, or in a world marked with the
+`ap_world` key, which is set the first time a connected player plays in it. So co-op partners and offline
+play need no setting. A world that has never been connected runs the research system on its own:
+crafting a research unlocks it directly (Samupo's original "vanilla" mode).
+
 Key names use the location name lowercased with spaces as underscores (Valheim splits global keys at
 the first space). Checks that aren't in the connected seed (options, goal) are marked sent without sending.
 
 ### Receiving items
+
+```mermaid
+sequenceDiagram
+    participant S as Archipelago server
+    participant N as Network thread
+    participant G as Game thread (2-second tick)
+    participant W as World keys
+    participant C as Archipelago Chest
+    S->>N: you received "Smelter" (from someone's check)
+    Note over N: never touches the game, only stores it
+    G->>N: read all received items
+    G->>W: researchSmelter: the Smelter can be built
+    S->>N: you received "10 Iron"
+    G->>C: 10 Iron delivered (counted in your character, never twice)
+```
 
 Items arrive on the network thread, where touching the game isn't safe, so the mod only reads them from
 the 2-second tick, on the game's main thread (`TryGetAllItems`):
@@ -163,36 +201,43 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
 
 ## Tools and the data pipeline
 
-```
-Valheim files ──scan_game_data.py──▶ game database (json, not in the repo)
-                                         │
-mod/research.tsv ──gen_apworld_data.py──▶ research_data.py, check_data.py
-mod/checks.tsv  ─┘                       │
-game database ──gen_boss_gates.py──────▶ boss_data.py
-              ──audit_tiers.py─────────▶ "no check placed before its materials"
-APWorld ──gen_poptracker.py────────────▶ poptracker/
-everything ──build.sh──────────────────▶ dist/ zips (mod, APWorld, PopTracker, Thunderstore)
+```mermaid
+flowchart LR
+    VF["Valheim game files"] -- scan_game_data.py --> DB[("game database<br/>(json, not in the repo)")]
+    RT["mod/research.tsv"] -- gen_apworld_data.py --> RD["research_data.py"]
+    CT["mod/checks.tsv"] -- gen_apworld_data.py --> CD["check_data.py"]
+    DB -- gen_boss_gates.py --> BD["boss_data.py"]
+    DB -.->|verify_game_data.py| V{{"every name exists"}}
+    DB -.->|audit_tiers.py| A{{"no check before<br/>its materials"}}
+    RD --> APW["APWorld<br/>(valheimapworld/)"]
+    CD --> APW
+    BD --> APW
+    APW -- gen_poptracker.py --> PT["poptracker/"]
+    APW -- build.sh --> Z["dist/ zips: mod, APWorld,<br/>PopTracker, Thunderstore"]
+    PT -- build.sh --> Z
 ```
 
-| Tool | |
-|---|---|
-| `scan_game_data.py` | one pass over the game's asset files into a database: items, recipes, pieces, creatures and drops, locations, spawns, offerings, traders, fish... |
-| `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction and the English names |
-| `gen_apworld_data.py` | run after editing `research.tsv` or `checks.tsv` |
-| `gen_boss_gates.py` | which bosses each research and check needs, following recipes from each boss drop |
-| `audit_tiers.py` | flags checks placed in a tier before their materials |
-| `gen_poptracker.py` | the PopTracker pack, from the APWorld's own tables |
-| `make_icon.py` | the Thunderstore icon |
-| `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten |
-| `ap_tests.sh` | Archipelago's own test suites for this world |
-| `net_test.sh` | the mod's network code against a live server |
+| Tool | What it does | Run it |
+|---|---|---|
+| `scan_game_data.py` | reads every game file into one database: items, recipes, pieces, creatures and drops, locations, spawns, altars, traders, fish... (about 25 minutes) | after a Valheim update |
+| `verify_game_data.py` | checks every name the randomizer uses against the database | after a Valheim update, or editing the tables |
+| `gen_apworld_data.py` | writes `research_data.py` and `check_data.py` | after editing `research.tsv` or `checks.tsv` |
+| `gen_boss_gates.py` | writes `boss_data.py`: which bosses each research and check needs | after editing the tables |
+| `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
+| `gen_poptracker.py` | writes the PopTracker pack from the APWorld's own tables | before a release |
+| `make_icon.py` | draws the Thunderstore icon | when changing the icon |
+| `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction, and the English names | for English names |
+| `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten | after any APWorld change |
+| `ap_tests.sh` | runs Archipelago's own test suites for this world | before a release |
+| `net_test.sh` | runs the mod's network code against a live server | after changing the links or connection code |
 
 ## Adding a check: an example
 
 To add "Obtain: Amber":
 
 1. Add a line to `mod/checks.tsv`: `obtain`, `Amber`, `Obtain: Amber`, its tier, any research it needs.
-2. Run `tools/gen_apworld_data.py` and `tools/gen_boss_gates.py <database>`; run `tools/audit_tiers.py`.
+2. Run `tools/gen_apworld_data.py`, `tools/gen_boss_gates.py <database>`, `tools/audit_tiers.py <database>`
+   and `tools/verify_game_data.py <database>`.
 3. Run `./build.sh`, `tools/test_generate.sh fader 3` and `tools/ap_tests.sh`; regenerate the PopTracker pack.
 
 No C# changes: the mod reads the new line from the embedded `checks.tsv`.

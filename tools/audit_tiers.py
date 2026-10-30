@@ -1,6 +1,6 @@
 """Flags checks placed in an earlier tier than the materials they need.
 
-    python3 tools/audit_tiers.py <game data json from tools/extract_game_data.py>
+    python3 tools/audit_tiers.py <game database from tools/scan_game_data.py>
 
 A material's tier is the tier of its obtain check in mod/checks.tsv. For build, eat, obtain and buy
 checks and every research's cost, the recipe tree (recipes, pieces, smelting) is followed down to
@@ -14,8 +14,18 @@ import pathlib
 import re
 import sys
 
+
+def load_game_data(path):
+    """Reads tools/scan_game_data.py's database (or the older extract_game_data.py json) as lists of
+    recipes and pieces."""
+    data = json.load(open(path))
+    if isinstance(data["recipes"], dict):
+        data["recipes"] = [dict(recipe=name, **r) for name, r in data["recipes"].items()]
+        data["pieces"] = [dict(piece=name, token=p["name"], **p) for name, p in data["pieces"].items()]
+    return data
+
 root = pathlib.Path(__file__).resolve().parent.parent
-data = json.load(open(sys.argv[1]))
+data = load_game_data(sys.argv[1])
 recipes = {}
 for r in data["recipes"]:
     if r["item"] and r["enabled"]:

@@ -70,9 +70,10 @@ Items you send and receive, hints and other players' chat are shown on screen an
 
 ### Co-op
 
-Several Vikings can share one slot: one player connects; everyone else ticks **Randomized** in the
-Archipelago window and does **not** connect. Their researches, pickups, kills and other checks are sent
-through the world by the connected player. Traps, boss items and Death Link reach only the connected player.
+Several Vikings can share one slot: **one** player connects; everyone else just joins that world, with
+the mod installed and without connecting. The mod knows it's an Archipelago world, and their researches,
+pickups, kills and other checks are sent by the connected player. Traps, boss items and Death Link reach
+only the connected player.
 
 ## Options
 

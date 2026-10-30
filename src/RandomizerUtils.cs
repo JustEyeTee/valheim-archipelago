@@ -137,29 +137,14 @@ public static class RandomizerUtils
 
         if (requiredResearchIDs.Length > 0)
         {
-            description += "\r\n\r\nRequires: ";
-            foreach (var researchID in requiredResearchIDs)
-            {
-                description += researchID + ", ";
-            }
-            description.Substring(0, description.Length - 2);
+            description += "\r\n\r\nRequires: " + string.Join(", ", requiredResearchIDs);
         }
 
-        if (ValheimRandomizer.randomized.Value)
+        // Built at startup, before connecting, so it fits both modes.
+        if (gatedItemPrefabIDs.Length > 0)
         {
-            description += "\r\n\r\nUnlocks: Something?";
-        }
-        else
-        {
-            if (gatedItemPrefabIDs.Length > 0)
-            {
-                description += "\r\n\r\nUnlocks: ";
-                foreach (var prefabID in gatedItemPrefabIDs)
-                {
-                    description += prefabID + ", ";
-                }
-                description.Substring(0, description.Length - 2);
-            }
+            description += "\r\n\r\nUnlocks: " + string.Join(", ", gatedItemPrefabIDs) +
+                           "\r\n(In an Archipelago game: once you receive this research.)";
         }
         researchDrop.m_itemData.m_shared.m_description = description;
 

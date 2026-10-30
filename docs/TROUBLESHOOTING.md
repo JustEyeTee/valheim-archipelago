@@ -36,8 +36,8 @@ The text after "Error:" comes from the server:
   `38281` that changes when the room restarts) and that the room is running.
 
 **I connected but nothing seems randomized.**
-Connecting turns on randomized mode; check that **Randomized?** is ticked and connect before loading the
-world. Use a **new world**: an existing one may already have researches unlocked.
+Connect **before** loading the world (the window is on the main menu), and use a **new world**: one played
+before without Archipelago may already have researches unlocked.
 
 ## Researches and checks
 
@@ -89,8 +89,9 @@ move Coins in and out (1 Coin = 1 MJ). Withdrawals need room in your inventory.
 
 ## Co-op
 
-Only **one** player connects to the slot. Everyone else ticks **Randomized?** in the Archipelago window
-and does **not** connect; their checks are passed to the server by the connected player. Traps, boss items
+Only **one** player connects to the slot. Everyone else just joins that world with the mod installed and
+does **not** connect: once the connected player has played in it, the world is marked as an Archipelago
+world, and their checks are passed to the server by the connected player. Traps, boss items
 and Death Link reach only the connected player. If two players connect to the same slot, items are applied
 twice.
 
