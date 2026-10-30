@@ -61,6 +61,19 @@ public static class ArchipelagoExtras
         { "Black Metal Axe", ("AxeBlackMetal", 1) }, { "Black Metal Pickaxe", ("PickaxeBlackMetal", 1) },
     };
 
+    // Maps: AP item name -> the boss location it pins (as that boss's Vegvisir does), and Map Fragments.
+    private static readonly Dictionary<string, (string location, string pin)> BossMaps = new Dictionary<string, (string, string)>
+    {
+        { "Map to Eikthyr", ("Eikthyrnir", "Eikthyr") }, { "Map to The Elder", ("GDKing", "The Elder") },
+        { "Map to Bonemass", ("Bonemass", "Bonemass") }, { "Map to Moder", ("Dragonqueen", "Moder") },
+        { "Map to Yagluth", ("GoblinKing", "Yagluth") }, { "Map to The Queen", ("Mistlands_DvergrBossEntrance1", "The Queen") },
+        { "Map to Fader", ("FaderLocation", "Fader") }, { "Map to Kall Fimbulbringer", ("DN_Bossroom", "Kall Fimbulbringer") },
+    };
+    private const string MapFragment = "Map Fragment";
+    private const float FragmentRadius = 250f;
+    private static readonly System.Reflection.MethodInfo MinimapExplore =
+        AccessTools.Method(typeof(Minimap), "Explore", new[] { typeof(Vector3), typeof(float) });
+
     // Starter Kit: straight into the inventory, since there's no chest yet.
     private static readonly (string prefab, int amount)[] StarterKit =
         { ("Club", 1), ("AxeStone", 1), ("Torch", 1), ("Raspberry", 10) };
@@ -70,6 +83,9 @@ public static class ArchipelagoExtras
     private static readonly Dictionary<string, string> KillLocations = new Dictionary<string, string>();
     private static readonly List<(float percent, string location)> ExploreLocations = new List<(float, string)>();
     private static readonly List<(int level, string location)> ComfortLocations = new List<(int, string)>();
+    private static readonly List<(string prefix, string location)> ReadLocations = new List<(string, string)>();
+    private static readonly Dictionary<string, string> VegvisirLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> LootLocations = new Dictionary<string, string>();
 
     private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
         new List<(Skills.SkillType, int, string)>();
@@ -137,7 +153,8 @@ public static class ArchipelagoExtras
     public static IEnumerable<string> LocationNames => BiomeLocations.Values
         .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location))
         .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location))
-        .Concat(ComfortLocations.Select(e => e.location))
+        .Concat(ComfortLocations.Select(e => e.location)).Concat(ReadLocations.Select(e => e.location))
+        .Concat(VegvisirLocations.Values).Concat(LootLocations.Values)
         .Concat(EatLocations.Values).Concat(BuildLocations.Values).Concat(BuyLocations.Values).Concat(TameLocations.Values);
 
     static ArchipelagoExtras()
@@ -155,7 +172,11 @@ public static class ArchipelagoExtras
                     case "obtain":
                     case "catch": ObtainLocations[cols[1]] = cols[2]; break;
                     case "eat": EatLocations[cols[1]] = cols[2]; break;
-                    case "build": BuildLocations[cols[1]] = cols[2]; break;
+                    case "build":
+                    case "plant": BuildLocations[cols[1]] = cols[2]; break;
+                    case "read": ReadLocations.Add((cols[1], cols[2])); break;
+                    case "vegvisir": VegvisirLocations[cols[1]] = cols[2]; break;
+                    case "loot": LootLocations[cols[1]] = cols[2]; break;
                     case "buy": BuyLocations[cols[1]] = cols[2]; break;
                     case "tame": TameLocations[cols[1]] = cols[2]; break;
                     case "kill": KillLocations[cols[1]] = cols[2]; break;
@@ -176,7 +197,7 @@ public static class ArchipelagoExtras
 
     public static bool IsExtraItem(string name) =>
         Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name) || name == "Starter Kit" ||
-        name == ArchipelagoGoal.RelicName;
+        name == ArchipelagoGoal.RelicName || BossMaps.ContainsKey(name) || name == MapFragment;
 
     // The skill a skill check is for ("Skill: Woodcutting 10" -> WoodCutting).
     public static Skills.SkillType? SkillOf(string location)
@@ -311,6 +332,26 @@ public static class ArchipelagoExtras
     public static void OnFoodEaten(ItemDrop.ItemData food) => SendFrom(EatLocations, food?.m_dropPrefab?.name);
     public static void OnPiecePlaced(Piece piece) => SendFrom(BuildLocations, piece ? PrefabName(piece.gameObject) : null);
     public static void OnItemBought(Trader.TradeItem item) => SendFrom(BuyLocations, item?.m_prefab ? item.m_prefab.name : null);
+    // Lore checks: a rune stone, by the rune stone location it stands in; a Vegvisir, by the boss it reveals.
+    public static void OnRuneStoneRead(RuneStone stone)
+    {
+        var here = stone ? Location.GetLocation(stone.transform.position) : null;
+        if (here == null) return;
+        var prefab = PrefabName(here.gameObject);
+        foreach (var (prefix, location) in ReadLocations)
+        {
+            if (prefab.StartsWith(prefix, StringComparison.Ordinal)) ArchipelagoConnection.SendLocationOnce(location);
+        }
+    }
+
+    public static void OnVegvisirRead(Vegvisir vegvisir)
+    {
+        foreach (var target in vegvisir.m_locations) SendFrom(VegvisirLocations, target.m_locationName);
+    }
+
+    // Dungeon checks: opening a treasure chest only that kind of dungeon has.
+    public static void OnContainerOpened(Container container) => SendFrom(LootLocations, container ? PrefabName(container.gameObject) : null);
+
     public static void OnTamed(Tameable tameable) => SendFrom(TameLocations, tameable ? PrefabName(tameable.gameObject) : null);
 
     // Kill checks: creatures are known by the trophy in their drop table, which every
@@ -354,6 +395,23 @@ public static class ArchipelagoExtras
         }
     }
 
+    private static void ApplyMap(Player player, string name)
+    {
+        if (BossMaps.TryGetValue(name, out var map))
+        {
+            Game.instance.DiscoverClosestLocation(map.location, player.transform.position, map.pin, (int)Minimap.PinType.Boss, false);
+            player.Message(MessageHud.MessageType.Center, $"Archipelago: {name}! Its altar is on your map.");
+            return;
+        }
+        // A Map Fragment: a patch of the map somewhere around you, 0.5 to 2.5 km away.
+        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f), distance = UnityEngine.Random.Range(500f, 2500f);
+        var spot = player.transform.position + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * distance;
+        MinimapExplore?.Invoke(Minimap.instance, new object[] { spot, FragmentRadius });
+        string direction = new[] { "east", "northeast", "north", "northwest", "west", "southwest", "south", "southeast" }
+            [Mathf.RoundToInt(angle / (Mathf.PI / 4f)) % 8];
+        player.Message(MessageHud.MessageType.Center, $"Archipelago: a Map Fragment! It shows land {distance / 1000f:0.0} km {direction} of here.");
+    }
+
     private static int PopCount(uint v)
     {
         v -= (v >> 1) & 0x55555555u;
@@ -373,7 +431,8 @@ public static class ArchipelagoExtras
         int trapsDone = GetCount(player, progressKey + ":traps");
         int boostsDone = GetCount(player, progressKey + ":boosts");
         int kitsDone = GetCount(player, progressKey + ":kits");
-        int bundleIndex = 0, trapIndex = 0, boostIndex = 0, kitIndex = 0, waiting = 0;
+        int mapsDone = GetCount(player, progressKey + ":maps");
+        int bundleIndex = 0, trapIndex = 0, boostIndex = 0, kitIndex = 0, mapIndex = 0, waiting = 0;
         bool bundlesBlocked = false;
         Container chest = null;
         bool chestFull = false;
@@ -421,6 +480,12 @@ public static class ArchipelagoExtras
                 if (boostIndex++ < boostsDone || player.IsDead()) continue;
                 ApplyBoost(player, name);
                 SetCount(player, progressKey + ":boosts", ++boostsDone);
+            }
+            else if (BossMaps.ContainsKey(name) || name == MapFragment)
+            {
+                if (mapIndex++ < mapsDone || Minimap.instance == null || Game.instance == null) continue;
+                ApplyMap(player, name);
+                SetCount(player, progressKey + ":maps", ++mapsDone);
             }
         }
 

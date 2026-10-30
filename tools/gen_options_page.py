@@ -64,7 +64,8 @@ groups.append({"name": "Archipelago", "options": [describe(n, hints[n]) for n in
 
 CHECK_OPTIONS = {"Biome: ": "biome_checks", "Obtain: ": "obtain_checks",
                  "Kill: ": "kill_checks", "Discover: ": "discovery_checks", "Build: ": "build_checks",
-                 "Eat: ": "eat_checks", "Catch: ": "fishing_checks", "Tame: ": "taming_checks", "Buy: ": "trader_checks"}
+                 "Eat: ": "eat_checks", "Catch: ": "fishing_checks", "Tame: ": "taming_checks", "Buy: ": "trader_checks",
+                 "Read: ": "lore_checks", "Vegvisir: ": "lore_checks", "Plant: ": "farming_checks", "Loot: ": "dungeon_checks"}
 
 
 def build(options):

@@ -380,6 +380,35 @@ public static class Patches
         }
     }
 
+    // ---------- Lore and dungeon checks ----------
+    [HarmonyPatch(typeof(RuneStone), nameof(RuneStone.Interact))]
+    private static class RuneStone_Interact_Check_Patch
+    {
+        private static void Postfix(RuneStone __instance, Humanoid character, bool hold)
+        {
+            if (!hold && ValheimRandomizer.Randomized && character == Player.m_localPlayer) ArchipelagoExtras.OnRuneStoneRead(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(Vegvisir), nameof(Vegvisir.Interact))]
+    private static class Vegvisir_Interact_Check_Patch
+    {
+        private static void Postfix(Vegvisir __instance, Humanoid character, bool hold)
+        {
+            if (!hold && ValheimRandomizer.Randomized && character == Player.m_localPlayer) ArchipelagoExtras.OnVegvisirRead(__instance);
+        }
+    }
+
+    // The container screen opens only once the chest is really yours to open (not locked by a ward or in use).
+    [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Show))]
+    private static class InventoryGui_Show_Loot_Patch
+    {
+        private static void Postfix(Container container)
+        {
+            if (container != null && ValheimRandomizer.Randomized) ArchipelagoExtras.OnContainerOpened(container);
+        }
+    }
+
     // ---------- The logic window takes the mouse and keyboard while it's open ----------
     [HarmonyPatch(typeof(Player), "TakeInput")]
     private static class Player_TakeInput_LogicWindow_Patch

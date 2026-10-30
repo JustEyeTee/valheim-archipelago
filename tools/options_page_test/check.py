@@ -11,13 +11,15 @@ AutoWorldRegister.world_types.pop("Valheim", None)
 import valheimapworld as vw
 PREFIXES = {"Biome: ": "Biomes", "Obtain: ": "Obtain", "Kill: ": "Kills", "Discover: ": "Discoveries", "Build: ": "Build",
             "Eat: ": "Eat", "Catch: ": "Fishing", "Tame: ": "Taming", "Buy: ": "Trader", "Skill: ": "Skills",
-            "Explore: ": "Exploration", "Trophy: ": "Trophies", "Comfort: ": "Comfort"}
+            "Explore: ": "Exploration", "Trophy: ": "Trophies", "Comfort: ": "Comfort", "Read: ": "Lore",
+            "Vegvisir: ": "Lore", "Plant: ": "Farming", "Loot: ": "Dungeons"}
 def item_kind(n):
     if n in vw.RESEARCH_PREREQS or n in vw.PROGRESSIVE_FAMILIES: return "Researches"
     if n.startswith("Trophy: "): return "Trophy boosts"
     if n in vw.BOSS_DROP_ITEMS.values(): return "Boss drops"
     if n in vw.GEAR_ITEMS: return "Tools"
     if n == vw.RELIC: return "Forsaken Relics"
+    if n in vw.MAP_ITEMS or n == vw.MAP_FRAGMENT: return "Maps"
     if n in vw.TRAP_ITEMS: return "Traps"
     if n in vw.BOOST_ITEMS: return "Boosts"
     if n in vw.FILLER_ITEMS: return "Resource bundles"

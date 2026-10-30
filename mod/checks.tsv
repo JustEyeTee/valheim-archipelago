@@ -11,6 +11,10 @@
 # buy: key = item prefab, sent when you buy it from a trader
 # explore: key = percent of the world map you have explored
 # comfort: key = comfort level, sent when your comfort (what the Rested effect shows) reaches it
+# read: key = rune stone location prefab, sent when you read a rune stone there
+# vegvisir: key = the boss location a Vegvisir reveals, sent when you read one
+# plant: key = sapling piece prefab, sent when you plant one (with the Cultivator)
+# loot: key = treasure chest prefab, sent when you open one
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
 obtain	Flint	Obtain: Flint	0	
@@ -643,3 +647,35 @@ comfort	11	Comfort: Level 11	7
 comfort	12	Comfort: Level 12	7	
 comfort	13	Comfort: Level 13	8	
 comfort	14	Comfort: Level 14	8	
+read	Runestone_DeepNorth	Read: Runestone (Deep North)	12	
+read	Runestone_Ashlands	Read: Runestone (Ashlands)	11	
+read	Runestone_Greydwarfs	Read: Runestone (Greydwarfs)	0	
+read	Runestone_Draugr	Read: Runestone (Draugr)	4	
+read	Runestone_Meadows	Read: Runestone (Meadows)	0	
+read	Runestone_Boars	Read: Runestone (Boars)	0	
+read	Runestone_Swamps	Read: Runestone (Swamp)	4	
+read	Runestone_Mountains	Read: Runestone (Mountains)	6	
+read	Runestone_BlackForest	Read: Runestone (Black Forest)	0	
+read	Runestone_Plains	Read: Runestone (Plains)	7	
+read	Runestone_Mistlands	Read: Runestone (Mistlands)	9	
+vegvisir	Eikthyrnir	Vegvisir: Eikthyr	0	
+vegvisir	GDKing	Vegvisir: The Elder	1	
+vegvisir	Bonemass	Vegvisir: Bonemass	4	
+vegvisir	Dragonqueen	Vegvisir: Moder	7	
+vegvisir	GoblinKing	Vegvisir: Yagluth	8	
+vegvisir	Mistlands_DvergrBossEntrance1	Vegvisir: The Queen	9	
+vegvisir	FaderLocation	Vegvisir: Fader	11	
+vegvisir	DN_Bossroom	Vegvisir: Kall Fimbulbringer	12	
+plant	sapling_carrot	Plant: Carrot	4	Cultivator
+plant	sapling_turnip	Plant: Turnip	4	Cultivator
+plant	sapling_onion	Plant: Onion	7	Cultivator
+plant	sapling_barley	Plant: Barley	8	Cultivator
+plant	sapling_flax	Plant: Flax	8	Cultivator
+plant	sapling_magecap	Plant: Magecap	9	Cultivator
+plant	sapling_jotunpuffs	Plant: Jotun Puffs	9	Cultivator
+loot	TreasureChest_forestcrypt	Loot: Burial Chamber	1	
+loot	TreasureChest_trollcave	Loot: Troll Cave	1	
+loot	TreasureChest_sunkencrypt	Loot: Sunken Crypt	4	
+loot	TreasureChest_mountaincave	Loot: Frost Cave	7	
+loot	TreasureChest_dvergrtown	Loot: Infested Mine	9	
+loot	TreasureChest_charredfortress	Loot: Charred Fortress	11	

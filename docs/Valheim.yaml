@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.8 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.15.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.16.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -363,6 +363,25 @@ Valheim:
     'false': 0
     'true': 50
 
+  lore_checks:
+    # Adds a check for reading each biome's lore rune stones (the Meadows, Boars, Greydwarfs, Black Forest, Draugr,
+    # Swamp, Mountains, Plains, Mistlands, Ashlands and Deep North rune stones) and each boss's Vegvisir, up to the
+    # goal's era.
+    'false': 0
+    'true': 50
+
+  farming_checks:
+    # Adds a check for planting each crop with the Cultivator: carrot, turnip, onion, barley, flax, magecap and
+    # jotun puffs, up to the goal's era.
+    'false': 0
+    'true': 50
+
+  dungeon_checks:
+    # Adds a check for opening a treasure chest in each kind of dungeon: Burial Chamber, Troll Cave, Sunken Crypt,
+    # Frost Cave, Infested Mine and Charred Fortress, up to the goal's era.
+    'false': 0
+    'true': 50
+
   #########
   # Items #
   #########
@@ -390,6 +409,25 @@ Valheim:
     # Iron, Silver, Black Metal...), never past your goal.
     'false': 0
     'true': 50
+
+  map_items:
+    # Puts a Map to each boss of the goal's era into the item pool (Map to Eikthyr, Map to The Elder...):
+    # receiving one pins that boss's nearest altar on your map, as reading its Vegvisir does.
+    'false': 0
+    'true': 50
+
+  map_fragments:
+    # How many Map Fragments are in the item pool: each one uncovers a patch of the map (500 m across) somewhere
+    # around you, which counts for exploration checks and the Explorer goal.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 20
+    5: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-20: 0 # random value between 0 and 20
 
   starter_kit:
     # Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.

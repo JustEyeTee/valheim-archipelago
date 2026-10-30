@@ -968,6 +968,38 @@ location	Comfort: Level 11	7	comfort:11
 location	Comfort: Level 12	7	comfort:12
 location	Comfort: Level 13	8	comfort:13
 location	Comfort: Level 14	8	comfort:14
+location	Read: Runestone (Deep North)	12	
+location	Read: Runestone (Ashlands)	11	
+location	Read: Runestone (Greydwarfs)	0	
+location	Read: Runestone (Draugr)	4	
+location	Read: Runestone (Meadows)	0	
+location	Read: Runestone (Boars)	0	
+location	Read: Runestone (Swamp)	4	
+location	Read: Runestone (Mountains)	6	
+location	Read: Runestone (Black Forest)	0	
+location	Read: Runestone (Plains)	7	
+location	Read: Runestone (Mistlands)	9	
+location	Vegvisir: Eikthyr	0	
+location	Vegvisir: The Elder	1	
+location	Vegvisir: Bonemass	4	boss:The Elder
+location	Vegvisir: Moder	7	
+location	Vegvisir: Yagluth	8	
+location	Vegvisir: The Queen	9	
+location	Vegvisir: Fader	11	
+location	Vegvisir: Kall Fimbulbringer	12	
+location	Plant: Carrot	4	Cultivator
+location	Plant: Turnip	4	Cultivator
+location	Plant: Onion	7	Cultivator
+location	Plant: Barley	8	Cultivator
+location	Plant: Flax	8	Cultivator
+location	Plant: Magecap	9	Cultivator
+location	Plant: Jotun Puffs	9	Cultivator
+location	Loot: Burial Chamber	1	
+location	Loot: Troll Cave	1	
+location	Loot: Sunken Crypt	4	boss:The Elder
+location	Loot: Frost Cave	7	
+location	Loot: Infested Mine	9	
+location	Loot: Charred Fortress	11	
 combat	Meadows	armor	
 combat	Meadows	weapons	Clubs Tier 1|Axes Tier 1|Blades Tier 1|Spears Tier 1|Knuckles Tier 1|Short Blades Tier 1
 combat	Meadows	ranged	Bows Tier 1

@@ -7826,5 +7826,502 @@
     "y": 594
    }
   ]
+ },
+ {
+  "name": "Read - Tier 0",
+  "sections": [
+   {
+    "name": "Read: Runestone (Greydwarfs)",
+    "item_count": 1
+   },
+   {
+    "name": "Read: Runestone (Meadows)",
+    "item_count": 1
+   },
+   {
+    "name": "Read: Runestone (Boars)",
+    "item_count": 1
+   },
+   {
+    "name": "Read: Runestone (Black Forest)",
+    "item_count": 1
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 82
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 4",
+  "sections": [
+   {
+    "name": "Read: Runestone (Draugr)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Read: Runestone (Swamp)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 6",
+  "sections": [
+   {
+    "name": "Read: Runestone (Mountains)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 466
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 7",
+  "sections": [
+   {
+    "name": "Read: Runestone (Plains)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 530
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 9",
+  "sections": [
+   {
+    "name": "Read: Runestone (Mistlands)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 658
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 11",
+  "sections": [
+   {
+    "name": "Read: Runestone (Ashlands)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 786
+   }
+  ]
+ },
+ {
+  "name": "Read - Tier 12",
+  "sections": [
+   {
+    "name": "Read: Runestone (Deep North)",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1685,
+    "y": 850
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 0",
+  "sections": [
+   {
+    "name": "Vegvisir: Eikthyr",
+    "item_count": 1
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 82
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 1",
+  "sections": [
+   {
+    "name": "Vegvisir: The Elder",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 146
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 4",
+  "sections": [
+   {
+    "name": "Vegvisir: Bonemass",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$boss|the_elder,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 7",
+  "sections": [
+   {
+    "name": "Vegvisir: Moder",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 530
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 8",
+  "sections": [
+   {
+    "name": "Vegvisir: Yagluth",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 594
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 9",
+  "sections": [
+   {
+    "name": "Vegvisir: The Queen",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 658
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 11",
+  "sections": [
+   {
+    "name": "Vegvisir: Fader",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 786
+   }
+  ]
+ },
+ {
+  "name": "Vegvisir - Tier 12",
+  "sections": [
+   {
+    "name": "Vegvisir: Kall Fimbulbringer",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1795,
+    "y": 850
+   }
+  ]
+ },
+ {
+  "name": "Plant - Tier 4",
+  "sections": [
+   {
+    "name": "Plant: Carrot",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Plant: Turnip",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1905,
+    "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Plant - Tier 7",
+  "sections": [
+   {
+    "name": "Plant: Onion",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,cultivator,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1905,
+    "y": 530
+   }
+  ]
+ },
+ {
+  "name": "Plant - Tier 8",
+  "sections": [
+   {
+    "name": "Plant: Barley",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,cultivator,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Plant: Flax",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,cultivator,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1905,
+    "y": 594
+   }
+  ]
+ },
+ {
+  "name": "Plant - Tier 9",
+  "sections": [
+   {
+    "name": "Plant: Magecap",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,cultivator,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Plant: Jotun Puffs",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,cultivator,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1905,
+    "y": 658
+   }
+  ]
+ },
+ {
+  "name": "Loot - Tier 1",
+  "sections": [
+   {
+    "name": "Loot: Burial Chamber",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Loot: Troll Cave",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2015,
+    "y": 146
+   }
+  ]
+ },
+ {
+  "name": "Loot - Tier 4",
+  "sections": [
+   {
+    "name": "Loot: Sunken Crypt",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$boss|the_elder,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2015,
+    "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Loot - Tier 7",
+  "sections": [
+   {
+    "name": "Loot: Frost Cave",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2015,
+    "y": 530
+   }
+  ]
+ },
+ {
+  "name": "Loot - Tier 9",
+  "sections": [
+   {
+    "name": "Loot: Infested Mine",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2015,
+    "y": 658
+   }
+  ]
+ },
+ {
+  "name": "Loot - Tier 11",
+  "sections": [
+   {
+    "name": "Loot: Charred Fortress",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2015,
+    "y": 786
+   }
+  ]
  }
 ]

@@ -308,6 +308,31 @@ class TraderChecks(DefaultOnToggle):
     display_name = "Trader Checks"
 
 
+class LoreChecks(DefaultOnToggle):
+    """
+    Adds a check for reading each biome's lore rune stones (the Meadows, Boars, Greydwarfs, Black Forest, Draugr,
+    Swamp, Mountains, Plains, Mistlands, Ashlands and Deep North rune stones) and each boss's Vegvisir, up to the
+    goal's era.
+    """
+    display_name = "Lore Checks"
+
+
+class FarmingChecks(DefaultOnToggle):
+    """
+    Adds a check for planting each crop with the Cultivator: carrot, turnip, onion, barley, flax, magecap and
+    jotun puffs, up to the goal's era.
+    """
+    display_name = "Farming Checks"
+
+
+class DungeonChecks(DefaultOnToggle):
+    """
+    Adds a check for opening a treasure chest in each kind of dungeon: Burial Chamber, Troll Cave, Sunken Crypt,
+    Frost Cave, Infested Mine and Charred Fortress, up to the goal's era.
+    """
+    display_name = "Dungeon Checks"
+
+
 class BossItems(DefaultOnToggle):
     """
     Puts the drops of the bosses before your goal into the item pool, delivered to your
@@ -349,6 +374,25 @@ class HintShopPrice(Range):
     range_start = 0
     range_end = 1000
     default = 100
+
+
+class MapItems(DefaultOnToggle):
+    """
+    Puts a Map to each boss of the goal's era into the item pool (Map to Eikthyr, Map to The Elder...):
+    receiving one pins that boss's nearest altar on your map, as reading its Vegvisir does.
+    """
+    display_name = "Map Items"
+
+
+class MapFragments(Range):
+    """
+    How many Map Fragments are in the item pool: each one uncovers a patch of the map (500 m across) somewhere
+    around you, which counts for exploration checks and the Explorer goal.
+    """
+    display_name = "Map Fragments"
+    range_start = 0
+    range_end = 20
+    default = 5
 
 
 class StarterKit(DefaultOnToggle):
@@ -489,11 +533,16 @@ class ValheimOptions(PerGameCommonOptions):
     fishing_checks: FishingChecks
     taming_checks: TamingChecks
     trader_checks: TraderChecks
+    lore_checks: LoreChecks
+    farming_checks: FarmingChecks
+    dungeon_checks: DungeonChecks
     boss_items: BossItems
     gear_items: GearItems
     starter_kit: StarterKit
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
+    map_items: MapItems
+    map_fragments: MapFragments
     trap_percentage: TrapPercentage
     excluded_traps: ExcludedTraps
     boost_percentage: BoostPercentage
@@ -510,8 +559,10 @@ option_groups = [
                          CombatLogic]),
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
-                           BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
-    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, StarterKit, BoostPercentage, HintShopPrice]),
+                           BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
+                           FarmingChecks, DungeonChecks]),
+    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
+                          HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
 ]

@@ -46,6 +46,22 @@ obtain = {r[1]: (r[2], int(r[3])) for r in check_rows if r and r[0] == "obtain"}
 
 
 
+def replace_rows(rows, kinds, new):
+    """rows with those kinds' rows replaced by new ones: in place (where the first of each kind was), so
+    location ids, which follow the order of checks.tsv, don't move; new kinds go at the end."""
+    out, placed = [], set()
+    for r in rows:
+        if r and r[0] in kinds:
+            if r[0] not in placed:
+                placed.add(r[0])
+                out += [n for n in new if n[0] == r[0]]
+            continue
+        out.append(r)
+    while out and not out[-1]:
+        out.pop()
+    return out + [n for n in new if n[0] not in placed]
+
+
 def needs(prefab):
     """(research items, obtain checks, tier) to build a piece, or None if a material has no obtain check."""
     piece = db["pieces"][prefab]
@@ -108,12 +124,9 @@ out += [f"    {p!r}," for p in pieces]
 out += [")", ""]
 (root / "valheimapworld" / "comfort_data.py").write_text("\n".join(out))
 
-rows = [r for r in check_rows if not (r and r[0] == COMFORT_ROW)]
-while rows and not rows[-1]:
-    rows.pop()
-rows += [[COMFORT_ROW, str(level), f"Comfort: Level {level}", str(tier), ""] for level, tier in sorted(levels.items())]
+comfort_rows = [[COMFORT_ROW, str(level), f"Comfort: Level {level}", str(tier), ""] for level, tier in sorted(levels.items())]
 with open(root / "mod" / "checks.tsv", "w", newline="") as f:
-    csv.writer(f, delimiter="\t", lineterminator="\n").writerows(rows)
+    csv.writer(f, delimiter="\t", lineterminator="\n").writerows(replace_rows(check_rows, (COMFORT_ROW,), comfort_rows))
 
 print(f"{len(pieces)} comfort pieces; levels {min(levels)}-{max(levels)}: "
       + ", ".join(f"{level}@T{tier}" for level, tier in sorted(levels.items())))

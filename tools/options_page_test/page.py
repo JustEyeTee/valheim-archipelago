@@ -12,7 +12,7 @@ cases = [
                    ("uncheck", "#opt-starter_kit")]),
     ("yagluth", [("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
                  ("num", "#opt-exploration_checks", "20"), ("click", "label[for=opt-exploration_check_spacing-half_percent]")]),
-    ("moder", [("check", "#opt-progressive_items"), ("uncheck", "#opt-gear_items"), ("uncheck", "#opt-boss_items"), ("num", "#opt-trap_percentage", "50"),
+    ("moder", [("check", "#opt-progressive_items"), ("uncheck", "#opt-map_items"), ("num", "#opt-map_fragments", "12"), ("uncheck", "#opt-gear_items"), ("uncheck", "#opt-boss_items"), ("num", "#opt-trap_percentage", "50"),
                ("num", "#opt-boost_percentage", "50")]),
     ("eikthyr", [("uncheck", "#opt-biome_checks"), ("uncheck", "#opt-obtain_checks"), ("uncheck", "#opt-discovery_checks"),
                  ("uncheck", "#opt-build_checks"), ("uncheck", "#opt-eat_checks"), ("num", "#opt-skill_checks", "0"),

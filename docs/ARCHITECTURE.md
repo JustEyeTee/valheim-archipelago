@@ -219,6 +219,7 @@ flowchart LR
     CT["mod/checks.tsv"] -- gen_apworld_data.py --> CD["check_data.py"]
     DB -- gen_boss_gates.py --> BD["boss_data.py"]
     DB -- gen_comfort_data.py --> CF["comfort_data.py<br/>+ comfort rows in checks.tsv"]
+    DB -- gen_world_checks.py --> CT
     DB -.->|verify_game_data.py| V{{"every name exists"}}
     DB -.->|audit_tiers.py| A{{"no check before<br/>its materials"}}
     RD --> APW["APWorld<br/>(valheimapworld/)"]
@@ -237,6 +238,7 @@ flowchart LR
 | `verify_game_data.py` | checks every name the randomizer uses against the database | after a Valheim update, or editing the tables |
 | `gen_apworld_data.py` | writes `research_data.py` and `check_data.py` | after editing `research.tsv` or `checks.tsv` |
 | `gen_boss_gates.py` | writes `boss_data.py`: which bosses each research and check needs | after editing the tables |
+| `gen_world_checks.py` | writes the read (rune stones), vegvisir, plant and loot rows of `checks.tsv` from the game database | after a Valheim update (then run `gen_apworld_data.py`) |
 | `gen_comfort_data.py` | writes `comfort_data.py` (each buildable comfort piece and what it needs) and the comfort rows of `checks.tsv` | after a Valheim update, or editing `research.tsv` or the obtain checks (then run `gen_apworld_data.py`) |
 | `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
 | `gen_mod_logic.py` | writes `mod/logic.tsv`, the rules the mod's logic panel uses | after any logic change (`test_generate.sh` checks it's current) |

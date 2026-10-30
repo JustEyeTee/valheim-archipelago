@@ -34,15 +34,19 @@ def bosses_to_use(items) -> set:
     return {boss for item in items for boss in RESEARCH_USE_BOSSES.get(item, ())}
 
 
+# The Sunken Crypts open with The Elder's Swamp Key: Bonemass's altar takes their Withered Bones, and
+# Bonemass's Vegvisir and the crypt chests are inside.
+EXTRA_BOSSES = {"Trophy: TrophyBonemass": {"The Elder"}, "Vegvisir: Bonemass": {"The Elder"},
+                "Loot: Sunken Crypt": {"The Elder"}}
+
 # Location -> bosses that must be defeated first (their drops go into it): a research's cost,
-# an item to obtain, the unlocks a check's required research gives, and Bonemass, whose altar
-# takes Withered Bones from the Sunken Crypts (The Elder's Swamp Key).
+# an item to obtain, the unlocks a check's required research gives, and EXTRA_BOSSES.
 LOCATION_BOSSES = {
     location.user_friendly_name: frozenset(
         set(RESEARCH_COST_BOSSES.get(location.user_friendly_name, ()))
         | set(CHECK_BOSSES.get(location.user_friendly_name, ()))
         | bosses_to_use(CHECK_REQS.get(location.user_friendly_name, ()))
-        | ({"The Elder"} if location.user_friendly_name == "Trophy: TrophyBonemass" else set()))
+        | EXTRA_BOSSES.get(location.user_friendly_name, set()))
     for location in location_data_table
 }
 
@@ -72,7 +76,8 @@ TRACKER_OPTIONS = ("goal", "progressive_items", "goal_conditions", "explorer_per
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
-                   "fishing_checks", "taming_checks", "trader_checks")
+                   "fishing_checks", "taming_checks", "trader_checks", "lore_checks", "farming_checks",
+                   "dungeon_checks")
 
 # Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
@@ -139,6 +144,8 @@ HILDIR_QUESTS = {
     "Hildir3": ("Discover: Hildir's Camp", "Discover: Sealed Tower"),
 }
 RELIC = "Forsaken Relic"
+MAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("map:") and item.item_name.startswith("Map to "))
+MAP_FRAGMENT = "Map Fragment"
 COMFORT = "Comfort: Level "
 
 
@@ -201,6 +208,7 @@ class ValheimWorld(World):
         "Boss Drops": set(BOSS_DROP_ITEMS.values()),
         "Progressive Items": set(PROGRESSIVE_FAMILIES),
         "Tools": set(GEAR_ITEMS),
+        "Maps": set(MAP_ITEMS) | {MAP_FRAGMENT},
         "Bundles": set(FILLER_ITEMS),
         "Traps": set(TRAP_ITEMS),
         "Boosts": set(BOOST_ITEMS),
@@ -248,7 +256,11 @@ class ValheimWorld(World):
                                                   ("Eat: ", self.options.eat_checks),
                                                   ("Catch: ", self.options.fishing_checks),
                                                   ("Tame: ", self.options.taming_checks),
-                                                  ("Buy: ", self.options.trader_checks)) if not option)
+                                                  ("Buy: ", self.options.trader_checks),
+                                                  ("Read: ", self.options.lore_checks),
+                                                  ("Vegvisir: ", self.options.lore_checks),
+                                                  ("Plant: ", self.options.farming_checks),
+                                                  ("Loot: ", self.options.dungeon_checks)) if not option)
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
         self.scope = frozenset(name for name in self.scope if self.wanted(name))
@@ -445,6 +457,12 @@ class ValheimWorld(World):
                 self.multiworld.itempool.append(self.create_item(RELIC))
             missing -= self.relics
             self.goal_needed["Relic Hunt"] = max(1, math.ceil(self.relics * self.options.relic_hunt_percent.value / 100))
+        # Maps (to each boss of the era, and fragments) take filler's place, as far as there's room.
+        maps = ([f"Map to {boss}" for boss in self.era_bosses] if self.options.map_items else []) \
+            + [MAP_FRAGMENT] * self.options.map_fragments.value
+        for name in maps[:missing]:
+            self.multiworld.itempool.append(self.create_item(name))
+        missing -= min(missing, len(maps))
         allowed_traps = [trap for trap in TRAP_ITEMS if trap not in self.options.excluded_traps.value]
         traps = round(missing * self.options.trap_percentage.value / 100) if allowed_traps else 0
         boosts = min(missing - traps, round(missing * self.options.boost_percentage.value / 100))

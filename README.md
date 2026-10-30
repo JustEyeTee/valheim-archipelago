@@ -101,12 +101,13 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `great_hall_comfort` | 10 | Great Hall: the comfort level to reach (lowered to the most the era allows). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
 | `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |
-| `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks` | on | Extra kinds of checks. |
+| `biome_checks`, `obtain_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks`, `lore_checks`, `farming_checks`, `dungeon_checks` | on | Extra kinds of checks (lore: rune stones and Vegvisirs; farming: planting crops; dungeons: opening each kind of dungeon's treasure chest). |
 | `exploration_checks`, `exploration_check_spacing` | 6, one_percent | Checks for exploring up to this % of the map (0-20), every half, one or two percent. |
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
+| `map_items`, `map_fragments` | on, 5 | Maps to each boss of your era (they pin its altar) and Map Fragments (they uncover part of the map). |
 | `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
 | `gear_items` | on | Tools from your goal's era. |

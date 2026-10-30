@@ -400,6 +400,15 @@ Rested Blessing,boost:rested,1,Boost,Useful
 Eikthyr's Blessing,boost:eikthyr,1,Boost,Useful
 Moder's Blessing,boost:moder,1,Boost,Useful
 Forsaken Relic,goal:relic,1,Goal,Progression
+Map to Eikthyr,map:Eikthyrnir,1,Map,Useful
+Map to The Elder,map:GDKing,1,Map,Useful
+Map to Bonemass,map:Bonemass,1,Map,Useful
+Map to Moder,map:Dragonqueen,1,Map,Useful
+Map to Yagluth,map:GoblinKing,1,Map,Useful
+Map to The Queen,map:Mistlands_DvergrBossEntrance1,1,Map,Useful
+Map to Fader,map:FaderLocation,1,Map,Useful
+Map to Kall Fimbulbringer,map:DN_Bossroom,1,Map,Useful
+Map Fragment,map:fragment,1,Map,Useful
 '''
 
 # Map string classifications to `ItemClassification`

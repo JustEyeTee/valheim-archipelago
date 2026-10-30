@@ -1,6 +1,6 @@
 {
   "name": "ValheimArchipelago",
-  "version_number": "0.15.0",
+  "version_number": "0.16.0",
   "website_url": "https://github.com/JustEyeTee/valheim-archipelago",
   "description": "Archipelago multiworld randomizer: researches unlock recipes; trophies, biomes, bosses, skills and more are checks. Based on Samupo's mod. Written with AI assistance (see README). APWorld on GitHub.",
   "dependencies": [

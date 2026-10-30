@@ -2,6 +2,18 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.16.0
+
+- **Lore checks** (`lore_checks`, on): reading each biome's lore rune stones (11) and each boss's Vegvisir (8).
+- **Farming checks** (`farming_checks`, on): planting carrot, turnip, onion, barley, flax, magecap and jotun puffs
+  with the Cultivator. (Trees and the Deep North crops need obtain checks for their seeds first.)
+- **Dungeon checks** (`dungeon_checks`, on): opening a treasure chest in a Burial Chamber, Troll Cave, Sunken
+  Crypt, Frost Cave, Infested Mine and Charred Fortress (each kind of chest is only in that dungeon).
+- **Map items** (`map_items`, on; `map_fragments`, 5): a Map to each boss of your era pins its altar, as its
+  Vegvisir does; Map Fragments uncover a patch of the map near you (which counts for exploration).
+- All era-limited like the other checks; the game data scan now records Vegvisirs, rune stones and plants
+  (`tools/gen_world_checks.py` writes the rows).
+
 ## 0.15.0
 
 - **Haldor's hint shop** (`hint_shop_price`, 100 Coins by default, 0 closes it): by a trader (Haldor, Hildir
