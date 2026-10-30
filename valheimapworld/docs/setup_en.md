@@ -34,5 +34,11 @@ Type `/ap status` in the in-game chat to check the connection, and `/ap` for the
 
 ## Playing together
 
-Several players can share one slot: one player connects, and the others just join that world with the mod installed,
-without connecting. Their checks are sent through the world.
+Each world has a co-op mode, chosen in the connection window ("Co-op (new worlds)") by the first player who
+connects in it. A world keeps that mode.
+
+- **Shared slot**: one player connects, and the others just join that world with the mod installed, without
+  connecting. Everyone's checks count for that one slot, and its researches unlock for everyone.
+- **A slot each**: every player has their own slot in the room (their own YAML) and connects to it before loading
+  the world. Each player has their own researches, checks, goal and Archipelago Chest (bundles go to a chest you
+  built). A boss drops one trophy: pass it around so everyone picks it up.

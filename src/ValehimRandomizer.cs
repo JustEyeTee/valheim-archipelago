@@ -30,6 +30,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoSlot;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoPassword;
     internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicPanelKey;
+    internal static BepInEx.Configuration.ConfigEntry<string> coopMode;
 
     public class TrophyResearch
     {
@@ -73,6 +74,10 @@ public class ValheimRandomizer : BaseUnityPlugin
         archipelagoPort = Config.Bind("Archipelago", "Port", 38281, "Archipelago server port");
         archipelagoSlot = Config.Bind("Archipelago", "Slot", "Player", "Your Archipelago slot name");
         archipelagoPassword = Config.Bind("Archipelago", "Password", "", "Archipelago password (if any)");
+        coopMode = Config.Bind("Archipelago", "CoopMode", ArchipelagoCoop.Shared,
+            new BepInEx.Configuration.ConfigDescription("For a world nobody has connected in yet: shared (one slot for " +
+                "the world) or separate (each player connects to their own slot). A world keeps the mode it starts with.",
+                new BepInEx.Configuration.AcceptableValueList<string>(ArchipelagoCoop.Shared, ArchipelagoCoop.Separate)));
         logicPanelKey = Config.Bind("Archipelago", "LogicPanelKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F8),
             "Shows or hides the panel of checks you can do now (in logic)");
 
@@ -167,12 +172,12 @@ public class ValheimRandomizer : BaseUnityPlugin
     public static void DoUnlockResearch(string research)
     {
         Log.LogInfo("Research unlocked: " + research);
-        ZoneSystem.instance.SetGlobalKey(research);
+        ZoneSystem.instance.SetGlobalKey(ArchipelagoCoop.Scoped(research));
     }
 
     public static void UnlockResearch(string research)
     {
-        ZoneSystem.instance.SetGlobalKey(research + "_crafted");
+        ArchipelagoCoop.WhenReady(() => ZoneSystem.instance.SetGlobalKey(ArchipelagoCoop.Scoped(research + "_crafted")));
         if (Randomized)
         {
             ArchipelagoConnection.SendLocation(researchToArchipelago[research]);
@@ -185,12 +190,12 @@ public class ValheimRandomizer : BaseUnityPlugin
 
     public static bool IsResearchUnlocked(string research)
     {
-        return ZoneSystem.instance.GetGlobalKey(research);
+        return ZoneSystem.instance.GetGlobalKey(ArchipelagoCoop.Scoped(research));
     }
 
     public static bool IsResearchCrafted(string research)
     {
-        return ZoneSystem.instance.GetGlobalKey(research + "_crafted");
+        return ZoneSystem.instance.GetGlobalKey(ArchipelagoCoop.Scoped(research + "_crafted"));
     }
 
     public static void AddResearchRequirement(string itemID, params string[] researches)

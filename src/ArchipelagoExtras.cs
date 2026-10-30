@@ -433,11 +433,15 @@ public static class ArchipelagoExtras
         }
     }
 
+    // An Archipelago Chest that's loaded; with separate co-op slots, one this player built.
     private static Container FindChest()
     {
+        long me = Player.m_localPlayer ? Player.m_localPlayer.GetPlayerID() : 0;
+        bool separate = ArchipelagoCoop.IsSeparate;
         return UnityEngine.Object.FindObjectsByType<Container>(FindObjectsSortMode.None)
             .FirstOrDefault(c => c && c.name.StartsWith(ChestPrefabName, StringComparison.Ordinal)
-                                 && c.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid());
+                                 && c.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid()
+                                 && (!separate || (c.GetComponent<Piece>() is Piece piece && piece.GetCreator() == me)));
     }
 
     private static bool Deliver(Container chest, string prefabName, int amount, out bool full)

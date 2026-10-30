@@ -45,6 +45,7 @@ They share three data files in `mod/`, so a name always means the same thing on 
 | `RandomizerUtils.cs` | Creates the Research Bench and the research items and recipes; research cost percentage |
 | `Patches.cs` | Harmony patches: recipe and piece locking, trophy boosts, and hooks for eat, build, buy, tame, kill and Death Link |
 | `ArchipelagoConnection.cs` | Connecting, sending checks, receiving items, sending the goal |
+| `ArchipelagoCoop.cs` | Co-op modes per world: shared slot, or a slot each (per-slot keys) |
 | `ArchipelagoLogic.cs` | Which checks are in logic now (from `logic.tsv`); the F8 panel and `/ap logic` |
 | `ArchipelagoGoal.cs` | The goal conditions from slot data: progress, `/ap goal`, Skill Master's skill keys |
 | `ArchipelagoExtras.cs` | Every check beyond researches and trophies, the Archipelago Chest, bundles, boss drops, tools, traps, boosts |
@@ -88,7 +89,13 @@ every 2 seconds, `TryFlushPendingLocations` sends anything still pending and mar
 Because they're world keys:
 
 - checks done while disconnected are sent on the next connect,
-- in co-op, a player who isn't connected sets the pending key and the connected player sends it.
+- in co-op with a shared slot, a player who isn't connected sets the pending key and the connected player sends it.
+
+**Co-op modes** (`ArchipelagoCoop.cs`): the first connected player in a world stores `ap_coop shared` or
+`ap_coop separate` in it (worlds without it are shared). With separate slots, every key the mod keeps per
+slot (researches received and crafted, `ap_pending:`/`ap_sent:`, goal keys) gets `@<slot>` appended
+(`ArchipelagoCoop.Scoped`), and the flush only sends this slot's pending keys (`IsMine`). Recipe and piece
+locking runs on each client, so per-slot research keys give each player their own unlocks.
 
 **Randomized mode** (`ValheimRandomizer.Randomized`) is on while connected, or in a world marked with the
 `ap_world` key, which is set the first time a connected player plays in it. So co-op partners and offline

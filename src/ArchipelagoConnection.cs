@@ -26,6 +26,7 @@ internal static class ArchipelagoConnection
     private const string WorldKey = "ap_world";
 
     public static bool IsConnected => connected && session != null;
+    public static string SlotName => IsConnected ? slotName : null;
     public static bool IsArchipelagoWorld => HasGlobal(WorldKey);
 
     public static void Connect(string host, int port, string slot, string password)
@@ -79,7 +80,7 @@ internal static class ArchipelagoConnection
     // "ap_sent:clubs" (lookups of the whole name never match, and "Clubs Tier 2" would replace
     // it). Keys use the name lowercased with spaces as underscores instead.
     private static string Key(string prefix, string locationName)
-        => prefix + locationName.ToLowerInvariant().Replace(' ', '_');
+        => ArchipelagoCoop.Scoped(prefix + locationName.ToLowerInvariant().Replace(' ', '_'));
 
     public static bool IsLocationDone(string locationName)
         => HasGlobal(Key("ap_sent:", locationName)) || HasGlobal(Key("ap_pending:", locationName));
@@ -98,11 +99,13 @@ internal static class ArchipelagoConnection
         if (!WorldLoaded()) return;
         if (string.IsNullOrWhiteSpace(locationName)) return;
 
-        if (HasGlobal(Key("ap_sent:", locationName))) return;
-        ValheimRandomizer.Log.LogInfo("Queue location " + locationName);
-
-        SetGlobal(Key("ap_pending:", locationName));
-        TryFlushPendingLocations();
+        ArchipelagoCoop.WhenReady(() =>
+        {
+            if (HasGlobal(Key("ap_sent:", locationName))) return;
+            ValheimRandomizer.Log.LogInfo("Queue location " + locationName);
+            SetGlobal(Key("ap_pending:", locationName));
+            TryFlushPendingLocations();
+        });
     }
 
     // Runs on the websocket thread, where Unity and game calls aren't safe. Received items are
@@ -132,15 +135,16 @@ internal static class ArchipelagoConnection
     }
 
     // Items already applied to the loaded world (unlocking a research sets a world key); reset when another
-    // world is loaded, which needs them applied too.
+    // world is loaded, or another slot connects, which need them applied too.
     static System.Collections.Generic.List<string> gottenItems = new System.Collections.Generic.List<string>();
-    static long gottenWorld;
+    static string gottenFor;
     static void TryGetAllItems()
     {
         if (!WorldLoaded()) return;
-        if (ZNet.instance.GetWorldUID() != gottenWorld)
+        var target = $"{ZNet.instance.GetWorldUID()}:{slotName}";  // with separate co-op slots, also per slot
+        if (target != gottenFor)
         {
-            gottenWorld = ZNet.instance.GetWorldUID();
+            gottenFor = target;
             gottenItems.Clear();
         }
 
@@ -192,20 +196,25 @@ internal static class ArchipelagoConnection
     {
         if (!connected || session == null) return;
         if (!WorldLoaded()) return;
+        // The world's co-op mode has to be known before any per-slot key is written (see ArchipelagoCoop.Ready).
+        if (!ArchipelagoCoop.Ready) return;
+        ArchipelagoCoop.Replay();
         if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
         TryGetAllItems();
-        if (HasGlobal("ap_goal_pending")) CompleteGame();
+        if (HasGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"))) CompleteGame();
         ArchipelagoGoal.Check(ReceivedCount);
 
         foreach (var key in ZoneSystem.instance.GetGlobalKeys())
         {
             if (!key.StartsWith("ap_pending:", StringComparison.Ordinal)) continue;
+            // Separate co-op slots: only this player's checks.
+            if (!ArchipelagoCoop.IsMine(key, out var unscoped)) continue;
 
             // Pending keys from older builds hold the lowercased name with its spaces.
-            var pendingName = key.Substring("ap_pending:".Length);
+            var pendingName = unscoped.Substring("ap_pending:".Length);
             if (string.IsNullOrWhiteSpace(pendingName)) continue;
             var locationName = ValheimRandomizer.archipelagoToResearch.Keys.Concat(ArchipelagoExtras.LocationNames)
-                .FirstOrDefault(name => Key("", name) == pendingName || name.ToLower() == pendingName) ?? pendingName;
+                .FirstOrDefault(name => name.ToLowerInvariant().Replace(' ', '_') == pendingName || name.ToLower() == pendingName) ?? pendingName;
 
             try
             {
@@ -263,12 +272,12 @@ internal static class ArchipelagoConnection
     // sent by TryFlushPendingLocations.
     public static void CompleteGame()
     {
-        if (!WorldLoaded() || HasGlobal("ap_goal_sent")) return;
-        SetGlobal("ap_goal_pending");
+        if (!WorldLoaded() || !ArchipelagoCoop.Ready || HasGlobal(ArchipelagoCoop.Scoped("ap_goal_sent"))) return;
+        SetGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"));
         if (!connected || session == null) return;
 
         session.SetGoalAchieved();
-        SetGlobal("ap_goal_sent");
+        SetGlobal(ArchipelagoCoop.Scoped("ap_goal_sent"));
         ValheimRandomizer.Log.LogInfo("[AP] Goal complete");
         Player.m_localPlayer?.Message(MessageHud.MessageType.Center, "Archipelago: goal complete!");
     }

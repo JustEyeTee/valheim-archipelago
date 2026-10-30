@@ -73,10 +73,15 @@ Items you send and receive, hints and other players' chat are shown on screen an
 
 ### Co-op
 
-Several Vikings can share one slot: **one** player connects; everyone else just joins that world, with
-the mod installed and without connecting. The mod knows it's an Archipelago world, and their researches,
-pickups, kills and other checks are sent by the connected player. Traps, boss items and Death Link reach
-only the connected player.
+Each world has a co-op mode, picked in the connection window by the first player who connects in it:
+
+- **Shared slot** (the default): **one** player connects; everyone else just joins that world, with the mod
+  installed and without connecting. Their researches, pickups, kills and other checks are sent by the
+  connected player. Traps, boss items and Death Link reach only the connected player.
+- **A slot each**: every player connects to their own slot. Each has their own researches, checks, goal and
+  Archipelago Chest in the same world. Pass boss trophies around so everyone picks them up.
+
+`/ap status` shows the world's mode.
 
 ## Options
 

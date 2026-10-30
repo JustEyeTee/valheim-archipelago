@@ -2,6 +2,13 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.14.0
+
+- **Co-op modes, chosen per world**: the first player to connect in a world picks **shared slot** (one player
+  connects, everyone's checks count; the old behavior, and what existing worlds stay) or **a slot each**
+  (every player connects to their own slot and has their own researches, checks, goal and Archipelago Chest
+  in the same world). Set in the connection window or `CoopMode` in the config; `/ap status` shows it.
+
 ## 0.13.0
 
 - **Progressive items** (`progressive_items`, off by default): tiered researches come as progressive items

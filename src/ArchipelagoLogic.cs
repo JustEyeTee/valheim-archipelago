@@ -78,7 +78,7 @@ public static class ArchipelagoLogic
     private static bool Has(string item)
     {
         if (ValheimRandomizer.archipelagoToResearch.TryGetValue(item, out var researchId))
-            return ZoneSystem.instance.GetGlobalKey(researchId);
+            return ValheimRandomizer.IsResearchUnlocked(researchId);
         return ArchipelagoConnection.ReceivedCount(item) > 0;
     }
 

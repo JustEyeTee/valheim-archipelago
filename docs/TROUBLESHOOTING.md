@@ -98,11 +98,25 @@ move Coins in and out (1 Coin = 1 MJ). Withdrawals need room in your inventory.
 
 ## Co-op
 
-Only **one** player connects to the slot. Everyone else just joins that world with the mod installed and
-does **not** connect: once the connected player has played in it, the world is marked as an Archipelago
-world, and their checks are passed to the server by the connected player. Traps, boss items
-and Death Link reach only the connected player. If two players connect to the same slot, items are applied
-twice.
+`/ap status` shows the world's co-op mode. It's set by the first player to connect in the world (the
+connection window's "Co-op (new worlds)" choice, or `CoopMode` in the config) and never changes; worlds
+played before co-op modes existed are shared.
+
+**Shared slot.** Only **one** player connects to the slot. Everyone else just joins that world with the mod
+installed and does **not** connect: their checks are passed to the server by the connected player. Traps,
+boss items and Death Link reach only the connected player. If two players connect to the same slot, items
+are applied twice.
+
+**A slot each.** Every player connects to their own slot before loading the world. If something is locked
+for you that's unlocked for a friend, that's expected: researches are per player. Bundles go to an
+Archipelago Chest **you** built. A player who joins without connecting plays as the slot in their config
+and their checks wait until they connect. A boss drops one trophy: drop it for the next player to pick up.
+Hildir's quests are the world's (as in the game): a chest anyone returns counts for every player. Slots
+whose names differ only in case, spaces or `@` ("Bob Smith", "bob_smith") would share progress in the
+same world, so give co-op slots distinct names. If two players connect into a brand-new world at the same
+moment with different modes chosen, connect one at a time. Start a separate-slot game in a fresh world: a
+world that was played without Archipelago first keeps that play's research as shared progress, which the
+players' own slots don't see.
 
 ## Trackers
 

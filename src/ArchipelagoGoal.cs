@@ -71,7 +71,7 @@ internal static class ArchipelagoGoal
                 return received(RelicName);
             case "Skill Master":
                 return condition.Targets.Count(t => ArchipelagoExtras.SkillOf(t) is Skills.SkillType skill &&
-                                                    ZoneSystem.instance.GetGlobalKey(SkillKey + skill.ToString().ToLowerInvariant()));
+                                                    ZoneSystem.instance.GetGlobalKey(ArchipelagoCoop.Scoped(SkillKey + skill.ToString().ToLowerInvariant())));
             case "Hildir's Quests":
                 return condition.Targets.Count(key => ZoneSystem.instance.GetGlobalKey(key));
             default:
@@ -87,9 +87,10 @@ internal static class ArchipelagoGoal
         if (!HasConditions || ZoneSystem.instance == null) return;
         var player = Player.m_localPlayer;
 
-        if (skillLevel > 0 && (!ZoneSystem.instance.GetGlobalKey(SkillLevelKey, out var level) || level != skillLevel.ToString()))
+        var levelKey = ArchipelagoCoop.Scoped(SkillLevelKey);
+        if (skillLevel > 0 && (!ZoneSystem.instance.GetGlobalKey(levelKey, out var level) || level != skillLevel.ToString()))
         {
-            ZoneSystem.instance.SetGlobalKey($"{SkillLevelKey} {skillLevel}");
+            ZoneSystem.instance.SetGlobalKey($"{levelKey} {skillLevel}");
         }
 
         int done = 0;
@@ -116,12 +117,13 @@ internal static class ArchipelagoGoal
     // Skill Master: marks each skill of the local player at the goal's level (any player with the mod).
     public static void MarkSkills(Player player)
     {
-        if (ZoneSystem.instance == null || !ZoneSystem.instance.GetGlobalKey(SkillLevelKey, out var value) ||
+        if (!ArchipelagoCoop.Ready) return;  // skills are checked again next tick
+        if (ZoneSystem.instance == null || !ZoneSystem.instance.GetGlobalKey(ArchipelagoCoop.Scoped(SkillLevelKey), out var value) ||
             !int.TryParse(value, out var level) || level <= 0) return;
         foreach (var skill in player.GetSkills().GetSkillList())
         {
             var type = skill.m_info.m_skill;
-            var key = SkillKey + type.ToString().ToLowerInvariant();
+            var key = ArchipelagoCoop.Scoped(SkillKey + type.ToString().ToLowerInvariant());
             if (!ZoneSystem.instance.GetGlobalKey(key) && player.GetSkills().GetSkillLevel(type) >= level)
             {
                 ZoneSystem.instance.SetGlobalKey(key);

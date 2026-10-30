@@ -398,6 +398,7 @@ public class ArchipelagoCommand : ConsoleCommand
         if (sub == "status" || sub == "help")
         {
             Reply(ArchipelagoLinks.Status());
+            if (ZoneSystem.instance != null) Reply(ArchipelagoCoop.Describe());
             Reply("Commands: /ap goal, /ap logic [category], /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
