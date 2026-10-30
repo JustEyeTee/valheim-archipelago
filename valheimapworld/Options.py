@@ -387,7 +387,8 @@ class HintShopPrice(Range):
     """
     Haldor's hint shop: standing by a trader (Haldor, Hildir or the Bog Witch), type /ap shop hint in chat to
     pay this many Coins and have one of your checks that's in logic revealed as a hint for everyone
-    (/ap shop hint obtain picks an obtain check, and so on). 0 closes the shop.
+    (/ap shop hint obtain picks an obtain check, and so on). The price stays the same all game: dear early on,
+    when Coins are few, and easier as they pile up. 0 closes the shop.
     """
     display_name = "Hint Shop Price"
     range_start = 0
@@ -402,14 +403,6 @@ class BossAltarKeys(Toggle):
     fight (and Kall Fimbulbringer's for the gate to his prison). The keys go into the item pool.
     """
     display_name = "Boss Altar Keys"
-
-
-class HintShopScaling(DefaultOnToggle):
-    """
-    The hint shop's price grows as the game goes on: hint_shop_price times one more than the number of bosses
-    defeated (100 Coins at the start, 200 after Eikthyr, 300 after The Elder...), since late-game Coins are plenty.
-    """
-    display_name = "Hint Shop Scaling"
 
 
 class MapItems(DefaultOnToggle):
@@ -579,7 +572,6 @@ class ValheimOptions(PerGameCommonOptions):
     starter_kit: StarterKit
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
-    hint_shop_scaling: HintShopScaling
     map_items: MapItems
     boss_altar_keys: BossAltarKeys
     map_fragments: MapFragments
@@ -602,7 +594,7 @@ option_groups = [
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
                            FarmingChecks, BrewingChecks, DungeonChecks, RaidChecks]),
     OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
-                          HintShopPrice, HintShopScaling]),
+                          HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
 ]

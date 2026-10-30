@@ -14,21 +14,27 @@ on:
 permissions:
   contents: read
 
+# A newer push to the same branch or pull request cancels the run it supersedes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
 jobs:
   test:
     name: Archipelago ${{ matrix.archipelago }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       matrix:
         archipelago: ["0.6.8"]  # the APWorld's minimum_ap_version (the current release)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           path: valheim-archipelago
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "8.0.x"
       - name: Install Archipelago ${{ matrix.archipelago }}
@@ -60,10 +66,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Package the APWorld and the PopTracker pack
         run: APWORLD_ONLY=1 ./build.sh
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           draft: true
           files: |

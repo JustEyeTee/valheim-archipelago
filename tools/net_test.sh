@@ -8,7 +8,8 @@ cd "$(dirname "$0")/.."
 ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}
 port=${PORT:-38997}
 work=$(mktemp -d); server=""
-trap '[ -n "$server" ] && kill "$server" 2>/dev/null; rm -rf "$work"' EXIT
+# The server saves the game as it shuts down: wait for it before removing its folder.
+trap '[ -n "$server" ] && { kill "$server"; wait "$server"; } 2>/dev/null; rm -rf "$work"' EXIT
 
 APWORLD_ONLY=1 ./build.sh >/dev/null
 mkdir -p "$ap/custom_worlds" && cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"

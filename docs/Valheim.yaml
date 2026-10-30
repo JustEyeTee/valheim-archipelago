@@ -473,7 +473,8 @@ Valheim:
   hint_shop_price:
     # Haldor's hint shop: standing by a trader (Haldor, Hildir or the Bog Witch), type /ap shop hint in chat to
     # pay this many Coins and have one of your checks that's in logic revealed as a hint for everyone
-    # (/ap shop hint obtain picks an obtain check, and so on). 0 closes the shop.
+    # (/ap shop hint obtain picks an obtain check, and so on). The price stays the same all game: dear early on,
+    # when Coins are few, and easier as they pile up. 0 closes the shop.
     #
     # You can define additional values between the minimum and maximum values.
     # Minimum value is 0
@@ -483,12 +484,6 @@ Valheim:
     random-low: 0 # random value weighted towards lower values
     random-high: 0 # random value weighted towards higher values
     random-range-0-1000: 0 # random value between 0 and 1000
-
-  hint_shop_scaling:
-    # The hint shop's price grows as the game goes on: hint_shop_price times one more than the number of bosses
-    # defeated (100 Coins at the start, 200 after Eikthyr, 300 after The Elder...), since late-game Coins are plenty.
-    'false': 0
-    'true': 50
 
   #########
   # Traps #
