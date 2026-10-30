@@ -11,6 +11,10 @@ internal static class ArchipelagoConnection
     private static ArchipelagoSession session;
     private static bool connected;
 
+    // Trophy that wins the game, from the room's slot data. Rooms generated before the
+    // goal option existed send none, and their goal was always Fader.
+    public static string GoalTrophy { get; private set; } = "TrophyFader";
+
     public static void Connect(string host, int port, string slot, string password)
     {
         // Dispose previous session if any
@@ -29,6 +33,13 @@ internal static class ArchipelagoConnection
             var failure = (LoginFailure)result;
             throw new Exception(string.Join("; ", failure.Errors ?? Array.Empty<string>()));
         }
+
+        var slotData = ((LoginSuccessful)result).SlotData;
+        if (slotData != null && slotData.TryGetValue("goal_trophy", out var goal) && goal is string trophy && trophy.Length > 0)
+        {
+            GoalTrophy = trophy;
+        }
+        ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
 
         // Hook item reception
         session.Items.ItemReceived += OnApItemReceived;
@@ -103,6 +114,7 @@ internal static class ArchipelagoConnection
         if (!connected || session == null) return;
         if (!WorldLoaded()) return;
         TryGetAllItems();
+        if (HasGlobal("ap_goal_pending")) CompleteGame();
 
         foreach (var key in ZoneSystem.instance.GetGlobalKeys())
         {
@@ -160,8 +172,16 @@ internal static class ArchipelagoConnection
         ZoneSystem.instance.RemoveGlobalKey(k);
     }
 
+    // Called whenever the goal trophy is in the inventory. Sends the goal once per world; if
+    // not connected yet, it is remembered in the world and sent by TryFlushPendingLocations.
     public static void CompleteGame()
     {
+        if (!WorldLoaded() || HasGlobal("ap_goal_sent")) return;
+        SetGlobal("ap_goal_pending");
+        if (!connected || session == null) return;
+
         session.SetGoalAchieved();
+        SetGlobal("ap_goal_sent");
+        ValheimRandomizer.Log.LogInfo("[AP] Goal complete: " + GoalTrophy);
     }
 }

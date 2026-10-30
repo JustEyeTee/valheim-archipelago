@@ -132,7 +132,7 @@ public class ValheimRandomizer : BaseUnityPlugin
                 var dropName = it?.m_dropPrefab?.name;
                 if (string.IsNullOrEmpty(dropName)) continue;
 
-                if (dropName == "TrophyFader")
+                if (randomized.Value && dropName == ArchipelagoConnection.GoalTrophy)
                 {
                     ArchipelagoConnection.CompleteGame();
                 }

@@ -43,7 +43,7 @@ open(p, "w", newline="").write("\n".join(lines))
 EOF
 fi
 (cd valheimapworld && rm -f ../dist/stage/valheimapworld.apworld &&
-  mkdir -p ../dist/stage/apw/valheimapworld && cp ./*.py ../dist/stage/apw/valheimapworld/ &&
+  mkdir -p ../dist/stage/apw/valheimapworld && cp ./*.py archipelago.json ../dist/stage/apw/valheimapworld/ &&
   cd ../dist/stage/apw && python3 -I -m zipfile -c ../valheimapworld.apworld valheimapworld) && rm -rf "$stage/apw"
 zip="dist/ValheimArchipelagoRandomizer-$tag.zip"
 rm -f "$zip" && (cd "$stage" && python3 -I -m zipfile -c "../$(basename "$zip")" BepInEx valheimapworld.apworld)
