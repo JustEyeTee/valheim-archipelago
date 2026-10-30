@@ -124,6 +124,47 @@ class DiscoveryChecks(DefaultOnToggle):
     display_name = "Discovery Checks"
 
 
+class BuildChecks(DefaultOnToggle):
+    """
+    Adds a check for placing each crafting station, boat and portal for the first time
+    (Workbench, Forge, Smelter, Karve, Portal, Blast Furnace, Galdr Table...: 29 kinds), up to
+    the goal's tier.
+    """
+    display_name = "Build Checks"
+
+
+class EatChecks(DefaultOnToggle):
+    """
+    Adds a check for eating each of 51 foods for the first time, from Raspberries to Lox Meat
+    Pie, up to the goal's tier.
+    """
+    display_name = "Eat Checks"
+
+
+class FishingChecks(DefaultOnToggle):
+    """
+    Adds a check for catching each of the 12 kinds of fish, up to the goal's tier. A fishing
+    rod and bait are sold by Haldor; biome bait is made at the Food Preparation Table.
+    """
+    display_name = "Fishing Checks"
+
+
+class TamingChecks(DefaultOnToggle):
+    """
+    Adds a check for taming each tameable animal: Boar, Wolf, Lox, Hen, Asksvin and Moose, up
+    to the goal's tier.
+    """
+    display_name = "Taming Checks"
+
+
+class TraderChecks(DefaultOnToggle):
+    """
+    Adds a check for buying each of 14 items from Haldor and Hildir (Fishing Rod, Megingjord,
+    Ymir Flesh, Egg...), up to the goal's tier.
+    """
+    display_name = "Trader Checks"
+
+
 class TrapPercentage(Range):
     """
     Percentage of the extra items (the items beyond one per research and trophy) that are
@@ -193,6 +234,11 @@ class ValheimOptions(PerGameCommonOptions):
     kill_checks: KillChecks
     skill_checks: SkillChecks
     discovery_checks: DiscoveryChecks
+    build_checks: BuildChecks
+    eat_checks: EatChecks
+    fishing_checks: FishingChecks
+    taming_checks: TamingChecks
+    trader_checks: TraderChecks
     trap_percentage: TrapPercentage
     boost_percentage: BoostPercentage
     death_link: DeathLink

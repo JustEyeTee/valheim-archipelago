@@ -260,7 +260,7 @@ Trophy,Trophy: TrophyGhost,loc:researchTrophyGhost,Not Missable,Tier1
 Trophy,Trophy: TrophySkeletonHildir,loc:researchTrophyBrenna,Not Missable,Tier4
 Trophy,Trophy: TrophyDraugrElite,loc:researchTrophyDraugrElite,Not Missable,Tier4
 Trophy,Trophy: TrophyAbomination,loc:researchTrophyAbomination,Not Missable,Tier4
-Trophy,Trophy: TrophyBonemass,loc:researchTrophyBonemass,Not Missable,Tier4
+Trophy,Trophy: TrophyBonemass,loc:researchTrophyBonemass,Not Missable,Tier6
 Trophy,Trophy: TrophyKvastur,loc:researchTrophyKvastur,Not Missable,Tier4
 Trophy,Trophy: TrophyBlob,loc:researchTrophyBlob,Not Missable,Tier4
 Trophy,Trophy: TrophyLeech,loc:researchTrophyLeech,Not Missable,Tier4
