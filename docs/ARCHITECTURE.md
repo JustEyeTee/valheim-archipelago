@@ -63,6 +63,7 @@ example `researchSmelter`). Global keys are saved with the world and shared by e
 ### Doing a research sends a check
 
 ```mermaid
+%%{init: {"sequence": {"mirrorActors": false}}}%%
 sequenceDiagram
     actor P as You
     participant G as Valheim (mod)
@@ -104,6 +105,7 @@ the first space). Checks that aren't in the connected seed (options, goal) are m
 ### Receiving items
 
 ```mermaid
+%%{init: {"sequence": {"mirrorActors": false}}}%%
 sequenceDiagram
     participant S as Archipelago server
     participant N as Network thread
