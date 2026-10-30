@@ -1,0 +1,15 @@
+# A solo test seed for The Elder's era (Hildir's first quest, farming, brewing, dungeons, the troll raid). Host it
+# with tools/test_room.sh; see docs/TESTING.md.
+name: TestViking
+game: Valheim
+requires:
+  version: 0.6.8
+Valheim:
+  goal: the_elder
+  goal_conditions: ["Goal Boss", "Hildir's Quests"]
+  research_cost_percent: 1
+  combat_logic: normal
+  raid_checks: true
+  hint_shop_price: 10
+  trap_percentage: 20
+  death_link: false

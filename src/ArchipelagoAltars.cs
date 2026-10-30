@@ -21,6 +21,8 @@ internal static class ArchipelagoAltars
 
     private static string Tag(string boss) => KeyPrefix + boss.ToLowerInvariant().Replace(' ', '_');
 
+    public static IEnumerable<string> KeyNames => Bosses.Values.Distinct().Select(boss => boss + KeySuffix);
+
     public static bool IsAltarKey(string itemName) => itemName.EndsWith(KeySuffix) && Bosses.ContainsValue(itemName.Substring(0, itemName.Length - KeySuffix.Length));
 
     // The connected seed's setting replaces the world's; keys received in another seed (a reused world) are dropped.

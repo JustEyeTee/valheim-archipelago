@@ -104,3 +104,10 @@ Console.WriteLine($"A buys a hint for {a.Locations.GetLocationNameFromId(shopLoc
 var scouted = a.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, shopLoc).Result;
 foreach (var info in scouted.Values) Console.WriteLine($"  scouted: {info.ItemName} for {info.Player.Name}");
 Thread.Sleep(2000);
+
+// Testing: the server's item cheat (what /ap give uses) sends A an item the normal way.
+int before = a.Items.AllItemsReceived.Count;
+a.Say("!getitem Burning Trap");
+Thread.Sleep(2000);
+var cheated = a.Items.AllItemsReceived.Skip(before).Select(i => i.ItemName).ToList();
+Console.WriteLine($"A asked for Burning Trap: received {(cheated.Count > 0 ? string.Join(", ", cheated) : "nothing")}");

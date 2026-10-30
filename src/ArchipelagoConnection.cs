@@ -149,6 +149,8 @@ internal static class ArchipelagoConnection
         while (helper.DequeueItem() != null) { }
     }
 
+    public static System.Collections.Generic.IEnumerable<string> ProgressiveNames => Progressive.Keys;
+
     private static void LoadProgressive(System.Collections.Generic.Dictionary<string, object> slotData)
     {
         Progressive.Clear();

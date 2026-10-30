@@ -200,6 +200,10 @@ public static class ArchipelagoExtras
         }
     }
 
+    // Every item name the mod handles beyond researches (for /ap give and /ap items).
+    public static IEnumerable<string> ItemNames => Bundles.Keys.Concat(TrapNames).Concat(Boosts)
+        .Concat(new[] { "Starter Kit", ArchipelagoGoal.RelicName, MapFragment }).Concat(BossMaps.Keys);
+
     public static bool IsExtraItem(string name) =>
         Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name) || name == "Starter Kit" ||
         name == ArchipelagoGoal.RelicName || BossMaps.ContainsKey(name) || name == MapFragment;

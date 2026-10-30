@@ -6,7 +6,11 @@ works; for anything that doesn't, note what you did and send `BepInEx/LogOutput.
 
 ## Setup
 
-Make two YAMLs with the [Options Builder](https://justeyetee.github.io/valheim-archipelago/options/):
+[TESTING.md](TESTING.md) explains how to host a test room and get any item with `/ap give` (traps, researches,
+altar keys...), so you don't have to wait for the multiworld to send them. The test YAMLs in `tools/testing/` are
+the two sessions below.
+
+Or make your own with the [Options Builder](https://justeyetee.github.io/valheim-archipelago/options/):
 
 - **Session 1 (Eikthyr):** goal `eikthyr`; goal conditions **Goal Boss + Trophy Hunt + Skill Master**
   (skill_master_count 2, skill_master_level 20); `boss_altar_keys` on; `progressive_items` on;

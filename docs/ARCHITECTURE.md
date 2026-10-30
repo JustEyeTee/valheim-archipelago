@@ -248,6 +248,7 @@ flowchart LR
 | `make_icon.py` | draws the Thunderstore icon | when changing the icon |
 | `make_social.py` | draws `docs/social-preview.png`, the repository's link preview (upload it in Settings > General) | when the version or icon changes |
 | `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction, and the English names | for English names |
+| `test_room.sh [yaml]` | hosts a test room (item cheats on) from `tools/testing/*.yaml`, for testing with `/ap give` (docs/TESTING.md) | for playtests |
 | `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten | after any APWorld change |
 | `ap_tests.sh` | runs Archipelago's own test suites for this world | before a release |
 | `net_test.sh` | runs the mod's network code against a live server | after changing the links or connection code |

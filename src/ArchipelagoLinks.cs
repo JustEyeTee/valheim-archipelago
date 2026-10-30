@@ -259,6 +259,32 @@ public static class ArchipelagoLinks
 
     public static void Say(string text) => session.Say(text);
 
+    // ---------- Testing: items through the server's item cheat ----------
+    // /ap give asks the server for an item with !getitem, so it arrives the way any received item does (the
+    // server must allow item cheats, which a room you host yourself does by default).
+    public static List<string> ItemNames() => ValheimRandomizer.archipelagoToResearch.Keys
+        .Concat(ArchipelagoExtras.ItemNames).Concat(ArchipelagoAltars.KeyNames).Concat(ArchipelagoConnection.ProgressiveNames)
+        .Distinct().OrderBy(n => n, StringComparer.OrdinalIgnoreCase).ToList();
+
+    // An exact name (any case), else the one name containing the text; otherwise the text as typed (the server
+    // matches names itself and says if it can't).
+    public static string ResolveItem(string text)
+    {
+        var names = ItemNames();
+        var exact = names.FirstOrDefault(n => string.Equals(n, text, StringComparison.OrdinalIgnoreCase));
+        if (exact != null) return exact;
+        var partial = names.Where(n => n.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+        return partial.Count == 1 ? partial[0] : text;
+    }
+
+    public static string Give(string text, int count)
+    {
+        var name = ResolveItem(text);
+        for (int i = 0; i < count; i++) Say("!getitem " + name);
+        return $"Asked the server for {(count > 1 ? count + " x " : "")}{name}. (A room you host allows this; " +
+               "a room on archipelago.gg needs item cheats turned on when it's made.)";
+    }
+
     // ---------- Hint shop ----------
     // By a trader, pay Coins to reveal one of your checks that's in logic as a hint for everyone (scouting your
     // own location with a hint costs no hint points). A check bought once isn't offered again.
@@ -457,13 +483,14 @@ public static class ArchipelagoLinks
     }
 }
 
-// Chat command (type /ap in chat): /ap status | goal | logic [category] | shop [hint [category]] | checks | missing <category> | hint <item> | say <text> |
+// Chat command (type /ap in chat): /ap status | goal | logic [category] | shop [hint [category]] | give [n] <item> |
+// items [search] | checks | missing <category> | hint <item> | say <text> |
 // energy | deposit <coins> | withdraw <coins> | deathlink on|off
 public class ArchipelagoCommand : ConsoleCommand
 {
     public override string Name => "ap";
     public override string Help =>
-        "Archipelago: status, goal, logic [category], shop, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
+        "Archipelago: status, goal, logic [category], shop, give [n] <item>, items [search], checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
 
     public override void Run(string[] args, Terminal context)
     {
@@ -473,7 +500,7 @@ public class ArchipelagoCommand : ConsoleCommand
         {
             Reply(ArchipelagoLinks.Status());
             if (ZoneSystem.instance != null) Reply(ArchipelagoCoop.Describe());
-            Reply("Commands: /ap goal, /ap logic [category], /ap shop, /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
+            Reply("Commands: /ap goal, /ap logic [category], /ap shop, /ap give [n] <item>, /ap items [search], /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
@@ -486,6 +513,24 @@ public class ArchipelagoCommand : ConsoleCommand
             case "goal":
                 foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
                 break;
+            case "give":
+            {
+                // /ap give [count] <item>: for testing, through the server's item cheat.
+                var words = args.Skip(1).ToList();
+                int count = 1;
+                if (words.Count > 1 && int.TryParse(words[0], out var c)) { count = Math.Max(1, Math.Min(20, c)); words.RemoveAt(0); }
+                if (words.Count == 0) { Reply("Usage: /ap give [count] <item>, e.g. /ap give Burning Trap or /ap give 2 Progressive Axes"); return; }
+                Reply(ArchipelagoLinks.Give(string.Join(" ", words), count));
+                break;
+            }
+            case "items":
+            {
+                var all = ArchipelagoLinks.ItemNames();
+                var found = rest.Length == 0 ? all : all.Where(n => n.IndexOf(rest, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                Reply(found.Count == 0 ? $"No item names contain '{rest}'." :
+                      $"{found.Count} items: " + string.Join(", ", found.Take(60)) + (found.Count > 60 ? ", ... (narrow it: /ap items <text>)" : ""));
+                break;
+            }
             case "shop":
                 if (args.Length < 2 || args[1].ToLowerInvariant() != "hint") { Reply(ArchipelagoLinks.ShopInfo()); return; }
                 Reply(ArchipelagoLinks.ShopHint(player, args.Length > 2 ? string.Join(" ", args.Skip(2)) : null));

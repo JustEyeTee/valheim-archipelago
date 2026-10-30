@@ -2,6 +2,13 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.21.0
+
+- **Testing with any item**: `/ap give [count] <item>` asks the server for any item through its item cheat (on in
+  rooms you host), so it arrives the normal way; `/ap items [search]` lists item names. `tools/test_room.sh` hosts
+  a test room from `tools/testing/solo-eikthyr.yaml` or `solo-elder.yaml`; `docs/TESTING.md` explains it.
+- The hint shop keeps a fixed price (the scaling option is gone).
+
 ## 0.20.0
 
 - **All 19 meads** are brewing checks: the Bog Witch's stock counts as a source for their ingredients, with new

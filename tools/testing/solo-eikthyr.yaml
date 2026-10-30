@@ -1,0 +1,25 @@
+# A quick solo test seed: Eikthyr's era with most features on, so one short session can try them. Host it with
+# tools/test_room.sh (item cheats on), then use /ap give in the game to receive any item. See docs/TESTING.md.
+name: TestViking
+game: Valheim
+requires:
+  version: 0.6.8
+Valheim:
+  goal: eikthyr
+  goal_conditions: ["Goal Boss", "Trophy Hunt", "Skill Master"]
+  trophy_hunt_percent: 50
+  skill_master_count: 2
+  skill_master_level: 20
+  research_cost_percent: 1
+  combat_logic: normal
+  progressive_items: true
+  boss_altar_keys: true
+  map_items: true
+  map_fragments: 5
+  hint_shop_price: 10
+  trap_percentage: 30
+  boost_percentage: 20
+  starter_kit: true
+  comfort_checks: 14
+  raid_checks: false
+  death_link: false
