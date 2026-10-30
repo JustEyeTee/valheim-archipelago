@@ -5413,6 +5413,424 @@
     "access_rules": [
      "crafting"
     ]
+   },
+   {
+    "name": "Skill: Clubs 20",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 20",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 30",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 30",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 40",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 40",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 50",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 50",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 60",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 60",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 70",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 70",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 80",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 80",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 90",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 90",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 100",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 100",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 25",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 25",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Skill: Clubs 75",
+    "item_count": 1,
+    "access_rules": [
+     "clubs_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Fists 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Jump 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Sneak 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Run 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Swim 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Dodge 75",
+    "item_count": 1
+   },
+   {
+    "name": "Skill: Crafting 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
    }
   ],
   "map_locations": [
@@ -5481,6 +5899,622 @@
     "access_rules": [
      "crafting,cooking_station"
     ]
+   },
+   {
+    "name": "Skill: Woodcutting 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
+   },
+   {
+    "name": "Skill: Woodcutting 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Axes 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Swords 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Knives 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,short_blades_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Spears 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,spears_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Bows 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,bows_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Blocking 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,shields_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Cooking 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,cooking_station"
+    ]
    }
   ],
   "map_locations": [
@@ -5507,6 +6541,160 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
     ]
+   },
+   {
+    "name": "Skill: Pickaxes 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 20",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
+   },
+   {
+    "name": "Skill: Pickaxes 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,pickaxes_tier_1,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Skill: Fishing 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
+    ]
    }
   ],
   "map_locations": [
@@ -5514,144 +6702,6 @@
     "map": "Overview",
     "x": 1355,
     "y": 210
-   }
-  ]
- },
- {
-  "name": "Skill - Tier 3",
-  "sections": [
-   {
-    "name": "Skill: Woodcutting 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Pickaxes 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Axes 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Clubs 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,clubs_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Swords 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,blades_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Knives 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,short_blades_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Spears 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,spears_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Bows 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bows_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Blocking 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,shields_tier_1,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Fists 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Jump 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Sneak 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Run 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Swim 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Dodge 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Fishing 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Cooking 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Skill: Crafting 20",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
-    ]
-   }
-  ],
-  "map_locations": [
-   {
-    "map": "Overview",
-    "x": 1355,
-    "y": 274
    }
   ]
  },
@@ -5685,6 +6735,146 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
     ]
+   },
+   {
+    "name": "Skill: Polearms 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 30",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Polearms 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Skill: Farming 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
    }
   ],
   "map_locations": [
@@ -5692,158 +6882,6 @@
     "map": "Overview",
     "x": 1355,
     "y": 338
-   }
-  ]
- },
- {
-  "name": "Skill - Tier 6",
-  "sections": [
-   {
-    "name": "Skill: Woodcutting 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Pickaxes 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Axes 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Clubs 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,clubs_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Swords 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,blades_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Knives 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,short_blades_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Spears 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,spears_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Polearms 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,polearms_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Bows 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,bows_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Blocking 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,shields_tier_1,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Fists 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Jump 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Sneak 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Run 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Swim 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Dodge 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Fishing 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Cooking 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Farming 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,cultivator,$boss|eikthyr,$combat|black_forest"
-    ]
-   },
-   {
-    "name": "Skill: Crafting 30",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
-    ]
-   }
-  ],
-  "map_locations": [
-   {
-    "map": "Overview",
-    "x": 1355,
-    "y": 466
    }
   ]
  },
@@ -5872,147 +6910,63 @@
     ]
    },
    {
-    "name": "Skill: Woodcutting 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Pickaxes 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Axes 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Clubs 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,clubs_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Swords 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,blades_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Knives 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,short_blades_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Spears 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,spears_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Polearms 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,polearms_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Bows 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,bows_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Blocking 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,shields_tier_1,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Fists 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Jump 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Sneak 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Run 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Swim 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Dodge 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Fishing 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Cooking 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Farming 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,cultivator,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
-    "name": "Skill: Crafting 40",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
-    ]
-   },
-   {
     "name": "Skill: Ride 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Skill: Ride 75",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
@@ -6053,6 +7007,62 @@
    },
    {
     "name": "Skill: Crossbows 40",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 50",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 60",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 70",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 80",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 90",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 100",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Crossbows 75",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
@@ -6127,90 +7137,6 @@
     ]
    },
    {
-    "name": "Skill: Woodcutting 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Pickaxes 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Axes 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Clubs 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,clubs_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Swords 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blades_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Knives 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,short_blades_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Spears 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,spears_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Polearms 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,polearms_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Bows 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,bows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Crossbows 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,crossbows_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Blocking 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,shields_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
-    "name": "Skill: Fists 50",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
-    ]
-   },
-   {
     "name": "Skill: Elemental Magic 50",
     "item_count": 1,
     "access_rules": [
@@ -6225,73 +7151,101 @@
     ]
    },
    {
-    "name": "Skill: Jump 50",
+    "name": "Skill: Elemental Magic 60",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Sneak 50",
+    "name": "Skill: Blood Magic 60",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Run 50",
+    "name": "Skill: Elemental Magic 70",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Swim 50",
+    "name": "Skill: Blood Magic 70",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Dodge 50",
+    "name": "Skill: Elemental Magic 80",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Fishing 50",
+    "name": "Skill: Blood Magic 80",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Cooking 50",
+    "name": "Skill: Elemental Magic 90",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Farming 50",
+    "name": "Skill: Blood Magic 90",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,cultivator,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Crafting 50",
+    "name": "Skill: Elemental Magic 100",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    },
    {
-    "name": "Skill: Ride 50",
+    "name": "Skill: Blood Magic 100",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Elemental Magic 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Blood Magic 25",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Elemental Magic 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,elemental_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Skill: Blood Magic 75",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,blood_magic_tier_1,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    }
   ],
@@ -6380,10 +7334,90 @@
   ]
  },
  {
-  "name": "Explore - Tier 7",
+  "name": "Explore - Tier 5",
   "sections": [
    {
     "name": "Explore: 2% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Explore: 2.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1465,
+    "y": 402
+   }
+  ]
+ },
+ {
+  "name": "Explore - Tier 6",
+  "sections": [
+   {
+    "name": "Explore: 3% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Explore: 4% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Explore: 3.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1465,
+    "y": 466
+   }
+  ]
+ },
+ {
+  "name": "Explore - Tier 7",
+  "sections": [
+   {
+    "name": "Explore: 5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   },
+   {
+    "name": "Explore: 6% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   },
+   {
+    "name": "Explore: 4.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+    ]
+   },
+   {
+    "name": "Explore: 5.5% of the World",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
@@ -6402,7 +7436,28 @@
   "name": "Explore - Tier 8",
   "sections": [
    {
-    "name": "Explore: 3% of the World",
+    "name": "Explore: 6.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Explore: 7% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Explore: 7.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+    ]
+   },
+   {
+    "name": "Explore: 8% of the World",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
@@ -6421,7 +7476,28 @@
   "name": "Explore - Tier 9",
   "sections": [
    {
-    "name": "Explore: 4% of the World",
+    "name": "Explore: 8.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 9% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 9.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 10% of the World",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
@@ -6437,10 +7513,155 @@
   ]
  },
  {
+  "name": "Explore - Tier 10",
+  "sections": [
+   {
+    "name": "Explore: 10.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 11% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 11.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 12% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 12.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 13% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 13.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 14% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 14.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   },
+   {
+    "name": "Explore: 15% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1465,
+    "y": 722
+   }
+  ]
+ },
+ {
   "name": "Explore - Tier 11",
   "sections": [
    {
-    "name": "Explore: 5% of the World",
+    "name": "Explore: 15.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 16% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 16.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 17% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 17.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 18% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 18.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 19% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 19.5% of the World",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+    ]
+   },
+   {
+    "name": "Explore: 20% of the World",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
@@ -6452,25 +7673,6 @@
     "map": "Overview",
     "x": 1465,
     "y": 786
-   }
-  ]
- },
- {
-  "name": "Explore - Tier 12",
-  "sections": [
-   {
-    "name": "Explore: 6% of the World",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands"
-    ]
-   }
-  ],
-  "map_locations": [
-   {
-    "map": "Overview",
-    "x": 1465,
-    "y": 850
    }
   ]
  }

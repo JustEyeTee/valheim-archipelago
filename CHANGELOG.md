@@ -2,6 +2,19 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.10.0
+
+- Skill checks go to level 100 (`skill_checks`), every 10, 20 or 25 levels (`skill_check_spacing`). A goal no
+  longer caps them: each skill's checks start once you can train it (Pickaxes after Eikthyr's antler,
+  Farming with the Cultivator, Riding in the Plains, magic in the Mistlands), at any level.
+- Exploration checks up to 20% of the map (`exploration_checks`), every half, one or two percent
+  (`exploration_check_spacing`); larger percentages come later in logic.
+- Skill levels above 30 and exploration past 6% never hold progression items, so no seed makes you grind
+  for a key item.
+- Removed `include_deep_north` (the goal decides: Kall includes the Deep North, Fader doesn't) and the
+  "Classic" preset; "Full game with every check" goes to skills 100 and exploration 20%.
+- Options Builder: counts for the new options (checked against generation), singular "check".
+
 ## 0.9.1
 
 - **Kall Fimbulbringer is now the default goal**: the full game, through the Deep North. Fader ends the game

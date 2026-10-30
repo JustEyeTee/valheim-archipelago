@@ -160,11 +160,11 @@ explore	0.25	Explore: 0.25% of the World	1
 explore	0.5	Explore: 0.5% of the World	2	
 explore	1	Explore: 1% of the World	3	
 explore	1.5	Explore: 1.5% of the World	4	
-explore	2	Explore: 2% of the World	7	
-explore	3	Explore: 3% of the World	8	
-explore	4	Explore: 4% of the World	9	
-explore	5	Explore: 5% of the World	11	
-explore	6	Explore: 6% of the World	12	
+explore	2	Explore: 2% of the World	5	
+explore	3	Explore: 3% of the World	6	
+explore	4	Explore: 4% of the World	6	
+explore	5	Explore: 5% of the World	7	
+explore	6	Explore: 6% of the World	7	
 skill	WoodCutting:10	Skill: Woodcutting 10	1	Axes Tier 1
 skill	Pickaxes:10	Skill: Pickaxes 10	2	Pickaxes Tier 1
 skill	Axes:10	Skill: Axes 10	1	Axes Tier 1
@@ -189,102 +189,102 @@ skill	Cooking:10	Skill: Cooking 10	1	Cooking Station
 skill	Farming:10	Skill: Farming 10	4	Cultivator
 skill	Crafting:10	Skill: Crafting 10	0	Crafting
 skill	Ride:10	Skill: Ride 10	8	
-skill	WoodCutting:20	Skill: Woodcutting 20	3	Axes Tier 1
-skill	Pickaxes:20	Skill: Pickaxes 20	3	Pickaxes Tier 1
-skill	Axes:20	Skill: Axes 20	3	Axes Tier 1
-skill	Clubs:20	Skill: Clubs 20	3	Clubs Tier 1
-skill	Swords:20	Skill: Swords 20	3	Blades Tier 1
-skill	Knives:20	Skill: Knives 20	3	Short Blades Tier 1
-skill	Spears:20	Skill: Spears 20	3	Spears Tier 1
+skill	WoodCutting:20	Skill: Woodcutting 20	1	Axes Tier 1
+skill	Pickaxes:20	Skill: Pickaxes 20	2	Pickaxes Tier 1
+skill	Axes:20	Skill: Axes 20	1	Axes Tier 1
+skill	Clubs:20	Skill: Clubs 20	0	Clubs Tier 1
+skill	Swords:20	Skill: Swords 20	1	Blades Tier 1
+skill	Knives:20	Skill: Knives 20	1	Short Blades Tier 1
+skill	Spears:20	Skill: Spears 20	1	Spears Tier 1
 skill	Polearms:20	Skill: Polearms 20	4	Polearms Tier 1
-skill	Bows:20	Skill: Bows 20	3	Bows Tier 1
+skill	Bows:20	Skill: Bows 20	1	Bows Tier 1
 skill	Crossbows:20	Skill: Crossbows 20	9	Crossbows Tier 1
-skill	Blocking:20	Skill: Blocking 20	3	Shields Tier 1
-skill	Unarmed:20	Skill: Fists 20	3	
+skill	Blocking:20	Skill: Blocking 20	1	Shields Tier 1
+skill	Unarmed:20	Skill: Fists 20	0	
 skill	ElementalMagic:20	Skill: Elemental Magic 20	10	Elemental Magic Tier 1
 skill	BloodMagic:20	Skill: Blood Magic 20	10	Blood Magic Tier 1
-skill	Jump:20	Skill: Jump 20	3	
-skill	Sneak:20	Skill: Sneak 20	3	
-skill	Run:20	Skill: Run 20	3	
-skill	Swim:20	Skill: Swim 20	3	
-skill	Dodge:20	Skill: Dodge 20	3	
-skill	Fishing:20	Skill: Fishing 20	3	
-skill	Cooking:20	Skill: Cooking 20	3	Cooking Station
+skill	Jump:20	Skill: Jump 20	0	
+skill	Sneak:20	Skill: Sneak 20	0	
+skill	Run:20	Skill: Run 20	0	
+skill	Swim:20	Skill: Swim 20	0	
+skill	Dodge:20	Skill: Dodge 20	0	
+skill	Fishing:20	Skill: Fishing 20	2	
+skill	Cooking:20	Skill: Cooking 20	1	Cooking Station
 skill	Farming:20	Skill: Farming 20	4	Cultivator
-skill	Crafting:20	Skill: Crafting 20	3	Crafting
+skill	Crafting:20	Skill: Crafting 20	0	Crafting
 skill	Ride:20	Skill: Ride 20	8	
-skill	WoodCutting:30	Skill: Woodcutting 30	6	Axes Tier 1
-skill	Pickaxes:30	Skill: Pickaxes 30	6	Pickaxes Tier 1
-skill	Axes:30	Skill: Axes 30	6	Axes Tier 1
-skill	Clubs:30	Skill: Clubs 30	6	Clubs Tier 1
-skill	Swords:30	Skill: Swords 30	6	Blades Tier 1
-skill	Knives:30	Skill: Knives 30	6	Short Blades Tier 1
-skill	Spears:30	Skill: Spears 30	6	Spears Tier 1
-skill	Polearms:30	Skill: Polearms 30	6	Polearms Tier 1
-skill	Bows:30	Skill: Bows 30	6	Bows Tier 1
+skill	WoodCutting:30	Skill: Woodcutting 30	1	Axes Tier 1
+skill	Pickaxes:30	Skill: Pickaxes 30	2	Pickaxes Tier 1
+skill	Axes:30	Skill: Axes 30	1	Axes Tier 1
+skill	Clubs:30	Skill: Clubs 30	0	Clubs Tier 1
+skill	Swords:30	Skill: Swords 30	1	Blades Tier 1
+skill	Knives:30	Skill: Knives 30	1	Short Blades Tier 1
+skill	Spears:30	Skill: Spears 30	1	Spears Tier 1
+skill	Polearms:30	Skill: Polearms 30	4	Polearms Tier 1
+skill	Bows:30	Skill: Bows 30	1	Bows Tier 1
 skill	Crossbows:30	Skill: Crossbows 30	9	Crossbows Tier 1
-skill	Blocking:30	Skill: Blocking 30	6	Shields Tier 1
-skill	Unarmed:30	Skill: Fists 30	6	
+skill	Blocking:30	Skill: Blocking 30	1	Shields Tier 1
+skill	Unarmed:30	Skill: Fists 30	0	
 skill	ElementalMagic:30	Skill: Elemental Magic 30	10	Elemental Magic Tier 1
 skill	BloodMagic:30	Skill: Blood Magic 30	10	Blood Magic Tier 1
-skill	Jump:30	Skill: Jump 30	6	
-skill	Sneak:30	Skill: Sneak 30	6	
-skill	Run:30	Skill: Run 30	6	
-skill	Swim:30	Skill: Swim 30	6	
-skill	Dodge:30	Skill: Dodge 30	6	
-skill	Fishing:30	Skill: Fishing 30	6	
-skill	Cooking:30	Skill: Cooking 30	6	Cooking Station
-skill	Farming:30	Skill: Farming 30	6	Cultivator
-skill	Crafting:30	Skill: Crafting 30	6	Crafting
+skill	Jump:30	Skill: Jump 30	0	
+skill	Sneak:30	Skill: Sneak 30	0	
+skill	Run:30	Skill: Run 30	0	
+skill	Swim:30	Skill: Swim 30	0	
+skill	Dodge:30	Skill: Dodge 30	0	
+skill	Fishing:30	Skill: Fishing 30	2	
+skill	Cooking:30	Skill: Cooking 30	1	Cooking Station
+skill	Farming:30	Skill: Farming 30	4	Cultivator
+skill	Crafting:30	Skill: Crafting 30	0	Crafting
 skill	Ride:30	Skill: Ride 30	8	
-skill	WoodCutting:40	Skill: Woodcutting 40	8	Axes Tier 1
-skill	Pickaxes:40	Skill: Pickaxes 40	8	Pickaxes Tier 1
-skill	Axes:40	Skill: Axes 40	8	Axes Tier 1
-skill	Clubs:40	Skill: Clubs 40	8	Clubs Tier 1
-skill	Swords:40	Skill: Swords 40	8	Blades Tier 1
-skill	Knives:40	Skill: Knives 40	8	Short Blades Tier 1
-skill	Spears:40	Skill: Spears 40	8	Spears Tier 1
-skill	Polearms:40	Skill: Polearms 40	8	Polearms Tier 1
-skill	Bows:40	Skill: Bows 40	8	Bows Tier 1
+skill	WoodCutting:40	Skill: Woodcutting 40	1	Axes Tier 1
+skill	Pickaxes:40	Skill: Pickaxes 40	2	Pickaxes Tier 1
+skill	Axes:40	Skill: Axes 40	1	Axes Tier 1
+skill	Clubs:40	Skill: Clubs 40	0	Clubs Tier 1
+skill	Swords:40	Skill: Swords 40	1	Blades Tier 1
+skill	Knives:40	Skill: Knives 40	1	Short Blades Tier 1
+skill	Spears:40	Skill: Spears 40	1	Spears Tier 1
+skill	Polearms:40	Skill: Polearms 40	4	Polearms Tier 1
+skill	Bows:40	Skill: Bows 40	1	Bows Tier 1
 skill	Crossbows:40	Skill: Crossbows 40	9	Crossbows Tier 1
-skill	Blocking:40	Skill: Blocking 40	8	Shields Tier 1
-skill	Unarmed:40	Skill: Fists 40	8	
+skill	Blocking:40	Skill: Blocking 40	1	Shields Tier 1
+skill	Unarmed:40	Skill: Fists 40	0	
 skill	ElementalMagic:40	Skill: Elemental Magic 40	10	Elemental Magic Tier 1
 skill	BloodMagic:40	Skill: Blood Magic 40	10	Blood Magic Tier 1
-skill	Jump:40	Skill: Jump 40	8	
-skill	Sneak:40	Skill: Sneak 40	8	
-skill	Run:40	Skill: Run 40	8	
-skill	Swim:40	Skill: Swim 40	8	
-skill	Dodge:40	Skill: Dodge 40	8	
-skill	Fishing:40	Skill: Fishing 40	8	
-skill	Cooking:40	Skill: Cooking 40	8	Cooking Station
-skill	Farming:40	Skill: Farming 40	8	Cultivator
-skill	Crafting:40	Skill: Crafting 40	8	Crafting
+skill	Jump:40	Skill: Jump 40	0	
+skill	Sneak:40	Skill: Sneak 40	0	
+skill	Run:40	Skill: Run 40	0	
+skill	Swim:40	Skill: Swim 40	0	
+skill	Dodge:40	Skill: Dodge 40	0	
+skill	Fishing:40	Skill: Fishing 40	2	
+skill	Cooking:40	Skill: Cooking 40	1	Cooking Station
+skill	Farming:40	Skill: Farming 40	4	Cultivator
+skill	Crafting:40	Skill: Crafting 40	0	Crafting
 skill	Ride:40	Skill: Ride 40	8	
-skill	WoodCutting:50	Skill: Woodcutting 50	10	Axes Tier 1
-skill	Pickaxes:50	Skill: Pickaxes 50	10	Pickaxes Tier 1
-skill	Axes:50	Skill: Axes 50	10	Axes Tier 1
-skill	Clubs:50	Skill: Clubs 50	10	Clubs Tier 1
-skill	Swords:50	Skill: Swords 50	10	Blades Tier 1
-skill	Knives:50	Skill: Knives 50	10	Short Blades Tier 1
-skill	Spears:50	Skill: Spears 50	10	Spears Tier 1
-skill	Polearms:50	Skill: Polearms 50	10	Polearms Tier 1
-skill	Bows:50	Skill: Bows 50	10	Bows Tier 1
-skill	Crossbows:50	Skill: Crossbows 50	10	Crossbows Tier 1
-skill	Blocking:50	Skill: Blocking 50	10	Shields Tier 1
-skill	Unarmed:50	Skill: Fists 50	10	
+skill	WoodCutting:50	Skill: Woodcutting 50	1	Axes Tier 1
+skill	Pickaxes:50	Skill: Pickaxes 50	2	Pickaxes Tier 1
+skill	Axes:50	Skill: Axes 50	1	Axes Tier 1
+skill	Clubs:50	Skill: Clubs 50	0	Clubs Tier 1
+skill	Swords:50	Skill: Swords 50	1	Blades Tier 1
+skill	Knives:50	Skill: Knives 50	1	Short Blades Tier 1
+skill	Spears:50	Skill: Spears 50	1	Spears Tier 1
+skill	Polearms:50	Skill: Polearms 50	4	Polearms Tier 1
+skill	Bows:50	Skill: Bows 50	1	Bows Tier 1
+skill	Crossbows:50	Skill: Crossbows 50	9	Crossbows Tier 1
+skill	Blocking:50	Skill: Blocking 50	1	Shields Tier 1
+skill	Unarmed:50	Skill: Fists 50	0	
 skill	ElementalMagic:50	Skill: Elemental Magic 50	10	Elemental Magic Tier 1
 skill	BloodMagic:50	Skill: Blood Magic 50	10	Blood Magic Tier 1
-skill	Jump:50	Skill: Jump 50	10	
-skill	Sneak:50	Skill: Sneak 50	10	
-skill	Run:50	Skill: Run 50	10	
-skill	Swim:50	Skill: Swim 50	10	
-skill	Dodge:50	Skill: Dodge 50	10	
-skill	Fishing:50	Skill: Fishing 50	10	
-skill	Cooking:50	Skill: Cooking 50	10	Cooking Station
-skill	Farming:50	Skill: Farming 50	10	Cultivator
-skill	Crafting:50	Skill: Crafting 50	10	Crafting
-skill	Ride:50	Skill: Ride 50	10	
+skill	Jump:50	Skill: Jump 50	0	
+skill	Sneak:50	Skill: Sneak 50	0	
+skill	Run:50	Skill: Run 50	0	
+skill	Swim:50	Skill: Swim 50	0	
+skill	Dodge:50	Skill: Dodge 50	0	
+skill	Fishing:50	Skill: Fishing 50	2	
+skill	Cooking:50	Skill: Cooking 50	1	Cooking Station
+skill	Farming:50	Skill: Farming 50	4	Cultivator
+skill	Crafting:50	Skill: Crafting 50	0	Crafting
+skill	Ride:50	Skill: Ride 50	8	
 discover	Eikthyrnir	Discover: Eikthyr's Altar	0	
 discover	Crypt	Discover: Burial Chamber	1	
 discover	TrollCave	Discover: Troll Cave	1	
@@ -429,3 +429,203 @@ buy	PowderedDragonEgg	Buy: Powdered Dragon Eggshells	4
 buy	MeadTrollPheromones	Buy: Love Potion	4	
 buy	SpiceForests	Buy: Woodland Herb Blend	4	
 buy	BlobVial	Buy: Corked Vial	4	
+skill	WoodCutting:60	Skill: Woodcutting 60	1	Axes Tier 1
+skill	Pickaxes:60	Skill: Pickaxes 60	2	Pickaxes Tier 1
+skill	Axes:60	Skill: Axes 60	1	Axes Tier 1
+skill	Clubs:60	Skill: Clubs 60	0	Clubs Tier 1
+skill	Swords:60	Skill: Swords 60	1	Blades Tier 1
+skill	Knives:60	Skill: Knives 60	1	Short Blades Tier 1
+skill	Spears:60	Skill: Spears 60	1	Spears Tier 1
+skill	Polearms:60	Skill: Polearms 60	4	Polearms Tier 1
+skill	Bows:60	Skill: Bows 60	1	Bows Tier 1
+skill	Crossbows:60	Skill: Crossbows 60	9	Crossbows Tier 1
+skill	Blocking:60	Skill: Blocking 60	1	Shields Tier 1
+skill	Unarmed:60	Skill: Fists 60	0	
+skill	ElementalMagic:60	Skill: Elemental Magic 60	10	Elemental Magic Tier 1
+skill	BloodMagic:60	Skill: Blood Magic 60	10	Blood Magic Tier 1
+skill	Jump:60	Skill: Jump 60	0	
+skill	Sneak:60	Skill: Sneak 60	0	
+skill	Run:60	Skill: Run 60	0	
+skill	Swim:60	Skill: Swim 60	0	
+skill	Dodge:60	Skill: Dodge 60	0	
+skill	Fishing:60	Skill: Fishing 60	2	
+skill	Cooking:60	Skill: Cooking 60	1	Cooking Station
+skill	Farming:60	Skill: Farming 60	4	Cultivator
+skill	Crafting:60	Skill: Crafting 60	0	Crafting
+skill	Ride:60	Skill: Ride 60	8	
+skill	WoodCutting:70	Skill: Woodcutting 70	1	Axes Tier 1
+skill	Pickaxes:70	Skill: Pickaxes 70	2	Pickaxes Tier 1
+skill	Axes:70	Skill: Axes 70	1	Axes Tier 1
+skill	Clubs:70	Skill: Clubs 70	0	Clubs Tier 1
+skill	Swords:70	Skill: Swords 70	1	Blades Tier 1
+skill	Knives:70	Skill: Knives 70	1	Short Blades Tier 1
+skill	Spears:70	Skill: Spears 70	1	Spears Tier 1
+skill	Polearms:70	Skill: Polearms 70	4	Polearms Tier 1
+skill	Bows:70	Skill: Bows 70	1	Bows Tier 1
+skill	Crossbows:70	Skill: Crossbows 70	9	Crossbows Tier 1
+skill	Blocking:70	Skill: Blocking 70	1	Shields Tier 1
+skill	Unarmed:70	Skill: Fists 70	0	
+skill	ElementalMagic:70	Skill: Elemental Magic 70	10	Elemental Magic Tier 1
+skill	BloodMagic:70	Skill: Blood Magic 70	10	Blood Magic Tier 1
+skill	Jump:70	Skill: Jump 70	0	
+skill	Sneak:70	Skill: Sneak 70	0	
+skill	Run:70	Skill: Run 70	0	
+skill	Swim:70	Skill: Swim 70	0	
+skill	Dodge:70	Skill: Dodge 70	0	
+skill	Fishing:70	Skill: Fishing 70	2	
+skill	Cooking:70	Skill: Cooking 70	1	Cooking Station
+skill	Farming:70	Skill: Farming 70	4	Cultivator
+skill	Crafting:70	Skill: Crafting 70	0	Crafting
+skill	Ride:70	Skill: Ride 70	8	
+skill	WoodCutting:80	Skill: Woodcutting 80	1	Axes Tier 1
+skill	Pickaxes:80	Skill: Pickaxes 80	2	Pickaxes Tier 1
+skill	Axes:80	Skill: Axes 80	1	Axes Tier 1
+skill	Clubs:80	Skill: Clubs 80	0	Clubs Tier 1
+skill	Swords:80	Skill: Swords 80	1	Blades Tier 1
+skill	Knives:80	Skill: Knives 80	1	Short Blades Tier 1
+skill	Spears:80	Skill: Spears 80	1	Spears Tier 1
+skill	Polearms:80	Skill: Polearms 80	4	Polearms Tier 1
+skill	Bows:80	Skill: Bows 80	1	Bows Tier 1
+skill	Crossbows:80	Skill: Crossbows 80	9	Crossbows Tier 1
+skill	Blocking:80	Skill: Blocking 80	1	Shields Tier 1
+skill	Unarmed:80	Skill: Fists 80	0	
+skill	ElementalMagic:80	Skill: Elemental Magic 80	10	Elemental Magic Tier 1
+skill	BloodMagic:80	Skill: Blood Magic 80	10	Blood Magic Tier 1
+skill	Jump:80	Skill: Jump 80	0	
+skill	Sneak:80	Skill: Sneak 80	0	
+skill	Run:80	Skill: Run 80	0	
+skill	Swim:80	Skill: Swim 80	0	
+skill	Dodge:80	Skill: Dodge 80	0	
+skill	Fishing:80	Skill: Fishing 80	2	
+skill	Cooking:80	Skill: Cooking 80	1	Cooking Station
+skill	Farming:80	Skill: Farming 80	4	Cultivator
+skill	Crafting:80	Skill: Crafting 80	0	Crafting
+skill	Ride:80	Skill: Ride 80	8	
+skill	WoodCutting:90	Skill: Woodcutting 90	1	Axes Tier 1
+skill	Pickaxes:90	Skill: Pickaxes 90	2	Pickaxes Tier 1
+skill	Axes:90	Skill: Axes 90	1	Axes Tier 1
+skill	Clubs:90	Skill: Clubs 90	0	Clubs Tier 1
+skill	Swords:90	Skill: Swords 90	1	Blades Tier 1
+skill	Knives:90	Skill: Knives 90	1	Short Blades Tier 1
+skill	Spears:90	Skill: Spears 90	1	Spears Tier 1
+skill	Polearms:90	Skill: Polearms 90	4	Polearms Tier 1
+skill	Bows:90	Skill: Bows 90	1	Bows Tier 1
+skill	Crossbows:90	Skill: Crossbows 90	9	Crossbows Tier 1
+skill	Blocking:90	Skill: Blocking 90	1	Shields Tier 1
+skill	Unarmed:90	Skill: Fists 90	0	
+skill	ElementalMagic:90	Skill: Elemental Magic 90	10	Elemental Magic Tier 1
+skill	BloodMagic:90	Skill: Blood Magic 90	10	Blood Magic Tier 1
+skill	Jump:90	Skill: Jump 90	0	
+skill	Sneak:90	Skill: Sneak 90	0	
+skill	Run:90	Skill: Run 90	0	
+skill	Swim:90	Skill: Swim 90	0	
+skill	Dodge:90	Skill: Dodge 90	0	
+skill	Fishing:90	Skill: Fishing 90	2	
+skill	Cooking:90	Skill: Cooking 90	1	Cooking Station
+skill	Farming:90	Skill: Farming 90	4	Cultivator
+skill	Crafting:90	Skill: Crafting 90	0	Crafting
+skill	Ride:90	Skill: Ride 90	8	
+skill	WoodCutting:100	Skill: Woodcutting 100	1	Axes Tier 1
+skill	Pickaxes:100	Skill: Pickaxes 100	2	Pickaxes Tier 1
+skill	Axes:100	Skill: Axes 100	1	Axes Tier 1
+skill	Clubs:100	Skill: Clubs 100	0	Clubs Tier 1
+skill	Swords:100	Skill: Swords 100	1	Blades Tier 1
+skill	Knives:100	Skill: Knives 100	1	Short Blades Tier 1
+skill	Spears:100	Skill: Spears 100	1	Spears Tier 1
+skill	Polearms:100	Skill: Polearms 100	4	Polearms Tier 1
+skill	Bows:100	Skill: Bows 100	1	Bows Tier 1
+skill	Crossbows:100	Skill: Crossbows 100	9	Crossbows Tier 1
+skill	Blocking:100	Skill: Blocking 100	1	Shields Tier 1
+skill	Unarmed:100	Skill: Fists 100	0	
+skill	ElementalMagic:100	Skill: Elemental Magic 100	10	Elemental Magic Tier 1
+skill	BloodMagic:100	Skill: Blood Magic 100	10	Blood Magic Tier 1
+skill	Jump:100	Skill: Jump 100	0	
+skill	Sneak:100	Skill: Sneak 100	0	
+skill	Run:100	Skill: Run 100	0	
+skill	Swim:100	Skill: Swim 100	0	
+skill	Dodge:100	Skill: Dodge 100	0	
+skill	Fishing:100	Skill: Fishing 100	2	
+skill	Cooking:100	Skill: Cooking 100	1	Cooking Station
+skill	Farming:100	Skill: Farming 100	4	Cultivator
+skill	Crafting:100	Skill: Crafting 100	0	Crafting
+skill	Ride:100	Skill: Ride 100	8	
+skill	WoodCutting:25	Skill: Woodcutting 25	1	Axes Tier 1
+skill	Pickaxes:25	Skill: Pickaxes 25	2	Pickaxes Tier 1
+skill	Axes:25	Skill: Axes 25	1	Axes Tier 1
+skill	Clubs:25	Skill: Clubs 25	0	Clubs Tier 1
+skill	Swords:25	Skill: Swords 25	1	Blades Tier 1
+skill	Knives:25	Skill: Knives 25	1	Short Blades Tier 1
+skill	Spears:25	Skill: Spears 25	1	Spears Tier 1
+skill	Polearms:25	Skill: Polearms 25	4	Polearms Tier 1
+skill	Bows:25	Skill: Bows 25	1	Bows Tier 1
+skill	Crossbows:25	Skill: Crossbows 25	9	Crossbows Tier 1
+skill	Blocking:25	Skill: Blocking 25	1	Shields Tier 1
+skill	Unarmed:25	Skill: Fists 25	0	
+skill	ElementalMagic:25	Skill: Elemental Magic 25	10	Elemental Magic Tier 1
+skill	BloodMagic:25	Skill: Blood Magic 25	10	Blood Magic Tier 1
+skill	Jump:25	Skill: Jump 25	0	
+skill	Sneak:25	Skill: Sneak 25	0	
+skill	Run:25	Skill: Run 25	0	
+skill	Swim:25	Skill: Swim 25	0	
+skill	Dodge:25	Skill: Dodge 25	0	
+skill	Fishing:25	Skill: Fishing 25	2	
+skill	Cooking:25	Skill: Cooking 25	1	Cooking Station
+skill	Farming:25	Skill: Farming 25	4	Cultivator
+skill	Crafting:25	Skill: Crafting 25	0	Crafting
+skill	Ride:25	Skill: Ride 25	8	
+skill	WoodCutting:75	Skill: Woodcutting 75	1	Axes Tier 1
+skill	Pickaxes:75	Skill: Pickaxes 75	2	Pickaxes Tier 1
+skill	Axes:75	Skill: Axes 75	1	Axes Tier 1
+skill	Clubs:75	Skill: Clubs 75	0	Clubs Tier 1
+skill	Swords:75	Skill: Swords 75	1	Blades Tier 1
+skill	Knives:75	Skill: Knives 75	1	Short Blades Tier 1
+skill	Spears:75	Skill: Spears 75	1	Spears Tier 1
+skill	Polearms:75	Skill: Polearms 75	4	Polearms Tier 1
+skill	Bows:75	Skill: Bows 75	1	Bows Tier 1
+skill	Crossbows:75	Skill: Crossbows 75	9	Crossbows Tier 1
+skill	Blocking:75	Skill: Blocking 75	1	Shields Tier 1
+skill	Unarmed:75	Skill: Fists 75	0	
+skill	ElementalMagic:75	Skill: Elemental Magic 75	10	Elemental Magic Tier 1
+skill	BloodMagic:75	Skill: Blood Magic 75	10	Blood Magic Tier 1
+skill	Jump:75	Skill: Jump 75	0	
+skill	Sneak:75	Skill: Sneak 75	0	
+skill	Run:75	Skill: Run 75	0	
+skill	Swim:75	Skill: Swim 75	0	
+skill	Dodge:75	Skill: Dodge 75	0	
+skill	Fishing:75	Skill: Fishing 75	2	
+skill	Cooking:75	Skill: Cooking 75	1	Cooking Station
+skill	Farming:75	Skill: Farming 75	4	Cultivator
+skill	Crafting:75	Skill: Crafting 75	0	Crafting
+skill	Ride:75	Skill: Ride 75	8	
+explore	2.5	Explore: 2.5% of the World	5	
+explore	3.5	Explore: 3.5% of the World	6	
+explore	4.5	Explore: 4.5% of the World	7	
+explore	5.5	Explore: 5.5% of the World	7	
+explore	6.5	Explore: 6.5% of the World	8	
+explore	7	Explore: 7% of the World	8	
+explore	7.5	Explore: 7.5% of the World	8	
+explore	8	Explore: 8% of the World	8	
+explore	8.5	Explore: 8.5% of the World	9	
+explore	9	Explore: 9% of the World	9	
+explore	9.5	Explore: 9.5% of the World	9	
+explore	10	Explore: 10% of the World	9	
+explore	10.5	Explore: 10.5% of the World	10	
+explore	11	Explore: 11% of the World	10	
+explore	11.5	Explore: 11.5% of the World	10	
+explore	12	Explore: 12% of the World	10	
+explore	12.5	Explore: 12.5% of the World	10	
+explore	13	Explore: 13% of the World	10	
+explore	13.5	Explore: 13.5% of the World	10	
+explore	14	Explore: 14% of the World	10	
+explore	14.5	Explore: 14.5% of the World	10	
+explore	15	Explore: 15% of the World	10	
+explore	15.5	Explore: 15.5% of the World	11	
+explore	16	Explore: 16% of the World	11	
+explore	16.5	Explore: 16.5% of the World	11	
+explore	17	Explore: 17% of the World	11	
+explore	17.5	Explore: 17.5% of the World	11	
+explore	18	Explore: 18% of the World	11	
+explore	18.5	Explore: 18.5% of the World	11	
+explore	19	Explore: 19% of the World	11	
+explore	19.5	Explore: 19.5% of the World	11	
+explore	20	Explore: 20% of the World	11	

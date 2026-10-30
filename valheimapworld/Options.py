@@ -52,20 +52,10 @@ class ResearchCostPercent(NamedRange):
     }
 
 
-class IncludeDeepNorth(Toggle):
-    """
-    Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
-    there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    upgrades) and 8 Deep North trophies to a Fader game, without its boss. The Kall Fimbulbringer
-    goal (the full game) always includes the Deep North.
-    """
-    display_name = "Include Deep North"
-
-
 class BiomeChecks(DefaultOnToggle):
     """
     Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,
-    Ocean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.
+    Ocean, Plains, Mistlands, Ashlands, and Deep North in a Kall game), up to the goal's tier.
     These checks are filled with resource bundles and traps; bundles arrive in an
     Archipelago Chest you build with the Hammer.
     """
@@ -81,13 +71,31 @@ class ObtainChecks(DefaultOnToggle):
     display_name = "Obtain Checks"
 
 
-class ExplorationChecks(DefaultOnToggle):
+class ExplorationChecks(NamedRange):
     """
-    Adds checks for exploring part of the world map: 0.25%, 0.5%, 1%, 1.5%, 2%, 3%, 4%, 5% and
-    6% of the world, up to the goal's tier. Walking 1 km uncovers roughly 0.06%; sailing is
-    faster. These checks are filled with resource bundles and traps.
+    Adds checks for exploring the world map, up to this percentage of the world (0 turns them off),
+    spaced by exploration_check_spacing. Walking 1 km uncovers about 0.06% of the world; sailing is
+    faster. Larger percentages come later in logic, and checks past 6% never hold progression items.
     """
     display_name = "Exploration Checks"
+    range_start = 0
+    range_end = 20
+    default = 6
+    special_range_names = {"off": 0, "light": 2, "normal": 6, "far": 10, "everything": 20}
+
+
+class ExplorationCheckSpacing(Choice):
+    """
+    How far apart exploration checks are.
+    half_percent: 0.25%, then every half percent.
+    one_percent: 0.25%, 0.5%, then every percent.
+    two_percent: 0.5%, 1%, then every second percent.
+    """
+    display_name = "Exploration Check Spacing"
+    option_half_percent = 0
+    option_one_percent = 1
+    option_two_percent = 2
+    default = option_one_percent
 
 
 class KillChecks(Toggle):
@@ -101,22 +109,28 @@ class KillChecks(Toggle):
 
 class SkillChecks(NamedRange):
     """
-    Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) to level 10,
-    20, 30, 40 and 50, up to this level. 0 turns skill checks off. Weapon and tool skills
-    only count once their research is received (Swords needs Blades Tier 1, and so on).
+    Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) up to this level (skills
+    go to 100; 0 turns these checks off), spaced by skill_check_spacing. Each skill's checks start once you
+    can train it: Pickaxes after Eikthyr's antler, Farming once you have the Cultivator (bronze), Riding in
+    the Plains, magic in the Mistlands. Skill checks above level 30 never hold progression items.
     """
     display_name = "Skill Checks"
     range_start = 0
-    range_end = 50
+    range_end = 100
     default = 20
-    special_range_names = {
-        "off": 0,
-        "level_10": 10,
-        "level_20": 20,
-        "level_30": 30,
-        "level_40": 40,
-        "level_50": 50,
-    }
+    special_range_names = {"off": 0, "level_10": 10, "level_20": 20, "level_30": 30, "level_50": 50, "level_100": 100}
+
+
+class SkillCheckSpacing(Choice):
+    """
+    Which skill levels are checks: every 10 levels (10, 20, 30...), every 20 levels (20, 40, 60...) or every
+    25 levels (25, 50, 75, 100).
+    """
+    display_name = "Skill Check Spacing"
+    option_every_10 = 0
+    option_every_20 = 1
+    option_every_25 = 2
+    default = option_every_10
 
 
 class DiscoveryChecks(DefaultOnToggle):
@@ -305,12 +319,13 @@ class ValheimOptions(PerGameCommonOptions):
     goal: Goal
     research_cost_percent: ResearchCostPercent
     combat_logic: CombatLogic
-    include_deep_north: IncludeDeepNorth
     biome_checks: BiomeChecks
     obtain_checks: ObtainChecks
     exploration_checks: ExplorationChecks
+    exploration_check_spacing: ExplorationCheckSpacing
     kill_checks: KillChecks
     skill_checks: SkillChecks
+    skill_check_spacing: SkillCheckSpacing
     discovery_checks: DiscoveryChecks
     build_checks: BuildChecks
     eat_checks: EatChecks
@@ -331,8 +346,9 @@ class ValheimOptions(PerGameCommonOptions):
 
 # How the options are grouped on the website and in generated templates.
 option_groups = [
-    OptionGroup("Goal", [Goal, IncludeDeepNorth, ResearchCostPercent, CombatLogic]),
-    OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, KillChecks, SkillChecks, DiscoveryChecks,
+    OptionGroup("Goal", [Goal, ResearchCostPercent, CombatLogic]),
+    OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
+                           SkillChecks, SkillCheckSpacing, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
     OptionGroup("Items", [BossItems, GearItems, StarterKit, BoostPercentage]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
@@ -343,6 +359,6 @@ options_presets = {
     "Quick Eikthyr run": {"goal": "eikthyr", "research_cost_percent": 25},
     "The Elder run": {"goal": "the_elder", "research_cost_percent": 50},
     "Full game": {"goal": "kall_fimbulbringer"},
-    "Full game with every check": {"goal": "kall_fimbulbringer", "kill_checks": True, "skill_checks": 50},
-    "Classic (ends at Fader)": {"goal": "fader"},
+    "Full game with every check": {"goal": "kall_fimbulbringer", "kill_checks": True, "skill_checks": 100,
+                                   "exploration_checks": 20},
 }

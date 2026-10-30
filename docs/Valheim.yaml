@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.9.1 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.10.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -81,14 +81,6 @@ Valheim:
     fader: 0
     kall_fimbulbringer: 50
 
-  include_deep_north:
-    # Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
-    # there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    # upgrades) and 8 Deep North trophies to a Fader game, without its boss. The Kall Fimbulbringer
-    # goal (the full game) always includes the Deep North.
-    'false': 50
-    'true': 0
-
   research_cost_percent:
     # Scales how many materials each research costs at the Research Bench, as a percentage.
     # Every ingredient still costs at least 1, so 1 makes every research cost 1 of each.
@@ -123,7 +115,7 @@ Valheim:
   ##########
   biome_checks:
     # Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,
-    # Ocean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.
+    # Ocean, Plains, Mistlands, Ashlands, and Deep North in a Kall game), up to the goal's tier.
     # These checks are filled with resource bundles and traps; bundles arrive in an
     # Archipelago Chest you build with the Hammer.
     'false': 0
@@ -137,11 +129,31 @@ Valheim:
     'true': 50
 
   exploration_checks:
-    # Adds checks for exploring part of the world map: 0.25%, 0.5%, 1%, 1.5%, 2%, 3%, 4%, 5% and
-    # 6% of the world, up to the goal's tier. Walking 1 km uncovers roughly 0.06%; sailing is
-    # faster. These checks are filled with resource bundles and traps.
-    'false': 0
-    'true': 50
+    # Adds checks for exploring the world map, up to this percentage of the world (0 turns them off),
+    # spaced by exploration_check_spacing. Walking 1 km uncovers about 0.06% of the world; sailing is
+    # faster. Larger percentages come later in logic, and checks past 6% never hold progression items.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 20
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-20: 0 # random value between 0 and 20
+    off: 0 # equivalent to 0
+    light: 0 # equivalent to 2
+    normal: 50 # equivalent to 6
+    far: 0 # equivalent to 10
+    everything: 0 # equivalent to 20
+
+  exploration_check_spacing:
+    # How far apart exploration checks are.
+    # half_percent: 0.25%, then every half percent.
+    # one_percent: 0.25%, 0.5%, then every percent.
+    # two_percent: 0.5%, 1%, then every second percent.
+    half_percent: 0
+    one_percent: 50
+    two_percent: 0
 
   kill_checks:
     # Adds a check for the first kill of each kind of creature (Neck, Greydwarf, Troll, Draugr,
@@ -151,23 +163,31 @@ Valheim:
     'true': 0
 
   skill_checks:
-    # Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) to level 10,
-    # 20, 30, 40 and 50, up to this level. 0 turns skill checks off. Weapon and tool skills
-    # only count once their research is received (Swords needs Blades Tier 1, and so on).
+    # Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) up to this level (skills
+    # go to 100; 0 turns these checks off), spaced by skill_check_spacing. Each skill's checks start once you
+    # can train it: Pickaxes after Eikthyr's antler, Farming once you have the Cultivator (bronze), Riding in
+    # the Plains, magic in the Mistlands. Skill checks above level 30 never hold progression items.
     #
     # You can define additional values between the minimum and maximum values.
     # Minimum value is 0
-    # Maximum value is 50
+    # Maximum value is 100
     random: 0
     random-low: 0 # random value weighted towards lower values
     random-high: 0 # random value weighted towards higher values
-    random-range-0-50: 0 # random value between 0 and 50
+    random-range-0-100: 0 # random value between 0 and 100
     off: 0 # equivalent to 0
     level_10: 0 # equivalent to 10
     level_20: 50 # equivalent to 20
     level_30: 0 # equivalent to 30
-    level_40: 0 # equivalent to 40
     level_50: 0 # equivalent to 50
+    level_100: 0 # equivalent to 100
+
+  skill_check_spacing:
+    # Which skill levels are checks: every 10 levels (10, 20, 30...), every 20 levels (20, 40, 60...) or every
+    # 25 levels (25, 50, 75, 100).
+    every_10: 50
+    every_20: 0
+    every_25: 0
 
   discovery_checks:
     # Adds a check for reaching each kind of dungeon and landmark for the first time: Burial

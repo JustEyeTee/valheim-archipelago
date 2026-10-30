@@ -163,17 +163,30 @@ pre.yaml .k { color: var(--code-key); }
   const STORE = "valheim-options-builder";
   // Options that add checks, and how many each adds for the chosen goal (precomputed per goal by
   // building a world with every kind of check on).
-  const CHECK_OPTIONS = ["biome_checks", "obtain_checks", "exploration_checks", "kill_checks", "discovery_checks",
+  const CHECK_OPTIONS = ["biome_checks", "obtain_checks", "kill_checks", "discovery_checks",
                          "build_checks", "eat_checks", "fishing_checks", "taming_checks", "trader_checks"];
-  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "include_deep_north"];
+  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks"];
   const goalData = () => data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
-  const breakdownFor = dn => { const g = goalData(); return dn && g.deep_north ? g.deep_north : g.breakdown; };
+  // The same rules as the APWorld (ValheimWorld.wanted).
+  const SKILL_STEP = { every_10: 10, every_20: 20, every_25: 25 };
+  function skillLevels() {
+    const step = SKILL_STEP[values.skill_check_spacing] || 10, out = [];
+    for (let level = step; level <= values.skill_checks; level += step) out.push(level);
+    return out;
+  }
+  function exploreWanted(p) {
+    const s = values.exploration_check_spacing;
+    const kept = s === "half_percent" ? true
+      : s === "one_percent" ? (p === 0.25 || p === 0.5 || Number.isInteger(p))
+      : (p === 0.5 || p === 1 || (Number.isInteger(p) && p % 2 === 0));
+    return kept && p <= values.exploration_checks;
+  }
   function totalFor(b) {
-    let t = b.base;
+    let t = b.base + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length;
     for (const o of CHECK_OPTIONS) if (values[o]) t += b[o] || 0;
-    for (const [level, n] of Object.entries(b.skills)) if (Number(level) <= values.skill_checks) t += n;
     return t;
   }
+  const checks = n => `${n} check${n === 1 ? "" : "s"}`;
   function setOption(name, text, add, off) {
     const badge = $("badge-" + name), wrap = $("wrap-" + name);
     if (badge) { badge.textContent = text; badge.classList.toggle("add", add); }
@@ -182,27 +195,21 @@ pre.yaml .k { color: var(--code-key); }
     wrap.querySelectorAll("input, button.chip").forEach(c => { c.disabled = off; });
   }
   function updateCounts() {
-    const g = goalData(), dnApplies = values.goal === "fader";
-    const b = breakdownFor(dnApplies && values.include_deep_north);
+    const g = goalData(), b = g.breakdown;
     for (const o of CHECK_OPTIONS) {
       const n = b[o] || 0;
-      setOption(o, n ? (values[o] ? `+${n} checks` : `${n} checks if on`) : "none for this goal", n && values[o], !n);
+      setOption(o, n ? (values[o] ? `+${checks(n)}` : `${checks(n)} if on`) : "none for this goal", n && values[o], !n);
     }
-    const skillAll = Object.values(b.skills).reduce((a, n) => a + n, 0);
-    const skillNow = Object.entries(b.skills).reduce((a, [l, n]) => a + (Number(l) <= values.skill_checks ? n : 0), 0);
-    const topLevel = Math.max(0, ...Object.entries(b.skills).filter(([, n]) => n > 0).map(([l]) => Number(l)));
-    setOption("skill_checks", !skillAll ? "none for this goal" : `+${skillNow} checks` +
-              (values.skill_checks > topLevel ? ` (none above level ${topLevel} for this goal)` : ""), skillNow > 0, !skillAll);
-    if (dnApplies) {
-      const extra = totalFor(breakdownFor(true)) - totalFor(breakdownFor(false));
-      setOption("include_deep_north", values.include_deep_north ? `+${extra} checks` : `${extra} checks if on`,
-                values.include_deep_north, false);
-    } else {
-      setOption("include_deep_north", values.goal === "kall_fimbulbringer" ? "always included for Kall" : "only with the Fader goal",
-                false, true);
-    }
+    const levels = skillLevels(), skills = b.skills_available * levels.length;
+    setOption("skill_checks", !b.skills_available ? "none for this goal"
+              : `+${checks(skills)} (${b.skills_available} skills × ${levels.length} levels)`, skills > 0, !b.skills_available);
+    setOption("skill_check_spacing", "", false, !b.skills_available || values.skill_checks < 10);
+    const explore = b.explore.filter(exploreWanted), top = b.explore.length ? b.explore[b.explore.length - 1] : 0;
+    setOption("exploration_checks", !b.explore.length ? "none for this goal" : `+${checks(explore.length)}` +
+              (values.exploration_checks > top ? ` (up to ${top}% in this goal)` : ""), explore.length > 0, !b.explore.length);
+    setOption("exploration_check_spacing", "", false, !b.explore.length || values.exploration_checks === 0);
     $("total").innerHTML = "";
-    $("total").append(el("strong", { text: String(totalFor(b)) }), ` checks for ${g.boss} with these options`);
+    $("total").append(el("strong", { text: String(totalFor(b)) }), ` check${totalFor(b) === 1 ? "" : "s"} for ${g.boss} with these options`);
   }
 
   $("version").textContent = `Valheim ${data.game_version} · APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;

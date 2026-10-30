@@ -1,14 +1,14 @@
-import logging
 from typing import Any, Dict
 
-from BaseClasses import Item, ItemClassification, Location, Tutorial
+from BaseClasses import Item, ItemClassification, Location, LocationProgressType, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.generic.Rules import add_rule
 
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table
-from .Options import ValheimOptions, Goal, CombatLogic, GOAL_BOSSES, option_groups, options_presets
+from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, SkillCheckSpacing, GOAL_BOSSES,
+                      option_groups, options_presets)
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_PREREQS
 from .check_data import CHECKS
@@ -64,9 +64,9 @@ LOGIC_ITEMS = frozenset(
        for connection in region.connections for name in connection.required_items}
 )
 
-DEEP_NORTH_TIER = 12
 
-TRACKER_OPTIONS = ("goal", "include_deep_north", "combat_logic", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
+TRACKER_OPTIONS = ("goal", "combat_logic", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
+                   "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks")
 
@@ -193,20 +193,14 @@ class ValheimWorld(World):
         # A lower goal ends the game earlier, so checks and items past the goal are left out
         # instead of sitting where they can never be reached.
         self.goal_boss, self.goal_trophy = GOAL_BOSSES[self.options.goal.value]
+        # Kall Fimbulbringer's game runs through the Deep North (tier 12); every other goal ends before it.
         scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
-        if self.options.include_deep_north and self.options.goal != Goal.option_kall_fimbulbringer:
-            if self.options.goal == Goal.option_fader:
-                scope_tier = DEEP_NORTH_TIER
-            else:
-                logging.warning(f"Valheim: {self.player_name} has include_deep_north on, but it only "
-                                f"applies with goal: fader, so it is ignored.")
         self.scope = goal_scope(scope_tier, self.goal_boss)
         self.scope_tier = scope_tier
         # With combat logic, armor and weapons gate fights, so logic has to count them.
         self.logic_items = LOGIC_ITEMS | (COMBAT_ITEMS if self.options.combat_logic else frozenset())
         off = tuple(prefix for prefix, option in (("Biome: ", self.options.biome_checks),
                                                   ("Obtain: ", self.options.obtain_checks),
-                                                  ("Explore: ", self.options.exploration_checks),
                                                   ("Kill: ", self.options.kill_checks),
                                                   ("Discover: ", self.options.discovery_checks),
                                                   ("Build: ", self.options.build_checks),
@@ -216,10 +210,26 @@ class ValheimWorld(World):
                                                   ("Buy: ", self.options.trader_checks)) if not option)
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
-        # "Skill: Woodcutting 30" -> level 30
-        max_level = self.options.skill_checks.value
-        self.scope = frozenset(name for name in self.scope
-                               if not name.startswith("Skill: ") or int(name.rsplit(" ", 1)[1]) <= max_level)
+        self.scope = frozenset(name for name in self.scope if self.wanted(name))
+
+    def wanted(self, name: str) -> bool:
+        """Whether a skill or exploration check is in by its level or percentage and the spacing options."""
+        if name.startswith("Skill: "):
+            level = int(name.rsplit(" ", 1)[1])  # "Skill: Woodcutting 30" -> 30
+            step = {SkillCheckSpacing.option_every_10: 10, SkillCheckSpacing.option_every_20: 20,
+                    SkillCheckSpacing.option_every_25: 25}[self.options.skill_check_spacing.value]
+            return level <= self.options.skill_checks.value and level % step == 0
+        if name.startswith("Explore: "):
+            percent = float(name[len("Explore: "):].split("%")[0])  # "Explore: 2.5% of the World" -> 2.5
+            spacing = self.options.exploration_check_spacing.value
+            if spacing == ExplorationCheckSpacing.option_half_percent:
+                kept = True
+            elif spacing == ExplorationCheckSpacing.option_one_percent:
+                kept = percent in (0.25, 0.5) or percent.is_integer()
+            else:
+                kept = percent in (0.5, 1) or (percent.is_integer() and percent % 2 == 0)
+            return kept and percent <= self.options.exploration_checks.value
+        return True
 
     def create_regions(self):
         """
@@ -228,6 +238,12 @@ class ValheimWorld(World):
         """
         create_regions(self)
         create_locations(self, self.scope)
+        # Long grinds never hold progression: skill levels above 30, exploration past 6%.
+        for location in self.multiworld.get_locations(self.player):
+            name = location.name
+            if (name.startswith("Skill: ") and int(name.rsplit(" ", 1)[1]) > 30) or \
+                    (name.startswith("Explore: ") and float(name[len("Explore: "):].split("%")[0]) > 6):
+                location.progress_type = LocationProgressType.EXCLUDED
 
         # An event at each boss's trophy, reachable exactly when that trophy is: "Eikthyr
         # Defeated", which later progress needs, and Victory for the goal boss.
