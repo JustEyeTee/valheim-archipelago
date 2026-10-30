@@ -1,0 +1,51 @@
+{
+ "tracker_default": {
+  "type": "container",
+  "background": "#1c1e22",
+  "content": {
+   "type": "dock",
+   "dropshadow": true,
+   "content": [
+    {
+     "type": "dock",
+     "dock": "left",
+     "v_alignment": "stretch",
+     "content": [
+      {
+       "type": "group",
+       "header": "Bosses and boss drops",
+       "dock": "top",
+       "content": {
+        "type": "layout",
+        "key": "boss_grid"
+       }
+      },
+      {
+       "type": "group",
+       "header": "Tier gates",
+       "dock": "top",
+       "content": {
+        "type": "layout",
+        "key": "gate_grid"
+       }
+      }
+     ]
+    },
+    {
+     "type": "map",
+     "maps": [
+      "Overview"
+     ]
+    }
+   ]
+  }
+ },
+ "tracker_broadcast": {
+  "type": "group",
+  "header": "Bosses",
+  "content": {
+   "type": "layout",
+   "key": "boss_grid"
+  }
+ }
+}

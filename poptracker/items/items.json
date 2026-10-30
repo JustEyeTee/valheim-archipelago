@@ -1,0 +1,1082 @@
+[
+ {
+  "name": "Arrows Tier 1",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_1.png",
+  "codes": "arrows_tier_1"
+ },
+ {
+  "name": "Arrows Tier 10",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_10.png",
+  "codes": "arrows_tier_10"
+ },
+ {
+  "name": "Arrows Tier 2",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_2.png",
+  "codes": "arrows_tier_2"
+ },
+ {
+  "name": "Arrows Tier 3",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_3.png",
+  "codes": "arrows_tier_3"
+ },
+ {
+  "name": "Arrows Tier 4",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_4.png",
+  "codes": "arrows_tier_4"
+ },
+ {
+  "name": "Arrows Tier 5",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_5.png",
+  "codes": "arrows_tier_5"
+ },
+ {
+  "name": "Arrows Tier 6",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_6.png",
+  "codes": "arrows_tier_6"
+ },
+ {
+  "name": "Arrows Tier 7",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_7.png",
+  "codes": "arrows_tier_7"
+ },
+ {
+  "name": "Arrows Tier 8",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_8.png",
+  "codes": "arrows_tier_8"
+ },
+ {
+  "name": "Arrows Tier 9",
+  "type": "toggle",
+  "img": "images/items/arrows_tier_9.png",
+  "codes": "arrows_tier_9"
+ },
+ {
+  "name": "Artisan Press",
+  "type": "toggle",
+  "img": "images/items/artisan_press.png",
+  "codes": "artisan_press"
+ },
+ {
+  "name": "Artisan Table",
+  "type": "toggle",
+  "img": "images/items/artisan_table.png",
+  "codes": "artisan_table"
+ },
+ {
+  "name": "Axes Tier 1",
+  "type": "toggle",
+  "img": "images/items/axes_tier_1.png",
+  "codes": "axes_tier_1"
+ },
+ {
+  "name": "Axes Tier 2",
+  "type": "toggle",
+  "img": "images/items/axes_tier_2.png",
+  "codes": "axes_tier_2"
+ },
+ {
+  "name": "Axes Tier 4",
+  "type": "toggle",
+  "img": "images/items/axes_tier_4.png",
+  "codes": "axes_tier_4"
+ },
+ {
+  "name": "Battleaxes Tier 1",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_1.png",
+  "codes": "battleaxes_tier_1"
+ },
+ {
+  "name": "Battleaxes Tier 2",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_2.png",
+  "codes": "battleaxes_tier_2"
+ },
+ {
+  "name": "Battleaxes Tier 3",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_3.png",
+  "codes": "battleaxes_tier_3"
+ },
+ {
+  "name": "Battleaxes Tier 4",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_4.png",
+  "codes": "battleaxes_tier_4"
+ },
+ {
+  "name": "Battleaxes Tier 5",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_5.png",
+  "codes": "battleaxes_tier_5"
+ },
+ {
+  "name": "Bed Tier 1",
+  "type": "toggle",
+  "img": "images/items/bed_tier_1.png",
+  "codes": "bed_tier_1"
+ },
+ {
+  "name": "Bed Tier 2",
+  "type": "toggle",
+  "img": "images/items/bed_tier_2.png",
+  "codes": "bed_tier_2"
+ },
+ {
+  "name": "Beekeping",
+  "type": "toggle",
+  "img": "images/items/beekeping.png",
+  "codes": "beekeping"
+ },
+ {
+  "name": "Black Forge",
+  "type": "toggle",
+  "img": "images/items/black_forge.png",
+  "codes": "black_forge"
+ },
+ {
+  "name": "Black Forge Upgrade 1",
+  "type": "toggle",
+  "img": "images/items/black_forge_upgrade_1.png",
+  "codes": "black_forge_upgrade_1"
+ },
+ {
+  "name": "Black Forge Upgrade 2",
+  "type": "toggle",
+  "img": "images/items/black_forge_upgrade_2.png",
+  "codes": "black_forge_upgrade_2"
+ },
+ {
+  "name": "Black Forge Upgrade 3",
+  "type": "toggle",
+  "img": "images/items/black_forge_upgrade_3.png",
+  "codes": "black_forge_upgrade_3"
+ },
+ {
+  "name": "Black Forge Upgrade 4",
+  "type": "toggle",
+  "img": "images/items/black_forge_upgrade_4.png",
+  "codes": "black_forge_upgrade_4"
+ },
+ {
+  "name": "Black Forge Upgrade 5",
+  "type": "toggle",
+  "img": "images/items/black_forge_upgrade_5.png",
+  "codes": "black_forge_upgrade_5"
+ },
+ {
+  "name": "Blades Tier 1",
+  "type": "toggle",
+  "img": "images/items/blades_tier_1.png",
+  "codes": "blades_tier_1"
+ },
+ {
+  "name": "Blades Tier 2",
+  "type": "toggle",
+  "img": "images/items/blades_tier_2.png",
+  "codes": "blades_tier_2"
+ },
+ {
+  "name": "Blades Tier 3",
+  "type": "toggle",
+  "img": "images/items/blades_tier_3.png",
+  "codes": "blades_tier_3"
+ },
+ {
+  "name": "Blades Tier 4",
+  "type": "toggle",
+  "img": "images/items/blades_tier_4.png",
+  "codes": "blades_tier_4"
+ },
+ {
+  "name": "Blades Tier 5",
+  "type": "toggle",
+  "img": "images/items/blades_tier_5.png",
+  "codes": "blades_tier_5"
+ },
+ {
+  "name": "Blades Tier 6",
+  "type": "toggle",
+  "img": "images/items/blades_tier_6.png",
+  "codes": "blades_tier_6"
+ },
+ {
+  "name": "Blades Tier 7",
+  "type": "toggle",
+  "img": "images/items/blades_tier_7.png",
+  "codes": "blades_tier_7"
+ },
+ {
+  "name": "Blast Furnace",
+  "type": "toggle",
+  "img": "images/items/blast_furnace.png",
+  "codes": "blast_furnace"
+ },
+ {
+  "name": "Blood Magic Tier 1",
+  "type": "toggle",
+  "img": "images/items/blood_magic_tier_1.png",
+  "codes": "blood_magic_tier_1"
+ },
+ {
+  "name": "Boat Tier 1",
+  "type": "toggle",
+  "img": "images/items/boat_tier_1.png",
+  "codes": "boat_tier_1"
+ },
+ {
+  "name": "Boat Tier 2",
+  "type": "toggle",
+  "img": "images/items/boat_tier_2.png",
+  "codes": "boat_tier_2"
+ },
+ {
+  "name": "Boat Tier 3",
+  "type": "toggle",
+  "img": "images/items/boat_tier_3.png",
+  "codes": "boat_tier_3"
+ },
+ {
+  "name": "Boat Tier 4",
+  "type": "toggle",
+  "img": "images/items/boat_tier_4.png",
+  "codes": "boat_tier_4"
+ },
+ {
+  "name": "Bolts Tier 1",
+  "type": "toggle",
+  "img": "images/items/bolts_tier_1.png",
+  "codes": "bolts_tier_1"
+ },
+ {
+  "name": "Bolts Tier 2",
+  "type": "toggle",
+  "img": "images/items/bolts_tier_2.png",
+  "codes": "bolts_tier_2"
+ },
+ {
+  "name": "Bolts Tier 3",
+  "type": "toggle",
+  "img": "images/items/bolts_tier_3.png",
+  "codes": "bolts_tier_3"
+ },
+ {
+  "name": "Bonfire",
+  "type": "toggle",
+  "img": "images/items/bonfire.png",
+  "codes": "bonfire"
+ },
+ {
+  "name": "Bows Tier 1",
+  "type": "toggle",
+  "img": "images/items/bows_tier_1.png",
+  "codes": "bows_tier_1"
+ },
+ {
+  "name": "Bows Tier 2",
+  "type": "toggle",
+  "img": "images/items/bows_tier_2.png",
+  "codes": "bows_tier_2"
+ },
+ {
+  "name": "Bows Tier 3",
+  "type": "toggle",
+  "img": "images/items/bows_tier_3.png",
+  "codes": "bows_tier_3"
+ },
+ {
+  "name": "Bows Tier 4",
+  "type": "toggle",
+  "img": "images/items/bows_tier_4.png",
+  "codes": "bows_tier_4"
+ },
+ {
+  "name": "Bows Tier 5",
+  "type": "toggle",
+  "img": "images/items/bows_tier_5.png",
+  "codes": "bows_tier_5"
+ },
+ {
+  "name": "Bows Tier 6",
+  "type": "toggle",
+  "img": "images/items/bows_tier_6.png",
+  "codes": "bows_tier_6"
+ },
+ {
+  "name": "Bronze",
+  "type": "toggle",
+  "img": "images/items/bronze.png",
+  "codes": "bronze"
+ },
+ {
+  "name": "Bucklers Tier 1",
+  "type": "toggle",
+  "img": "images/items/bucklers_tier_1.png",
+  "codes": "bucklers_tier_1"
+ },
+ {
+  "name": "Bucklers Tier 2",
+  "type": "toggle",
+  "img": "images/items/bucklers_tier_2.png",
+  "codes": "bucklers_tier_2"
+ },
+ {
+  "name": "Cape Tier 1",
+  "type": "toggle",
+  "img": "images/items/cape_tier_1.png",
+  "codes": "cape_tier_1"
+ },
+ {
+  "name": "Cape Tier 2",
+  "type": "toggle",
+  "img": "images/items/cape_tier_2.png",
+  "codes": "cape_tier_2"
+ },
+ {
+  "name": "Cape Tier 3",
+  "type": "toggle",
+  "img": "images/items/cape_tier_3.png",
+  "codes": "cape_tier_3"
+ },
+ {
+  "name": "Cape Tier 4",
+  "type": "toggle",
+  "img": "images/items/cape_tier_4.png",
+  "codes": "cape_tier_4"
+ },
+ {
+  "name": "Cape Tier 5",
+  "type": "toggle",
+  "img": "images/items/cape_tier_5.png",
+  "codes": "cape_tier_5"
+ },
+ {
+  "name": "Cape Tier 6",
+  "type": "toggle",
+  "img": "images/items/cape_tier_6.png",
+  "codes": "cape_tier_6"
+ },
+ {
+  "name": "Cape Tier 7",
+  "type": "toggle",
+  "img": "images/items/cape_tier_7.png",
+  "codes": "cape_tier_7"
+ },
+ {
+  "name": "Cape Tier 8",
+  "type": "toggle",
+  "img": "images/items/cape_tier_8.png",
+  "codes": "cape_tier_8"
+ },
+ {
+  "name": "Cauldron",
+  "type": "toggle",
+  "img": "images/items/cauldron.png",
+  "codes": "cauldron"
+ },
+ {
+  "name": "Cauldron Upgrade 1",
+  "type": "toggle",
+  "img": "images/items/cauldron_upgrade_1.png",
+  "codes": "cauldron_upgrade_1"
+ },
+ {
+  "name": "Cauldron Upgrade 2",
+  "type": "toggle",
+  "img": "images/items/cauldron_upgrade_2.png",
+  "codes": "cauldron_upgrade_2"
+ },
+ {
+  "name": "Cauldron Upgrade 3",
+  "type": "toggle",
+  "img": "images/items/cauldron_upgrade_3.png",
+  "codes": "cauldron_upgrade_3"
+ },
+ {
+  "name": "Cauldron Upgrade 4",
+  "type": "toggle",
+  "img": "images/items/cauldron_upgrade_4.png",
+  "codes": "cauldron_upgrade_4"
+ },
+ {
+  "name": "Cauldron Upgrade 5",
+  "type": "toggle",
+  "img": "images/items/cauldron_upgrade_5.png",
+  "codes": "cauldron_upgrade_5"
+ },
+ {
+  "name": "Ceramic Plates",
+  "type": "toggle",
+  "img": "images/items/ceramic_plates.png",
+  "codes": "ceramic_plates"
+ },
+ {
+  "name": "Charcoal Kiln",
+  "type": "toggle",
+  "img": "images/items/charcoal_kiln.png",
+  "codes": "charcoal_kiln"
+ },
+ {
+  "name": "Clubs Tier 1",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_1.png",
+  "codes": "clubs_tier_1"
+ },
+ {
+  "name": "Clubs Tier 2",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_2.png",
+  "codes": "clubs_tier_2"
+ },
+ {
+  "name": "Clubs Tier 3",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_3.png",
+  "codes": "clubs_tier_3"
+ },
+ {
+  "name": "Clubs Tier 4",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_4.png",
+  "codes": "clubs_tier_4"
+ },
+ {
+  "name": "Clubs Tier 5",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_5.png",
+  "codes": "clubs_tier_5"
+ },
+ {
+  "name": "Clubs Tier 6",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_6.png",
+  "codes": "clubs_tier_6"
+ },
+ {
+  "name": "Cooking Station",
+  "type": "toggle",
+  "img": "images/items/cooking_station.png",
+  "codes": "cooking_station"
+ },
+ {
+  "name": "Crafting",
+  "type": "toggle",
+  "img": "images/items/crafting.png",
+  "codes": "crafting"
+ },
+ {
+  "name": "Crossbows Tier 1",
+  "type": "toggle",
+  "img": "images/items/crossbows_tier_1.png",
+  "codes": "crossbows_tier_1"
+ },
+ {
+  "name": "Crossbows Tier 2",
+  "type": "toggle",
+  "img": "images/items/crossbows_tier_2.png",
+  "codes": "crossbows_tier_2"
+ },
+ {
+  "name": "Cultivator",
+  "type": "toggle",
+  "img": "images/items/cultivator.png",
+  "codes": "cultivator"
+ },
+ {
+  "name": "Eitr Refinery",
+  "type": "toggle",
+  "img": "images/items/eitr_refinery.png",
+  "codes": "eitr_refinery"
+ },
+ {
+  "name": "Elemental Magic Tier 1",
+  "type": "toggle",
+  "img": "images/items/elemental_magic_tier_1.png",
+  "codes": "elemental_magic_tier_1"
+ },
+ {
+  "name": "Elemental Magic Tier 2",
+  "type": "toggle",
+  "img": "images/items/elemental_magic_tier_2.png",
+  "codes": "elemental_magic_tier_2"
+ },
+ {
+  "name": "Fermenter",
+  "type": "toggle",
+  "img": "images/items/fermenter.png",
+  "codes": "fermenter"
+ },
+ {
+  "name": "Flametal Armor",
+  "type": "toggle",
+  "img": "images/items/flametal_armor.png",
+  "codes": "flametal_armor"
+ },
+ {
+  "name": "Food Preparation Table",
+  "type": "toggle",
+  "img": "images/items/food_preparation_table.png",
+  "codes": "food_preparation_table"
+ },
+ {
+  "name": "Forge",
+  "type": "toggle",
+  "img": "images/items/forge.png",
+  "codes": "forge"
+ },
+ {
+  "name": "Forge Upgrade 1",
+  "type": "toggle",
+  "img": "images/items/forge_upgrade_1.png",
+  "codes": "forge_upgrade_1"
+ },
+ {
+  "name": "Forge Upgrade 2",
+  "type": "toggle",
+  "img": "images/items/forge_upgrade_2.png",
+  "codes": "forge_upgrade_2"
+ },
+ {
+  "name": "Forge Upgrade 3",
+  "type": "toggle",
+  "img": "images/items/forge_upgrade_3.png",
+  "codes": "forge_upgrade_3"
+ },
+ {
+  "name": "Forge Upgrade 4",
+  "type": "toggle",
+  "img": "images/items/forge_upgrade_4.png",
+  "codes": "forge_upgrade_4"
+ },
+ {
+  "name": "Forge Upgrade 5",
+  "type": "toggle",
+  "img": "images/items/forge_upgrade_5.png",
+  "codes": "forge_upgrade_5"
+ },
+ {
+  "name": "Frost Foundry",
+  "type": "toggle",
+  "img": "images/items/frost_foundry.png",
+  "codes": "frost_foundry"
+ },
+ {
+  "name": "Galdr Table",
+  "type": "toggle",
+  "img": "images/items/galdr_table.png",
+  "codes": "galdr_table"
+ },
+ {
+  "name": "Galdr Table Upgrade 1",
+  "type": "toggle",
+  "img": "images/items/galdr_table_upgrade_1.png",
+  "codes": "galdr_table_upgrade_1"
+ },
+ {
+  "name": "Galdr Table Upgrade 2",
+  "type": "toggle",
+  "img": "images/items/galdr_table_upgrade_2.png",
+  "codes": "galdr_table_upgrade_2"
+ },
+ {
+  "name": "Galdr Table Upgrade 3",
+  "type": "toggle",
+  "img": "images/items/galdr_table_upgrade_3.png",
+  "codes": "galdr_table_upgrade_3"
+ },
+ {
+  "name": "Galdr Table Upgrade 4",
+  "type": "toggle",
+  "img": "images/items/galdr_table_upgrade_4.png",
+  "codes": "galdr_table_upgrade_4"
+ },
+ {
+  "name": "Hearth",
+  "type": "toggle",
+  "img": "images/items/hearth.png",
+  "codes": "hearth"
+ },
+ {
+  "name": "Iron Cooking Station",
+  "type": "toggle",
+  "img": "images/items/iron_cooking_station.png",
+  "codes": "iron_cooking_station"
+ },
+ {
+  "name": "Knuckles Tier 1",
+  "type": "toggle",
+  "img": "images/items/knuckles_tier_1.png",
+  "codes": "knuckles_tier_1"
+ },
+ {
+  "name": "Knuckles Tier 2",
+  "type": "toggle",
+  "img": "images/items/knuckles_tier_2.png",
+  "codes": "knuckles_tier_2"
+ },
+ {
+  "name": "Long Blades Tier 1",
+  "type": "toggle",
+  "img": "images/items/long_blades_tier_1.png",
+  "codes": "long_blades_tier_1"
+ },
+ {
+  "name": "Long Blades Tier 2",
+  "type": "toggle",
+  "img": "images/items/long_blades_tier_2.png",
+  "codes": "long_blades_tier_2"
+ },
+ {
+  "name": "Mead ketill",
+  "type": "toggle",
+  "img": "images/items/mead_ketill.png",
+  "codes": "mead_ketill"
+ },
+ {
+  "name": "Nails Tier 1",
+  "type": "toggle",
+  "img": "images/items/nails_tier_1.png",
+  "codes": "nails_tier_1"
+ },
+ {
+  "name": "Nails Tier 2",
+  "type": "toggle",
+  "img": "images/items/nails_tier_2.png",
+  "codes": "nails_tier_2"
+ },
+ {
+  "name": "Nord Bows and Crossbows",
+  "type": "toggle",
+  "img": "images/items/nord_bows_and_crossbows.png",
+  "codes": "nord_bows_and_crossbows"
+ },
+ {
+  "name": "Nord Weapons Tier 1",
+  "type": "toggle",
+  "img": "images/items/nord_weapons_tier_1.png",
+  "codes": "nord_weapons_tier_1"
+ },
+ {
+  "name": "Nord Weapons Tier 2",
+  "type": "toggle",
+  "img": "images/items/nord_weapons_tier_2.png",
+  "codes": "nord_weapons_tier_2"
+ },
+ {
+  "name": "Pickaxes Tier 1",
+  "type": "toggle",
+  "img": "images/items/pickaxes_tier_1.png",
+  "codes": "pickaxes_tier_1"
+ },
+ {
+  "name": "Pickaxes Tier 2",
+  "type": "toggle",
+  "img": "images/items/pickaxes_tier_2.png",
+  "codes": "pickaxes_tier_2"
+ },
+ {
+  "name": "Pickaxes Tier 3",
+  "type": "toggle",
+  "img": "images/items/pickaxes_tier_3.png",
+  "codes": "pickaxes_tier_3"
+ },
+ {
+  "name": "Pickaxes Tier 4",
+  "type": "toggle",
+  "img": "images/items/pickaxes_tier_4.png",
+  "codes": "pickaxes_tier_4"
+ },
+ {
+  "name": "Polearms Tier 1",
+  "type": "toggle",
+  "img": "images/items/polearms_tier_1.png",
+  "codes": "polearms_tier_1"
+ },
+ {
+  "name": "Polearms Tier 2",
+  "type": "toggle",
+  "img": "images/items/polearms_tier_2.png",
+  "codes": "polearms_tier_2"
+ },
+ {
+  "name": "Polearms Tier 3",
+  "type": "toggle",
+  "img": "images/items/polearms_tier_3.png",
+  "codes": "polearms_tier_3"
+ },
+ {
+  "name": "Rag Armor",
+  "type": "toggle",
+  "img": "images/items/rag_armor.png",
+  "codes": "rag_armor"
+ },
+ {
+  "name": "Sap Extractor",
+  "type": "toggle",
+  "img": "images/items/sap_extractor.png",
+  "codes": "sap_extractor"
+ },
+ {
+  "name": "Shields Tier 1",
+  "type": "toggle",
+  "img": "images/items/shields_tier_1.png",
+  "codes": "shields_tier_1"
+ },
+ {
+  "name": "Shields Tier 2",
+  "type": "toggle",
+  "img": "images/items/shields_tier_2.png",
+  "codes": "shields_tier_2"
+ },
+ {
+  "name": "Shields Tier 3",
+  "type": "toggle",
+  "img": "images/items/shields_tier_3.png",
+  "codes": "shields_tier_3"
+ },
+ {
+  "name": "Shields Tier 4",
+  "type": "toggle",
+  "img": "images/items/shields_tier_4.png",
+  "codes": "shields_tier_4"
+ },
+ {
+  "name": "Shields Tier 5",
+  "type": "toggle",
+  "img": "images/items/shields_tier_5.png",
+  "codes": "shields_tier_5"
+ },
+ {
+  "name": "Short Blades Tier 1",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_1.png",
+  "codes": "short_blades_tier_1"
+ },
+ {
+  "name": "Short Blades Tier 2",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_2.png",
+  "codes": "short_blades_tier_2"
+ },
+ {
+  "name": "Short Blades Tier 3",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_3.png",
+  "codes": "short_blades_tier_3"
+ },
+ {
+  "name": "Short Blades Tier 4",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_4.png",
+  "codes": "short_blades_tier_4"
+ },
+ {
+  "name": "Short Blades Tier 5",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_5.png",
+  "codes": "short_blades_tier_5"
+ },
+ {
+  "name": "Siege",
+  "type": "toggle",
+  "img": "images/items/siege.png",
+  "codes": "siege"
+ },
+ {
+  "name": "Sledgehammers Tier 1",
+  "type": "toggle",
+  "img": "images/items/sledgehammers_tier_1.png",
+  "codes": "sledgehammers_tier_1"
+ },
+ {
+  "name": "Sledgehammers Tier 2",
+  "type": "toggle",
+  "img": "images/items/sledgehammers_tier_2.png",
+  "codes": "sledgehammers_tier_2"
+ },
+ {
+  "name": "Smelter",
+  "type": "toggle",
+  "img": "images/items/smelter.png",
+  "codes": "smelter"
+ },
+ {
+  "name": "Spears Tier 1",
+  "type": "toggle",
+  "img": "images/items/spears_tier_1.png",
+  "codes": "spears_tier_1"
+ },
+ {
+  "name": "Spears Tier 2",
+  "type": "toggle",
+  "img": "images/items/spears_tier_2.png",
+  "codes": "spears_tier_2"
+ },
+ {
+  "name": "Spears Tier 3",
+  "type": "toggle",
+  "img": "images/items/spears_tier_3.png",
+  "codes": "spears_tier_3"
+ },
+ {
+  "name": "Spears Tier 4",
+  "type": "toggle",
+  "img": "images/items/spears_tier_4.png",
+  "codes": "spears_tier_4"
+ },
+ {
+  "name": "Spears Tier 5",
+  "type": "toggle",
+  "img": "images/items/spears_tier_5.png",
+  "codes": "spears_tier_5"
+ },
+ {
+  "name": "Spears Tier 6",
+  "type": "toggle",
+  "img": "images/items/spears_tier_6.png",
+  "codes": "spears_tier_6"
+ },
+ {
+  "name": "Spinning Wheel",
+  "type": "toggle",
+  "img": "images/items/spinning_wheel.png",
+  "codes": "spinning_wheel"
+ },
+ {
+  "name": "Stone Oven",
+  "type": "toggle",
+  "img": "images/items/stone_oven.png",
+  "codes": "stone_oven"
+ },
+ {
+  "name": "Stonecutter",
+  "type": "toggle",
+  "img": "images/items/stonecutter.png",
+  "codes": "stonecutter"
+ },
+ {
+  "name": "Storage Tier 1",
+  "type": "toggle",
+  "img": "images/items/storage_tier_1.png",
+  "codes": "storage_tier_1"
+ },
+ {
+  "name": "Storage Tier 2",
+  "type": "toggle",
+  "img": "images/items/storage_tier_2.png",
+  "codes": "storage_tier_2"
+ },
+ {
+  "name": "Storage Tier 3",
+  "type": "toggle",
+  "img": "images/items/storage_tier_3.png",
+  "codes": "storage_tier_3"
+ },
+ {
+  "name": "Tower Shields Tier 1",
+  "type": "toggle",
+  "img": "images/items/tower_shields_tier_1.png",
+  "codes": "tower_shields_tier_1"
+ },
+ {
+  "name": "Tower Shields Tier 2",
+  "type": "toggle",
+  "img": "images/items/tower_shields_tier_2.png",
+  "codes": "tower_shields_tier_2"
+ },
+ {
+  "name": "Tower Shields Tier 3",
+  "type": "toggle",
+  "img": "images/items/tower_shields_tier_3.png",
+  "codes": "tower_shields_tier_3"
+ },
+ {
+  "name": "Transportation Tier 1",
+  "type": "toggle",
+  "img": "images/items/transportation_tier_1.png",
+  "codes": "transportation_tier_1"
+ },
+ {
+  "name": "Transportation Tier 2",
+  "type": "toggle",
+  "img": "images/items/transportation_tier_2.png",
+  "codes": "transportation_tier_2"
+ },
+ {
+  "name": "Transportation Tier 3",
+  "type": "toggle",
+  "img": "images/items/transportation_tier_3.png",
+  "codes": "transportation_tier_3"
+ },
+ {
+  "name": "Trinkets Tier 1",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_1.png",
+  "codes": "trinkets_tier_1"
+ },
+ {
+  "name": "Trinkets Tier 2",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_2.png",
+  "codes": "trinkets_tier_2"
+ },
+ {
+  "name": "Trinkets Tier 3",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_3.png",
+  "codes": "trinkets_tier_3"
+ },
+ {
+  "name": "Trinkets Tier 4",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_4.png",
+  "codes": "trinkets_tier_4"
+ },
+ {
+  "name": "Trinkets Tier 5",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_5.png",
+  "codes": "trinkets_tier_5"
+ },
+ {
+  "name": "Trinkets Tier 6",
+  "type": "toggle",
+  "img": "images/items/trinkets_tier_6.png",
+  "codes": "trinkets_tier_6"
+ },
+ {
+  "name": "Troll Armor",
+  "type": "toggle",
+  "img": "images/items/troll_armor.png",
+  "codes": "troll_armor"
+ },
+ {
+  "name": "Warmth Tier 1",
+  "type": "toggle",
+  "img": "images/items/warmth_tier_1.png",
+  "codes": "warmth_tier_1"
+ },
+ {
+  "name": "Windmill",
+  "type": "toggle",
+  "img": "images/items/windmill.png",
+  "codes": "windmill"
+ },
+ {
+  "name": "Wisp Fountain",
+  "type": "toggle",
+  "img": "images/items/wisp_fountain.png",
+  "codes": "wisp_fountain"
+ },
+ {
+  "name": "Wisplight",
+  "type": "toggle",
+  "img": "images/items/wisplight.png",
+  "codes": "wisplight"
+ },
+ {
+  "name": "Workbench Upgrade 1",
+  "type": "toggle",
+  "img": "images/items/workbench_upgrade_1.png",
+  "codes": "workbench_upgrade_1"
+ },
+ {
+  "name": "Workbench Upgrade 2",
+  "type": "toggle",
+  "img": "images/items/workbench_upgrade_2.png",
+  "codes": "workbench_upgrade_2"
+ },
+ {
+  "name": "Workbench Upgrade 3",
+  "type": "toggle",
+  "img": "images/items/workbench_upgrade_3.png",
+  "codes": "workbench_upgrade_3"
+ },
+ {
+  "name": "Hard Antler",
+  "type": "toggle",
+  "img": "images/items/hard_antler.png",
+  "codes": "hard_antler"
+ },
+ {
+  "name": "Swamp Key",
+  "type": "toggle",
+  "img": "images/items/swamp_key.png",
+  "codes": "swamp_key"
+ },
+ {
+  "name": "Wishbone",
+  "type": "toggle",
+  "img": "images/items/wishbone.png",
+  "codes": "wishbone"
+ },
+ {
+  "name": "3 Dragon Tears",
+  "type": "toggle",
+  "img": "images/items/3_dragon_tears.png",
+  "codes": "3_dragon_tears"
+ },
+ {
+  "name": "Torn Spirit",
+  "type": "toggle",
+  "img": "images/items/torn_spirit.png",
+  "codes": "torn_spirit"
+ },
+ {
+  "name": "Majestic Carapace",
+  "type": "toggle",
+  "img": "images/items/majestic_carapace.png",
+  "codes": "majestic_carapace"
+ },
+ {
+  "name": "Eikthyr Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_eikthyr.png",
+  "codes": "boss_eikthyr"
+ },
+ {
+  "name": "The Elder Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_the_elder.png",
+  "codes": "boss_the_elder"
+ },
+ {
+  "name": "Bonemass Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_bonemass.png",
+  "codes": "boss_bonemass"
+ },
+ {
+  "name": "Moder Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_moder.png",
+  "codes": "boss_moder"
+ },
+ {
+  "name": "Yagluth Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_yagluth.png",
+  "codes": "boss_yagluth"
+ },
+ {
+  "name": "The Queen Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_the_queen.png",
+  "codes": "boss_the_queen"
+ },
+ {
+  "name": "Fader Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_fader.png",
+  "codes": "boss_fader"
+ }
+]
