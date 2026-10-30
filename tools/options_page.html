@@ -1,0 +1,343 @@
+<title>Valheim Options Builder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: options on the left in the order of a YAML file; the live YAML on the right, sticky; one column on phones. */
+:root {
+  --bg: #edf0ee;            /* fjord stone */
+  --surface: #fbfcfb;
+  --ink: #1c2723;           /* pine ink */
+  --muted: #56655f;
+  --line: #d2d9d5;
+  --accent: #965a08;        /* mead amber */
+  --accent-ink: #ffffff;
+  --accent-soft: #f2e5cc;
+  --code-bg: #1d2522;
+  --code-ink: #dfe7e3;
+  --code-key: #e3a540;
+  --bad: #a3321f;
+  --font-display: "Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+    --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18;
+    --code-bg: #0c110f; --code-ink: #d6e0db; --code-key: #e3a540; --bad: #f08a72; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+  --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18;
+  --code-bg: #0c110f; --code-ink: #d6e0db; --code-key: #e3a540; --bad: #f08a72; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font: 16px/1.5 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 24px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 700 2rem/1.1 var(--font-display); margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 60ch; }
+.version { font: 500 0.8rem var(--font-mono); color: var(--muted); }
+.jump { color: var(--accent); font-weight: 700; }
+@media (min-width: 960px) { .jump { display: none; } }
+.layout { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr) 400px; } }
+.form { display: grid; gap: 28px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 16px; }
+h2 { font: 700 1.25rem var(--font-display); margin: 0; letter-spacing: 0.02em; }
+.who { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; }
+.field { display: grid; gap: 4px; }
+label, .label { font-weight: 700; }
+.hint { color: var(--muted); font-size: 0.92rem; white-space: pre-line; max-width: 72ch; margin: 0; }
+input[type="text"], input[type="number"], select {
+  font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px;
+}
+input[type="number"] { width: 6.5em; font-variant-numeric: tabular-nums; }
+input:focus-visible, select:focus-visible, button:focus-visible, .goal:focus-within, .chip:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.opt { display: grid; gap: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+.opt:first-of-type { border-top: 0; padding-top: 0; }
+.row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+input[type="range"] { flex: 1 1 180px; accent-color: var(--accent); }
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; }
+.switch input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent); }
+.chip { font: 500 0.82rem var(--font-body); border: 1px solid var(--line); background: transparent; color: var(--muted);
+  border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg label { font-weight: 500; border: 1px solid var(--line); border-radius: 6px; padding: 4px 12px; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label:has(input:checked) { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.goals { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.goal { position: relative; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: grid; gap: 2px; background: var(--bg); }
+.goal input { position: absolute; opacity: 0; pointer-events: none; }
+.goal:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.goal .boss { font: 700 1.05rem var(--font-display); letter-spacing: 0.02em; }
+.goal .era { color: var(--muted); font-size: 0.88rem; }
+.goal .count { font: 500 0.8rem var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.checks { display: grid; gap: 4px 16px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.checks label { font-weight: 400; display: flex; gap: 8px; align-items: center; }
+.checks input { accent-color: var(--accent); }
+.preview { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 12px; min-width: 0; }
+@media (max-width: 959px) { .preview { position: static; } }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+button.primary, button.secondary { font: 700 0.95rem var(--font-body); border-radius: 6px; padding: 8px 16px; cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent); }
+button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+pre.yaml { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px;
+  font: 0.8rem/1.55 var(--font-mono); overflow: auto; max-height: 70vh; white-space: pre; }
+pre.yaml .k { color: var(--code-key); }
+.status { min-height: 1.4em; font-size: 0.9rem; color: var(--muted); margin: 0; }
+.status.bad { color: var(--bad); }
+.foot { color: var(--muted); font-size: 0.88rem; max-width: 72ch; }
+.foot a, .sub a { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { .goal, .seg label, .chip { transition: background-color .12s, border-color .12s; } }
+</style>
+<!--BODY-->
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Valheim Options Builder</h1>
+      <p class="sub">Choose your options and save the YAML into your Archipelago <code>Players</code> folder. Every option here comes from the randomizer itself.</p>
+    </div>
+    <span class="version" id="version"></span>
+    <a class="jump" href="#yaml-h">Jump to your options file</a>
+  </header>
+  <div class="layout">
+    <form class="form" id="form" novalidate>
+      <section class="panel" aria-labelledby="who-h">
+        <h2 id="who-h">Player</h2>
+        <div class="who">
+          <div class="field">
+            <label for="player-name">Slot name</label>
+            <input type="text" id="player-name" maxlength="16" value="Viking" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="preset">Start from a preset</label>
+            <select id="preset"><option value="">Defaults</option></select>
+          </div>
+          <button type="button" class="secondary" id="reset">Reset to defaults</button>
+        </div>
+      </section>
+      <div id="groups" class="form"></div>
+    </form>
+    <aside class="preview" aria-labelledby="yaml-h">
+      <h2 id="yaml-h">Your options file</h2>
+      <pre class="yaml" id="yaml" tabindex="0" aria-label="Generated YAML"></pre>
+      <div class="actions">
+        <button type="button" class="primary" id="copy">Copy YAML</button>
+        <button type="button" class="secondary" id="download">Download .yaml</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+      <p class="foot">Advanced options (local and non-local items, start inventory, plando) can be added to the file by hand.
+        Put the file in Archipelago's <code>Players</code> folder and generate as usual. Install the matching APWorld and mod from the
+        <a href="https://github.com/JustEyeTee/valheim-archipelago/releases" target="_blank" rel="noopener">releases page</a>.</p>
+    </aside>
+  </div>
+</div>
+<script type="application/json" id="data">/*DATA*/</script>
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById("data").textContent);
+  const options = data.groups.flatMap(g => g.options);
+  const byName = Object.fromEntries(options.map(o => [o.name, o]));
+  const defaults = () => Object.fromEntries(options.map(o => [o.name, Array.isArray(o.default) ? [...o.default] : o.default]));
+  let values = defaults();
+  const $ = id => document.getElementById(id);
+  const STORE = "valheim-options-builder";
+
+  $("version").textContent = `APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
+  for (const name of Object.keys(data.presets)) {
+    const o = document.createElement("option"); o.value = name; o.textContent = name; $("preset").append(o);
+  }
+
+  const el = (tag, attrs = {}, ...kids) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+    }
+    e.append(...kids); return e;
+  };
+
+  function control(o) {
+    const id = "opt-" + o.name;
+    if (o.name === "goal") {
+      const box = el("div", { class: "goals", role: "radiogroup", "aria-label": o.display });
+      for (const g of data.goals) {
+        const input = el("input", { type: "radio", name: id, value: g.key, id: id + "-" + g.key });
+        input.addEventListener("change", () => set(o.name, g.key));
+        box.append(el("label", { class: "goal", for: input.id }, input,
+          el("span", { class: "boss", text: g.boss }), el("span", { class: "era", text: g.era }),
+          el("span", { class: "count", text: `${g.checks} checks with defaults` })));
+      }
+      return box;
+    }
+    if (o.kind === "toggle") {
+      const input = el("input", { type: "checkbox", id });
+      input.addEventListener("change", () => set(o.name, input.checked));
+      return el("label", { class: "switch", for: id }, input, el("span", { text: o.display }));
+    }
+    if (o.kind === "choice") {
+      if (o.choices.length <= 4) {
+        const seg = el("div", { class: "seg", role: "radiogroup", "aria-label": o.display });
+        for (const c of o.choices) {
+          const input = el("input", { type: "radio", name: id, value: c, id: id + "-" + c });
+          input.addEventListener("change", () => set(o.name, c));
+          seg.append(el("label", { for: input.id }, input, c.replace(/_/g, " ")));
+        }
+        return seg;
+      }
+      const sel = el("select", { id });
+      for (const c of o.choices) sel.append(el("option", { value: c, text: c.replace(/_/g, " ") }));
+      sel.addEventListener("change", () => set(o.name, sel.value));
+      return sel;
+    }
+    if (o.kind === "range") {
+      const row = el("div", { class: "row" });
+      const slider = el("input", { type: "range", min: o.min, max: o.max, step: 1, id: id + "-slider", "aria-label": o.display });
+      const num = el("input", { type: "number", min: o.min, max: o.max, step: 1, id, "aria-label": o.display + " value" });
+      slider.addEventListener("input", () => set(o.name, Number(slider.value)));
+      num.addEventListener("change", () => {
+        const v = Math.min(o.max, Math.max(o.min, Math.round(Number(num.value) || o.min))); set(o.name, v);
+      });
+      row.append(slider, num);
+      const names = Object.entries(o.names || {});
+      if (names.length) {
+        const chips = el("div", { class: "row" });
+        for (const [label, v] of names) {
+          const chip = el("button", { type: "button", class: "chip", "data-v": v, "aria-pressed": "false", text: label.replace(/_/g, " ") });
+          chip.addEventListener("click", () => set(o.name, v));
+          chips.append(chip);
+        }
+        return el("div", { class: "field" }, row, chips);
+      }
+      return row;
+    }
+    if (o.kind === "set") {
+      const box = el("div", { class: "checks", role: "group", "aria-label": o.display });
+      for (const k of o.keys) {
+        const input = el("input", { type: "checkbox", value: k, id: id + "-" + k.replace(/\W+/g, "-") });
+        input.addEventListener("change", () => {
+          const cur = new Set(values[o.name]); input.checked ? cur.add(k) : cur.delete(k); set(o.name, [...cur].sort());
+        });
+        box.append(el("label", { for: input.id }, input, k));
+      }
+      return box;
+    }
+    return el("span");
+  }
+
+  for (const g of data.groups) {
+    const sec = el("section", { class: "panel" }, el("h2", { text: g.name }));
+    for (const o of g.options) {
+      const wrap = el("div", { class: "opt" });
+      if (o.kind !== "toggle" && o.display !== g.name) wrap.append(el("span", { class: "label", text: o.display }));
+      wrap.append(control(o), el("p", { class: "hint", text: o.doc }));
+      sec.append(wrap);
+    }
+    $("groups").append(sec);
+  }
+
+  function sync() {
+    for (const o of options) {
+      const id = "opt-" + o.name, v = values[o.name];
+      if (o.kind === "toggle") $(id).checked = v;
+      else if (o.kind === "choice" || o.name === "goal") {
+        const radio = document.getElementById(id + "-" + v);
+        if (radio) radio.checked = true; else if ($(id)) $(id).value = v;
+      } else if (o.kind === "range") {
+        $(id).value = v; $(id + "-slider").value = v;
+        $(id).closest(".opt").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(Number(c.dataset.v) === v)));
+      } else if (o.kind === "set") {
+        document.querySelectorAll(`input[id^="${id}-"]`).forEach(c => { c.checked = v.includes(c.value); });
+      }
+    }
+    render();
+  }
+
+  function set(name, v) { values[name] = v; $("preset").value = ""; render(); save(); syncChips(name); }
+  function syncChips(name) {
+    const o = byName[name]; if (o.kind !== "range") return;
+    $("opt-" + name).value = values[name]; $("opt-" + name + "-slider").value = values[name];
+    $("opt-" + name).closest(".opt").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(Number(c.dataset.v) === values[name])));
+  }
+
+  const q = s => JSON.stringify(s);
+  function yaml() {
+    const name = $("player-name").value.trim();
+    const lines = [
+      `# Made with the Valheim Options Builder (APWorld ${data.world_version}).`,
+      `name: ${q(name || "Viking")}`, `game: ${data.game}`,
+      "requires:", `  version: ${data.minimum_ap_version}`, "  game:", `    ${data.game}: ${data.world_version}`,
+      `${data.game}:`,
+    ];
+    for (const g of data.groups) {
+      lines.push(`  # ${g.name}`);
+      for (const o of g.options) {
+        const v = values[o.name];
+        const out = o.kind === "set" ? "[" + v.map(q).join(", ") + "]" : String(v);
+        lines.push(`  ${o.name}: ${out}`);
+      }
+    }
+    return lines.join("\n") + "\n";
+  }
+  function render() {
+    const text = yaml(), pre = $("yaml"); pre.textContent = "";
+    for (const line of text.split("\n")) {
+      const m = line.match(/^(\s*)([A-Za-z_]+):(.*)$/);
+      if (m && !line.trimStart().startsWith("#")) pre.append(m[1], el("span", { class: "k", text: m[2] + ":" }), m[3] + "\n");
+      else pre.append(line + "\n");
+    }
+    const name = $("player-name").value.trim(), status = $("status");
+    status.classList.toggle("bad", !name);
+    status.textContent = name ? "" : "Enter a slot name (up to 16 characters): it's how you connect from the game.";
+  }
+  function save() { try { localStorage.setItem(STORE, JSON.stringify({ values, name: $("player-name").value })); } catch (e) {} }
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (s && s.values) { for (const k of Object.keys(values)) if (k in s.values) values[k] = s.values[k]; if (s.name) $("player-name").value = s.name; }
+    } catch (e) {}
+  }
+
+  $("player-name").addEventListener("input", () => { render(); save(); });
+  $("preset").addEventListener("change", () => {
+    const p = data.presets[$("preset").value]; const keep = $("preset").value;
+    values = defaults();
+    if (p) for (const [k, v] of Object.entries(p)) {
+      const o = byName[k]; if (!o) continue;
+      values[k] = o.kind === "toggle" ? Boolean(v) : o.kind === "range" && typeof v === "string" ? (o.names[v] ?? o.default) : v;
+    }
+    sync(); $("preset").value = keep; save();
+  });
+  $("reset").addEventListener("click", () => { values = defaults(); $("preset").value = ""; sync(); save(); });
+  $("copy").addEventListener("click", async () => {
+    const text = yaml();
+    try { await navigator.clipboard.writeText(text); $("status").textContent = "Copied. Paste it into a .yaml file in your Players folder."; }
+    catch (e) {
+      const r = document.createRange(); r.selectNodeContents($("yaml"));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      $("status").textContent = "Selected: press Ctrl+C (or ⌘C) to copy.";
+    }
+  });
+  // Downloads only work when the page is opened directly (GitHub Pages), not inside an embedded preview.
+  if (window.top !== window.self) $("download").hidden = true;
+  $("download").addEventListener("click", () => {
+    const name = ($("player-name").value.trim() || "Viking").replace(/[^\w-]+/g, "_");
+    const a = el("a", { href: URL.createObjectURL(new Blob([yaml()], { type: "text/yaml" })), download: `${name}-Valheim.yaml` });
+    document.body.append(a); a.click(); a.remove();
+    $("status").textContent = `Saved ${name}-Valheim.yaml.`;
+  });
+
+  load(); sync();
+})();
+</script>

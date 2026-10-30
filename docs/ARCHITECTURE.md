@@ -213,6 +213,7 @@ flowchart LR
 | `gen_boss_gates.py` | writes `boss_data.py`: which bosses each research and check needs | after editing the tables |
 | `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
 | `gen_poptracker.py` | writes the PopTracker pack from the APWorld's own tables | before a release |
+| `gen_options_page.py` | builds the Options Builder web page (`docs/options/`, served by GitHub Pages) from the APWorld's options, counting each goal's checks | before a release |
 | `gen_template.sh` | regenerates `docs/Valheim.yaml`, the options template, with Archipelago's own generator | before a release |
 | `make_icon.py` | draws the Thunderstore icon | when changing the icon |
 | `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction, and the English names | for English names |

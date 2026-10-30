@@ -38,8 +38,9 @@ folder, found with r2modman's Settings > Browse profile folder).
 
 ## Setting up a game
 
-1. Copy [docs/Valheim.yaml](docs/Valheim.yaml) into your Archipelago `Players` folder, rename it, and set
-   your `name` and options (see below).
+1. Make your options file with the **[Options Builder](https://justeyetee.github.io/valheim-archipelago/options/)**
+   (pick your options, then copy or download the YAML), or copy [docs/Valheim.yaml](docs/Valheim.yaml) and edit it.
+   Put it in your Archipelago `Players` folder.
 2. Generate and host the multiworld as usual.
 3. Start Valheim. In the **Archipelago** window on the main menu, enter the host, port, slot name and
    password, click **Connect**, then start a **new world** (and preferably a new character).
@@ -96,8 +97,8 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 
 Each boss's drops gate the next part of the game in logic (copper needs Eikthyr's antler, iron The Elder's
 Swamp Key, silver Bonemass's Wishbone, and so on). With `boss_items`, receiving the drop works too.
-Default check counts: Eikthyr 111, The Elder 223, Bonemass 274, Moder 318, Yagluth 391, The Queen 481,
-Fader 557.
+Default check counts: Eikthyr 114, The Elder 227, Bonemass 284, Moder 327, Yagluth 400, The Queen 490,
+Fader 566, Kall Fimbulbringer 611.
 
 ## Trackers
 

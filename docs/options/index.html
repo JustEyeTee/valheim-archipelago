@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valheim Options Builder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: options on the left in the order of a YAML file; the live YAML on the right, sticky; one column on phones. */
+:root {
+  --bg: #edf0ee;            /* fjord stone */
+  --surface: #fbfcfb;
+  --ink: #1c2723;           /* pine ink */
+  --muted: #56655f;
+  --line: #d2d9d5;
+  --accent: #965a08;        /* mead amber */
+  --accent-ink: #ffffff;
+  --accent-soft: #f2e5cc;
+  --code-bg: #1d2522;
+  --code-ink: #dfe7e3;
+  --code-key: #e3a540;
+  --bad: #a3321f;
+  --font-display: "Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+    --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18;
+    --code-bg: #0c110f; --code-ink: #d6e0db; --code-key: #e3a540; --bad: #f08a72; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+  --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18;
+  --code-bg: #0c110f; --code-ink: #d6e0db; --code-key: #e3a540; --bad: #f08a72; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font: 16px/1.5 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 24px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 700 2rem/1.1 var(--font-display); margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 60ch; }
+.version { font: 500 0.8rem var(--font-mono); color: var(--muted); }
+.jump { color: var(--accent); font-weight: 700; }
+@media (min-width: 960px) { .jump { display: none; } }
+.layout { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr) 400px; } }
+.form { display: grid; gap: 28px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 16px; }
+h2 { font: 700 1.25rem var(--font-display); margin: 0; letter-spacing: 0.02em; }
+.who { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; }
+.field { display: grid; gap: 4px; }
+label, .label { font-weight: 700; }
+.hint { color: var(--muted); font-size: 0.92rem; white-space: pre-line; max-width: 72ch; margin: 0; }
+input[type="text"], input[type="number"], select {
+  font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px;
+}
+input[type="number"] { width: 6.5em; font-variant-numeric: tabular-nums; }
+input:focus-visible, select:focus-visible, button:focus-visible, .goal:focus-within, .chip:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.opt { display: grid; gap: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+.opt:first-of-type { border-top: 0; padding-top: 0; }
+.row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+input[type="range"] { flex: 1 1 180px; accent-color: var(--accent); }
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 700; }
+.switch input { width: 1.2rem; height: 1.2rem; accent-color: var(--accent); }
+.chip { font: 500 0.82rem var(--font-body); border: 1px solid var(--line); background: transparent; color: var(--muted);
+  border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.seg label { font-weight: 500; border: 1px solid var(--line); border-radius: 6px; padding: 4px 12px; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label:has(input:checked) { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.goals { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+.goal { position: relative; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: grid; gap: 2px; background: var(--bg); }
+.goal input { position: absolute; opacity: 0; pointer-events: none; }
+.goal:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.goal .boss { font: 700 1.05rem var(--font-display); letter-spacing: 0.02em; }
+.goal .era { color: var(--muted); font-size: 0.88rem; }
+.goal .count { font: 500 0.8rem var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.checks { display: grid; gap: 4px 16px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.checks label { font-weight: 400; display: flex; gap: 8px; align-items: center; }
+.checks input { accent-color: var(--accent); }
+.preview { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 12px; min-width: 0; }
+@media (max-width: 959px) { .preview { position: static; } }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+button.primary, button.secondary { font: 700 0.95rem var(--font-body); border-radius: 6px; padding: 8px 16px; cursor: pointer; }
+button.primary { background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent); }
+button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+pre.yaml { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px;
+  font: 0.8rem/1.55 var(--font-mono); overflow: auto; max-height: 70vh; white-space: pre; }
+pre.yaml .k { color: var(--code-key); }
+.status { min-height: 1.4em; font-size: 0.9rem; color: var(--muted); margin: 0; }
+.status.bad { color: var(--bad); }
+.foot { color: var(--muted); font-size: 0.88rem; max-width: 72ch; }
+.foot a, .sub a { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { .goal, .seg label, .chip { transition: background-color .12s, border-color .12s; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Valheim Options Builder</h1>
+      <p class="sub">Choose your options and save the YAML into your Archipelago <code>Players</code> folder. Every option here comes from the randomizer itself.</p>
+    </div>
+    <span class="version" id="version"></span>
+    <a class="jump" href="#yaml-h">Jump to your options file</a>
+  </header>
+  <div class="layout">
+    <form class="form" id="form" novalidate>
+      <section class="panel" aria-labelledby="who-h">
+        <h2 id="who-h">Player</h2>
+        <div class="who">
+          <div class="field">
+            <label for="player-name">Slot name</label>
+            <input type="text" id="player-name" maxlength="16" value="Viking" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="preset">Start from a preset</label>
+            <select id="preset"><option value="">Defaults</option></select>
+          </div>
+          <button type="button" class="secondary" id="reset">Reset to defaults</button>
+        </div>
+      </section>
+      <div id="groups" class="form"></div>
+    </form>
+    <aside class="preview" aria-labelledby="yaml-h">
+      <h2 id="yaml-h">Your options file</h2>
+      <pre class="yaml" id="yaml" tabindex="0" aria-label="Generated YAML"></pre>
+      <div class="actions">
+        <button type="button" class="primary" id="copy">Copy YAML</button>
+        <button type="button" class="secondary" id="download">Download .yaml</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+      <p class="foot">Advanced options (local and non-local items, start inventory, plando) can be added to the file by hand.
+        Put the file in Archipelago's <code>Players</code> folder and generate as usual. Install the matching APWorld and mod from the
+        <a href="https://github.com/JustEyeTee/valheim-archipelago/releases" target="_blank" rel="noopener">releases page</a>.</p>
+    </aside>
+  </div>
+</div>
+<script type="application/json" id="data">{"game":"Valheim","world_version":"0.8.1","minimum_ap_version":"0.6.4","groups":[{"name":"Goal","options":[{"name":"goal","display":"Goal","doc":"The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer\nhas none: you win when you pick up his Sacrificial Blood). Earlier bosses make a shorter game;\nFader is the full game, and Kall Fimbulbringer adds the Deep North.","kind":"choice","choices":["eikthyr","the_elder","bonemass","moder","yagluth","the_queen","fader","kall_fimbulbringer"],"default":"fader"},{"name":"include_deep_north","display":"Include Deep North","doc":"Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get\nthere, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station\nupgrades) and 8 Deep North trophies, when the goal is Fader. The Kall Fimbulbringer goal\nalways includes the Deep North.","kind":"toggle","default":false},{"name":"research_cost_percent","display":"Research Cost Percent","doc":"Scales how many materials each research costs at the Research Bench, as a percentage.\nEvery ingredient still costs at least 1, so 1 makes every research cost 1 of each.","kind":"range","min":1,"max":200,"default":100,"names":{"minimal":1,"quarter":25,"half":50,"normal":100,"double":200}}]},{"name":"Checks","options":[{"name":"biome_checks","display":"Biome Checks","doc":"Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,\nOcean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.\nThese checks are filled with resource bundles and traps; bundles arrive in an\nArchipelago Chest you build with the Hammer.","kind":"toggle","default":true},{"name":"obtain_checks","display":"Obtain Checks","doc":"Adds a check for getting each of 93 materials and ingredients for the first time, by\npicking it up or crafting it (Flint, Copper Ore, Bronze, Silver, Black Metal...), up to the\ngoal's tier. These checks are filled with resource bundles and traps.","kind":"toggle","default":true},{"name":"exploration_checks","display":"Exploration Checks","doc":"Adds checks for exploring part of the world map: 0.25%, 0.5%, 1%, 1.5%, 2%, 3%, 4%, 5% and\n6% of the world, up to the goal's tier. Walking 1 km uncovers roughly 0.06%; sailing is\nfaster. These checks are filled with resource bundles and traps.","kind":"toggle","default":true},{"name":"kill_checks","display":"Kill Checks","doc":"Adds a check for the first kill of each kind of creature (Neck, Greydwarf, Troll, Draugr,\nWolf, Lox, Seeker, Morgen...), up to the goal's tier. Bosses are left out, since their\ntrophies already are checks. These checks are filled with resource bundles and traps.","kind":"toggle","default":false},{"name":"skill_checks","display":"Skill Checks","doc":"Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) to level 10,\n20, 30, 40 and 50, up to this level. 0 turns skill checks off. Weapon and tool skills\nonly count once their research is received (Swords needs Blades Tier 1, and so on).","kind":"range","min":0,"max":50,"default":20,"names":{"off":0,"level_10":10,"level_20":20,"level_30":30,"level_40":40,"level_50":50}},{"name":"discovery_checks","display":"Discovery Checks","doc":"Adds a check for reaching each kind of dungeon and landmark for the first time: Burial\nChamber, Troll Cave, Sunken Crypt, Frost Cave, Fuling Village, Infested Mine, Charred\nFortress, the traders and every boss altar, up to the goal's tier.","kind":"toggle","default":true},{"name":"build_checks","display":"Build Checks","doc":"Adds a check for placing each crafting station, boat and portal for the first time\n(Workbench, Forge, Smelter, Karve, Portal, Blast Furnace, Galdr Table...: 29 kinds), up to\nthe goal's tier.","kind":"toggle","default":true},{"name":"eat_checks","display":"Eat Checks","doc":"Adds a check for eating each of 51 foods for the first time, from Raspberries to Lox Meat\nPie, up to the goal's tier.","kind":"toggle","default":true},{"name":"fishing_checks","display":"Fishing Checks","doc":"Adds a check for catching each of the 12 kinds of fish, up to the goal's tier. A fishing\nrod and bait are sold by Haldor; biome bait is made at the Food Preparation Table.","kind":"toggle","default":true},{"name":"taming_checks","display":"Taming Checks","doc":"Adds a check for taming each tameable animal: Boar, Wolf, Lox, Hen, Asksvin and Moose, up\nto the goal's tier.","kind":"toggle","default":true},{"name":"trader_checks","display":"Trader Checks","doc":"Adds a check for buying each of 14 items from Haldor and Hildir (Fishing Rod, Megingjord,\nYmir Flesh, Egg...), up to the goal's tier.","kind":"toggle","default":true}]},{"name":"Items","options":[{"name":"boss_items","display":"Boss Items","doc":"Puts the drops of the bosses before your goal into the item pool, delivered to your\nArchipelago Chest: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),\n3 Dragon Tears (Moder), Torn Spirit (Yagluth) and Majestic Carapace (The Queen). Logic\nthen lets you use either the boss kill or the received drop, so another player can\nopen the Sunken Crypts for you. Haldor's boss-unlocked stock still needs the kill.","kind":"toggle","default":true},{"name":"gear_items","display":"Gear Items","doc":"Puts tools from your goal's era into the item pool (one each), delivered to your\nArchipelago Chest: Flint Axe, Antler Pickaxe, Bronze, Iron and Black Metal Axe and\nPickaxe. Resource bundles also include your era's metals and woods (Copper, Bronze,\nIron, Silver, Black Metal...), never past your goal.","kind":"toggle","default":true},{"name":"starter_kit","display":"Starter Kit","doc":"Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.","kind":"toggle","default":true},{"name":"boost_percentage","display":"Boost Percentage","doc":"Percentage of the extra items that are boosts instead of resource bundles: Combat,\nWoodcutting and Mining Training (+5 skill levels) and Rested, Eikthyr's and Moder's\nBlessings (a timed buff). Traps are taken first, then boosts, and the rest are bundles.","kind":"range","min":0,"max":100,"default":20,"names":{}}]},{"name":"Traps","options":[{"name":"trap_percentage","display":"Trap Percentage","doc":"Percentage of the extra items (the items beyond one per research and trophy) that are\ntraps instead of resource bundles. See excluded_traps for the list.","kind":"range","min":0,"max":100,"default":20,"names":{}},{"name":"excluded_traps","display":"Excluded Traps","doc":"Traps that are never placed. The traps:\nGreydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you.\nMonster Pack Trap: a pack of whatever lives in the biome you're in (Draugr in the Swamp,\n  Wolves in the Mountains, Fulings in the Plains...).\nBat Swarm Trap: 6 bats.\nRaid Trap: a raid you're ready for starts (only when you host the world).\nThunderstorm Trap, Blizzard Trap: 2 minutes of storm or freezing snowstorm.\nLightning Strike Trap: lightning hits where you stand.\nFloor Is Lava Trap: for 30 seconds the ground burns you; stand on something you built\n  (or a boat), or keep jumping.\nBurning Trap, Poison Trap, Frost Trap: damage over time (Frost also slows you).\nSoaked Trap: you're wet. Tar Trap: you're covered in tar and slowed.\nFamine Trap: your food is gone. Butterfingers Trap: everything is unequipped.\nHeavy Load Trap: 50 Stone in your pockets. Launch Trap: you're thrown into the air.\nRust Trap: your equipped gear loses half its durability.\nMeteor Shower Trap: an Ashlands meteor shower for a minute, wherever you are.\nFake Item Trap: a message that you received an item; nothing arrives.","kind":"set","keys":["Bat Swarm Trap","Blizzard Trap","Burning Trap","Butterfingers Trap","Fake Item Trap","Famine Trap","Floor Is Lava Trap","Frost Trap","Greydwarf Ambush Trap","Heavy Load Trap","Launch Trap","Lightning Strike Trap","Meteor Shower Trap","Monster Pack Trap","Poison Trap","Raid Trap","Rust Trap","Skeleton Ambush Trap","Soaked Trap","Tar Trap","Thunderstorm Trap"],"default":[]}]},{"name":"Links","options":[{"name":"death_link","display":"Death Link","doc":"When you die, everyone who enabled death link dies. Of course, the reverse is true too.","kind":"toggle","default":false},{"name":"death_link_mode","display":"Death Link Mode","doc":"What happens to you when someone else's Death Link arrives.\nkill: you die (and lose skills and drop your items, as with any death).\nwounded: your health drops to 1.\ntrap: a random trap goes off instead.","kind":"choice","choices":["kill","wounded","trap"],"default":"kill"},{"name":"death_link_amnesty","display":"Death Link Amnesty","doc":"How many of your own deaths are forgiven before one is sent out over Death Link. 0 sends\nevery death; 2 sends every third death.","kind":"range","min":0,"max":10,"default":0,"names":{}},{"name":"trap_link","display":"Trap Link","doc":"Trap Link: when you receive a trap it is also sent to the other Trap Link games in the\nmultiworld, and their traps reach you (as the closest Valheim trap; unknown traps are\nignored).","kind":"toggle","default":false}]},{"name":"Archipelago","options":[{"name":"progression_balancing","display":"Progression Balancing","doc":"A system that can move progression earlier, to try and prevent the player from getting stuck and bored early.\n\nA lower setting means more getting stuck. A higher setting means less getting stuck.","kind":"range","min":0,"max":99,"default":50,"names":{"disabled":0,"normal":50,"extreme":99}},{"name":"accessibility","display":"Accessibility","doc":"Set rules for reachability of your items/locations.\n\n**Full:** ensure everything can be reached and acquired.\n\n**Minimal:** ensure what is needed to reach your goal can be acquired.","kind":"choice","choices":["full","minimal"],"default":"full"}]}],"presets":{"Quick Eikthyr run":{"goal":"eikthyr","research_cost_percent":25},"The Elder run":{"goal":"the_elder","research_cost_percent":50},"Full game":{"goal":"fader"},"Full game with Deep North and every check":{"goal":"fader","include_deep_north":true,"kill_checks":true,"skill_checks":50}},"goals":[{"key":"eikthyr","boss":"Eikthyr","era":"Meadows","checks":114},{"key":"the_elder","boss":"The Elder","era":"Black Forest","checks":227},{"key":"bonemass","boss":"Bonemass","era":"Swamp","checks":284},{"key":"moder","boss":"Moder","era":"Mountains","checks":327},{"key":"yagluth","boss":"Yagluth","era":"Plains","checks":400},{"key":"the_queen","boss":"The Queen","era":"Mistlands","checks":490},{"key":"fader","boss":"Fader","era":"Ashlands","checks":566},{"key":"kall_fimbulbringer","boss":"Kall Fimbulbringer","era":"Deep North","checks":611}]}</script>
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById("data").textContent);
+  const options = data.groups.flatMap(g => g.options);
+  const byName = Object.fromEntries(options.map(o => [o.name, o]));
+  const defaults = () => Object.fromEntries(options.map(o => [o.name, Array.isArray(o.default) ? [...o.default] : o.default]));
+  let values = defaults();
+  const $ = id => document.getElementById(id);
+  const STORE = "valheim-options-builder";
+
+  $("version").textContent = `APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
+  for (const name of Object.keys(data.presets)) {
+    const o = document.createElement("option"); o.value = name; o.textContent = name; $("preset").append(o);
+  }
+
+  const el = (tag, attrs = {}, ...kids) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+    }
+    e.append(...kids); return e;
+  };
+
+  function control(o) {
+    const id = "opt-" + o.name;
+    if (o.name === "goal") {
+      const box = el("div", { class: "goals", role: "radiogroup", "aria-label": o.display });
+      for (const g of data.goals) {
+        const input = el("input", { type: "radio", name: id, value: g.key, id: id + "-" + g.key });
+        input.addEventListener("change", () => set(o.name, g.key));
+        box.append(el("label", { class: "goal", for: input.id }, input,
+          el("span", { class: "boss", text: g.boss }), el("span", { class: "era", text: g.era }),
+          el("span", { class: "count", text: `${g.checks} checks with defaults` })));
+      }
+      return box;
+    }
+    if (o.kind === "toggle") {
+      const input = el("input", { type: "checkbox", id });
+      input.addEventListener("change", () => set(o.name, input.checked));
+      return el("label", { class: "switch", for: id }, input, el("span", { text: o.display }));
+    }
+    if (o.kind === "choice") {
+      if (o.choices.length <= 4) {
+        const seg = el("div", { class: "seg", role: "radiogroup", "aria-label": o.display });
+        for (const c of o.choices) {
+          const input = el("input", { type: "radio", name: id, value: c, id: id + "-" + c });
+          input.addEventListener("change", () => set(o.name, c));
+          seg.append(el("label", { for: input.id }, input, c.replace(/_/g, " ")));
+        }
+        return seg;
+      }
+      const sel = el("select", { id });
+      for (const c of o.choices) sel.append(el("option", { value: c, text: c.replace(/_/g, " ") }));
+      sel.addEventListener("change", () => set(o.name, sel.value));
+      return sel;
+    }
+    if (o.kind === "range") {
+      const row = el("div", { class: "row" });
+      const slider = el("input", { type: "range", min: o.min, max: o.max, step: 1, id: id + "-slider", "aria-label": o.display });
+      const num = el("input", { type: "number", min: o.min, max: o.max, step: 1, id, "aria-label": o.display + " value" });
+      slider.addEventListener("input", () => set(o.name, Number(slider.value)));
+      num.addEventListener("change", () => {
+        const v = Math.min(o.max, Math.max(o.min, Math.round(Number(num.value) || o.min))); set(o.name, v);
+      });
+      row.append(slider, num);
+      const names = Object.entries(o.names || {});
+      if (names.length) {
+        const chips = el("div", { class: "row" });
+        for (const [label, v] of names) {
+          const chip = el("button", { type: "button", class: "chip", "data-v": v, "aria-pressed": "false", text: label.replace(/_/g, " ") });
+          chip.addEventListener("click", () => set(o.name, v));
+          chips.append(chip);
+        }
+        return el("div", { class: "field" }, row, chips);
+      }
+      return row;
+    }
+    if (o.kind === "set") {
+      const box = el("div", { class: "checks", role: "group", "aria-label": o.display });
+      for (const k of o.keys) {
+        const input = el("input", { type: "checkbox", value: k, id: id + "-" + k.replace(/\W+/g, "-") });
+        input.addEventListener("change", () => {
+          const cur = new Set(values[o.name]); input.checked ? cur.add(k) : cur.delete(k); set(o.name, [...cur].sort());
+        });
+        box.append(el("label", { for: input.id }, input, k));
+      }
+      return box;
+    }
+    return el("span");
+  }
+
+  for (const g of data.groups) {
+    const sec = el("section", { class: "panel" }, el("h2", { text: g.name }));
+    for (const o of g.options) {
+      const wrap = el("div", { class: "opt" });
+      if (o.kind !== "toggle" && o.display !== g.name) wrap.append(el("span", { class: "label", text: o.display }));
+      wrap.append(control(o), el("p", { class: "hint", text: o.doc }));
+      sec.append(wrap);
+    }
+    $("groups").append(sec);
+  }
+
+  function sync() {
+    for (const o of options) {
+      const id = "opt-" + o.name, v = values[o.name];
+      if (o.kind === "toggle") $(id).checked = v;
+      else if (o.kind === "choice" || o.name === "goal") {
+        const radio = document.getElementById(id + "-" + v);
+        if (radio) radio.checked = true; else if ($(id)) $(id).value = v;
+      } else if (o.kind === "range") {
+        $(id).value = v; $(id + "-slider").value = v;
+        $(id).closest(".opt").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(Number(c.dataset.v) === v)));
+      } else if (o.kind === "set") {
+        document.querySelectorAll(`input[id^="${id}-"]`).forEach(c => { c.checked = v.includes(c.value); });
+      }
+    }
+    render();
+  }
+
+  function set(name, v) { values[name] = v; $("preset").value = ""; render(); save(); syncChips(name); }
+  function syncChips(name) {
+    const o = byName[name]; if (o.kind !== "range") return;
+    $("opt-" + name).value = values[name]; $("opt-" + name + "-slider").value = values[name];
+    $("opt-" + name).closest(".opt").querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(Number(c.dataset.v) === values[name])));
+  }
+
+  const q = s => JSON.stringify(s);
+  function yaml() {
+    const name = $("player-name").value.trim();
+    const lines = [
+      `# Made with the Valheim Options Builder (APWorld ${data.world_version}).`,
+      `name: ${q(name || "Viking")}`, `game: ${data.game}`,
+      "requires:", `  version: ${data.minimum_ap_version}`, "  game:", `    ${data.game}: ${data.world_version}`,
+      `${data.game}:`,
+    ];
+    for (const g of data.groups) {
+      lines.push(`  # ${g.name}`);
+      for (const o of g.options) {
+        const v = values[o.name];
+        const out = o.kind === "set" ? "[" + v.map(q).join(", ") + "]" : String(v);
+        lines.push(`  ${o.name}: ${out}`);
+      }
+    }
+    return lines.join("\n") + "\n";
+  }
+  function render() {
+    const text = yaml(), pre = $("yaml"); pre.textContent = "";
+    for (const line of text.split("\n")) {
+      const m = line.match(/^(\s*)([A-Za-z_]+):(.*)$/);
+      if (m && !line.trimStart().startsWith("#")) pre.append(m[1], el("span", { class: "k", text: m[2] + ":" }), m[3] + "\n");
+      else pre.append(line + "\n");
+    }
+    const name = $("player-name").value.trim(), status = $("status");
+    status.classList.toggle("bad", !name);
+    status.textContent = name ? "" : "Enter a slot name (up to 16 characters): it's how you connect from the game.";
+  }
+  function save() { try { localStorage.setItem(STORE, JSON.stringify({ values, name: $("player-name").value })); } catch (e) {} }
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (s && s.values) { for (const k of Object.keys(values)) if (k in s.values) values[k] = s.values[k]; if (s.name) $("player-name").value = s.name; }
+    } catch (e) {}
+  }
+
+  $("player-name").addEventListener("input", () => { render(); save(); });
+  $("preset").addEventListener("change", () => {
+    const p = data.presets[$("preset").value]; const keep = $("preset").value;
+    values = defaults();
+    if (p) for (const [k, v] of Object.entries(p)) {
+      const o = byName[k]; if (!o) continue;
+      values[k] = o.kind === "toggle" ? Boolean(v) : o.kind === "range" && typeof v === "string" ? (o.names[v] ?? o.default) : v;
+    }
+    sync(); $("preset").value = keep; save();
+  });
+  $("reset").addEventListener("click", () => { values = defaults(); $("preset").value = ""; sync(); save(); });
+  $("copy").addEventListener("click", async () => {
+    const text = yaml();
+    try { await navigator.clipboard.writeText(text); $("status").textContent = "Copied. Paste it into a .yaml file in your Players folder."; }
+    catch (e) {
+      const r = document.createRange(); r.selectNodeContents($("yaml"));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      $("status").textContent = "Selected: press Ctrl+C (or ⌘C) to copy.";
+    }
+  });
+  // Downloads only work when the page is opened directly (GitHub Pages), not inside an embedded preview.
+  if (window.top !== window.self) $("download").hidden = true;
+  $("download").addEventListener("click", () => {
+    const name = ($("player-name").value.trim() || "Viking").replace(/[^\w-]+/g, "_");
+    const a = el("a", { href: URL.createObjectURL(new Blob([yaml()], { type: "text/yaml" })), download: `${name}-Valheim.yaml` });
+    document.body.append(a); a.click(); a.remove();
+    $("status").textContent = `Saved ${name}-Valheim.yaml.`;
+  });
+
+  load(); sync();
+})();
+</script>
+</body>
+</html>
