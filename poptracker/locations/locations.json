@@ -1920,7 +1920,7 @@
     "name": "Trophy: TrophyEikthyr",
     "item_count": 1,
     "access_rules": [
-     "crafting,$combat|meadows"
+     "crafting,$combat|meadows,$altarkey|eikthyr_s_altar_key"
     ]
    },
    {
@@ -2002,7 +2002,7 @@
     "name": "Trophy: TrophyTheElder",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$combat|black_forest"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$combat|black_forest,$altarkey|the_elder_s_altar_key"
     ]
    },
    {
@@ -2054,7 +2054,7 @@
     "name": "Trophy: TrophyBonemass",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|bronze"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|bronze,$altarkey|bonemass_s_altar_key"
     ]
    }
   ],
@@ -2101,7 +2101,7 @@
     "name": "Trophy: TrophyDragonQueen",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron,$altarkey|moder_s_altar_key"
     ]
    },
    {
@@ -2183,7 +2183,7 @@
     "name": "Trophy: TrophyGoblinKing",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver,$altarkey|yagluth_s_altar_key"
     ]
    },
    {
@@ -2277,7 +2277,7 @@
     "name": "Trophy: TrophySeekerQueen",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$altarkey|the_queen_s_altar_key"
     ]
    }
   ],
@@ -2338,7 +2338,7 @@
     "name": "Trophy: TrophyFader",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$altarkey|fader_s_altar_key"
     ]
    },
    {
@@ -2816,7 +2816,7 @@
     "name": "Discover: The First Prison",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands,$altarkey|kall_fimbulbringer_s_altar_key"
     ]
    }
   ],
@@ -3583,7 +3583,7 @@
     "name": "Obtain: Sacrificial Blood",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands,$combat|deep_north"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal,$combat|mistlands,$combat|ashlands,$combat|deep_north,$altarkey|kall_fimbulbringer_s_altar_key"
     ]
    }
   ],

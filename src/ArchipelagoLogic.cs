@@ -100,6 +100,7 @@ public static class ArchipelagoLogic
             case "kill": result = Defeated(arg); break;
             case "combat": result = CombatReady(arg); break;
             case "comfort": result = Comfort() >= int.Parse(arg); break;
+            case "altarkey": result = ArchipelagoAltars.HasKey(arg); break;
             default: result = Has(token); break;
         }
         cache[token] = result;
@@ -221,15 +222,19 @@ public class ArchipelagoLogicWindow : MonoBehaviour
     private List<string> inLogic = new List<string>();
     private int outOfLogic;
     private string message = "";
+    private string nextCategory, nextMessage;
 
     private void Update()
     {
         bool toggle = ValheimRandomizer.logicWindowKey.Value.IsDown() && Player.m_localPlayer != null &&
                       !(Chat.instance && Chat.instance.HasFocus()) && !Console.IsVisible() && !TextInput.IsVisible();
-        if (toggle || (IsOpen && (Input.GetKeyDown(KeyCode.Escape) || Player.m_localPlayer == null)))
+        if (toggle || (IsOpen && Player.m_localPlayer == null))
         {
             SetOpen(!IsOpen && toggle);
         }
+        // Clicks change what's drawn only from the next frame, so IMGUI's layout and draw passes agree.
+        if (nextCategory != null) { category = nextCategory; nextCategory = null; scroll = Vector2.zero; }
+        if (nextMessage != null) { message = nextMessage; nextMessage = null; }
         if (IsOpen && Time.unscaledTime >= nextRefresh)
         {
             nextRefresh = Time.unscaledTime + RefreshSeconds;
@@ -273,9 +278,9 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         {
             var categories = new[] { "All" }.Concat(inLogic.Select(ArchipelagoLinks.Category).Distinct().OrderBy(c => c)).ToArray();
             int selected = Math.Max(0, Array.IndexOf(categories, category));
-            selected = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({inLogic.Count})" :
+            int clicked = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({inLogic.Count})" :
                 $"{c} ({inLogic.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 4);
-            category = categories[selected];
+            if (clicked != selected) nextCategory = categories[clicked];
 
             scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(440));
             foreach (var name in inLogic.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
@@ -286,15 +291,15 @@ public class ArchipelagoLogicWindow : MonoBehaviour
                 if (GUILayout.Button("Hint", GUILayout.Width(60)))
                 {
                     ArchipelagoLinks.Say("!hint_location " + name);
-                    message = $"Asked for a hint on {name} (costs hint points).";
+                    nextMessage = $"Asked for a hint on {name} (costs hint points).";
                 }
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndScrollView();
-            if (message.Length > 0) GUILayout.Label(message);
+            GUILayout.Label(message);  // always drawn (maybe empty), so the layout doesn't change
         }
         GUILayout.BeginHorizontal();
-        GUILayout.Label($"{ValheimRandomizer.logicWindowKey.Value} or Esc closes.");
+        GUILayout.Label($"{ValheimRandomizer.logicWindowKey.Value} or Close closes it.");
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Close", GUILayout.Width(80))) SetOpen(false);
         GUILayout.EndHorizontal();

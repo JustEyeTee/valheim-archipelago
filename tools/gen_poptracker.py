@@ -47,7 +47,7 @@ def boss_code(boss: str) -> str:
 # (Comfort counts the researches that unlock comfort pieces and roofs.)
 logic_items = sorted(world.LOGIC_ITEMS | world.COMBAT_ITEMS | {n for p in world.COMFORT_PIECES for n in p[4]}
                      | set(world.SHELTER[0]))
-key_items = list(world.BOSS_DROP_ITEMS.values())
+key_items = list(world.BOSS_DROP_ITEMS.values()) + list(world.ALTAR_KEYS.values())
 bosses = list(world.BOSS_ORDER)
 gate_items = []  # tier gate items in tier order, shown first
 for region in region_data_table.values():
@@ -112,7 +112,8 @@ def rule(location):
     eras = region_combat[location.region] + ([world.COMBAT_GATES[name]] if name in world.COMBAT_GATES else [])
     combat = [f"$combat|{code(era)}" for era in dict.fromkeys(eras)]
     comfort = [f"$comfort|{world.comfort_level(name)}"] if name.startswith(world.COMFORT) else []
-    return ",".join(dict.fromkeys(codes + tokens + combat + comfort))
+    altar = [f"$altarkey|{code(world.ALTAR_GATED[name])}"] if name in world.ALTAR_GATED else []
+    return ",".join(dict.fromkeys(codes + tokens + combat + comfort + altar))
 
 
 def category(name):
@@ -239,6 +240,13 @@ function combat(era)
   return any_of(gear.armor) and any_of(gear.weapons) and (COMBAT_MODE < 2 or any_of(gear.ranged))
 end
 
+-- boss_altar_keys (the seed's setting, read when autotracking connects): a boss's altar needs its key.
+ALTAR_KEYS = false
+
+function altarkey(key)
+  return not ALTAR_KEYS or has(key)
+end
+
 -- Comfort (what the Rested effect shows): 1, plus 1 under a roof, plus the best piece of each comfort group
 -- among those you can build. A piece needs its researches and the tier gates of the tier its materials are from.
 local function has_all(list)
@@ -288,6 +296,7 @@ end
 function onClear(slot_data)
   CUR_INDEX = -1
   PROGRESSIVE, PROGRESSIVE_COUNT = (slot_data and slot_data.progressive) or {}, {}
+  ALTAR_KEYS = (slot_data and slot_data.boss_altar_keys) and true or false
   if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
     COMBAT_MODE = slot_data.options.combat_logic
   end

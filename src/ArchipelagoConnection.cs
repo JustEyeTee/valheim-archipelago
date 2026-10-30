@@ -16,6 +16,7 @@ internal static class ArchipelagoConnection
     public static string GoalTrophy { get; private set; } = "TrophyFader";
 
     private static string slotName;
+    private static bool altarKeys;  // boss_altar_keys
 
     // progressive_items: each progressive item -> its family's researches in order; the k-th copy received
     // unlocks the k-th. Empty when the option is off (or for rooms from before it).
@@ -56,6 +57,7 @@ internal static class ArchipelagoConnection
         ArchipelagoGoal.Load(slotData);
         LoadProgressive(slotData);
         ArchipelagoLogic.Load(slotData);
+        altarKeys = slotData != null && slotData.TryGetValue("boss_altar_keys", out var keys) && keys is bool on && on;
         if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
 
         // Slot data numbers arrive as Int64; rooms from before this option use full costs.
@@ -161,6 +163,10 @@ internal static class ArchipelagoConnection
             {
                 ValheimRandomizer.DoUnlockResearch(researchId);
             }
+            else if (ArchipelagoAltars.IsAltarKey(name))
+            {
+                ArchipelagoAltars.OnReceived(name);
+            }
             else if (!ArchipelagoExtras.IsExtraItem(name))
             {
                 ValheimRandomizer.Log.LogWarning(
@@ -200,6 +206,7 @@ internal static class ArchipelagoConnection
         if (!ArchipelagoCoop.Ready) return;
         ArchipelagoCoop.Replay();
         if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
+        ArchipelagoAltars.OnConnected(altarKeys, session.RoomState.Seed);
         TryGetAllItems();
         if (HasGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"))) CompleteGame();
         ArchipelagoGoal.Check(ReceivedCount);

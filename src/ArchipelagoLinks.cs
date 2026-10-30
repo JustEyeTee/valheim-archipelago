@@ -86,6 +86,7 @@ public static class ArchipelagoLinks
         deathLinkAmnesty = GetInt(slotData, "death_link_amnesty");
         trapLink = GetInt(slotData, "trap_link") != 0;
         hintShopPrice = GetInt(slotData, "hint_shop_price");
+        shopPending = false;
 
         deathLinkService = session.CreateDeathLinkService();
         deathLinkService.OnDeathLinkReceived += dl => incomingDeaths.Enqueue(dl);
@@ -254,6 +255,8 @@ public static class ArchipelagoLinks
     {
         if (hintShopPrice <= 0) return "The hint shop is closed in this game (hint_shop_price is 0).";
         if (player == null) return "Load your world first.";
+        if (!ArchipelagoConnection.IsConnected || !session.Socket.Connected) return "Not connected to Archipelago.";
+        if (shopPending) return "Your last hint is still on its way.";
         bool nearTrader = UnityEngine.Object.FindObjectsByType<Trader>(FindObjectsSortMode.None)
             .Any(t => t && Vector3.Distance(t.transform.position, player.transform.position) <= ShopDistance);
         if (!nearTrader) return "Stand by a trader (Haldor, Hildir or the Bog Witch) to shop.";
@@ -269,11 +272,29 @@ public static class ArchipelagoLinks
         long id = session.Locations.GetLocationIdFromName("Valheim", name);
         if (id < 0) return "That check isn't in this seed.";
 
-        inventory.RemoveItem("$item_coins", hintShopPrice);
-        ZoneSystem.instance.SetGlobalKey(Bought(name));
-        session.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, id);
-        return $"Paid {hintShopPrice} Coins: the hint for {name} is on its way.";
+        // Paid once the server has made the hint (the reply comes on the network thread; paying is done on the
+        // main thread, in Tick), so a lost connection costs nothing.
+        shopPending = true;
+        int price = hintShopPrice;
+        session.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, id).ContinueWith(task =>
+            shopResults.Enqueue(() =>
+            {
+                shopPending = false;
+                var me = Player.m_localPlayer;
+                if (task.IsFaulted || task.IsCanceled || task.Result == null || task.Result.Count == 0)
+                {
+                    me?.Message(MessageHud.MessageType.Center, "Archipelago: the hint shop couldn't reach the server; nothing was paid.");
+                    return;
+                }
+                me?.GetInventory().RemoveItem("$item_coins", price);
+                ZoneSystem.instance?.SetGlobalKey(Bought(name));
+                me?.Message(MessageHud.MessageType.Center, $"Archipelago: paid {price} Coins for a hint on {name}.");
+            }));
+        return $"Asking the server for a hint on {name}...";
     }
+
+    private static bool shopPending;
+    private static readonly ConcurrentQueue<Action> shopResults = new ConcurrentQueue<Action>();
 
     public static string ShopInfo() => hintShopPrice <= 0 ? "The hint shop is closed in this game." :
         $"Hint shop: by a trader, /ap shop hint [category] pays {hintShopPrice} Coins to reveal one of your checks in logic.";
@@ -387,6 +408,7 @@ public static class ArchipelagoLinks
 
     public static void Tick(Player player)
     {
+        while (shopResults.TryDequeue(out var shopResult)) shopResult();
         while (messages.TryDequeue(out var message))
         {
             player.Message(MessageHud.MessageType.TopLeft, message);

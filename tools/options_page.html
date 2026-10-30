@@ -249,7 +249,8 @@ pre.yaml .k { color: var(--code-key); }
                     explore: b.explore.filter(exploreWanted).length, comfort: comfortLevels(b).length };
     for (const o of CHECK_OPTIONS) kinds[o] = values[o] ? b[o] || 0 : 0;
     let boss = values.boss_items ? b.boss_drops : 0, gear = values.gear_items ? b.gear : 0, relics = 0;
-    let missing = total - (b.research + b.trophy + boss + gear);
+    const keys = values.boss_altar_keys ? g.conditions["All Bosses"] : 0;
+    let missing = total - (b.research + b.trophy + boss + keys + gear);
     if (missing < 0) { gear -= Math.min(gear, -missing); missing = 0; }  // too few checks: tools go first
     const conditions = values.goal_conditions.length ? values.goal_conditions : ["Goal Boss"];
     if (conditions.includes("Relic Hunt")) {
@@ -266,7 +267,7 @@ pre.yaml .k { color: var(--code-key); }
     return {
       total,
       checks: CHECK_KINDS.map(([k, label]) => [label, kinds[k]]).filter(([, n]) => n > 0),
-      items: [["Researches", b.research], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Tools", gear],
+      items: [["Researches", b.research], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Altar keys", keys], ["Tools", gear],
               ["Forsaken Relics", relics], ["Maps", maps], ["Traps", traps], ["Boosts", boosts], ["Resource bundles", missing - traps - boosts]]
         .filter(([, n]) => n > 0),
     };

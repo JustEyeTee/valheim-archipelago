@@ -1248,6 +1248,54 @@
   "codes": "majestic_carapace"
  },
  {
+  "name": "Eikthyr's Altar Key",
+  "type": "toggle",
+  "img": "images/items/eikthyr_s_altar_key.png",
+  "codes": "eikthyr_s_altar_key"
+ },
+ {
+  "name": "The Elder's Altar Key",
+  "type": "toggle",
+  "img": "images/items/the_elder_s_altar_key.png",
+  "codes": "the_elder_s_altar_key"
+ },
+ {
+  "name": "Bonemass's Altar Key",
+  "type": "toggle",
+  "img": "images/items/bonemass_s_altar_key.png",
+  "codes": "bonemass_s_altar_key"
+ },
+ {
+  "name": "Moder's Altar Key",
+  "type": "toggle",
+  "img": "images/items/moder_s_altar_key.png",
+  "codes": "moder_s_altar_key"
+ },
+ {
+  "name": "Yagluth's Altar Key",
+  "type": "toggle",
+  "img": "images/items/yagluth_s_altar_key.png",
+  "codes": "yagluth_s_altar_key"
+ },
+ {
+  "name": "The Queen's Altar Key",
+  "type": "toggle",
+  "img": "images/items/the_queen_s_altar_key.png",
+  "codes": "the_queen_s_altar_key"
+ },
+ {
+  "name": "Fader's Altar Key",
+  "type": "toggle",
+  "img": "images/items/fader_s_altar_key.png",
+  "codes": "fader_s_altar_key"
+ },
+ {
+  "name": "Kall Fimbulbringer's Altar Key",
+  "type": "toggle",
+  "img": "images/items/kall_fimbulbringer_s_altar_key.png",
+  "codes": "kall_fimbulbringer_s_altar_key"
+ },
+ {
   "name": "Eikthyr Defeated",
   "type": "toggle",
   "img": "images/items/boss_eikthyr.png",

@@ -376,6 +376,15 @@ class HintShopPrice(Range):
     default = 100
 
 
+class BossAltarKeys(Toggle):
+    """
+    Seals every boss altar until you receive that boss's Altar Key from the multiworld (Eikthyr's Altar Key,
+    The Elder's Altar Key...): the altar takes no offering until then, so logic needs the key for each boss
+    fight (and Kall Fimbulbringer's for the gate to his prison). The keys go into the item pool.
+    """
+    display_name = "Boss Altar Keys"
+
+
 class MapItems(DefaultOnToggle):
     """
     Puts a Map to each boss of the goal's era into the item pool (Map to Eikthyr, Map to The Elder...):
@@ -542,6 +551,7 @@ class ValheimOptions(PerGameCommonOptions):
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
     map_items: MapItems
+    boss_altar_keys: BossAltarKeys
     map_fragments: MapFragments
     trap_percentage: TrapPercentage
     excluded_traps: ExcludedTraps
@@ -561,7 +571,7 @@ option_groups = [
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
                            FarmingChecks, DungeonChecks]),
-    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
+    OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
                           HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),

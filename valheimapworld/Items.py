@@ -409,6 +409,14 @@ Map to The Queen,map:Mistlands_DvergrBossEntrance1,1,Map,Useful
 Map to Fader,map:FaderLocation,1,Map,Useful
 Map to Kall Fimbulbringer,map:DN_Bossroom,1,Map,Useful
 Map Fragment,map:fragment,1,Map,Useful
+Eikthyr's Altar Key,altar:Eikthyr,1,Key,Progression
+The Elder's Altar Key,altar:The Elder,1,Key,Progression
+Bonemass's Altar Key,altar:Bonemass,1,Key,Progression
+Moder's Altar Key,altar:Moder,1,Key,Progression
+Yagluth's Altar Key,altar:Yagluth,1,Key,Progression
+The Queen's Altar Key,altar:The Queen,1,Key,Progression
+Fader's Altar Key,altar:Fader,1,Key,Progression
+Kall Fimbulbringer's Altar Key,altar:Kall Fimbulbringer,1,Key,Progression
 '''
 
 # Map string classifications to `ItemClassification`

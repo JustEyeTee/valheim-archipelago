@@ -2,6 +2,15 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.17.0
+
+- **Boss altar keys** (`boss_altar_keys`, off by default): every boss altar is sealed until you receive that
+  boss's Altar Key from the multiworld (Eikthyr's Altar Key, The Elder's Altar Key...); the altar takes no
+  offering until then. Logic needs the key for each boss fight, and Kall Fimbulbringer's for his prison's gate.
+  The keys are in the PopTracker pack, the logic panel and the Options Builder's summary.
+- The hint shop takes your Coins only once the server has made the hint (nothing is paid if the connection
+  is lost). The logic window closes with its key or Close (Esc no longer also opens the menu).
+
 ## 0.16.0
 
 - **Lore checks** (`lore_checks`, on): reading each biome's lore rune stones (11) and each boss's Vegvisir (8).

@@ -66,6 +66,9 @@ combat logic) gear. The key can be changed in the mod's config (`LogicPanelKey`)
 logic, for everyone. It costs no hint points. In the F9 window, a check's Hint button asks the server
 instead (`!hint_location`), which does cost hint points.
 
+**"The altar is sealed".** The seed uses `boss_altar_keys`: that boss's altar takes offerings once you've
+received its Altar Key (`/ap hint <Boss>'s Altar Key` finds it).
+
 **I did my goal but didn't win.** Type `/ap goal` in chat: it lists each goal condition and how far along it
 is. You have to be connected; progress made offline counts once you reconnect. Trophy Hunt and Researcher
 count trophies and researches from your goal's era only; Skill Master counts a skill once it reaches the

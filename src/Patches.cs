@@ -380,6 +380,30 @@ public static class Patches
         }
     }
 
+    // ---------- boss_altar_keys: a boss altar takes no offering until its key is received ----------
+    [HarmonyPatch(typeof(OfferingBowl), nameof(OfferingBowl.UseItem))]
+    private static class OfferingBowl_UseItem_AltarKey_Patch
+    {
+        private static bool Prefix(OfferingBowl __instance, Humanoid user, ref bool __result)
+        {
+            if (ArchipelagoAltars.Open(__instance, user)) return true;
+            __result = true;  // handled: nothing is offered
+            return false;
+        }
+    }
+
+    // Moder's altar: the dragon eggs go on item stands, and the bowl is used with the interact key.
+    [HarmonyPatch(typeof(OfferingBowl), nameof(OfferingBowl.Interact))]
+    private static class OfferingBowl_Interact_AltarKey_Patch
+    {
+        private static bool Prefix(OfferingBowl __instance, Humanoid user, bool hold, ref bool __result)
+        {
+            if (hold || ArchipelagoAltars.Open(__instance, user)) return true;
+            __result = true;
+            return false;
+        }
+    }
+
     // ---------- Lore and dungeon checks ----------
     [HarmonyPatch(typeof(RuneStone), nameof(RuneStone.Interact))]
     private static class RuneStone_Interact_Check_Patch

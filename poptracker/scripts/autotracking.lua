@@ -18,6 +18,7 @@ end
 function onClear(slot_data)
   CUR_INDEX = -1
   PROGRESSIVE, PROGRESSIVE_COUNT = (slot_data and slot_data.progressive) or {}, {}
+  ALTAR_KEYS = (slot_data and slot_data.boss_altar_keys) and true or false
   if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
     COMBAT_MODE = slot_data.options.combat_logic
   end

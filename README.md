@@ -107,6 +107,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
+| `boss_altar_keys` | off | Boss altars stay sealed until you receive each boss's Altar Key from the multiworld. |
 | `map_items`, `map_fragments` | on, 5 | Maps to each boss of your era (they pin its altar) and Map Fragments (they uncover part of the map). |
 | `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |

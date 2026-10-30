@@ -19,6 +19,7 @@ def item_kind(n):
     if n in vw.BOSS_DROP_ITEMS.values(): return "Boss drops"
     if n in vw.GEAR_ITEMS: return "Tools"
     if n == vw.RELIC: return "Forsaken Relics"
+    if n in vw.ALTAR_KEYS.values(): return "Altar keys"
     if n in vw.MAP_ITEMS or n == vw.MAP_FRAGMENT: return "Maps"
     if n in vw.TRAP_ITEMS: return "Traps"
     if n in vw.BOOST_ITEMS: return "Boosts"

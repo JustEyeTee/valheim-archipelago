@@ -208,4 +208,12 @@ ITEM_MAPPING = {
   [2342] = "3_dragon_tears",
   [2343] = "torn_spirit",
   [2344] = "majestic_carapace",
+  [2388] = "eikthyr_s_altar_key",
+  [2389] = "the_elder_s_altar_key",
+  [2390] = "bonemass_s_altar_key",
+  [2391] = "moder_s_altar_key",
+  [2392] = "yagluth_s_altar_key",
+  [2393] = "the_queen_s_altar_key",
+  [2394] = "fader_s_altar_key",
+  [2395] = "kall_fimbulbringer_s_altar_key",
 }

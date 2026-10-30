@@ -41,6 +41,13 @@ function combat(era)
   return any_of(gear.armor) and any_of(gear.weapons) and (COMBAT_MODE < 2 or any_of(gear.ranged))
 end
 
+-- boss_altar_keys (the seed's setting, read when autotracking connects): a boss's altar needs its key.
+ALTAR_KEYS = false
+
+function altarkey(key)
+  return not ALTAR_KEYS or has(key)
+end
+
 -- Comfort (what the Rested effect shows): 1, plus 1 under a roof, plus the best piece of each comfort group
 -- among those you can build. A piece needs its researches and the tier gates of the tier its materials are from.
 local function has_all(list)

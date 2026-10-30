@@ -72,7 +72,7 @@ LOGIC_ITEMS = frozenset(
 )
 
 
-TRACKER_OPTIONS = ("goal", "progressive_items", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -146,6 +146,11 @@ HILDIR_QUESTS = {
 RELIC = "Forsaken Relic"
 MAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("map:") and item.item_name.startswith("Map to "))
 MAP_FRAGMENT = "Map Fragment"
+
+# boss_altar_keys: each boss's key, and the checks its altar gates (its fight; Kall's gate altar opens his prison).
+ALTAR_KEYS = {boss: f"{boss}'s Altar Key" for boss in BOSS_ORDER}
+ALTAR_GATED = {**{BOSS_TROPHIES[boss]: ALTAR_KEYS[boss] for boss in BOSS_ORDER},
+               "Discover: The First Prison": ALTAR_KEYS["Kall Fimbulbringer"]}
 COMFORT = "Comfort: Level "
 
 
@@ -209,6 +214,7 @@ class ValheimWorld(World):
         "Progressive Items": set(PROGRESSIVE_FAMILIES),
         "Tools": set(GEAR_ITEMS),
         "Maps": set(MAP_ITEMS) | {MAP_FRAGMENT},
+        "Altar Keys": set(ALTAR_KEYS.values()),
         "Bundles": set(FILLER_ITEMS),
         "Traps": set(TRAP_ITEMS),
         "Boosts": set(BOOST_ITEMS),
@@ -427,6 +433,9 @@ class ValheimWorld(World):
             for boss in earlier:
                 if boss in BOSS_DROP_ITEMS:
                     self.multiworld.itempool.append(self.create_item(BOSS_DROP_ITEMS[boss]))
+        if self.options.boss_altar_keys:
+            for boss in self.era_bosses:
+                self.multiworld.itempool.append(self.create_item(ALTAR_KEYS[boss]))
         if self.options.gear_items:
             for gear in GEAR_ITEMS:
                 if ITEM_TIERS[gear] <= self.scope_tier:
@@ -475,7 +484,7 @@ class ValheimWorld(World):
         classification = ItemClassification.trap if name in TRAP_ITEMS else \
             ItemClassification.filler if name in FILLER_ITEMS else \
             ItemClassification.progression if name in getattr(self, "logic_items", LOGIC_ITEMS) \
-            or name in BOSS_DROP_ITEMS.values() or name == RELIC \
+            or name in BOSS_DROP_ITEMS.values() or name == RELIC or name in ALTAR_KEYS.values() \
             else ItemClassification.useful
         return Item(name, classification, item_table[name], self.player)
 
@@ -502,6 +511,8 @@ class ValheimWorld(World):
             rules.append(self.combat_rules[name])
         if name.startswith(COMFORT):
             rules.append(lambda state, level=comfort_level(name): self.comfort(state) >= level)
+        if self.options.boss_altar_keys and name in ALTAR_GATED:
+            rules.append(lambda state, key=ALTAR_GATED[name]: state.has(key, self.player))
         return rules
 
     def comfort(self, state) -> int:
@@ -572,6 +583,7 @@ class ValheimWorld(World):
             "goal": self.goal_slot_data(),
             "progressive": self.progressive,
             "hint_shop_price": self.options.hint_shop_price.value,
+            "boss_altar_keys": bool(self.options.boss_altar_keys.value),
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),
             "death_link_mode": self.options.death_link_mode.current_key,

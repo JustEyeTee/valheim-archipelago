@@ -46,6 +46,7 @@ Type `/ap goal` in the in-game chat to see your progress.
 - Tools, resource bundles and boosts (skill training, blessings).
 - Forsaken Relics, in a Relic Hunt.
 - Maps: a Map to each boss pins its altar on your map; a Map Fragment uncovers part of the map.
+- With `boss_altar_keys`, each boss's Altar Key: its altar takes offerings only once you have it.
 - Traps, such as ambushes, raids, storms, Floor Is Lava and Butterfingers.
 
 Physical items arrive in an Archipelago Chest you build (Hammer > Randomizer).
