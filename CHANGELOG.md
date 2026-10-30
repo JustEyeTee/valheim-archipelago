@@ -12,6 +12,10 @@ From the first playtest:
   many of each kind. F9 hides skill, exploration and comfort checks unless you ask (they come as you play), sorts
   its tabs by size and drops the repeated "Obtain:" inside a tab.
 - A Map Fragment pins the spot it uncovers on your map.
+- Traps: the Lightning Strike no longer kills a new character outright (the bolt lands beside you; you take a
+  third of your health); Bat Swarm is 2 bats plus one per boss defeated (6 killed you at spawn over and over);
+  the Launch Trap throws you higher; creatures a trap summons leave after 3 minutes or when you die.
+- The F8 panel hides while the inventory, the menu, a store or the map is open.
 
 ## 0.21.0
 

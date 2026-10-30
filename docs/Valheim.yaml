@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.8 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.21.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.21.1 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -203,8 +203,9 @@ Valheim:
     random-range-2-14: 0 # random value between 2 and 14
 
   research_cost_percent:
-    # Scales how many materials each research costs at the Research Bench, as a percentage.
-    # Every ingredient still costs at least 1, so 1 makes every research cost 1 of each.
+    # Scales how many materials each research costs at the Research Bench, as a percentage, and the Research Bench
+    # and the Archipelago Chest themselves. Every ingredient still costs at least 1, so 1 makes every research cost 1
+    # of each.
     #
     # You can define additional values between the minimum and maximum values.
     # Minimum value is 1
@@ -452,7 +453,7 @@ Valheim:
     random-range-0-20: 0 # random value between 0 and 20
 
   starter_kit:
-    # Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
+    # Start with a Club, a Stone Axe and a Torch in your inventory.
     'false': 0
     'true': 50
 
@@ -503,13 +504,14 @@ Valheim:
 
   excluded_traps:
     # Traps that are never placed. The traps:
-    # Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you.
+    # Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you. Creatures a trap summons leave
+    #   after 3 minutes, or when you die.
     # Monster Pack Trap: a pack of whatever lives in the biome you're in (Draugr in the Swamp,
     #   Wolves in the Mountains, Fulings in the Plains...).
-    # Bat Swarm Trap: 6 bats.
+    # Bat Swarm Trap: 2 bats, and one more for each boss defeated (6 at most).
     # Raid Trap: a raid you're ready for starts (only when you host the world).
     # Thunderstorm Trap, Blizzard Trap: 2 minutes of storm or freezing snowstorm.
-    # Lightning Strike Trap: lightning hits where you stand.
+    # Lightning Strike Trap: lightning strikes beside you and takes a third of your health.
     # Floor Is Lava Trap: for 30 seconds the ground burns you; stand on something you built
     #   (or a boat), or keep jumping.
     # Burning Trap, Poison Trap, Frost Trap: damage over time (Frost also slows you).

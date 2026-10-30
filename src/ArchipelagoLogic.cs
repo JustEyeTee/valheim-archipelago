@@ -242,6 +242,8 @@ public class ArchipelagoLogicPanel : MonoBehaviour
     private void OnGUI()
     {
         if (!open || Player.m_localPlayer == null) return;
+        // Out of the way of the game's own screens.
+        if (InventoryGui.IsVisible() || Menu.IsVisible() || StoreGui.IsVisible() || Minimap.IsOpen()) return;
         if (style == null)
         {
             style = new GUIStyle(GUI.skin.box) { alignment = TextAnchor.UpperLeft, wordWrap = true, fontSize = 14 };

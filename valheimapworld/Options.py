@@ -463,13 +463,14 @@ class TrapPercentage(Range):
 class ExcludedTraps(OptionSet):
     """
     Traps that are never placed. The traps:
-    Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you.
+    Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you. Creatures a trap summons leave
+      after 3 minutes, or when you die.
     Monster Pack Trap: a pack of whatever lives in the biome you're in (Draugr in the Swamp,
       Wolves in the Mountains, Fulings in the Plains...).
-    Bat Swarm Trap: 6 bats.
+    Bat Swarm Trap: 2 bats, and one more for each boss defeated (6 at most).
     Raid Trap: a raid you're ready for starts (only when you host the world).
     Thunderstorm Trap, Blizzard Trap: 2 minutes of storm or freezing snowstorm.
-    Lightning Strike Trap: lightning hits where you stand.
+    Lightning Strike Trap: lightning strikes beside you and takes a third of your health.
     Floor Is Lava Trap: for 30 seconds the ground burns you; stand on something you built
       (or a boat), or keep jumping.
     Burning Trap, Poison Trap, Frost Trap: damage over time (Frost also slows you).

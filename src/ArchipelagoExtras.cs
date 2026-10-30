@@ -290,6 +290,7 @@ public static class ArchipelagoExtras
         }
 
         ArchipelagoLinks.Tick(player);
+        if (trapCreatures.Count > 0) DespawnTrapCreatures(player.IsDead());
 
         if (Time.time >= nextExploreTime)
         {
@@ -629,12 +630,18 @@ public static class ArchipelagoExtras
                 SpawnAround(player, pack.creature, pack.count, 12f);
                 break;
             case "Bat Swarm Trap":
-                SpawnAround(player, "Bat", 6, 6f);
+                // 2 bats early on, one more per boss defeated (6 at most): 6 at the start was a death loop.
+                SpawnAround(player, "Bat", Math.Min(6, 2 + BossesDefeated()), 6f);
                 break;
             case "Lightning Strike Trap":
+                // The game's lightning blast is tuned for late-game armor and killed a new character outright: the
+                // bolt lands a few metres away, and you take a third of your health as a lightning hit.
                 var bolt = ZNetScene.instance ? ZNetScene.instance.GetPrefab("lightningAOE") : null;
-                if (bolt) UnityEngine.Object.Instantiate(bolt, player.transform.position, Quaternion.identity);
+                if (bolt) UnityEngine.Object.Instantiate(bolt, player.transform.position + Quaternion.Euler(0f, UnityEngine.Random.Range(0f, 360f), 0f) * Vector3.forward * 6f, Quaternion.identity);
                 else ValheimRandomizer.Log.LogWarning("[AP] 'lightningAOE' not found");
+                var shock = new HitData { m_point = player.transform.position, m_hitType = HitData.HitType.Undefined };
+                shock.m_damage.m_lightning = player.GetMaxHealth() * 0.35f;
+                player.Damage(shock);
                 break;
             case "Floor Is Lava Trap":
                 lavaEndTime = Time.time + LavaSeconds;
@@ -653,7 +660,7 @@ public static class ArchipelagoExtras
                 AddEffect(player, "Tared");
                 break;
             case "Launch Trap":
-                player.ForceJump(Vector3.up * 12f, true);
+                player.ForceJump(Vector3.up * 18f, true);
                 break;
             case "Rust Trap":
                 foreach (var item in player.GetInventory().GetEquippedItems())
@@ -779,9 +786,33 @@ public static class ArchipelagoExtras
             var offset = Quaternion.Euler(0f, 360f * i / count, 0f) * Vector3.forward * distance;
             var pos = player.transform.position + offset;
             pos.y = ZoneSystem.instance.GetGroundHeight(pos) + 0.5f;
-            UnityEngine.Object.Instantiate(prefab, pos, Quaternion.identity);
+            trapCreatures.Add((UnityEngine.Object.Instantiate(prefab, pos, Quaternion.identity), Time.time + TrapCreatureSeconds));
         }
     }
+
+    // Creatures a trap summons leave after a few minutes, or when you die, so you don't respawn into them.
+    private const float TrapCreatureSeconds = 180f;
+    private static readonly List<(GameObject creature, float until)> trapCreatures = new List<(GameObject, float)>();
+
+    private static void DespawnTrapCreatures(bool all)
+    {
+        for (int i = trapCreatures.Count - 1; i >= 0; i--)
+        {
+            var (creature, until) = trapCreatures[i];
+            if (creature && !all && Time.time < until) continue;
+            if (creature && creature.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid() && nview.IsOwner())
+                ZNetScene.instance.Destroy(creature);
+            trapCreatures.RemoveAt(i);
+        }
+    }
+
+    // How many bosses this world has seen defeated (the keys the game sets).
+    private static readonly string[] BossKeys =
+        { "defeated_eikthyr", "defeated_gdking", "defeated_bonemass", "defeated_dragon", "defeated_goblinking",
+          "defeated_queen", "defeated_fader", "defeated_frozenking_p3" };
+
+    private static int BossesDefeated() =>
+        ZoneSystem.instance == null ? 0 : BossKeys.Count(key => ZoneSystem.instance.GetGlobalKey(key));
 
     private static StatusEffect AddEffect(Player player, string effectName)
     {
