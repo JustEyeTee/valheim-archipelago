@@ -14,7 +14,9 @@ Versions are the APWorld's `world_version`; the mod is released alongside it.
 - `/ap goal` in chat shows your progress; the game shows each step and each condition done.
 - Presets "Relic hunt to Moder" and "Trophy and Hildir hunt to Yagluth".
 - Options Builder: each goal condition says what it means for the chosen goal (e.g. "21 of 42 trophies"),
-  and is greyed out when there's nothing to do in that era.
+  and is greyed out when there's nothing to do in that era. A live summary shows your game's checks and items
+  by kind (researches, trophies, boss drops, tools, relics, traps, boosts, bundles), checked against real
+  generation by `tools/options_page_test.sh`.
 
 ## 0.10.0
 

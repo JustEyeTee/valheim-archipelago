@@ -85,17 +85,17 @@ def build(options):
 
 def locations(options):
     """Location names of a world built with these options (others default)."""
-    world = build(options)
-    return [loc.name for loc in world.multiworld.get_locations(1) if loc.address is not None]
+    built = build(options)
+    return [loc.name for loc in built.multiworld.get_locations(1) if loc.address is not None]
 
 
 def goal_info(goal):
     """What each goal condition has to work with in this goal's era: how many trophies, researches,
     skills, Hildir's quests and bosses, and the most of the map Explorer can ask for (0: none)."""
-    world = build({"goal": goal, "explorer_percent": 20})
-    targets = world.goal_targets
+    built = build({"goal": goal, "explorer_percent": 20})
+    targets = built.goal_targets
     explore = targets["Explorer"]
-    return {"All Bosses": len(world.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
+    return {"All Bosses": len(built.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
             "Researcher": len(targets["Researcher"]), "Skill Master": len(targets["Skill Master"]),
             "Hildir's Quests": len(targets["Hildir's Quests"]),
             "Explorer": int(float(explore[0][len("Explore: "):].split("%")[0])) if explore else 0}
@@ -110,7 +110,7 @@ def breakdown(goal):
     """How many checks each option adds for this goal: with every kind of check on, each location is
     counted under the option that adds it. Skills: how many can be trained in this goal (every level of a
     skill comes with it); exploration: the percentages available. The rest are always there."""
-    out = {"base": 0, "skills_available": 0, "explore": []}
+    out = {"base": 0, "research": 0, "trophy": 0, "skills_available": 0, "explore": []}
     for name in locations({"goal": goal, "kill_checks": 1, "skill_checks": 10, "skill_check_spacing": "every_10",
                            "exploration_checks": 20, "exploration_check_spacing": "half_percent"}):
         option = next((o for prefix, o in CHECK_OPTIONS.items() if name.startswith(prefix)), None)
@@ -122,8 +122,19 @@ def breakdown(goal):
             out["explore"].append(float(name[len("Explore: "):].split("%")[0]))
         else:
             out["base"] += 1
+            out["trophy" if name.startswith("Trophy: ") else "research"] += 1
     out["explore"].sort()
+    out.update(pool_info(goal))
     return out
+
+
+def pool_info(goal):
+    """The items a goal's pool starts from, before filler (the same rules as ValheimWorld.create_items):
+    the earlier bosses' drops (boss_items) and the era's tools (gear_items)."""
+    built = build({"goal": goal})
+    earlier = world.BOSS_ORDER[:world.BOSS_ORDER.index(built.goal_boss)]
+    return {"boss_drops": sum(1 for boss in earlier if boss in world.BOSS_DROP_ITEMS),
+            "gear": sum(1 for gear in world.GEAR_ITEMS if world.ITEM_TIERS[gear] <= built.scope_tier)}
 
 
 goal_cls = hints["goal"]
@@ -141,6 +152,7 @@ data = {
     "groups": groups,
     "presets": options_presets,
     "goals": goals,
+    "trap_count": len(world.TRAP_ITEMS),
 }
 
 page = (root / "tools" / "options_page.html").read_text()

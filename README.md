@@ -134,7 +134,8 @@ Data files and their generators:
   (`tools/extract_game_data.py` makes the json from a Valheim install, with UnityPy).
 - `tools/gen_poptracker.py <Archipelago folder>` writes the PopTracker pack.
 - `tools/test_generate.sh <goal> <seeds>` generates seeds and checks they can be beaten;
-  `tools/net_test.sh` tests the mod's network code against a live Archipelago server.
+  `tools/net_test.sh` tests the mod's network code against a live Archipelago server;
+  `tools/options_page_test.sh` checks the Options Builder's check and item counts against real generation.
 
 ## License
 

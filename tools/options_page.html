@@ -98,6 +98,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border: 1p
 button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 pre.yaml { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px;
   font: 0.8rem/1.55 var(--font-mono); overflow: auto; max-height: 70vh; white-space: pre; }
+@media (min-width: 960px) { pre.yaml { max-height: 40vh; } }
 pre.yaml .k { color: var(--code-key); }
 .badge { font: 500 0.8rem var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
 .badge.add { color: var(--accent); }
@@ -105,6 +106,12 @@ pre.yaml .k { color: var(--code-key); }
 .opt.off input, .opt.off .chip { cursor: not-allowed; }
 .total { margin: 0; font: 500 0.95rem var(--font-mono); font-variant-numeric: tabular-nums; }
 .total strong { font: 700 1.6rem var(--font-display); color: var(--accent); }
+.summary { display: grid; gap: 10px 20px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin: 0; }
+.summary h3 { font: 700 0.95rem var(--font-display); letter-spacing: 0.02em; margin: 0 0 4px; }
+.summary dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 1px 10px; font-size: 0.88rem; }
+.summary dt { color: var(--muted); }
+.summary dd { margin: 0; font: 500 0.82rem var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.summary .note { grid-column: 1 / -1; color: var(--muted); font-size: 0.82rem; margin: 0; }
 .status { min-height: 1.4em; font-size: 0.9rem; color: var(--muted); margin: 0; }
 .status.bad { color: var(--bad); }
 .foot { color: var(--muted); font-size: 0.88rem; max-width: 72ch; }
@@ -142,6 +149,7 @@ pre.yaml .k { color: var(--code-key); }
     <aside class="preview" aria-labelledby="yaml-h">
       <h2 id="yaml-h">Your options file</h2>
       <p class="total" id="total" aria-live="polite"></p>
+      <div class="summary" id="summary" aria-label="What's in your game"></div>
       <pre class="yaml" id="yaml" tabindex="0" aria-label="Generated YAML"></pre>
       <div class="actions">
         <button type="button" class="primary" id="copy">Copy YAML</button>
@@ -216,8 +224,52 @@ pre.yaml .k { color: var(--code-key); }
               (values.exploration_checks > top ? ` (up to ${top}% in this goal)` : ""), explore.length > 0, !b.explore.length);
     setOption("exploration_check_spacing", "", false, !b.explore.length || values.exploration_checks === 0);
     updateConditions(g);
+    updateSummary(g);
     $("total").innerHTML = "";
     $("total").append(el("strong", { text: String(totalFor(b)) }), ` check${totalFor(b) === 1 ? "" : "s"} for ${g.boss} with these options`);
+  }
+
+  // What's in the game: checks by kind, and the items that fill them (the same rules as
+  // ValheimWorld.create_items: one item per research and trophy, boss drops and tools, then relics,
+  // traps, boosts and bundles for the rest). Python rounds halves to even, so this does too.
+  const pyRound = x => { const f = Math.floor(x); return Math.abs(x - f - 0.5) < 1e-9 ? (f % 2 ? f + 1 : f) : Math.round(x); };
+  const CHECK_KINDS = [["research", "Researches"], ["trophy", "Trophies"], ["biome_checks", "Biomes"],
+    ["obtain_checks", "Obtain"], ["kill_checks", "Kills"], ["discovery_checks", "Discoveries"], ["build_checks", "Build"],
+    ["eat_checks", "Eat"], ["fishing_checks", "Fishing"], ["taming_checks", "Taming"], ["trader_checks", "Trader"],
+    ["skills", "Skills"], ["explore", "Exploration"]];
+  function summary(g) {
+    const b = g.breakdown, total = totalFor(b);
+    const kinds = { research: b.research, trophy: b.trophy, skills: b.skills_available * skillLevels().length,
+                    explore: b.explore.filter(exploreWanted).length };
+    for (const o of CHECK_OPTIONS) kinds[o] = values[o] ? b[o] || 0 : 0;
+    let boss = values.boss_items ? b.boss_drops : 0, gear = values.gear_items ? b.gear : 0, relics = 0;
+    let missing = total - (b.research + b.trophy + boss + gear);
+    if (missing < 0) { gear -= Math.min(gear, -missing); missing = 0; }  // too few checks: tools go first
+    const conditions = values.goal_conditions.length ? values.goal_conditions : ["Goal Boss"];
+    if (conditions.includes("Relic Hunt")) {
+      relics = Math.min(values.relic_hunt_total, missing + gear);
+      if (relics > missing) { gear -= relics - missing; missing = relics; }
+      missing -= relics;
+    }
+    const allowed = data.trap_count - values.excluded_traps.length;
+    const traps = allowed ? pyRound(missing * values.trap_percentage / 100) : 0;
+    const boosts = Math.min(missing - traps, pyRound(missing * values.boost_percentage / 100));
+    return {
+      total,
+      checks: CHECK_KINDS.map(([k, label]) => [label, kinds[k]]).filter(([, n]) => n > 0),
+      items: [["Researches", b.research], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Tools", gear],
+              ["Forsaken Relics", relics], ["Traps", traps], ["Boosts", boosts], ["Resource bundles", missing - traps - boosts]]
+        .filter(([, n]) => n > 0),
+    };
+  }
+  function updateSummary(g) {
+    const s = summary(g), box = $("summary"); box.textContent = "";
+    for (const [title, rows] of [["Checks", s.checks], ["Items", s.items]]) {
+      const dl = el("dl");
+      for (const [label, n] of rows) dl.append(el("dt", { text: label }), el("dd", { text: String(n) }));
+      box.append(el("div", {}, el("h3", { text: `${title} (${rows.reduce((t, [, n]) => t + n, 0)})` }), dl));
+    }
+    if (values.starter_kit) box.append(el("p", { class: "note", text: "Plus the Starter Kit, in your inventory from the start." }));
   }
 
   // Goal conditions: what each asks for in the chosen goal's era (the same rules as ValheimWorld.setup_goal),
