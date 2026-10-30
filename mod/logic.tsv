@@ -1047,6 +1047,18 @@ location	Survive: Ghost Raid	6	kill:Bonemass
 location	Survive: Skeleton Raid	6	kill:Bonemass
 location	Survive: Surtling Raid	6	kill:Bonemass
 location	Survive: Wolf Raid	6	kill:Bonemass
+location	Buy: Toadstool	7	kill:Moder
+location	Buy: Fragrant Bundle	7	kill:Moder
+location	Brew: Anti-Sting Concoction	8	Mead ketill|Fermenter|kill:Moder
+location	Brew: Berserkir Mead	7	Mead ketill|Fermenter|kill:Moder
+location	Brew: Tonic of Ratatosk	5	Mead ketill|Fermenter
+location	Brew: Mead of Troll Endurance	5	Mead ketill|Fermenter
+location	Brew: Draught of Vananidir	5	Mead ketill|Fermenter
+location	Brew: Brew of Animal Whispers	7	Mead ketill|Fermenter
+location	Obtain: Oat Seeds	12	
+location	Obtain: Poteitr Seeds	12	
+location	Plant: Oats	12	Cultivator|Northern Crops
+location	Plant: Poteitr	12	Cultivator|Northern Crops
 combat	Meadows	armor	
 combat	Meadows	weapons	Clubs Tier 1|Axes Tier 1|Blades Tier 1|Spears Tier 1|Knuckles Tier 1|Short Blades Tier 1
 combat	Meadows	ranged	Bows Tier 1

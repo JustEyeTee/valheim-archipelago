@@ -727,3 +727,15 @@ raid	ghosts	Survive: Ghost Raid	6
 raid	skeletons	Survive: Skeleton Raid	6	
 raid	surtlings	Survive: Surtling Raid	6	
 raid	wolves	Survive: Wolf Raid	6	
+buy	MushroomBzerker	Buy: Toadstool	7	
+buy	FragrantBundle	Buy: Fragrant Bundle	7	
+brew	MeadBugRepellent	Brew: Anti-Sting Concoction	8	Mead ketill|Fermenter
+brew	MeadBzerker	Brew: Berserkir Mead	7	Mead ketill|Fermenter
+brew	MeadHasty	Brew: Tonic of Ratatosk	5	Mead ketill|Fermenter
+brew	MeadStrength	Brew: Mead of Troll Endurance	5	Mead ketill|Fermenter
+brew	MeadSwimmer	Brew: Draught of Vananidir	5	Mead ketill|Fermenter
+brew	MeadTamer	Brew: Brew of Animal Whispers	7	Mead ketill|Fermenter
+obtain	OatSeeds	Obtain: Oat Seeds	12	
+obtain	PoteitrSeeds	Obtain: Poteitr Seeds	12	
+plant	sapling_oat	Plant: Oats	12	Cultivator|Northern Crops
+plant	sapling_poteitr	Plant: Poteitr	12	Cultivator|Northern Crops

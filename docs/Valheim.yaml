@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.8 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.19.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.20.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -372,7 +372,8 @@ Valheim:
 
   farming_checks:
     # Adds a check for planting each crop and tree with the Cultivator: carrot, turnip, onion (and each for seeds),
-    # barley, flax, magecap, jotun puffs, kale, ashvine, beech, birch, fir, pine and oak, up to the goal's era.
+    # barley, flax, magecap, jotun puffs, kale, oats, poteitr, ashvine, beech, birch, fir, pine and oak, up to the
+    # goal's era.
     'false': 0
     'true': 50
 
@@ -482,6 +483,12 @@ Valheim:
     random-low: 0 # random value weighted towards lower values
     random-high: 0 # random value weighted towards higher values
     random-range-0-1000: 0 # random value between 0 and 1000
+
+  hint_shop_scaling:
+    # The hint shop's price grows as the game goes on: hint_shop_price times one more than the number of bosses
+    # defeated (100 Coins at the start, 200 after Eikthyr, 300 after The Elder...), since late-game Coins are plenty.
+    'false': 0
+    'true': 50
 
   #########
   # Traps #

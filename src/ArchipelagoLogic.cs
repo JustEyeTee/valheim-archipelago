@@ -134,6 +134,39 @@ public static class ArchipelagoLogic
         return Token("tier:" + rule.tier) && All(rule.needs);
     }
 
+    // What a check still lacks, as the smallest things to get: items, bosses, gear for a fight, a comfort level
+    // (a tier's gate is opened up into what it needs).
+    private static void Lacking(string token, HashSet<string> into)
+    {
+        if (Token(token)) return;
+        if (token.StartsWith("tier:", StringComparison.Ordinal) && Tiers.TryGetValue(int.Parse(token.Substring(5)), out var needs))
+        {
+            foreach (var need in needs) Lacking(need, into);
+            return;
+        }
+        into.Add(token);
+    }
+
+    // The things that would each put the most checks in logic on their own: (what, how many checks).
+    public static List<(string what, int checks)> Next { get; private set; } = new List<(string, int)>();
+
+    public static string NextLine() => "Next: " + string.Join(", ", Next.Select(n => $"{Describe(n.what)} ({n.checks} {(n.checks == 1 ? "check" : "checks")})"));
+
+    public static string Describe(string token)
+    {
+        int colon = token.IndexOf(':');
+        string arg = colon > 0 ? token.Substring(colon + 1) : token;
+        switch (colon > 0 ? token.Substring(0, colon) : "")
+        {
+            case "boss": return $"defeat {arg} (or receive its drop)";
+            case "kill": return $"defeat {arg}";
+            case "combat": return $"{arg} gear (armor and a weapon)";
+            case "comfort": return $"comfort {arg}";
+            case "altarkey": return $"{arg}'s Altar Key";
+            default: return token;
+        }
+    }
+
     // The seed's missing checks split into in logic and not, by category ("Obtain", "Research"...).
     public static (List<string> inLogic, int outOfLogic) Missing(string category = null)
     {
@@ -141,11 +174,27 @@ public static class ArchipelagoLogic
         var inLogic = new List<string>();
         int outOfLogic = 0;
         if (ZoneSystem.instance == null) return (inLogic, 0);
+        var unlocks = new Dictionary<string, int>();
         foreach (var name in ArchipelagoLinks.MissingNames())
         {
             if (category != null && !string.Equals(ArchipelagoLinks.Category(name), category, StringComparison.OrdinalIgnoreCase)) continue;
-            if (InLogic(name)) inLogic.Add(name); else outOfLogic++;
+            if (InLogic(name))
+            {
+                inLogic.Add(name);
+                continue;
+            }
+            outOfLogic++;
+            if (!Locations.TryGetValue(name, out var rule)) continue;
+            var lacking = new HashSet<string>();
+            Lacking("tier:" + rule.tier, lacking);
+            foreach (var need in rule.needs) Lacking(need, lacking);
+            if (lacking.Count == 1)
+            {
+                var only = lacking.First();
+                unlocks[only] = unlocks.TryGetValue(only, out var n) ? n + 1 : 1;
+            }
         }
+        Next = unlocks.OrderByDescending(u => u.Value).ThenBy(u => u.Key).Take(3).Select(u => (u.Key, u.Value)).ToList();
         inLogic.Sort(StringComparer.Ordinal);
         return (inLogic, outOfLogic);
     }
@@ -182,6 +231,7 @@ public class ArchipelagoLogicPanel : MonoBehaviour
         if (!ArchipelagoLinks.Connected) return "Archipelago: not connected.";
         var (inLogic, outOfLogic) = ArchipelagoLogic.Missing();
         var lines = new List<string> { $"In logic now: {inLogic.Count}   (not yet: {outOfLogic})" };
+        if (ArchipelagoLogic.Next.Count > 0) lines.Add(ArchipelagoLogic.NextLine());
         foreach (var group in inLogic.GroupBy(ArchipelagoLinks.Category).OrderBy(g => g.Key))
         {
             var names = group.Select(n => n.Contains(": ") ? n.Substring(n.IndexOf(": ", StringComparison.Ordinal) + 2) : n).ToList();
@@ -297,6 +347,7 @@ public class ArchipelagoLogicWindow : MonoBehaviour
             }
             GUILayout.EndScrollView();
             GUILayout.Label(message);  // always drawn (maybe empty), so the layout doesn't change
+            GUILayout.Label(ArchipelagoLogic.Next.Count > 0 ? ArchipelagoLogic.NextLine() : "");
         }
         GUILayout.BeginHorizontal();
         GUILayout.Label($"{ValheimRandomizer.logicWindowKey.Value} or Close closes it.");

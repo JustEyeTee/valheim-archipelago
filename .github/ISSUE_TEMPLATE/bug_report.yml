@@ -1,0 +1,58 @@
+name: Bug report
+description: Something in the mod, the APWorld, the trackers or the web pages doesn't work.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! The [troubleshooting page](https://github.com/JustEyeTee/valheim-archipelago/blob/main/docs/TROUBLESHOOTING.md)
+        covers the common problems; `/ap status`, `/ap goal` and `/ap logic` in the game's chat often show what's going on.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: The APWorld and mod versions (the release you installed, or the Options Builder's version line), and Archipelago's.
+      placeholder: "APWorld 0.19.0, mod 0.19.0, Archipelago 0.6.8"
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - In the game (the mod)
+        - Generating or hosting (the APWorld)
+        - PopTracker or Universal Tracker
+        - The Options Builder or the guide
+        - Somewhere else
+    validations:
+      required: true
+  - type: dropdown
+    id: coop
+    attributes:
+      label: Co-op
+      options:
+        - Playing alone
+        - Co-op, shared slot
+        - Co-op, a slot each
+  - type: textarea
+    id: options
+    attributes:
+      label: Your options (YAML)
+      description: The Valheim part of your options file. Remove anything private.
+      render: yaml
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: |
+        For problems in the game, attach `BepInEx/LogOutput.log` from your Valheim (or mod manager profile) folder, or
+        paste the `[AP]` lines around the problem. For generation, Archipelago's error message.
+      render: text

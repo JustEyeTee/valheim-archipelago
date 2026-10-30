@@ -114,7 +114,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
 | `boss_altar_keys` | off | Boss altars stay sealed until you receive each boss's Altar Key from the multiworld. |
 | `map_items`, `map_fragments` | on, 5 | Maps to each boss of your era (they pin its altar) and Map Fragments (they uncover part of the map). |
-| `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
+| `hint_shop_price`, `hint_shop_scaling` | 100, on | Coins per hint in the hint shop (0 closes it); with scaling, times one more than the bosses defeated. |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
 | `gear_items` | on | Tools from your goal's era. |
 | `starter_kit` | on | Start with a Club, Stone Axe, Torch and Raspberries. |

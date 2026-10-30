@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Player guide
+    url: https://justeyetee.github.io/valheim-archipelago/guide/
+    about: Setup, goals, every kind of check, keys and commands, co-op.
+  - name: Troubleshooting
+    url: https://github.com/JustEyeTee/valheim-archipelago/blob/main/docs/TROUBLESHOOTING.md
+    about: The common problems and how to fix them.

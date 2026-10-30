@@ -320,7 +320,8 @@ class LoreChecks(DefaultOnToggle):
 class FarmingChecks(DefaultOnToggle):
     """
     Adds a check for planting each crop and tree with the Cultivator: carrot, turnip, onion (and each for seeds),
-    barley, flax, magecap, jotun puffs, kale, ashvine, beech, birch, fir, pine and oak, up to the goal's era.
+    barley, flax, magecap, jotun puffs, kale, oats, poteitr, ashvine, beech, birch, fir, pine and oak, up to the
+    goal's era.
     """
     display_name = "Farming Checks"
 
@@ -401,6 +402,14 @@ class BossAltarKeys(Toggle):
     fight (and Kall Fimbulbringer's for the gate to his prison). The keys go into the item pool.
     """
     display_name = "Boss Altar Keys"
+
+
+class HintShopScaling(DefaultOnToggle):
+    """
+    The hint shop's price grows as the game goes on: hint_shop_price times one more than the number of bosses
+    defeated (100 Coins at the start, 200 after Eikthyr, 300 after The Elder...), since late-game Coins are plenty.
+    """
+    display_name = "Hint Shop Scaling"
 
 
 class MapItems(DefaultOnToggle):
@@ -570,6 +579,7 @@ class ValheimOptions(PerGameCommonOptions):
     starter_kit: StarterKit
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
+    hint_shop_scaling: HintShopScaling
     map_items: MapItems
     boss_altar_keys: BossAltarKeys
     map_fragments: MapFragments
@@ -592,7 +602,7 @@ option_groups = [
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
                            FarmingChecks, BrewingChecks, DungeonChecks, RaidChecks]),
     OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
-                          HintShopPrice]),
+                          HintShopPrice, HintShopScaling]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
 ]

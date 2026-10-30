@@ -246,6 +246,7 @@ flowchart LR
 | `gen_options_page.py` | builds the Options Builder (`docs/options/`) and the player guide (`docs/guide/`), served by GitHub Pages, from the APWorld's options, counting each goal's checks | before a release |
 | `gen_template.sh` | regenerates `docs/Valheim.yaml`, the options template, with Archipelago's own generator | before a release |
 | `make_icon.py` | draws the Thunderstore icon | when changing the icon |
+| `make_social.py` | draws `docs/social-preview.png`, the repository's link preview (upload it in Settings > General) | when the version or icon changes |
 | `extract_game_data.py`, `extract_localization.py` | the older, smaller extraction, and the English names | for English names |
 | `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten | after any APWorld change |
 | `ap_tests.sh` | runs Archipelago's own test suites for this world | before a release |

@@ -97,6 +97,7 @@ public static class ArchipelagoLinks
         deathLinkAmnesty = GetInt(slotData, "death_link_amnesty");
         trapLink = GetInt(slotData, "trap_link") != 0;
         hintShopPrice = GetInt(slotData, "hint_shop_price");
+        hintShopScaling = slotData != null && slotData.TryGetValue("hint_shop_scaling", out var scaling) && scaling is bool on && on;
         shopPending = false;
 
         deathLinkService = session.CreateDeathLinkService();
@@ -263,7 +264,18 @@ public static class ArchipelagoLinks
     // By a trader, pay Coins to reveal one of your checks that's in logic as a hint for everyone (scouting your
     // own location with a hint costs no hint points). A check bought once isn't offered again.
     private static int hintShopPrice;
+    private static bool hintShopScaling;
     private const float ShopDistance = 10f;
+
+    // The keys the game sets when each boss is defeated.
+    private static readonly string[] BossKeys =
+        { "defeated_eikthyr", "defeated_gdking", "defeated_bonemass", "defeated_dragon", "defeated_goblinking",
+          "defeated_queen", "defeated_fader", "defeated_frozenking_p3" };
+
+    // hint_shop_scaling: the price times one more than the bosses defeated in this world.
+    private static int ShopPrice() => hintShopScaling && ZoneSystem.instance != null
+        ? hintShopPrice * (1 + BossKeys.Count(k => ZoneSystem.instance.GetGlobalKey(k)))
+        : hintShopPrice;
 
     public static string ShopHint(Player player, string category)
     {
@@ -276,7 +288,8 @@ public static class ArchipelagoLinks
         if (!nearTrader) return "Stand by a trader (Haldor, Hildir or the Bog Witch) to shop.";
         var inventory = player.GetInventory();
         int coins = inventory.CountItems("$item_coins");
-        if (coins < hintShopPrice) return $"A hint costs {hintShopPrice} Coins; you have {coins}.";
+        int price = ShopPrice();
+        if (coins < price) return $"A hint costs {price} Coins; you have {coins}.";
 
         string Bought(string name) => ArchipelagoCoop.Scoped("ap_shophint:" + name.ToLowerInvariant().Replace(' ', '_'));
         var choices = ArchipelagoLogic.Missing(category).inLogic.Where(n => !ZoneSystem.instance.GetGlobalKey(Bought(n))).ToList();
@@ -289,7 +302,6 @@ public static class ArchipelagoLinks
         // Paid once the server has made the hint (the reply comes on the network thread; paying is done on the
         // main thread, in Tick), so a lost connection costs nothing.
         shopPending = true;
-        int price = hintShopPrice;
         session.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, id).ContinueWith(task =>
             shopResults.Enqueue(() =>
             {
@@ -311,7 +323,8 @@ public static class ArchipelagoLinks
     private static readonly ConcurrentQueue<Action> shopResults = new ConcurrentQueue<Action>();
 
     public static string ShopInfo() => hintShopPrice <= 0 ? "The hint shop is closed in this game." :
-        $"Hint shop: by a trader, /ap shop hint [category] pays {hintShopPrice} Coins to reveal one of your checks in logic.";
+        $"Hint shop: by a trader, /ap shop hint [category] pays {ShopPrice()} Coins to reveal one of your checks in logic" +
+        (hintShopScaling ? " (the price grows with each boss defeated)." : ".");
 
     // ---------- Trap Link ----------
 
@@ -496,6 +509,7 @@ public class ArchipelagoCommand : ConsoleCommand
                     Reply($"In logic now: {all.Count} (not yet: {notYet}). " + string.Join(", ",
                           all.GroupBy(ArchipelagoLinks.Category).OrderBy(g => g.Key).Select(g => $"{g.Key} {g.Count()}")) +
                           $". /ap logic <category> lists them; {ValheimRandomizer.logicPanelKey.Value} shows the panel.");
+                    if (ArchipelagoLogic.Next.Count > 0) Reply(ArchipelagoLogic.NextLine());
                     return;
                 }
                 var (names2, later) = ArchipelagoLogic.Missing(rest);

@@ -26,8 +26,12 @@ db = json.load(open(sys.argv[1]))
 
 check_rows = [r for r in csv.reader(open(root / "mod" / "checks.tsv", newline=""), delimiter="\t")]
 tier_of = {r[2]: int(r[3]) for r in check_rows if r and not r[0].startswith("#")}
-# Item prefab -> the check for getting it (obtain checks, and catch checks for fish).
-obtain = {r[1]: r[2] for r in check_rows if r and r[0] in ("obtain", "catch")}
+# Item prefab -> the check for getting it (obtain checks, catch checks for fish, and buy checks for what a trader
+# sells, like the Bog Witch's mead ingredients).
+obtain = {}
+for r in check_rows:
+    if r and r[0] in ("obtain", "catch", "buy"):
+        obtain.setdefault(r[1], r[2])
 research = {}  # piece prefab -> (research name, tier)
 for r in csv.reader(open(root / "mod" / "research.tsv", newline=""), delimiter="\t"):
     if r and not r[0].startswith("#"):

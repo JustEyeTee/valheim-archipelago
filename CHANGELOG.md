@@ -2,6 +2,19 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.20.0
+
+- **All 19 meads** are brewing checks: the Bog Witch's stock counts as a source for their ingredients, with new
+  buy checks for her Toadstool and Fragrant Bundle (sold once Moder is dead).
+- **Oats and poteitr** are farming checks too (their seeds come from Deep North granaries; the game data scan now
+  records chest loot). Vineberry is still left out: no source for its seeds is in the game files.
+- **What to get next**: the F8 panel, the F9 window and `/ap logic` show the items, bosses or gear that would each
+  put the most checks in logic ("Next: Bronze (12 checks), defeat The Elder (9 checks)...").
+- **Hint shop scaling** (`hint_shop_scaling`, on): the price is `hint_shop_price` times one more than the bosses
+  defeated in your world.
+- **Website home page** (https://justeyetee.github.io/valheim-archipelago/), a bug report form for issues, a social
+  preview image (`docs/social-preview.png`, from `tools/make_social.py`) and Dependabot for CI's actions.
+
 ## 0.19.0
 
 - **Raid checks** (`raid_checks`, off by default): surviving each raid that keeps coming once it starts (trolls

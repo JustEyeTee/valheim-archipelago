@@ -587,6 +587,7 @@ class ValheimWorld(World):
             "goal": self.goal_slot_data(),
             "progressive": self.progressive,
             "hint_shop_price": self.options.hint_shop_price.value,
+            "hint_shop_scaling": bool(self.options.hint_shop_scaling.value),
             "boss_altar_keys": bool(self.options.boss_altar_keys.value),
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),

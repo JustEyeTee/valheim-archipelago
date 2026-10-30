@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valheim Archipelago</title>
+<meta name="description" content="A Valheim mod and APWorld for Archipelago, the multi-game randomizer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #edf0ee; --surface: #fbfcfb; --ink: #1c2723; --muted: #56655f; --line: #d2d9d5;
+  --accent: #965a08; --accent-ink: #ffffff; --accent-soft: #f2e5cc;
+  --font-display: "Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+    --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --surface: #18201d; --ink: #e5ece8; --muted: #98a8a1; --line: #2b3632;
+  --accent: #e3a540; --accent-ink: #1a1406; --accent-soft: #3a2e18; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 17px/1.6 var(--font-body); margin: 0;
+  padding: 48px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 28px; }
+.wrap > * { min-width: 0; }
+h1 { font: 700 2.6rem/1.05 var(--font-display); margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+.lede { font-size: 1.15rem; margin: 10px 0 0; max-width: 60ch; }
+.version { font: 500 0.8rem var(--font-mono); color: var(--muted); }
+.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { display: grid; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; color: inherit; text-decoration: none; }
+.card:hover, .card:focus-visible { border-color: var(--accent); outline: none; }
+.card strong { font: 700 1.15rem var(--font-display); color: var(--accent); letter-spacing: 0.02em; }
+.card span { color: var(--muted); font-size: 0.95rem; }
+ul { margin: 0; padding-left: 22px; }
+li { max-width: 68ch; }
+a { color: var(--accent); }
+footer { color: var(--muted); font-size: 0.9rem; }
+@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .12s; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Valheim Archipelago</h1>
+    <p class="lede">A Valheim mod and APWorld for <a href="https://archipelago.gg/" target="_blank" rel="noopener">Archipelago</a>,
+      the multi-game randomizer. Recipes and building pieces are locked behind researches; trophies, biomes,
+      skills, dungeons, farming, brewing and more are checks that send items across the multiworld.</p>
+    <span class="version" id="version"></span>
+  </header>
+  <nav class="cards" aria-label="Pages">
+    <a class="card" href="guide/"><strong>Player guide</strong><span>Setup, goals, every kind of check, keys and commands, co-op.</span></a>
+    <a class="card" href="options/"><strong>Options Builder</strong><span>Make your options file, with live counts of checks and items.</span></a>
+    <a class="card" href="https://github.com/JustEyeTee/valheim-archipelago/releases" target="_blank" rel="noopener"><strong>Downloads</strong><span>The mod, the APWorld and the PopTracker pack.</span></a>
+    <a class="card" href="https://github.com/JustEyeTee/valheim-archipelago" target="_blank" rel="noopener"><strong>Source</strong><span>Code, changelog, troubleshooting and issues.</span></a>
+  </nav>
+  <section>
+    <ul>
+      <li>Eight goal bosses from Eikthyr to Kall Fimbulbringer, with goal conditions you can combine (Relic Hunt,
+        Trophy Hunt, Great Hall, Hildir's Quests...).</li>
+      <li>Logic that knows your era: combat gear, comfort, boss keys and progressive items.</li>
+      <li>In game: a panel of what you can do now (F8), a hint shop at the traders, and co-op with a shared slot or a slot each.</li>
+    </ul>
+  </section>
+  <footer>
+    <p>Based on <a href="https://github.com/Samupo/ValheimArchipelagoRandomizer" target="_blank" rel="noopener">Samupo's Valheim Archipelago Randomizer</a>.
+      Most of this project's code, tools and documentation, this page included, were written by Claude, an AI model
+      made by Anthropic, at JustEyeTee's direction. Public domain (CC0).</p>
+  </footer>
+</div>
+<script type="application/json" id="data">{"world_version":"0.20.0","game_version":"1.0.21","minimum_ap_version":"0.6.8"}</script>
+<script>
+(() => {
+  const data = JSON.parse(document.getElementById("data").textContent);
+  document.getElementById("version").textContent =
+    `Valheim ${data.game_version} · APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
+})();
+</script>
+</body>
+</html>

@@ -27,6 +27,7 @@ Sections, all keyed by prefab (GameObject) name where there is one:
   vegvisirs    Vegvisir stones: the location (boss altar) each one reveals
   runestones   rune stones: the location a stone pins, if any, and how many lore texts it has
   plants       saplings and crops: biome, needs cultivated ground, what it grows into
+  containers   chests that come with loot: what they can hold
   raids        random events (raids): enabled, random, duration, biome, the world keys they need or rule out
 Asset references are (file, path id); refs to components resolve to the GameObject owning them.
 """
@@ -84,6 +85,8 @@ def kind_of(t):
         return "runestone"
     if "m_grownPrefabs" in t and "m_growTime" in t:
         return "plant"
+    if isinstance(t.get("m_defaultItems"), dict) and "m_width" in t and "m_height" in t:
+        return "container"
     if isinstance(t.get("m_events"), list) and t["m_events"] and isinstance(t["m_events"][0], dict) \
             and "m_requiredGlobalKeys" in t["m_events"][0]:
         return "raidlist"
@@ -215,6 +218,10 @@ for kind, cab, pid, ex, t in kept:
         db["plants"][owner] = {"name": t.get("m_name"), "biome": t.get("m_biome"),
                                "cultivated": t.get("m_needCultivatedGround"),
                                "grows": [resolve(g, cab, ex) for g in t.get("m_grownPrefabs") or []]}
+    elif kind == "container":
+        items = drop_table(t.get("m_defaultItems"), cab, ex)
+        if items:  # only chests that come with loot (treasure chests, not the ones players build)
+            db["containers"][owner] = {"name": t.get("m_name"), "loot": items}
     elif kind == "raidlist":
         for e in t["m_events"]:
             db["raids"][e.get("m_name")] = {

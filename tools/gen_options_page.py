@@ -1,6 +1,7 @@
 """Builds the options builder web page from the APWorld's own option definitions, so it can't drift out of
 date: docs/options/index.html (for GitHub Pages) and, with --fragment, the page body alone. Also builds the
-player guide, docs/guide/index.html, whose check counts come from the same worlds.
+player guide, docs/guide/index.html, whose check counts come from the same worlds, and the site's home page,
+docs/index.html.
 
 Needs Archipelago's Python (for the World and its options):
     ~/projects/archipelago-0.6.8/.venv/bin/python tools/gen_options_page.py ~/projects/archipelago-0.6.8 [--fragment out.html]
@@ -205,6 +206,9 @@ guide = {k: data[k] for k in ("world_version", "game_version", "minimum_ap_versi
 guide["goals"] = [{"boss": g["boss"], "era": g["era"], "checks": g["checks"]} for g in goals]
 guide["kinds"] = [{"kind": k, "what": w, "option": o if o == "always" else o, "count": n} for k, w, o, n in KINDS]
 write_page("guide_page.html", guide, root / "docs" / "guide" / "index.html")
+# The site's home page (https://justeyetee.github.io/valheim-archipelago/): links to the guide, the builder, downloads.
+write_page("home_page.html", {k: data[k] for k in ("world_version", "game_version", "minimum_ap_version")},
+           root / "docs" / "index.html")
 print(f"wrote {out}: {sum(len(g['options']) for g in groups)} options, goals {[(g['key'], g['checks']) for g in goals]}")
 if "--fragment" in sys.argv:
     pathlib.Path(sys.argv[sys.argv.index("--fragment") + 1]).write_text(head + rest)
