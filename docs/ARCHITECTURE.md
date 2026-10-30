@@ -63,18 +63,12 @@ example `researchSmelter`). Global keys are saved with the world and shared by e
 ### Doing a research sends a check
 
 ```mermaid
-%%{init: {"sequence": {"mirrorActors": false}}}%%
-sequenceDiagram
-    actor P as You
-    participant G as Valheim (mod)
-    participant W as World keys
-    participant S as Archipelago server
-    participant O as Another player
-    P->>G: craft "Smelter" at the Research Bench
-    G->>W: researchSmelter_crafted, ap_pending:smelter
-    G->>S: check "Smelter" done
-    G->>W: ap_sent:smelter
-    S->>O: the item that was at "Smelter" (maybe theirs, maybe yours)
+flowchart LR
+    P(["You"]) -- "1. craft Smelter at<br/>the Research Bench" --> G["Valheim (mod)"]
+    G -- "2. Smelter crafted,<br/>check pending" --> W[("World keys")]
+    G -- "3. check Smelter done" --> S["Archipelago server"]
+    G -.->|"4. check sent"| W
+    S -- "5. the item that was at Smelter<br/>(maybe someone else's, maybe yours)" --> O(["Another player"])
 ```
 
 1. You craft a research at the bench; the research item lands in your inventory.
@@ -105,19 +99,11 @@ the first space). Checks that aren't in the connected seed (options, goal) are m
 ### Receiving items
 
 ```mermaid
-%%{init: {"sequence": {"mirrorActors": false}}}%%
-sequenceDiagram
-    participant S as Archipelago server
-    participant N as Network thread
-    participant G as Game thread (2-second tick)
-    participant W as World keys
-    participant C as Archipelago Chest
-    S->>N: you received "Smelter" (from someone's check)
-    Note over N: never touches the game, only stores it
-    G->>N: read all received items
-    G->>W: researchSmelter: the Smelter can be built
-    S->>N: you received "10 Iron"
-    G->>C: 10 Iron delivered (counted in your character, never twice)
+flowchart LR
+    S["Archipelago server"] -- "1. you received Smelter,<br/>then 10 Iron" --> N["Network thread<br/>(only stores them;<br/>never touches the game)"]
+    N -- "2. picked up every<br/>2 seconds" --> T["Game thread"]
+    T -- "3. Smelter: can be built" --> W[("World keys")]
+    T -- "4. 10 Iron (counted in your<br/>character, never twice)" --> C["Archipelago Chest"]
 ```
 
 Items arrive on the network thread, where touching the game isn't safe, so the mod only reads them from
