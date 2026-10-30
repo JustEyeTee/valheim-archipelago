@@ -53,7 +53,7 @@ class IncludeDeepNorth(Toggle):
     """
     Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
     there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    upgrades) and 9 Deep North trophies. Only applies when the goal is Fader.
+    upgrades) and 8 Deep North trophies. Only applies when the goal is Fader.
     """
     display_name = "Include Deep North"
 
@@ -66,6 +66,33 @@ class BiomeChecks(DefaultOnToggle):
     Archipelago Chest you build with the Hammer.
     """
     display_name = "Biome Checks"
+
+
+class ObtainChecks(DefaultOnToggle):
+    """
+    Adds a check for getting each of 93 materials and ingredients for the first time, by
+    picking it up or crafting it (Flint, Copper Ore, Bronze, Silver, Black Metal...), up to the
+    goal's tier. These checks are filled with resource bundles and traps.
+    """
+    display_name = "Obtain Checks"
+
+
+class ExplorationChecks(DefaultOnToggle):
+    """
+    Adds checks for exploring part of the world map: 0.25%, 0.5%, 1%, 1.5%, 2%, 3%, 4%, 5% and
+    6% of the world, up to the goal's tier. Walking 1 km uncovers roughly 0.06%; sailing is
+    faster. These checks are filled with resource bundles and traps.
+    """
+    display_name = "Exploration Checks"
+
+
+class KillChecks(Toggle):
+    """
+    Adds a check for the first kill of each kind of creature (Neck, Greydwarf, Troll, Draugr,
+    Wolf, Lox, Seeker, Morgen...), up to the goal's tier. Bosses are left out, since their
+    trophies already are checks. These checks are filled with resource bundles and traps.
+    """
+    display_name = "Kill Checks"
 
 
 class TrapPercentage(Range):
@@ -85,4 +112,7 @@ class ValheimOptions(PerGameCommonOptions):
     research_cost_percent: ResearchCostPercent
     include_deep_north: IncludeDeepNorth
     biome_checks: BiomeChecks
+    obtain_checks: ObtainChecks
+    exploration_checks: ExplorationChecks
+    kill_checks: KillChecks
     trap_percentage: TrapPercentage

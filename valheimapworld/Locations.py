@@ -1,6 +1,8 @@
 from typing import Dict, NamedTuple, List, TYPE_CHECKING
 from BaseClasses import Location, LocationProgressType
 
+from .check_data import CHECKS
+
 if TYPE_CHECKING:
     from . import ValheimWorld
 
@@ -248,7 +250,7 @@ Trophy,Trophy: TrophyBoar,loc:researchTrophyBoar,Not Missable,Tier0
 Trophy,Trophy: TrophyDeer,loc:researchTrophyDeer,Not Missable,Tier0
 Trophy,Trophy: TrophyGreydwarfBrute,loc:researchTrophyGreydwarfBrute,Not Missable,Tier1
 Trophy,Trophy: TrophyBjorn,loc:researchTrophyBear,Not Missable,Tier1
-Trophy,Trophy: TrophyForestTroll,loc:researchTrophyTroll,Not Missable,Tier1
+Trophy,Trophy: TrophyFrostTroll,loc:researchTrophyTroll,Not Missable,Tier1
 Trophy,Trophy: TrophySkeleton,loc:researchTrophySkeleton,Not Missable,Tier1
 Trophy,Trophy: TrophyGreydwarfShaman,loc:researchTrophyGreydwarfShaman,Not Missable,Tier1
 Trophy,Trophy: TrophySkeletonPoison,loc:researchTrophyRancidRemains,Not Missable,Tier1
@@ -324,7 +326,6 @@ Research,Northern Crops,loc:researchNorthernCrops,Not Missable,Tier12
 Trophy,Trophy: TrophyBarka,loc:researchTrophyBarka,Not Missable,Tier12
 Trophy,Trophy: TrophyBlob_Frost,loc:researchTrophyBlob_Frost,Not Missable,Tier12
 Trophy,Trophy: TrophyElaking,loc:researchTrophyElaking,Not Missable,Tier12
-Trophy,Trophy: TrophyFrostTroll,loc:researchTrophyFrostTroll,Not Missable,Tier12
 Trophy,Trophy: TrophyJotunWarrior,loc:researchTrophyJotunWarrior,Not Missable,Tier12
 Trophy,Trophy: TrophyJotunWitch,loc:researchTrophyJotunWitch,Not Missable,Tier12
 Trophy,Trophy: TrophyMole,loc:researchTrophyMole,Not Missable,Tier12
@@ -363,6 +364,18 @@ for line in locations_txt.strip().splitlines():
         game_id=parts[2].strip(),  # Only for reference; not used in APWorld
         classification=parts[3].strip(),
         region=parts[4].strip(),
+    ))
+    current_id += 1
+
+# Obtain, kill and explore checks (mod/checks.tsv), after the table so existing ids stay the same.
+for location_type, name, tier, _ in CHECKS:
+    location_data_table.append(ValheimLocation(
+        id=current_id,
+        location_type=location_type,
+        user_friendly_name=name,
+        game_id="",
+        classification="Not Missable",
+        region=f"Tier{tier}",
     ))
     current_id += 1
 

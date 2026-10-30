@@ -10,10 +10,15 @@ from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table
 from .Options import ValheimOptions, Goal, GOAL_BOSSES
 from .research_data import RESEARCH_PREREQS
+from .check_data import CHECKS
 
-# Every item some rule depends on: research prerequisites and the region (tier) gates.
+# Location -> research items it needs beyond its tier: research prerequisites, and the
+# stations some obtain checks need (Bloodgold needs the Frost Foundry).
+LOCATION_REQS = {**RESEARCH_PREREQS, **{name: reqs for _, name, _, reqs in CHECKS if reqs}}
+
+# Every item some rule depends on: location requirements and the region (tier) gates.
 LOGIC_ITEMS = frozenset(
-    {name for reqs in RESEARCH_PREREQS.values() for name in reqs}
+    {name for reqs in LOCATION_REQS.values() for name in reqs}
     | {name for region in region_data_table.values()
        for connection in region.connections for name in connection.required_items}
 )
@@ -32,12 +37,13 @@ LOCATION_TIERS = {location.user_friendly_name: int(location.region[len("Tier"):]
 def goal_scope(goal_tier: int) -> frozenset:
     """
     Researches and trophies that belong in a game ending at `goal_tier`: everything up to that
-    tier, minus any research that needs a prerequisite from a later tier (repeated, since
-    dropping one research can strand another). Each name is both a location and an item.
+    tier, minus any location that needs a research item from a later tier (repeated, since
+    dropping one research can strand another). Each research and trophy name is both a
+    location and an item; the extra checks are locations only.
     """
     scope = {name for name, tier in LOCATION_TIERS.items() if tier <= goal_tier}
     while True:
-        stranded = {name for name in scope if any(p not in scope for p in RESEARCH_PREREQS.get(name, ()))}
+        stranded = {name for name in scope if any(p not in scope for p in LOCATION_REQS.get(name, ()))}
         if not stranded:
             return frozenset(scope)
         scope -= stranded
@@ -68,8 +74,12 @@ class ValheimWorld(World):
                 logging.warning(f"Valheim: {self.player_name} has include_deep_north on, but it only "
                                 f"applies with goal: fader, so it is ignored.")
         self.scope = goal_scope(scope_tier)
-        if not self.options.biome_checks:
-            self.scope = frozenset(name for name in self.scope if not name.startswith("Biome: "))
+        off = tuple(prefix for prefix, option in (("Biome: ", self.options.biome_checks),
+                                                  ("Obtain: ", self.options.obtain_checks),
+                                                  ("Explore: ", self.options.exploration_checks),
+                                                  ("Kill: ", self.options.kill_checks)) if not option)
+        if off:
+            self.scope = frozenset(name for name in self.scope if not name.startswith(off))
 
     def create_regions(self):
         """
@@ -91,7 +101,8 @@ class ValheimWorld(World):
         """
         create_items(self, self.scope, LOGIC_ITEMS)
 
-        # Checks without a same-named item (biomes) are filled with bundles and traps.
+        # Checks without a same-named item (biome, obtain, explore, kill) are filled with
+        # bundles and traps.
         missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
             sum(1 for item in self.multiworld.itempool if item.player == self.player)
         traps = round(missing * self.options.trap_percentage.value / 100)
@@ -109,8 +120,9 @@ class ValheimWorld(World):
         return self.random.choice(FILLER_ITEMS)
 
     def set_rules(self):
-        # The mod keeps a research's recipe locked until all of its prerequisites are received.
-        for location_name, prereqs in RESEARCH_PREREQS.items():
+        # The mod keeps a research's recipe locked until all of its prerequisites are received;
+        # some obtain checks need a station's research too.
+        for location_name, prereqs in LOCATION_REQS.items():
             if prereqs and location_name in self.scope:
                 add_rule(self.get_location(location_name),
                          lambda state, reqs=prereqs: state.has_all(reqs, self.player))

@@ -248,7 +248,7 @@ Trophy: TrophyBoar,item:researchTrophyBoar,1,Item,Useful
 Trophy: TrophyDeer,item:researchTrophyDeer,1,Item,Useful
 Trophy: TrophyGreydwarfBrute,item:researchTrophyGreydwarfBrute,1,Item,Useful
 Trophy: TrophyBjorn,item:researchTrophyBear,1,Item,Useful
-Trophy: TrophyForestTroll,item:researchTrophyTroll,1,Item,Useful
+Trophy: TrophyFrostTroll,item:researchTrophyTroll,1,Item,Useful
 Trophy: TrophySkeleton,item:researchTrophySkeleton,1,Item,Useful
 Trophy: TrophyGreydwarfShaman,item:researchTrophyGreydwarfShaman,1,Item,Useful
 Trophy: TrophySkeletonPoison,item:researchTrophyRancidRemains,1,Item,Useful
@@ -324,7 +324,6 @@ Northern Crops,item:researchNorthernCrops,1,Item,Useful
 Trophy: TrophyBarka,item:researchTrophyBarka,1,Item,Useful
 Trophy: TrophyBlob_Frost,item:researchTrophyBlob_Frost,1,Item,Useful
 Trophy: TrophyElaking,item:researchTrophyElaking,1,Item,Useful
-Trophy: TrophyFrostTroll,item:researchTrophyFrostTroll,1,Item,Useful
 Trophy: TrophyJotunWarrior,item:researchTrophyJotunWarrior,1,Item,Useful
 Trophy: TrophyJotunWitch,item:researchTrophyJotunWitch,1,Item,Useful
 Trophy: TrophyMole,item:researchTrophyMole,1,Item,Useful
