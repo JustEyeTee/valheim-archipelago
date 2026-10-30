@@ -34,6 +34,7 @@ public class ArchipelagoUI : MonoBehaviour
 
     private void Update()
     {
+        while (_mainThread.TryDequeue(out var action)) action();
         // Poll whether we’re in the FejdStartup (main menu) scene
         _fejdCheckTimer -= Time.unscaledDeltaTime;
         if (_fejdCheckTimer <= 0f)
@@ -108,6 +109,7 @@ public class ArchipelagoUI : MonoBehaviour
 
         bool clientConnected = ArchipelagoConnection.IsConnected;
         if (clientConnected && !_connecting) _status = $"Connected as {ArchipelagoConnection.SlotName}";
+        else if (!clientConnected && !_connecting && _status.StartsWith("Connected")) _status = "Connection lost: connect again";
         GUI.enabled = !_connecting && !clientConnected && ValidInputs();
         if (GUILayout.Button("Connect", GUILayout.Height(28)))
         {
@@ -147,33 +149,37 @@ public class ArchipelagoUI : MonoBehaviour
         ValheimRandomizer.archipelagoPassword.Value = _password ?? "";
     }
 
-    private async void StartConnect()
+    // Logging in waits on the server, so it runs on a task (the game doesn't freeze while it does); the result is
+    // used on the main thread, in Update. Being connected makes the game randomized (ValheimRandomizer.Randomized),
+    // and marks the world as an Archipelago world once it's loaded.
+    private readonly System.Collections.Concurrent.ConcurrentQueue<Action> _mainThread =
+        new System.Collections.Concurrent.ConcurrentQueue<Action>();
+
+    private void StartConnect()
     {
-        // Cancel previous attempts if any
-
-
         _connecting = true;
         _status = "Connecting...";
-        try
-        {
-            // Being connected makes the game randomized (ValheimRandomizer.Randomized), and marks
-            // the world as an Archipelago world once it's loaded.
-            ArchipelagoConnection.Connect(_host, _port, _slot, _password);
-            _status = $"Connected as {_slot}";
-        }
-        catch (OperationCanceledException)
-        {
-            _status = "Canceled";
-        }
-        catch (Exception ex)
-        {
-            _status = $"Error: {ex.Message}";
-            ValheimRandomizer.Log.LogError($"[AP] Connect error: {ex}");
-        }
-        finally
-        {
-            _connecting = false;
-        }
+        string host = _host, slot = _slot, password = _password;
+        int port = _port;
+        System.Threading.Tasks.Task.Run(() => ArchipelagoConnection.Login(host, port, slot, password)).ContinueWith(task =>
+            _mainThread.Enqueue(() =>
+            {
+                try
+                {
+                    if (task.IsFaulted) throw task.Exception.GetBaseException();
+                    ArchipelagoConnection.Finish(task.Result.session, task.Result.result, slot);
+                    _status = $"Connected as {slot}";
+                }
+                catch (Exception ex)
+                {
+                    _status = $"Error: {ex.Message}";
+                    ValheimRandomizer.Log.LogError($"[AP] Connect error: {ex}");
+                }
+                finally
+                {
+                    _connecting = false;
+                }
+            }));
     }
 
     private void Disconnect()

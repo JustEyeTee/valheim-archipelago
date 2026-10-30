@@ -17,6 +17,7 @@ internal static class ArchipelagoConnection
 
     private static string slotName;
     private static bool altarKeys;  // boss_altar_keys
+    private static bool resentLost;  // checks marked sent that the server lacks were resent this connection
 
     // progressive_items: each progressive item -> its family's researches in order; the k-th copy received
     // unlocks the k-th. Empty when the option is off (or for rooms from before it).
@@ -30,24 +31,27 @@ internal static class ArchipelagoConnection
     public static string SlotName => IsConnected ? slotName : null;
     public static bool IsArchipelagoWorld => HasGlobal(WorldKey);
 
-    public static void Connect(string host, int port, string slot, string password)
+    // Connecting is two steps: Login waits on the server, so it runs off the main thread (the connection window
+    // starts it on a task); Finish uses the result and touches the game, so it runs on the main thread.
+    public static (ArchipelagoSession session, LoginResult result) Login(string host, int port, string slot, string password)
     {
-        // Dispose previous session if any
-        session?.Socket?.DisconnectAsync();
-        session = null;
-        connected = false;
+        var newSession = ArchipelagoSessionFactory.CreateSession(host, port);
+        return (newSession, newSession.TryConnectAndLogin("Valheim", slot, ItemsHandlingFlags.AllItems, password: password));
+    }
 
-        // Create & login
-        session = ArchipelagoSessionFactory.CreateSession(host, port);
-        var result = session.TryConnectAndLogin("Valheim", slot,
-            ItemsHandlingFlags.AllItems, password: password);
-
+    public static void Finish(ArchipelagoSession newSession, LoginResult result, string slot)
+    {
         if (!result.Successful)
         {
             // Throw the first error up; UI handles it and shows the message
             var failure = (LoginFailure)result;
             throw new Exception(string.Join("; ", failure.Errors ?? Array.Empty<string>()));
         }
+        if (session != null) Disconnect();
+        session = newSession;
+        resentLost = false;
+        // A dropped connection isn't connected any more (checks wait in the world until the next connect).
+        newSession.Socket.SocketClosed += reason => { if (session == newSession) connected = false; };
 
         var slotData = ((LoginSuccessful)result).SlotData;
         if (slotData != null && slotData.TryGetValue("goal_trophy", out var goal) && goal is string trophy && trophy.Length > 0)
@@ -75,6 +79,19 @@ internal static class ArchipelagoConnection
         session.Items.ItemReceived += OnApItemReceived;
 
         connected = true;
+    }
+
+    // Once per connection: checks marked sent (ap_sent) that the server still lists as missing were sent into a
+    // connection that had dropped; send them again.
+    private static void ResendLost()
+    {
+        if (resentLost) return;
+        resentLost = true;
+        var lost = session.Locations.AllMissingLocations
+            .Where(id => HasGlobal(Key("ap_sent:", session.Locations.GetLocationNameFromId(id, "Valheim") ?? ""))).ToArray();
+        if (lost.Length == 0) return;
+        ValheimRandomizer.Log.LogInfo($"[AP] Resending {lost.Length} checks the server didn't get");
+        session.Locations.CompleteLocationChecks(lost);
     }
 
     // Disconnects from the room (the connection window's Disconnect button). Checks done meanwhile wait in the
@@ -215,13 +232,14 @@ internal static class ArchipelagoConnection
 
     public static void TryFlushPendingLocations()
     {
-        if (!connected || session == null) return;
+        if (!connected || session == null || !session.Socket.Connected) return;
         if (!WorldLoaded()) return;
         // The world's co-op mode has to be known before any per-slot key is written (see ArchipelagoCoop.Ready).
         if (!ArchipelagoCoop.Ready) return;
         ArchipelagoCoop.Replay();
         if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
         ArchipelagoAltars.OnConnected(altarKeys, session.RoomState.Seed);
+        ResendLost();
         TryGetAllItems();
         if (HasGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"))) CompleteGame();
         ArchipelagoGoal.Check(ReceivedCount);

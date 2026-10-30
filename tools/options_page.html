@@ -176,7 +176,7 @@ pre.yaml .k { color: var(--code-key); }
   // building a world with every kind of check on).
   const CHECK_OPTIONS = ["biome_checks", "obtain_checks", "kill_checks", "discovery_checks",
                          "build_checks", "eat_checks", "fishing_checks", "taming_checks", "trader_checks",
-                         "lore_checks", "farming_checks", "brewing_checks", "dungeon_checks"];
+                         "lore_checks", "farming_checks", "brewing_checks", "dungeon_checks", "raid_checks"];
   // Goal conditions and the options that only matter with them.
   const CONDITION_OPTIONS = { relic_hunt_total: "Relic Hunt", relic_hunt_percent: "Relic Hunt",
     trophy_hunt_percent: "Trophy Hunt", researcher_percent: "Researcher", explorer_percent: "Explorer",
@@ -241,7 +241,7 @@ pre.yaml .k { color: var(--code-key); }
   const CHECK_KINDS = [["research", "Researches"], ["trophy", "Trophies"], ["biome_checks", "Biomes"],
     ["obtain_checks", "Obtain"], ["kill_checks", "Kills"], ["discovery_checks", "Discoveries"], ["build_checks", "Build"],
     ["eat_checks", "Eat"], ["fishing_checks", "Fishing"], ["taming_checks", "Taming"], ["trader_checks", "Trader"],
-    ["lore_checks", "Lore"], ["farming_checks", "Farming"], ["brewing_checks", "Brewing"], ["dungeon_checks", "Dungeons"],
+    ["lore_checks", "Lore"], ["farming_checks", "Farming"], ["brewing_checks", "Brewing"], ["dungeon_checks", "Dungeons"], ["raid_checks", "Raids"],
     ["skills", "Skills"], ["explore", "Exploration"], ["comfort", "Comfort"]];
   function summary(g) {
     const b = g.breakdown, total = totalFor(b);

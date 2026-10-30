@@ -1041,6 +1041,12 @@ location	Brew: Lingering Healing Mead	11	Mead ketill|Fermenter
 location	Brew: Major Healing Mead	9	Mead ketill|Fermenter
 location	Brew: Lightfoot Mead	9	Mead ketill|Fermenter
 location	Brew: Lingering Stamina Mead	9	Mead ketill|Fermenter
+location	Survive: Troll Raid	4	kill:The Elder
+location	Survive: Blob Raid	6	kill:Bonemass
+location	Survive: Ghost Raid	6	kill:Bonemass
+location	Survive: Skeleton Raid	6	kill:Bonemass
+location	Survive: Surtling Raid	6	kill:Bonemass
+location	Survive: Wolf Raid	6	kill:Bonemass
 combat	Meadows	armor	
 combat	Meadows	weapons	Clubs Tier 1|Axes Tier 1|Blades Tier 1|Spears Tier 1|Knuckles Tier 1|Short Blades Tier 1
 combat	Meadows	ranged	Bows Tier 1

@@ -10,7 +10,7 @@ cases = [
                  ("num", "#opt-trap_percentage", "33"), ("num", "#opt-boost_percentage", "50")]),
     ("the_elder", [("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",), ("num", "#opt-comfort_checks", "3"),
                    ("uncheck", "#opt-starter_kit")]),
-    ("yagluth", [("check", "#opt-boss_altar_keys"), ("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
+    ("yagluth", [("check", "#opt-raid_checks"), ("check", "#opt-boss_altar_keys"), ("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
                  ("num", "#opt-exploration_checks", "20"), ("click", "label[for=opt-exploration_check_spacing-half_percent]")]),
     ("moder", [("check", "#opt-progressive_items"), ("uncheck", "#opt-map_items"), ("num", "#opt-map_fragments", "12"), ("uncheck", "#opt-gear_items"), ("uncheck", "#opt-boss_items"), ("num", "#opt-trap_percentage", "50"),
                ("num", "#opt-boost_percentage", "50")]),

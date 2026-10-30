@@ -16,6 +16,7 @@
 # plant: key = sapling piece prefab, sent when you plant one (with the Cultivator)
 # loot: key = treasure chest prefab, sent when you open one
 # brew: key = mead prefab, sent when you tap it from a Fermenter
+# raid: key = random event name, sent when that raid ends with you alive in it
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
 obtain	Flint	Obtain: Flint	0	
@@ -720,3 +721,9 @@ brew	MeadHealthLingering	Brew: Lingering Healing Mead	11	Mead ketill|Fermenter
 brew	MeadHealthMajor	Brew: Major Healing Mead	9	Mead ketill|Fermenter
 brew	MeadLightfoot	Brew: Lightfoot Mead	9	Mead ketill|Fermenter
 brew	MeadStaminaLingering	Brew: Lingering Stamina Mead	9	Mead ketill|Fermenter
+raid	foresttrolls	Survive: Troll Raid	4	
+raid	blobs	Survive: Blob Raid	6	
+raid	ghosts	Survive: Ghost Raid	6	
+raid	skeletons	Survive: Skeleton Raid	6	
+raid	surtlings	Survive: Surtling Raid	6	
+raid	wolves	Survive: Wolf Raid	6	

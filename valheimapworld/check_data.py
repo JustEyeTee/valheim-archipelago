@@ -706,4 +706,10 @@ CHECKS = (
     ('Brew', 'Brew: Major Healing Mead', 9, ('Mead ketill', 'Fermenter')),
     ('Brew', 'Brew: Lightfoot Mead', 9, ('Mead ketill', 'Fermenter')),
     ('Brew', 'Brew: Lingering Stamina Mead', 9, ('Mead ketill', 'Fermenter')),
+    ('Raid', 'Survive: Troll Raid', 4, ()),
+    ('Raid', 'Survive: Blob Raid', 6, ()),
+    ('Raid', 'Survive: Ghost Raid', 6, ()),
+    ('Raid', 'Survive: Skeleton Raid', 6, ()),
+    ('Raid', 'Survive: Surtling Raid', 6, ()),
+    ('Raid', 'Survive: Wolf Raid', 6, ()),
 )

@@ -434,6 +434,26 @@ public static class Patches
         }
     }
 
+    // A raid is active on the clients near it (activated when you enter its area, deactivated when you leave), and
+    // deactivated with end = true when it runs its course.
+    [HarmonyPatch(typeof(RandomEvent), nameof(RandomEvent.OnActivate))]
+    private static class RandomEvent_OnActivate_Raid_Patch
+    {
+        private static void Postfix(RandomEvent __instance)
+        {
+            if (ValheimRandomizer.Randomized) ArchipelagoExtras.OnRaidActivated(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(RandomEvent), nameof(RandomEvent.OnDeactivate))]
+    private static class RandomEvent_OnDeactivate_Raid_Patch
+    {
+        private static void Postfix(RandomEvent __instance, bool end)
+        {
+            if (ValheimRandomizer.Randomized) ArchipelagoExtras.OnRaidDeactivated(__instance, end);
+        }
+    }
+
     // The container screen opens only once the chest is really yours to open (not locked by a ward or in use).
     [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Show))]
     private static class InventoryGui_Show_Loot_Patch

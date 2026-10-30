@@ -2,6 +2,19 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.19.0
+
+- **Raid checks** (`raid_checks`, off by default): surviving each raid that keeps coming once it starts (trolls
+  after The Elder; blobs, ghosts, skeletons, Surtlings and wolves after Bonemass), sent when it ends with you in
+  it, alive. Raids are random, so these never hold progression items; the boss armies aren't included (each
+  stops once the next boss is dead, so it could be missed). The game data scan now records raids.
+- **Playtest checklist** (`docs/PLAYTEST.md`): two sessions that cover everything since 0.11.0.
+- Fixed (from an independent review): after a dropped connection the mod kept "sending" checks into the dead
+  connection and marked them sent. It now notices the connection closing, only sends while connected, and on
+  each connect resends any check it marked sent that the server still lists as missing. Connecting no longer
+  freezes the game while the server answers. A raid counts only if you were in it for 45 seconds before it ended.
+- Fixed: the Options Builder greyed out Raid Checks for every goal (it counted with the default options).
+
 ## 0.18.0
 
 - **Brewing checks** (`brewing_checks`, on): tapping each mead from a Fermenter (13 meads, from Minor Healing to

@@ -7,6 +7,8 @@ read:     each biome's lore rune stones (a Runestone_* world location), sent whe
 vegvisir: each boss's Vegvisir, sent when you read one; keyed by the boss location it reveals.
 plant:    planting each crop and tree with the Cultivator (a sapling piece).
 brew:     tapping each mead from a Fermenter (keyed by the mead), with the Mead ketill and the Fermenter.
+raid:     surviving each raid that keeps coming once it starts (not the boss armies, which end with the next
+          boss's death and could be missed), sent when it ends with you alive in it.
 loot:     opening a dungeon's treasure chest (Burial Chamber, Troll Cave, Sunken Crypt, Frost Cave,
           Infested Mine, Charred Fortress), keyed by the chest prefab, which only those dungeons have.
 
@@ -130,6 +132,18 @@ for recipe in sorted(db["recipes"].values(), key=lambda r: r["item"] or ""):
     tier = max([tier_of[obtain[m]] for m in materials] + [t for _, t in brewing])
     rows.append(["brew", mead, f"Brew: {MEAD_NAMES[mead]}", str(tier), "|".join(name for name, _ in brewing)])
 
+# ---------- Raids: the ones that keep coming (each boss army stops once the next boss is dead) ----------
+RAIDS = {"foresttrolls": ("Troll Raid", "Trophy: TrophyTheElder"), "blobs": ("Blob Raid", "Trophy: TrophyBonemass"),
+         "ghosts": ("Ghost Raid", "Trophy: TrophyBonemass"), "skeletons": ("Skeleton Raid", "Trophy: TrophyBonemass"),
+         "surtlings": ("Surtling Raid", "Trophy: TrophyBonemass"), "wolves": ("Wolf Raid", "Trophy: TrophyBonemass")}
+BOSS_TIERS = {"Trophy: TrophyTheElder": 4, "Trophy: TrophyBonemass": 6}  # the trophies are researches, not rows here
+for raid, (label, after) in RAIDS.items():
+    event = db["raids"].get(raid)
+    if not event or not event["enabled"] or not event["random"] or event["not_required_keys"]:
+        skipped.append((raid, "not a repeating random raid in the game data"))
+        continue
+    rows.append(["raid", raid, f"Survive: {label}", str(BOSS_TIERS[after]), ""])
+
 # ---------- Dungeon loot: the treasure chests only these dungeons have ----------
 LOOT = {"TreasureChest_forestcrypt": ("Burial Chamber", "Discover: Burial Chamber"),
         "TreasureChest_trollcave": ("Troll Cave", "Discover: Troll Cave"),
@@ -144,7 +158,7 @@ for chest, (label, discover) in LOOT.items():
         continue
     rows.append(["loot", chest, f"Loot: {label}", str(tier_of[discover]), ""])
 
-KINDS = ("read", "vegvisir", "plant", "brew", "loot")
+KINDS = ("read", "vegvisir", "plant", "brew", "loot", "raid")
 with open(root / "mod" / "checks.tsv", "w", newline="") as f:
     csv.writer(f, delimiter="\t", lineterminator="\n").writerows(replace_rows(check_rows, KINDS, rows))
 

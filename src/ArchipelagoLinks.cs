@@ -203,7 +203,10 @@ public static class ArchipelagoLinks
                     messages.Enqueue($"Sent {item} to {send.Receiver.Alias}");
                 break;
             case ChatLogMessage chat:
-                if (ValheimRandomizer.showChat.Value && chat.Player.Slot != session.ConnectionInfo.Slot) messages.Enqueue(chat.ToString());
+                // Runs on the network thread: the session may have just been dropped (Disconnect).
+                var current = session;
+                if (current != null && ValheimRandomizer.showChat.Value && chat.Player.Slot != current.ConnectionInfo.Slot)
+                    messages.Enqueue(chat.ToString());
                 break;
             default:
                 // Replies to /ap hint and /ap say commands, and server announcements.
@@ -409,8 +412,10 @@ public static class ArchipelagoLinks
         double taken = ToDouble(reply.OriginalValue) - ToDouble(reply.Value);
         int got = (int)Math.Floor(taken / JoulesPerCoin);
         double change = taken - (double)got * JoulesPerCoin;
-        // Part of a coin's worth goes back into the pool.
-        if (change > 0) session.DataStorage[Scope.Global, EnergyKey] += change;
+        // Part of a coin's worth goes back into the pool. (Network thread: the session may have just been dropped;
+        // the Coins are still paid out.)
+        var current = session;
+        if (change > 0 && current != null) current.DataStorage[Scope.Global, EnergyKey] += change;
         if (got > 0) incomingCoins.Enqueue(got);
         messages.Enqueue(got > 0 ? $"Withdrew {got} Coins from Energy Link." : "The Energy Link pool is empty.");
     }

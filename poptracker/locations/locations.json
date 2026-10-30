@@ -8675,5 +8675,71 @@
     "y": 786
    }
   ]
+ },
+ {
+  "name": "Survive - Tier 4",
+  "sections": [
+   {
+    "name": "Survive: Troll Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$kill|the_elder,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2235,
+    "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Survive - Tier 6",
+  "sections": [
+   {
+    "name": "Survive: Blob Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$kill|bonemass,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Survive: Ghost Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$kill|bonemass,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Survive: Skeleton Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$kill|bonemass,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Survive: Surtling Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$kill|bonemass,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Survive: Wolf Raid",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,$boss|eikthyr,$kill|bonemass,$combat|black_forest"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 2235,
+    "y": 466
+   }
+  ]
  }
 ]

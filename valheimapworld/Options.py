@@ -333,6 +333,16 @@ class BrewingChecks(DefaultOnToggle):
     display_name = "Brewing Checks"
 
 
+class RaidChecks(Toggle):
+    """
+    Adds a check for surviving each raid that keeps coming once it starts: trolls (after The Elder), and blobs,
+    ghosts, skeletons, Surtlings and wolves (after Bonemass). You have to be in the raid when it ends, alive. Raids
+    are random and can take many hours to come, so these checks never hold progression items. The boss armies
+    aren't included: each one stops once the next boss is dead, so it could be missed.
+    """
+    display_name = "Raid Checks"
+
+
 class DungeonChecks(DefaultOnToggle):
     """
     Adds a check for opening a treasure chest in each kind of dungeon: Burial Chamber, Troll Cave, Sunken Crypt,
@@ -553,6 +563,7 @@ class ValheimOptions(PerGameCommonOptions):
     lore_checks: LoreChecks
     farming_checks: FarmingChecks
     brewing_checks: BrewingChecks
+    raid_checks: RaidChecks
     dungeon_checks: DungeonChecks
     boss_items: BossItems
     gear_items: GearItems
@@ -579,7 +590,7 @@ option_groups = [
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
-                           FarmingChecks, BrewingChecks, DungeonChecks]),
+                           FarmingChecks, BrewingChecks, DungeonChecks, RaidChecks]),
     OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
                           HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),

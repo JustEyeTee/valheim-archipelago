@@ -36,8 +36,10 @@ def bosses_to_use(items) -> set:
 
 # The Sunken Crypts open with The Elder's Swamp Key: Bonemass's altar takes their Withered Bones, and
 # Bonemass's Vegvisir and the crypt chests are inside.
+# Raids come once the boss is actually dead (its drop as an item doesn't count): kill: tokens.
 EXTRA_BOSSES = {"Trophy: TrophyBonemass": {"The Elder"}, "Vegvisir: Bonemass": {"The Elder"},
-                "Loot: Sunken Crypt": {"The Elder"}}
+                "Loot: Sunken Crypt": {"The Elder"}, "Survive: Troll Raid": {"kill:The Elder"},
+                **{f"Survive: {raid} Raid": {"kill:Bonemass"} for raid in ("Blob", "Ghost", "Skeleton", "Surtling", "Wolf")}}
 
 # Location -> bosses that must be defeated first (their drops go into it): a research's cost,
 # an item to obtain, the unlocks a check's required research gives, and EXTRA_BOSSES.
@@ -77,7 +79,7 @@ TRACKER_OPTIONS = ("goal", "progressive_items", "boss_altar_keys", "goal_conditi
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks", "lore_checks", "farming_checks",
-                   "brewing_checks", "dungeon_checks")
+                   "brewing_checks", "dungeon_checks", "raid_checks")
 
 # Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
@@ -267,7 +269,8 @@ class ValheimWorld(World):
                                                   ("Vegvisir: ", self.options.lore_checks),
                                                   ("Plant: ", self.options.farming_checks),
                                                   ("Brew: ", self.options.brewing_checks),
-                                                  ("Loot: ", self.options.dungeon_checks)) if not option)
+                                                  ("Loot: ", self.options.dungeon_checks),
+                                                  ("Survive: ", self.options.raid_checks)) if not option)
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
         self.scope = frozenset(name for name in self.scope if self.wanted(name))
@@ -385,10 +388,10 @@ class ValheimWorld(World):
         """
         create_regions(self)
         create_locations(self, self.scope)
-        # Long grinds never hold progression: skill levels above 30, exploration past 6%.
+        # Long grinds never hold progression: skill levels above 30, exploration past 6%, and raids (random).
         for location in self.multiworld.get_locations(self.player):
             name = location.name
-            if (name.startswith("Skill: ") and int(name.rsplit(" ", 1)[1]) > 30) or \
+            if (name.startswith("Skill: ") and int(name.rsplit(" ", 1)[1]) > 30) or name.startswith("Survive: ") or \
                     (name.startswith("Explore: ") and float(name[len("Explore: "):].split("%")[0]) > 6):
                 location.progress_type = LocationProgressType.EXCLUDED
 

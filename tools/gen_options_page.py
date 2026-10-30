@@ -67,7 +67,7 @@ CHECK_OPTIONS = {"Biome: ": "biome_checks", "Obtain: ": "obtain_checks",
                  "Kill: ": "kill_checks", "Discover: ": "discovery_checks", "Build: ": "build_checks",
                  "Eat: ": "eat_checks", "Catch: ": "fishing_checks", "Tame: ": "taming_checks", "Buy: ": "trader_checks",
                  "Read: ": "lore_checks", "Vegvisir: ": "lore_checks", "Plant: ": "farming_checks", "Brew: ": "brewing_checks",
-                 "Loot: ": "dungeon_checks"}
+                 "Loot: ": "dungeon_checks", "Survive: ": "raid_checks"}
 
 
 def build(options):
@@ -114,7 +114,8 @@ def breakdown(goal):
     counted under the option that adds it. Skills: how many can be trained in this goal (every level of a
     skill comes with it); exploration: the percentages available. The rest are always there."""
     out = {"base": 0, "research": 0, "trophy": 0, "skills_available": 0, "explore": [], "comfort": []}
-    for name in locations({"goal": goal, "kill_checks": 1, "skill_checks": 10, "skill_check_spacing": "every_10",
+    every_kind = {option: 1 for option in CHECK_OPTIONS.values()}  # some are off by default (kills, raids)
+    for name in locations({**every_kind, "goal": goal, "skill_checks": 10, "skill_check_spacing": "every_10",
                            "exploration_checks": 20, "exploration_check_spacing": "half_percent",
                            "comfort_checks": hints["comfort_checks"].range_end}):
         option = next((o for prefix, o in CHECK_OPTIONS.items() if name.startswith(prefix)), None)
@@ -195,7 +196,8 @@ KINDS += [(kind, what, option, full_game.get(option, 0)) for kind, what, option 
     ("Read, Vegvisir", "reading each biome's rune stones and each boss's Vegvisir", "lore_checks"),
     ("Plant", "planting each crop and tree", "farming_checks"),
     ("Brew", "tapping each mead from a Fermenter", "brewing_checks"),
-    ("Loot", "opening each kind of dungeon's treasure chest", "dungeon_checks")]]
+    ("Loot", "opening each kind of dungeon's treasure chest", "dungeon_checks"),
+    ("Survive", "surviving each kind of repeating raid (random; no progression items)", "raid_checks")]]
 KINDS += [("Skill", "each skill reaching 10, 20... 100", "skill_checks", full_game["skills_available"] * 10),
           ("Explore", "uncovering the map, up to 20%", "exploration_checks", len(full_game["explore"])),
           ("Comfort", "reaching each comfort level", "comfort_checks", len(full_game["comfort"]))]

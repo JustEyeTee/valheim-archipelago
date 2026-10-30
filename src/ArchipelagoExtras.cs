@@ -87,6 +87,7 @@ public static class ArchipelagoExtras
     private static readonly Dictionary<string, string> VegvisirLocations = new Dictionary<string, string>();
     private static readonly Dictionary<string, string> LootLocations = new Dictionary<string, string>();
     private static readonly Dictionary<string, string> BrewLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> RaidLocations = new Dictionary<string, string>();
 
     private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
         new List<(Skills.SkillType, int, string)>();
@@ -156,6 +157,7 @@ public static class ArchipelagoExtras
         .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location))
         .Concat(ComfortLocations.Select(e => e.location)).Concat(ReadLocations.Select(e => e.location))
         .Concat(VegvisirLocations.Values).Concat(LootLocations.Values).Concat(BrewLocations.Values)
+        .Concat(RaidLocations.Values)
         .Concat(EatLocations.Values).Concat(BuildLocations.Values).Concat(BuyLocations.Values).Concat(TameLocations.Values);
 
     static ArchipelagoExtras()
@@ -179,6 +181,7 @@ public static class ArchipelagoExtras
                     case "vegvisir": VegvisirLocations[cols[1]] = cols[2]; break;
                     case "loot": LootLocations[cols[1]] = cols[2]; break;
                     case "brew": BrewLocations[cols[1]] = cols[2]; break;
+                    case "raid": RaidLocations[cols[1]] = cols[2]; break;
                     case "buy": BuyLocations[cols[1]] = cols[2]; break;
                     case "tame": TameLocations[cols[1]] = cols[2]; break;
                     case "kill": KillLocations[cols[1]] = cols[2]; break;
@@ -363,6 +366,25 @@ public static class ArchipelagoExtras
         var content = FermenterContent.Invoke(fermenter, null);
         var conversion = FermenterConversion.Invoke(fermenter, new[] { content }) as Fermenter.ItemConversion;
         if (conversion?.m_to != null) SendFrom(BrewLocations, conversion.m_to.gameObject.name);
+    }
+
+    // Raid checks: a raid ending while you're in it, alive, having been in it (without leaving) for a while, so
+    // walking in at the last moment doesn't count.
+    private const float RaidSecondsInside = 45f;
+    private static readonly Dictionary<string, float> raidJoined = new Dictionary<string, float>();
+
+    public static void OnRaidActivated(RandomEvent raid)
+    {
+        if (raid != null) raidJoined[raid.m_name] = Time.time;
+    }
+
+    public static void OnRaidDeactivated(RandomEvent raid, bool end)
+    {
+        if (raid == null || !raidJoined.TryGetValue(raid.m_name, out var joined)) return;
+        raidJoined.Remove(raid.m_name);
+        var player = Player.m_localPlayer;
+        if (end && player != null && !player.IsDead() && Time.time - joined >= RaidSecondsInside)
+            SendFrom(RaidLocations, raid.m_name);
     }
 
     // Dungeon checks: opening a treasure chest only that kind of dungeon has.

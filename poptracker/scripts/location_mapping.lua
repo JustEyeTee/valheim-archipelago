@@ -1021,6 +1021,12 @@ LOCATION_MAPPING = {
   [1019] = "@Brew - Tier 9/Brew: Major Healing Mead",
   [1020] = "@Brew - Tier 9/Brew: Lightfoot Mead",
   [1021] = "@Brew - Tier 9/Brew: Lingering Stamina Mead",
+  [1022] = "@Survive - Tier 4/Survive: Troll Raid",
+  [1023] = "@Survive - Tier 6/Survive: Blob Raid",
+  [1024] = "@Survive - Tier 6/Survive: Ghost Raid",
+  [1025] = "@Survive - Tier 6/Survive: Skeleton Raid",
+  [1026] = "@Survive - Tier 6/Survive: Surtling Raid",
+  [1027] = "@Survive - Tier 6/Survive: Wolf Raid",
 }
 TROPHY_BOSS = {
   [233] = "boss_eikthyr",
