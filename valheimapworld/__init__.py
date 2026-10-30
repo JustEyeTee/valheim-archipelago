@@ -177,10 +177,11 @@ class ValheimWorld(World):
         # filled with traps, then boosts, then bundles.
         missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
             sum(1 for item in self.multiworld.itempool if item.player == self.player)
-        traps = round(missing * self.options.trap_percentage.value / 100)
+        allowed_traps = [trap for trap in TRAP_ITEMS if trap not in self.options.excluded_traps.value]
+        traps = round(missing * self.options.trap_percentage.value / 100) if allowed_traps else 0
         boosts = min(missing - traps, round(missing * self.options.boost_percentage.value / 100))
         for i in range(missing):
-            name = self.random.choice(TRAP_ITEMS) if i < traps else \
+            name = self.random.choice(allowed_traps) if i < traps else \
                 self.random.choice(BOOST_ITEMS) if i < traps + boosts else self.get_filler_item_name()
             self.multiworld.itempool.append(self.create_item(name))
 

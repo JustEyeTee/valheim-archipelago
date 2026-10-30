@@ -349,6 +349,14 @@ Frost Trap,trap:frost,1,Trap,Trap
 Raid Trap,trap:raid,1,Trap,Trap
 Butterfingers Trap,trap:butterfingers,1,Trap,Trap
 Heavy Load Trap,trap:heavy,1,Trap,Trap
+Monster Pack Trap,trap:pack,1,Trap,Trap
+Bat Swarm Trap,trap:bats,1,Trap,Trap
+Lightning Strike Trap,trap:lightning,1,Trap,Trap
+Floor Is Lava Trap,trap:lava,1,Trap,Trap
+Blizzard Trap,trap:blizzard,1,Trap,Trap
+Tar Trap,trap:tar,1,Trap,Trap
+Launch Trap,trap:launch,1,Trap,Trap
+Rust Trap,trap:rust,1,Trap,Trap
 Combat Training,boost:combat,1,Boost,Useful
 Woodcutting Training,boost:woodcutting,1,Boost,Useful
 Mining Training,boost:mining,1,Boost,Useful

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionSet, PerGameCommonOptions, Range, Toggle
 
 
 class Goal(Choice):
@@ -168,13 +168,39 @@ class TraderChecks(DefaultOnToggle):
 class TrapPercentage(Range):
     """
     Percentage of the extra items (the items beyond one per research and trophy) that are
-    traps instead of resource bundles: Greydwarf and Skeleton Ambush, Raid, Thunderstorm,
-    Burning, Poison, Frost, Soaked, Famine, Butterfingers (unequips everything) and Heavy Load.
+    traps instead of resource bundles. See excluded_traps for the list.
     """
     display_name = "Trap Percentage"
     range_start = 0
     range_end = 100
     default = 20
+
+
+class ExcludedTraps(OptionSet):
+    """
+    Traps that are never placed. The traps:
+    Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you.
+    Monster Pack Trap: a pack of whatever lives in the biome you're in (Draugr in the Swamp,
+      Wolves in the Mountains, Fulings in the Plains...).
+    Bat Swarm Trap: 6 bats.
+    Raid Trap: a raid you're ready for starts (only when you host the world).
+    Thunderstorm Trap, Blizzard Trap: 2 minutes of storm or freezing snowstorm.
+    Lightning Strike Trap: lightning hits where you stand.
+    Floor Is Lava Trap: for 30 seconds the ground burns you; stand on something you built
+      (or a boat), or keep jumping.
+    Burning Trap, Poison Trap, Frost Trap: damage over time (Frost also slows you).
+    Soaked Trap: you're wet. Tar Trap: you're covered in tar and slowed.
+    Famine Trap: your food is gone. Butterfingers Trap: everything is unequipped.
+    Heavy Load Trap: 50 Stone in your pockets. Launch Trap: you're thrown into the air.
+    Rust Trap: your equipped gear loses half its durability.
+    """
+    display_name = "Excluded Traps"
+    valid_keys = frozenset({
+        "Greydwarf Ambush Trap", "Skeleton Ambush Trap", "Monster Pack Trap", "Bat Swarm Trap", "Raid Trap",
+        "Thunderstorm Trap", "Blizzard Trap", "Lightning Strike Trap", "Floor Is Lava Trap", "Burning Trap",
+        "Poison Trap", "Frost Trap", "Soaked Trap", "Tar Trap", "Famine Trap", "Butterfingers Trap",
+        "Heavy Load Trap", "Launch Trap", "Rust Trap",
+    })
 
 
 class BoostPercentage(Range):
@@ -240,6 +266,7 @@ class ValheimOptions(PerGameCommonOptions):
     taming_checks: TamingChecks
     trader_checks: TraderChecks
     trap_percentage: TrapPercentage
+    excluded_traps: ExcludedTraps
     boost_percentage: BoostPercentage
     death_link: DeathLink
     death_link_mode: DeathLinkMode
