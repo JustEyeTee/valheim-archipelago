@@ -114,6 +114,8 @@ public class ValheimRandomizer : BaseUnityPlugin
 
     private void OnInventoryChanged()
     {
+        if (randomized.Value) ArchipelagoExtras.OnInventoryChanged(currentPlayer.GetInventory());
+
         foreach (var researchId in research)
         {
             // Find an item whose DROP PREFAB name matches our research prefab id

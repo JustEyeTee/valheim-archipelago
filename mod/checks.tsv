@@ -1,0 +1,160 @@
+# Extra checks shared by the mod (embedded in the DLL) and the APWorld (tools/gen_apworld_data.py).
+# kind	key	location name	tier	required research items (|-separated)
+# obtain: key = item prefab, sent when it enters your inventory (picked up or crafted)
+# kill: key = trophy prefab the creature drops, sent when you kill one
+# explore: key = percent of the world map you have explored
+obtain	Wood	Obtain: Wood	0	
+obtain	Stone	Obtain: Stone	0	
+obtain	Flint	Obtain: Flint	0	
+obtain	Resin	Obtain: Resin	0	
+obtain	Raspberry	Obtain: Raspberries	0	
+obtain	Mushroom	Obtain: Mushroom	0	
+obtain	Dandelion	Obtain: Dandelion	0	
+obtain	LeatherScraps	Obtain: Leather Scraps	0	
+obtain	DeerHide	Obtain: Deer Hide	0	
+obtain	RawMeat	Obtain: Boar Meat	0	
+obtain	DeerMeat	Obtain: Deer Meat	0	
+obtain	NeckTail	Obtain: Neck Tail	0	
+obtain	Honey	Obtain: Honey	0	
+obtain	HardAntler	Obtain: Hard Antler	1	
+obtain	GreydwarfEye	Obtain: Greydwarf Eye	1	
+obtain	BoneFragments	Obtain: Bone Fragments	1	
+obtain	Blueberries	Obtain: Blueberries	1	
+obtain	Thistle	Obtain: Thistle	1	
+obtain	TrollHide	Obtain: Troll Hide	1	
+obtain	CarrotSeeds	Obtain: Carrot Seeds	1	
+obtain	BjornHide	Obtain: Bear Hide	1	
+obtain	RoundLog	Obtain: Corewood	2	
+obtain	SurtlingCore	Obtain: Surtling Core	2	
+obtain	MushroomYellow	Obtain: Yellow Mushroom	2	
+obtain	CopperOre	Obtain: Copper Ore	3	
+obtain	TinOre	Obtain: Tin Ore	3	
+obtain	Copper	Obtain: Copper	3	
+obtain	Tin	Obtain: Tin	3	
+obtain	Bronze	Obtain: Bronze	4	
+obtain	Coal	Obtain: Coal	4	
+obtain	IronScrap	Obtain: Scrap Iron	4	
+obtain	Iron	Obtain: Iron	4	
+obtain	Guck	Obtain: Guck	4	
+obtain	Bloodbag	Obtain: Bloodbag	4	
+obtain	Entrails	Obtain: Entrails	4	
+obtain	Ooze	Obtain: Ooze	4	
+obtain	WitheredBone	Obtain: Withered Bone	4	
+obtain	Chitin	Obtain: Chitin	4	
+obtain	SerpentScale	Obtain: Serpent Scale	4	
+obtain	TurnipSeeds	Obtain: Turnip Seeds	4	
+obtain	Wishbone	Obtain: Wishbone	4	
+obtain	ElderBark	Obtain: Ancient Bark	5	
+obtain	FineWood	Obtain: Finewood	5	
+obtain	SilverOre	Obtain: Silver Ore	7	
+obtain	Silver	Obtain: Silver	7	
+obtain	Obsidian	Obtain: Obsidian	7	
+obtain	WolfPelt	Obtain: Wolf Pelt	7	
+obtain	WolfFang	Obtain: Wolf Fang	7	
+obtain	FreezeGland	Obtain: Freeze Gland	7	
+obtain	Crystal	Obtain: Crystal	7	
+obtain	OnionSeeds	Obtain: Onion Seeds	7	
+obtain	DragonEgg	Obtain: Dragon Egg	7	
+obtain	DragonTear	Obtain: Dragon Tear	7	
+obtain	Barley	Obtain: Barley	8	
+obtain	Flax	Obtain: Flax	8	
+obtain	Cloudberry	Obtain: Cloudberries	8	
+obtain	BlackMetalScrap	Obtain: Black Metal Scrap	8	
+obtain	BlackMetal	Obtain: Black Metal	8	
+obtain	LoxPelt	Obtain: Lox Pelt	8	
+obtain	Needle	Obtain: Needle	8	
+obtain	Tar	Obtain: Tar	8	
+obtain	GoblinTotem	Obtain: Fuling Totem	8	
+obtain	YagluthDrop	Obtain: Torn Spirit	8	
+obtain	LinenThread	Obtain: Linen Thread	9	
+obtain	Carapace	Obtain: Carapace	9	
+obtain	MushroomJotunPuffs	Obtain: Jotun Puffs	9	
+obtain	MushroomMagecap	Obtain: Magecap	9	
+obtain	YggdrasilWood	Obtain: Yggdrasil Wood	9	
+obtain	BlackCore	Obtain: Black Core	9	
+obtain	Mandible	Obtain: Mandible	9	
+obtain	Bilebag	Obtain: Bilebag	9	
+obtain	BlackMarble	Obtain: Black Marble	10	
+obtain	Softtissue	Obtain: Soft Tissue	10	
+obtain	QueenDrop	Obtain: Majestic Carapace	10	
+obtain	FlametalOreNew	Obtain: Flametal Ore	11	
+obtain	FlametalNew	Obtain: Flametal	11	
+obtain	Blackwood	Obtain: Ashwood	11	
+obtain	CharredBone	Obtain: Charred Bone	11	
+obtain	Grausten	Obtain: Grausten	11	
+obtain	Vineberry	Obtain: Vineberry Cluster	11	
+obtain	Fiddleheadfern	Obtain: Fiddlehead	11	
+obtain	BellFragment	Obtain: Bell Fragment	11	
+obtain	CelestialFeather	Obtain: Celestial Feather	11	
+obtain	AskHide	Obtain: Asksvin Hide	11	
+obtain	MorgenSinew	Obtain: Morgen Sinew	11	
+obtain	SulfurStone	Obtain: Sulfur	11	
+obtain	MooseHide	Obtain: Moose Hide	12	
+obtain	MooseSinew	Obtain: Moose Sinew	12	
+obtain	SealHide	Obtain: Seal Pelt	12	
+obtain	SealBlubber	Obtain: Seal Blubber	12	
+obtain	MoleClaws	Obtain: Long Claws	12	
+obtain	BarkaBranch	Obtain: Frozen Branch	12	
+obtain	Gold	Obtain: Bloodgold	12	Frost Foundry
+kill	TrophyNeck	Kill: Neck	0	
+kill	TrophyBoar	Kill: Boar	0	
+kill	TrophyDeer	Kill: Deer	0	
+kill	TrophyGreydwarf	Kill: Greydwarf	1	
+kill	TrophyGreydwarfBrute	Kill: Greydwarf Brute	1	
+kill	TrophyGreydwarfShaman	Kill: Greydwarf Shaman	1	
+kill	TrophyBjorn	Kill: Bear	1	
+kill	TrophyFrostTroll	Kill: Troll	1	
+kill	TrophySkeleton	Kill: Skeleton	1	
+kill	TrophySkeletonPoison	Kill: Rancid Remains	1	
+kill	TrophyGhost	Kill: Ghost	1	
+kill	TrophyDraugr	Kill: Draugr	4	
+kill	TrophyDraugrElite	Kill: Draugr Elite	4	
+kill	TrophyAbomination	Kill: Abomination	4	
+kill	TrophyBlob	Kill: Blob	4	
+kill	TrophyLeech	Kill: Leech	4	
+kill	TrophyWraith	Kill: Wraith	4	
+kill	TrophySurtling	Kill: Surtling	4	
+kill	TrophySerpent	Kill: Serpent	4	
+kill	TrophyWolf	Kill: Wolf	7	
+kill	TrophyFenring	Kill: Fenring	7	
+kill	TrophyCultist	Kill: Cultist	7	
+kill	TrophySGolem	Kill: Stone Golem	7	
+kill	TrophyHatchling	Kill: Drake	7	
+kill	TrophyUlv	Kill: Ulv	7	
+kill	TrophyGoblin	Kill: Fuling	8	
+kill	TrophyGoblinBrute	Kill: Fuling Berserker	8	
+kill	TrophyGoblinShaman	Kill: Fuling Shaman	8	
+kill	TrophyDeathsquito	Kill: Deathsquito	8	
+kill	TrophyLox	Kill: Lox	8	
+kill	TrophyGrowth	Kill: Growth	8	
+kill	TrophyBjornUndead	Kill: Vile	8	
+kill	TrophySeeker	Kill: Seeker	9	
+kill	TrophySeekerBrute	Kill: Seeker Soldier	9	
+kill	TrophyGjall	Kill: Gjall	9	
+kill	TrophyTick	Kill: Tick	9	
+kill	TrophyDvergr	Kill: Dvergr	9	
+kill	TrophyHare	Kill: Hare	9	
+kill	TrophyCharredMelee	Kill: Charred Warrior	11	
+kill	TrophyCharredArcher	Kill: Charred Marksman	11	
+kill	TrophyCharredMage	Kill: Charred Warlock	11	
+kill	TrophyMorgen	Kill: Morgen	11	
+kill	TrophyFallenValkyrie	Kill: Fallen Valkyrie	11	
+kill	TrophyAsksvin	Kill: Asksvin	11	
+kill	TrophyVolture	Kill: Volture	11	
+kill	TrophyBonemawSerpent	Kill: Bonemaw	11	
+kill	TrophyBarka	Kill: Barka	12	
+kill	TrophyBlob_Frost	Kill: Frost Blob	12	
+kill	TrophyJotunWarrior	Kill: Krigen	12	
+kill	TrophyJotunWitch	Kill: Hexen	12	
+kill	TrophyMole	Kill: Eyeless One	12	
+kill	TrophyMoose	Kill: Moose	12	
+kill	TrophySeal	Kill: Seal	12	
+explore	0.25	Explore: 0.25% of the World	1	
+explore	0.5	Explore: 0.5% of the World	2	
+explore	1	Explore: 1% of the World	3	
+explore	1.5	Explore: 1.5% of the World	4	
+explore	2	Explore: 2% of the World	7	
+explore	3	Explore: 3% of the World	8	
+explore	4	Explore: 4% of the World	9	
+explore	5	Explore: 5% of the World	11	
+explore	6	Explore: 6% of the World	12	

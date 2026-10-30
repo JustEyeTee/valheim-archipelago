@@ -59,10 +59,21 @@ internal static class ArchipelagoConnection
         connected = true;
     }
 
-    // For checks re-detected every tick (biomes): only queue them the first time.
+    // Global keys are "key value" pairs split at the first space, so a location name with
+    // spaces can't be a key as it is: "ap_sent:clubs tier 1" would be stored as key
+    // "ap_sent:clubs" (lookups of the whole name never match, and "Clubs Tier 2" would replace
+    // it). Keys use the name lowercased with spaces as underscores instead.
+    private static string Key(string prefix, string locationName)
+        => prefix + locationName.ToLowerInvariant().Replace(' ', '_');
+
+    public static bool IsLocationDone(string locationName)
+        => HasGlobal(Key("ap_sent:", locationName)) || HasGlobal(Key("ap_pending:", locationName));
+
+    // For checks that are re-detected over and over (biomes, inventory, exploration): only
+    // queue them the first time.
     public static void SendLocationOnce(string locationName)
     {
-        if (!WorldLoaded() || HasGlobal($"ap_sent:{locationName}") || HasGlobal($"ap_pending:{locationName}")) return;
+        if (!WorldLoaded() || IsLocationDone(locationName)) return;
         SendLocation(locationName);
     }
 
@@ -72,11 +83,10 @@ internal static class ArchipelagoConnection
         if (!WorldLoaded()) return;
         if (string.IsNullOrWhiteSpace(locationName)) return;
 
+        if (HasGlobal(Key("ap_sent:", locationName))) return;
         ValheimRandomizer.Log.LogInfo("Queue location " + locationName);
 
-        if (HasGlobal($"ap_sent:{locationName}")) return;
-
-        SetGlobal($"ap_pending:{locationName}");
+        SetGlobal(Key("ap_pending:", locationName));
         TryFlushPendingLocations();
     }
 
@@ -126,27 +136,28 @@ internal static class ArchipelagoConnection
         {
             if (!key.StartsWith("ap_pending:", StringComparison.Ordinal)) continue;
 
-            var locationName = key.Substring("ap_pending:".Length);
-            if (string.IsNullOrWhiteSpace(locationName)) continue;
-
-            if (HasGlobal($"ap_sent:{locationName}")) continue;
+            // Pending keys from older builds hold the lowercased name with its spaces.
+            var pendingName = key.Substring("ap_pending:".Length);
+            if (string.IsNullOrWhiteSpace(pendingName)) continue;
+            var locationName = ValheimRandomizer.archipelagoToResearch.Keys.Concat(ArchipelagoExtras.LocationNames)
+                .FirstOrDefault(name => Key("", name) == pendingName || name.ToLower() == pendingName) ?? pendingName;
 
             try
             {
-                foreach (string str in ValheimRandomizer.archipelagoToResearch.Keys.Concat(ArchipelagoExtras.LocationNames))
-                {
-                    if (str.ToLower() == locationName)
-                    {
-                        locationName = str;
-                        break;
-                    }
-                }
-                ValheimRandomizer.Log.LogInfo("Unlock location " + locationName);
                 var id = session.Locations.GetLocationIdFromName("Valheim", locationName);
-                session.Locations.CompleteLocationChecks(id);
+                if (id >= 0 && session.Locations.AllLocations.Contains(id))
+                {
+                    ValheimRandomizer.Log.LogInfo("Unlock location " + locationName);
+                    session.Locations.CompleteLocationChecks(id);
+                }
+                else
+                {
+                    // An option left this check out of the seed (or it's past the goal).
+                    ValheimRandomizer.Log.LogInfo($"Location '{locationName}' is not in this seed; skipping it.");
+                }
 
                 // NEW: mark success so we don't resend forever
-                SetGlobal($"ap_sent:{locationName}");
+                SetGlobal(Key("ap_sent:", locationName));
                 RemoveGlobal(key);
             }
             catch (Exception ex)

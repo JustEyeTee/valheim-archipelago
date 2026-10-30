@@ -4,7 +4,7 @@ TrophyBoar	researchTrophyBoar	Load	0
 TrophyDeer	researchTrophyDeer	Stamina	0
 TrophyGreydwarfBrute	researchTrophyGreydwarfBrute	Attack	1
 TrophyBjorn	researchTrophyBear	Attack	1
-TrophyForestTroll	researchTrophyTroll	Defense	1
+TrophyFrostTroll	researchTrophyTroll	Defense	1
 TrophySkeleton	researchTrophySkeleton	HP	1
 TrophyGreydwarfShaman	researchTrophyGreydwarfShaman	HPRegen	1
 TrophySkeletonPoison	researchTrophyRancidRemains	Load	1
@@ -60,7 +60,6 @@ TrophyVolture	researchTrophyVolture	Stamina	11
 TrophyBarka	researchTrophyBarka	Defense	12
 TrophyBlob_Frost	researchTrophyBlob_Frost	HPRegen	12
 TrophyElaking	researchTrophyElaking	Attack	12
-TrophyFrostTroll	researchTrophyFrostTroll	HP	12
 TrophyJotunWarrior	researchTrophyJotunWarrior	Attack	12
 TrophyJotunWitch	researchTrophyJotunWitch	Eitr	12
 TrophyMole	researchTrophyMole	StaminaRegen	12

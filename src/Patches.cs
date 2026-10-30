@@ -366,4 +366,21 @@ public static class Patches
             dmg.m_chop *= mul;
         }
     }
+
+    // ---------- Kill checks ----------
+    [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
+    private static class Character_OnDeath_KillCheck_Patch
+    {
+        // Same test the game uses for kill stats (last hit by the local player), plus any hit
+        // by them, so a kill finished by poison or a tame still counts.
+        private static void Prefix(Character __instance, HitData ___m_lastHit, bool ___m_localPlayerHasHit)
+        {
+            if (!ValheimRandomizer.randomized.Value || __instance == null || __instance.IsPlayer()) return;
+            if (Player.m_localPlayer == null) return;
+            if (___m_localPlayerHasHit || ___m_lastHit?.GetAttacker() == Player.m_localPlayer)
+            {
+                ArchipelagoExtras.OnCreatureKilled(__instance);
+            }
+        }
+    }
 }

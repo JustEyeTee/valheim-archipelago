@@ -1,13 +1,17 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using HarmonyLib;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
 using UnityEngine;
 
-// Checks and items beyond researches and trophies: biome discovery checks, resource bundles
-// (delivered to an Archipelago Chest the player builds) and traps.
+// Checks and items beyond researches and trophies: biome discovery, obtain, kill and explore
+// checks, resource bundles (delivered to an Archipelago Chest the player builds) and traps.
 public static class ArchipelagoExtras
 {
     public const string ChestPrefabName = "piece_randomizer_apchest";
@@ -34,6 +38,11 @@ public static class ArchipelagoExtras
         { "5 Cooked Meat", ("CookedMeat", 5) },
     };
 
+    // From checks.tsv (embedded in the DLL; the APWorld is generated from the same file).
+    private static readonly Dictionary<string, string> ObtainLocations = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> KillLocations = new Dictionary<string, string>();
+    private static readonly List<(float percent, string location)> ExploreLocations = new List<(float, string)>();
+
     private static readonly HashSet<string> Traps = new HashSet<string>
     {
         "Greydwarf Ambush Trap", "Thunderstorm Trap", "Burning Trap", "Soaked Trap", "Famine Trap",
@@ -42,12 +51,42 @@ public static class ArchipelagoExtras
     private const float TrapSpacingSeconds = 10f;
     private const float StormSeconds = 120f;
     private const float ReminderSeconds = 60f;
+    private const float ExploreCheckSeconds = 15f;
+    private const float WorldRadius = 10000f;
+
+    private static readonly AccessTools.FieldRef<Minimap, BitArray> ExploredRef =
+        AccessTools.FieldRefAccess<Minimap, BitArray>("m_explored");
 
     private static float nextTrapTime;
     private static float stormEndTime;
     private static float nextReminderTime;
+    private static float nextExploreTime;
+    private static int[] exploredWords;
 
-    public static IEnumerable<string> LocationNames => BiomeLocations.Values;
+    public static IEnumerable<string> LocationNames => BiomeLocations.Values
+        .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location));
+
+    static ArchipelagoExtras()
+    {
+        using (var stream = typeof(ArchipelagoExtras).Assembly.GetManifestResourceStream("checks.tsv"))
+        using (var reader = new StreamReader(stream))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.Length == 0 || line.StartsWith("#", StringComparison.Ordinal)) continue;
+                var cols = line.Split('\t');
+                switch (cols[0])
+                {
+                    case "obtain": ObtainLocations[cols[1]] = cols[2]; break;
+                    case "kill": KillLocations[cols[1]] = cols[2]; break;
+                    case "explore":
+                        ExploreLocations.Add((float.Parse(cols[1], CultureInfo.InvariantCulture), cols[2]));
+                        break;
+                }
+            }
+        }
+    }
 
     public static bool IsExtraItem(string name) => Bundles.ContainsKey(name) || Traps.Contains(name);
 
@@ -85,11 +124,78 @@ public static class ArchipelagoExtras
             ArchipelagoConnection.SendLocationOnce(location);
         }
 
+        if (Time.time >= nextExploreTime)
+        {
+            nextExploreTime = Time.time + ExploreCheckSeconds;
+            CheckExploration(player);
+        }
+
         if (stormEndTime > 0f && Time.time >= stormEndTime)
         {
             stormEndTime = 0f;
             EnvMan.instance?.SetForceEnvironment("");
         }
+    }
+
+    // Obtain checks: anything entering the inventory, picked up or crafted.
+    public static void OnInventoryChanged(Inventory inventory)
+    {
+        foreach (var item in inventory.GetAllItems())
+        {
+            var prefab = item?.m_dropPrefab?.name;
+            if (prefab != null && ObtainLocations.TryGetValue(prefab, out var location))
+            {
+                ArchipelagoConnection.SendLocationOnce(location);
+            }
+        }
+    }
+
+    // Kill checks: creatures are known by the trophy in their drop table, which every
+    // variant of a creature shares (a sleeping Draugr or a frozen Greydwarf counts).
+    public static void OnCreatureKilled(Character character)
+    {
+        var drops = character.GetComponent<CharacterDrop>();
+        if (drops == null || drops.m_drops == null) return;
+        foreach (var drop in drops.m_drops)
+        {
+            if (drop?.m_prefab != null && KillLocations.TryGetValue(drop.m_prefab.name, out var location))
+            {
+                ArchipelagoConnection.SendLocationOnce(location);
+            }
+        }
+    }
+
+    // Explore checks: the share of the world (a 10 km radius disc) uncovered on your own map.
+    private static void CheckExploration(Player player)
+    {
+        var minimap = Minimap.instance;
+        if (minimap == null || ExploreLocations.All(e => ArchipelagoConnection.IsLocationDone(e.location))) return;
+        var explored = ExploredRef(minimap);
+        if (explored == null) return;
+
+        int words = (explored.Length + 31) / 32;
+        if (exploredWords == null || exploredWords.Length != words) exploredWords = new int[words];
+        explored.CopyTo(exploredWords, 0);
+        long count = 0;
+        foreach (var word in exploredWords) count += PopCount((uint)word);
+
+        float radiusPixels = WorldRadius / minimap.m_pixelSize;
+        double total = Math.Min(Math.PI * radiusPixels * radiusPixels, (double)minimap.m_textureSize * minimap.m_textureSize);
+        float percent = (float)(100.0 * count / total);
+
+        foreach (var (threshold, location) in ExploreLocations)
+        {
+            if (percent < threshold || ArchipelagoConnection.IsLocationDone(location)) continue;
+            ArchipelagoConnection.SendLocationOnce(location);
+            player.Message(MessageHud.MessageType.TopLeft, $"Archipelago: explored {percent:0.##}% of the world");
+        }
+    }
+
+    private static int PopCount(uint v)
+    {
+        v -= (v >> 1) & 0x55555555u;
+        v = (v & 0x33333333u) + ((v >> 2) & 0x33333333u);
+        return (int)((((v + (v >> 4)) & 0x0F0F0F0Fu) * 0x01010101u) >> 24);
     }
 
     // Bundles and traps can be received more than once, so they are handled by their order
