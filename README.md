@@ -103,6 +103,12 @@ Fader 557.
 - **PopTracker**: put the `ValheimArchipelagoPopTracker` zip in PopTracker's `packs` folder and connect
   it to the room; checks your seed doesn't have are hidden.
 
+## Help and documentation
+
+- [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md): common problems and how to read the log.
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): how the mod and the APWorld work, for maintainers.
+- Bugs and requests: [GitHub issues](https://github.com/JustEyeTee/valheim-archipelago/issues).
+
 ## Building from source
 
 Needs the .NET 8 SDK and Python 3. Copy the game's `valheim_Data/Managed` assemblies to
