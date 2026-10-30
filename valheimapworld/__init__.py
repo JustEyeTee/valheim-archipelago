@@ -61,12 +61,37 @@ LOGIC_ITEMS = frozenset(
 
 DEEP_NORTH_TIER = 12
 
-TRACKER_OPTIONS = ("goal", "include_deep_north", "biome_checks", "obtain_checks", "exploration_checks",
+TRACKER_OPTIONS = ("goal", "include_deep_north", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks")
 
 # Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
+GEAR_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("gear:"))
+
+# Boss -> its drop as an item, which works in place of defeating it.
+BOSS_DROP_ITEMS = {"Eikthyr": "Hard Antler", "The Elder": "Swamp Key", "Bonemass": "Wishbone",
+                   "Moder": "3 Dragon Tears", "Yagluth": "Torn Spirit", "The Queen": "Majestic Carapace"}
+
+# Bundles and gear from later in the game: the earliest tier (goal scope) they're placed in.
+# Anything not listed is available from the start.
+ITEM_TIERS = {"10 Copper": 3, "10 Tin": 3, "10 Coal": 3, "3 Surtling Cores": 2, "10 Bronze": 4,
+              "10 Finewood": 5, "10 Ancient Bark": 5, "10 Iron": 6, "10 Silver": 7, "5 Obsidian": 7,
+              "10 Black Metal": 8, "10 Linen Thread": 9, "10 Yggdrasil Wood": 9, "10 Black Marble": 9,
+              "5 Refined Eitr": 10, "10 Flametal": 11, "10 Ashwood": 11, "5 Bloodgold": 12,
+              "Flint Axe": 1, "Antler Pickaxe": 3, "Bronze Axe": 4, "Bronze Pickaxe": 4, "Iron Axe": 6,
+              "Iron Pickaxe": 6, "Black Metal Axe": 8, "Black Metal Pickaxe": 10}
+
+
+def boss_name(token: str) -> str:
+    return token[len("kill:"):] if token.startswith("kill:") else token
+
+
+def boss_rule(tokens, player):
+    """Every boss in `tokens` defeated, or its drop received (not for "kill:" ones)."""
+    needs = [[f"{boss_name(t)} Defeated"] if t.startswith("kill:") or t not in BOSS_DROP_ITEMS
+             else [f"{t} Defeated", BOSS_DROP_ITEMS[t]] for t in tokens]
+    return lambda state: all(state.has_any(options, player) for options in needs)
 TRAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("trap:"))
 BOOST_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("boost:"))
 
@@ -86,7 +111,7 @@ def goal_scope(goal_tier: int, goal_boss: str) -> frozenset:
     earlier = frozenset(BOSS_ORDER[:BOSS_ORDER.index(goal_boss)])
     region = {location.user_friendly_name: location.region for location in location_data_table}
     scope = {name for name, tier in LOCATION_TIERS.items()
-             if tier <= goal_tier and LOCATION_BOSSES[name] | REGION_BOSSES[region[name]] <= earlier}
+             if tier <= goal_tier and {boss_name(b) for b in LOCATION_BOSSES[name] | REGION_BOSSES[region[name]]} <= earlier}
     while True:
         stranded = {name for name in scope if any(p not in scope for p in LOCATION_REQS.get(name, ()))}
         if not stranded:
@@ -131,6 +156,7 @@ class ValheimWorld(World):
                 logging.warning(f"Valheim: {self.player_name} has include_deep_north on, but it only "
                                 f"applies with goal: fader, so it is ignored.")
         self.scope = goal_scope(scope_tier, self.goal_boss)
+        self.scope_tier = scope_tier
         off = tuple(prefix for prefix, option in (("Biome: ", self.options.biome_checks),
                                                   ("Obtain: ", self.options.obtain_checks),
                                                   ("Explore: ", self.options.exploration_checks),
@@ -172,11 +198,27 @@ class ValheimWorld(World):
         Populates the item pool with items for the world.
         """
         create_items(self, self.scope, LOGIC_ITEMS)
+        earlier = BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss)]
+        if self.options.boss_items:
+            for boss in earlier:
+                if boss in BOSS_DROP_ITEMS:
+                    self.multiworld.itempool.append(self.create_item(BOSS_DROP_ITEMS[boss]))
+        if self.options.gear_items:
+            for gear in GEAR_ITEMS:
+                if ITEM_TIERS[gear] <= self.scope_tier:
+                    self.multiworld.itempool.append(self.create_item(gear))
+        if self.options.starter_kit:
+            self.multiworld.push_precollected(self.create_item("Starter Kit"))
 
         # Checks without a same-named item (biome, obtain, explore, kill, skill, discover) are
         # filled with traps, then boosts, then bundles.
         missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
             sum(1 for item in self.multiworld.itempool if item.player == self.player)
+        if missing < 0:
+            # More items than checks (a small goal with few extra checks): drop tools first.
+            for item in [i for i in self.multiworld.itempool if i.player == self.player and i.name in GEAR_ITEMS][:-missing]:
+                self.multiworld.itempool.remove(item)
+            missing = 0
         allowed_traps = [trap for trap in TRAP_ITEMS if trap not in self.options.excluded_traps.value]
         traps = round(missing * self.options.trap_percentage.value / 100) if allowed_traps else 0
         boosts = min(missing - traps, round(missing * self.options.boost_percentage.value / 100))
@@ -188,11 +230,13 @@ class ValheimWorld(World):
     def create_item(self, name: str) -> Item:
         classification = ItemClassification.trap if name in TRAP_ITEMS else \
             ItemClassification.filler if name in FILLER_ITEMS else \
-            ItemClassification.progression if name in LOGIC_ITEMS else ItemClassification.useful
+            ItemClassification.progression if name in LOGIC_ITEMS or name in BOSS_DROP_ITEMS.values() \
+            else ItemClassification.useful
         return Item(name, classification, item_table[name], self.player)
 
     def get_filler_item_name(self) -> str:
-        return self.random.choice(FILLER_ITEMS)
+        # Bundles from the goal's era or earlier (no Black Metal in an Eikthyr game).
+        return self.random.choice([name for name in FILLER_ITEMS if ITEM_TIERS.get(name, 0) <= self.scope_tier])
 
     def set_rules(self):
         # The mod keeps a research's recipe locked until all of its prerequisites are received;
@@ -206,12 +250,10 @@ class ValheimWorld(World):
         for location_name in self.scope:
             bosses = LOCATION_BOSSES[location_name]
             if bosses:
-                add_rule(self.get_location(location_name),
-                         lambda state, events=[f"{b} Defeated" for b in bosses]: state.has_all(events, self.player))
+                add_rule(self.get_location(location_name), boss_rule(bosses, self.player))
         for region_name, bosses in ENTRANCE_BOSSES.items():
             if bosses:
-                entrance = self.get_region(region_name).entrances[0]
-                add_rule(entrance, lambda state, events=[f"{b} Defeated" for b in bosses]: state.has_all(events, self.player))
+                add_rule(self.get_region(region_name).entrances[0], boss_rule(bosses, self.player))
         for event, trophy_location in self.boss_events:
             event.access_rule = trophy_location.access_rule
 

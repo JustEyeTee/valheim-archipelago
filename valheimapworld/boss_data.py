@@ -2,6 +2,9 @@
 
 BOSS_ORDER = ('Eikthyr', 'The Elder', 'Bonemass', 'Moder', 'Yagluth', 'The Queen', 'Fader')
 
+# Entries are boss names (its drop is needed: defeating it or receiving the drop as an
+# item both work) or "kill:<boss>" (only defeating it works).
+
 # Research -> bosses whose drops its research cost needs.
 RESEARCH_COST_BOSSES = {
     'Bronze': ('Eikthyr',),
@@ -123,7 +126,7 @@ RESEARCH_USE_BOSSES = {
     'Axes Tier 3': ('Eikthyr', 'The Elder'),
     'Battleaxes Tier 1': ('Eikthyr', 'The Elder'),
     'Clubs Tier 3': ('Eikthyr', 'The Elder'),
-    'Sledgehammers Tier 2': ('Eikthyr', 'The Elder'),
+    'Sledgehammers Tier 2': ('Eikthyr', 'The Elder', 'kill:The Elder'),
     'Blades Tier 3': ('Eikthyr', 'The Elder'),
     'Spears Tier 3': ('Eikthyr', 'The Elder'),
     'Polearms Tier 2': ('Eikthyr', 'The Elder'),
@@ -145,7 +148,7 @@ RESEARCH_USE_BOSSES = {
     'Blast Furnace': ('The Elder', 'Moder'),
     'Wolf Armor': ('Eikthyr', 'The Elder', 'Bonemass'),
     'Battleaxes Tier 2': ('Eikthyr', 'The Elder', 'Bonemass'),
-    'Clubs Tier 4': ('Eikthyr', 'The Elder', 'Bonemass'),
+    'Clubs Tier 4': ('Eikthyr', 'The Elder', 'kill:The Elder', 'Bonemass'),
     'Blades Tier 4': ('Eikthyr', 'The Elder', 'Bonemass'),
     'Spears Tier 4': ('Eikthyr', 'The Elder', 'Bonemass'),
     'Short Blades Tier 4': ('Eikthyr', 'The Elder', 'Bonemass'),
@@ -285,8 +288,8 @@ CHECK_BOSSES = {
     'Obtain: Majestic Carapace': ('The Queen',),
     'Obtain: Flametal': ('The Elder', 'Moder'),
     'Obtain: Bloodgold': ('The Elder',),
-    'Tame: Hen': ('Yagluth',),
-    'Buy: Ymir Flesh': ('The Elder',),
-    'Buy: Thunder Stone': ('The Elder',),
-    'Buy: Egg': ('Yagluth',),
+    'Tame: Hen': ('kill:Yagluth',),
+    'Buy: Ymir Flesh': ('kill:The Elder',),
+    'Buy: Thunder Stone': ('kill:The Elder',),
+    'Buy: Egg': ('kill:Yagluth',),
 }

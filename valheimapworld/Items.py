@@ -357,6 +357,41 @@ Blizzard Trap,trap:blizzard,1,Trap,Trap
 Tar Trap,trap:tar,1,Trap,Trap
 Launch Trap,trap:launch,1,Trap,Trap
 Rust Trap,trap:rust,1,Trap,Trap
+Meteor Shower Trap,trap:meteors,1,Trap,Trap
+Fake Item Trap,trap:fake,1,Trap,Trap
+Hard Antler,key:HardAntler:1,1,Key,Progression
+Swamp Key,key:CryptKey:1,1,Key,Progression
+Wishbone,key:Wishbone:1,1,Key,Progression
+3 Dragon Tears,key:DragonTear:3,1,Key,Progression
+Torn Spirit,key:YagluthDrop:1,1,Key,Progression
+Majestic Carapace,key:QueenDrop:1,1,Key,Progression
+Starter Kit,kit:starter,1,Kit,Useful
+10 Copper,filler:Copper:10,1,Filler,Filler
+10 Tin,filler:Tin:10,1,Filler,Filler
+10 Coal,filler:Coal:10,1,Filler,Filler
+3 Surtling Cores,filler:SurtlingCore:3,1,Filler,Filler
+10 Bronze,filler:Bronze:10,1,Filler,Filler
+10 Finewood,filler:FineWood:10,1,Filler,Filler
+10 Ancient Bark,filler:ElderBark:10,1,Filler,Filler
+10 Iron,filler:Iron:10,1,Filler,Filler
+10 Silver,filler:Silver:10,1,Filler,Filler
+5 Obsidian,filler:Obsidian:5,1,Filler,Filler
+10 Black Metal,filler:BlackMetal:10,1,Filler,Filler
+10 Linen Thread,filler:LinenThread:10,1,Filler,Filler
+10 Yggdrasil Wood,filler:YggdrasilWood:10,1,Filler,Filler
+10 Black Marble,filler:BlackMarble:10,1,Filler,Filler
+5 Refined Eitr,filler:Eitr:5,1,Filler,Filler
+10 Flametal,filler:FlametalNew:10,1,Filler,Filler
+10 Ashwood,filler:Blackwood:10,1,Filler,Filler
+5 Bloodgold,filler:Gold:5,1,Filler,Filler
+Flint Axe,gear:AxeFlint:1,1,Gear,Useful
+Antler Pickaxe,gear:PickaxeAntler:1,1,Gear,Useful
+Bronze Axe,gear:AxeBronze:1,1,Gear,Useful
+Bronze Pickaxe,gear:PickaxeBronze:1,1,Gear,Useful
+Iron Axe,gear:AxeIron:1,1,Gear,Useful
+Iron Pickaxe,gear:PickaxeIron:1,1,Gear,Useful
+Black Metal Axe,gear:AxeBlackMetal:1,1,Gear,Useful
+Black Metal Pickaxe,gear:PickaxeBlackMetal:1,1,Gear,Useful
 Combat Training,boost:combat,1,Boost,Useful
 Woodcutting Training,boost:woodcutting,1,Boost,Useful
 Mining Training,boost:mining,1,Boost,Useful

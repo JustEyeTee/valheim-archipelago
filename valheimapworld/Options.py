@@ -165,6 +165,34 @@ class TraderChecks(DefaultOnToggle):
     display_name = "Trader Checks"
 
 
+class BossItems(DefaultOnToggle):
+    """
+    Puts the drops of the bosses before your goal into the item pool, delivered to your
+    Archipelago Chest: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),
+    3 Dragon Tears (Moder), Torn Spirit (Yagluth) and Majestic Carapace (The Queen). Logic
+    then lets you use either the boss kill or the received drop, so another player can
+    open the Sunken Crypts for you. Haldor's boss-unlocked stock still needs the kill.
+    """
+    display_name = "Boss Items"
+
+
+class GearItems(DefaultOnToggle):
+    """
+    Puts tools from your goal's era into the item pool (one each), delivered to your
+    Archipelago Chest: Flint Axe, Antler Pickaxe, Bronze, Iron and Black Metal Axe and
+    Pickaxe. Resource bundles also include your era's metals and woods (Copper, Bronze,
+    Iron, Silver, Black Metal...), never past your goal.
+    """
+    display_name = "Gear Items"
+
+
+class StarterKit(DefaultOnToggle):
+    """
+    Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
+    """
+    display_name = "Starter Kit"
+
+
 class TrapPercentage(Range):
     """
     Percentage of the extra items (the items beyond one per research and trophy) that are
@@ -193,13 +221,15 @@ class ExcludedTraps(OptionSet):
     Famine Trap: your food is gone. Butterfingers Trap: everything is unequipped.
     Heavy Load Trap: 50 Stone in your pockets. Launch Trap: you're thrown into the air.
     Rust Trap: your equipped gear loses half its durability.
+    Meteor Shower Trap: an Ashlands meteor shower for a minute, wherever you are.
+    Fake Item Trap: a message that you received an item; nothing arrives.
     """
     display_name = "Excluded Traps"
     valid_keys = frozenset({
         "Greydwarf Ambush Trap", "Skeleton Ambush Trap", "Monster Pack Trap", "Bat Swarm Trap", "Raid Trap",
         "Thunderstorm Trap", "Blizzard Trap", "Lightning Strike Trap", "Floor Is Lava Trap", "Burning Trap",
         "Poison Trap", "Frost Trap", "Soaked Trap", "Tar Trap", "Famine Trap", "Butterfingers Trap",
-        "Heavy Load Trap", "Launch Trap", "Rust Trap",
+        "Heavy Load Trap", "Launch Trap", "Rust Trap", "Meteor Shower Trap", "Fake Item Trap",
     })
 
 
@@ -265,6 +295,9 @@ class ValheimOptions(PerGameCommonOptions):
     fishing_checks: FishingChecks
     taming_checks: TamingChecks
     trader_checks: TraderChecks
+    boss_items: BossItems
+    gear_items: GearItems
+    starter_kit: StarterKit
     trap_percentage: TrapPercentage
     excluded_traps: ExcludedTraps
     boost_percentage: BoostPercentage
