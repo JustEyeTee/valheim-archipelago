@@ -1,0 +1,329 @@
+﻿# Q. What is this file?
+# A. This file contains options which allow you to configure your multiworld experience while allowing
+#    others to play how they want as well.
+#
+# Q. How do I use it?
+# A. The options in this file are weighted. This means the higher number you assign to a value, the
+#    more chances you have for that option to be chosen. For example, an option like this:
+#
+#    map_shuffle:
+#      on: 5
+#      off: 15
+#
+#    Means you have 5 chances for map shuffle to occur, and 15 chances for map shuffle to be turned
+#    off.
+#
+# Q. I've never seen a file like this before. What characters am I allowed to use?
+# A. This is a .yaml file. You are allowed to use most characters.
+#    To test if your yaml is valid or not, you can use this website:
+#        http://www.yamllint.com/
+#    You can also verify that your Archipelago options are valid at this site:
+#        https://archipelago.gg/check
+
+# Your name in-game, limited to 16 characters.
+#     {player} will be replaced with the player's slot number.
+#     {PLAYER} will be replaced with the player's slot number, if that slot number is greater than 1.
+#     {number} will be replaced with the counter value of the name.
+#     {NUMBER} will be replaced with the counter value of the name, if the counter value is greater than 1.
+name: Player{number}
+
+# Used to describe your yaml. Useful if you have multiple files.
+description: Default Valheim Template
+
+game: Valheim
+requires:
+  version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
+  game:
+    Valheim: 0.7.0 # Version of the world required for this yaml to work as expected.
+
+Valheim:
+  ################
+  # Game Options #
+  ################
+  progression_balancing:
+    # A system that can move progression earlier, to try and prevent the player from getting stuck and bored early.
+    # 
+    # A lower setting means more getting stuck. A higher setting means less getting stuck.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 99
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-99: 0 # random value between 0 and 99
+    disabled: 0 # equivalent to 0
+    normal: 50 # equivalent to 50
+    extreme: 0 # equivalent to 99
+
+  accessibility:
+    # Set rules for reachability of your items/locations.
+    # 
+    # **Full:** ensure everything can be reached and acquired.
+    # 
+    # **Minimal:** ensure what is needed to reach your goal can be acquired.
+    full: 50
+    minimal: 0
+
+  goal:
+    # The boss you must defeat to win. You win when you pick up that boss's trophy.
+    # Earlier bosses make a shorter game; Fader is the full game.
+    eikthyr: 0
+    the_elder: 0
+    bonemass: 0
+    moder: 0
+    yagluth: 0
+    the_queen: 0
+    fader: 50
+
+  research_cost_percent:
+    # Scales how many materials each research costs at the Research Bench, as a percentage.
+    # Every ingredient still costs at least 1, so 1 makes every research cost 1 of each.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 200
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-200: 0 # random value between 1 and 200
+    minimal: 0 # equivalent to 1
+    quarter: 0 # equivalent to 25
+    half: 0 # equivalent to 50
+    normal: 50 # equivalent to 100
+    double: 0 # equivalent to 200
+
+  include_deep_north:
+    # Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
+    # there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
+    # upgrades) and 8 Deep North trophies. Only applies when the goal is Fader.
+    'false': 50
+    'true': 0
+
+  biome_checks:
+    # Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,
+    # Ocean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.
+    # These checks are filled with resource bundles and traps; bundles arrive in an
+    # Archipelago Chest you build with the Hammer.
+    'false': 0
+    'true': 50
+
+  obtain_checks:
+    # Adds a check for getting each of 93 materials and ingredients for the first time, by
+    # picking it up or crafting it (Flint, Copper Ore, Bronze, Silver, Black Metal...), up to the
+    # goal's tier. These checks are filled with resource bundles and traps.
+    'false': 0
+    'true': 50
+
+  exploration_checks:
+    # Adds checks for exploring part of the world map: 0.25%, 0.5%, 1%, 1.5%, 2%, 3%, 4%, 5% and
+    # 6% of the world, up to the goal's tier. Walking 1 km uncovers roughly 0.06%; sailing is
+    # faster. These checks are filled with resource bundles and traps.
+    'false': 0
+    'true': 50
+
+  kill_checks:
+    # Adds a check for the first kill of each kind of creature (Neck, Greydwarf, Troll, Draugr,
+    # Wolf, Lox, Seeker, Morgen...), up to the goal's tier. Bosses are left out, since their
+    # trophies already are checks. These checks are filled with resource bundles and traps.
+    'false': 50
+    'true': 0
+
+  skill_checks:
+    # Adds checks for raising each skill (Woodcutting, Swords, Running, Fishing...) to level 10,
+    # 20, 30, 40 and 50, up to this level. 0 turns skill checks off. Weapon and tool skills
+    # only count once their research is received (Swords needs Blades Tier 1, and so on).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-50: 0 # random value between 0 and 50
+    off: 0 # equivalent to 0
+    level_10: 0 # equivalent to 10
+    level_20: 50 # equivalent to 20
+    level_30: 0 # equivalent to 30
+    level_40: 0 # equivalent to 40
+    level_50: 0 # equivalent to 50
+
+  discovery_checks:
+    # Adds a check for reaching each kind of dungeon and landmark for the first time: Burial
+    # Chamber, Troll Cave, Sunken Crypt, Frost Cave, Fuling Village, Infested Mine, Charred
+    # Fortress, the traders and every boss altar, up to the goal's tier.
+    'false': 0
+    'true': 50
+
+  build_checks:
+    # Adds a check for placing each crafting station, boat and portal for the first time
+    # (Workbench, Forge, Smelter, Karve, Portal, Blast Furnace, Galdr Table...: 29 kinds), up to
+    # the goal's tier.
+    'false': 0
+    'true': 50
+
+  eat_checks:
+    # Adds a check for eating each of 51 foods for the first time, from Raspberries to Lox Meat
+    # Pie, up to the goal's tier.
+    'false': 0
+    'true': 50
+
+  fishing_checks:
+    # Adds a check for catching each of the 12 kinds of fish, up to the goal's tier. A fishing
+    # rod and bait are sold by Haldor; biome bait is made at the Food Preparation Table.
+    'false': 0
+    'true': 50
+
+  taming_checks:
+    # Adds a check for taming each tameable animal: Boar, Wolf, Lox, Hen, Asksvin and Moose, up
+    # to the goal's tier.
+    'false': 0
+    'true': 50
+
+  trader_checks:
+    # Adds a check for buying each of 14 items from Haldor and Hildir (Fishing Rod, Megingjord,
+    # Ymir Flesh, Egg...), up to the goal's tier.
+    'false': 0
+    'true': 50
+
+  boss_items:
+    # Puts the drops of the bosses before your goal into the item pool, delivered to your
+    # Archipelago Chest: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),
+    # 3 Dragon Tears (Moder), Torn Spirit (Yagluth) and Majestic Carapace (The Queen). Logic
+    # then lets you use either the boss kill or the received drop, so another player can
+    # open the Sunken Crypts for you. Haldor's boss-unlocked stock still needs the kill.
+    'false': 0
+    'true': 50
+
+  gear_items:
+    # Puts tools from your goal's era into the item pool (one each), delivered to your
+    # Archipelago Chest: Flint Axe, Antler Pickaxe, Bronze, Iron and Black Metal Axe and
+    # Pickaxe. Resource bundles also include your era's metals and woods (Copper, Bronze,
+    # Iron, Silver, Black Metal...), never past your goal.
+    'false': 0
+    'true': 50
+
+  starter_kit:
+    # Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
+    'false': 0
+    'true': 50
+
+  trap_percentage:
+    # Percentage of the extra items (the items beyond one per research and trophy) that are
+    # traps instead of resource bundles. See excluded_traps for the list.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 100
+    20: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-100: 0 # random value between 0 and 100
+
+  excluded_traps:
+    # Traps that are never placed. The traps:
+    # Greydwarf Ambush Trap, Skeleton Ambush Trap: 3 of them spawn around you.
+    # Monster Pack Trap: a pack of whatever lives in the biome you're in (Draugr in the Swamp,
+    #   Wolves in the Mountains, Fulings in the Plains...).
+    # Bat Swarm Trap: 6 bats.
+    # Raid Trap: a raid you're ready for starts (only when you host the world).
+    # Thunderstorm Trap, Blizzard Trap: 2 minutes of storm or freezing snowstorm.
+    # Lightning Strike Trap: lightning hits where you stand.
+    # Floor Is Lava Trap: for 30 seconds the ground burns you; stand on something you built
+    #   (or a boat), or keep jumping.
+    # Burning Trap, Poison Trap, Frost Trap: damage over time (Frost also slows you).
+    # Soaked Trap: you're wet. Tar Trap: you're covered in tar and slowed.
+    # Famine Trap: your food is gone. Butterfingers Trap: everything is unequipped.
+    # Heavy Load Trap: 50 Stone in your pockets. Launch Trap: you're thrown into the air.
+    # Rust Trap: your equipped gear loses half its durability.
+    # Meteor Shower Trap: an Ashlands meteor shower for a minute, wherever you are.
+    # Fake Item Trap: a message that you received an item; nothing arrives.
+    []
+
+  boost_percentage:
+    # Percentage of the extra items that are boosts instead of resource bundles: Combat,
+    # Woodcutting and Mining Training (+5 skill levels) and Rested, Eikthyr's and Moder's
+    # Blessings (a timed buff). Traps are taken first, then boosts, and the rest are bundles.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 100
+    20: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-100: 0 # random value between 0 and 100
+
+  death_link:
+    # When you die, everyone who enabled death link dies. Of course, the reverse is true too.
+    'false': 50
+    'true': 0
+
+  death_link_mode:
+    # What happens to you when someone else's Death Link arrives.
+    # kill: you die (and lose skills and drop your items, as with any death).
+    # wounded: your health drops to 1.
+    # trap: a random trap goes off instead.
+    kill: 50
+    wounded: 0
+    trap: 0
+
+  death_link_amnesty:
+    # How many of your own deaths are forgiven before one is sent out over Death Link. 0 sends
+    # every death; 2 sends every third death.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    0: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  trap_link:
+    # Trap Link: when you receive a trap it is also sent to the other Trap Link games in the
+    # multiworld, and their traps reach you (as the closest Valheim trap; unknown traps are
+    # ignored).
+    'false': 50
+    'true': 0
+
+  ###########################
+  # Item & Location Options #
+  ###########################
+  local_items:
+    # Forces these items to be in their native world.
+    []
+
+  non_local_items:
+    # Forces these items to be outside their native world.
+    []
+
+  start_inventory:
+    # Start with the specified amount of these items. Example: {Bomb: 1, Arrow: 3}
+    {}
+
+  start_hints:
+    # Start with these item's locations prefilled into the ``!hint`` command.
+    []
+
+  start_location_hints:
+    # Start with these locations and their item prefilled into the ``!hint`` command.
+    []
+
+  exclude_locations:
+    # Prevent these locations from having an important item.
+    []
+
+  priority_locations:
+    # Prevent these locations from having an unimportant item.
+    []
+
+  item_links:
+    # Share part of your item pool with other players.
+    []
+
+  plando_items:
+    # Generic items plando.
+    []
