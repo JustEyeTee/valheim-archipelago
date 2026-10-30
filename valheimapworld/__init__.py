@@ -1,14 +1,14 @@
 import logging
 from typing import Any, Dict
 
-from BaseClasses import Item, ItemClassification, Location
-from worlds.AutoWorld import World
+from BaseClasses import Item, ItemClassification, Location, Tutorial
+from worlds.AutoWorld import WebWorld, World
 from worlds.generic.Rules import add_rule
 
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table
-from .Options import ValheimOptions, Goal, GOAL_BOSSES
+from .Options import ValheimOptions, Goal, GOAL_BOSSES, option_groups, options_presets
 from .research_data import RESEARCH_PREREQS
 from .check_data import CHECKS
 from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CHECK_BOSSES
@@ -119,6 +119,30 @@ def goal_scope(goal_tier: int, goal_boss: str) -> frozenset:
         scope -= stranded
 
 
+class ValheimWeb(WebWorld):
+    tutorials = [Tutorial(
+        "Multiworld Setup Guide",
+        "A guide to setting up the Valheim randomizer for Archipelago.",
+        "English",
+        "setup_en.md",
+        "setup/en",
+        ["JustEyeTee"],
+    )]
+    option_groups = option_groups
+    options_presets = options_presets
+
+
+def _location_groups() -> Dict[str, set]:
+    """By kind of check ("Obtain", "Trophy"... and "Research") and by tier ("Tier 4")."""
+    groups: Dict[str, set] = {}
+    for location in location_data_table:
+        name = location.user_friendly_name
+        kind = name.split(":")[0] if ":" in name else "Research"
+        groups.setdefault(f"{kind} Checks", set()).add(name)
+        groups.setdefault(f"Tier {location.region[len('Tier'):]}", set()).add(name)
+    return groups
+
+
 class ValheimWorld(World):
     """
     Valheim world integration for Archipelago.
@@ -130,6 +154,19 @@ class ValheimWorld(World):
     options: ValheimOptions
     location_name_to_id = location_table
     item_name_to_id = item_table
+    web = ValheimWeb()
+    item_name_groups = {
+        "Researches": {name for name in RESEARCH_PREREQS},
+        "Trophies": {item.item_name for item in item_data_table if item.item_name.startswith("Trophy: ")},
+        "Boss Drops": set(BOSS_DROP_ITEMS.values()),
+        "Tools": set(GEAR_ITEMS),
+        "Bundles": set(FILLER_ITEMS),
+        "Traps": set(TRAP_ITEMS),
+        "Boosts": set(BOOST_ITEMS),
+        "Tier Gates": {name for region in region_data_table.values()
+                       for connection in region.connections for name in connection.required_items},
+    }
+    location_name_groups = _location_groups()
     topology_present = True
 
     # Universal Tracker rebuilds this world from slot data instead of a YAML.
@@ -235,8 +272,10 @@ class ValheimWorld(World):
         return Item(name, classification, item_table[name], self.player)
 
     def get_filler_item_name(self) -> str:
-        # Bundles from the goal's era or earlier (no Black Metal in an Eikthyr game).
-        return self.random.choice([name for name in FILLER_ITEMS if ITEM_TIERS.get(name, 0) <= self.scope_tier])
+        # Bundles from the goal's era or earlier (no Black Metal in an Eikthyr game). Item link
+        # groups never run generate_early, so they only get the basic bundles.
+        tier = getattr(self, "scope_tier", 0)
+        return self.random.choice([name for name in FILLER_ITEMS if ITEM_TIERS.get(name, 0) <= tier])
 
     def set_rules(self):
         # The mod keeps a research's recipe locked until all of its prerequisites are received;

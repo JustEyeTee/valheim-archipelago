@@ -42,8 +42,12 @@ for i, line in enumerate(lines):
 open(p, "w", newline="").write("\n".join(lines))
 EOF
 fi
+# The source manifest has no container fields (apworld specification.md); the .apworld gets
+# version and compatible_version (APContainer scheme 7) when packaged.
 (cd valheimapworld && rm -f ../dist/stage/valheimapworld.apworld &&
-  mkdir -p ../dist/stage/apw/valheimapworld && cp ./*.py archipelago.json ../dist/stage/apw/valheimapworld/ &&
+  mkdir -p ../dist/stage/apw/valheimapworld && cp -r ./*.py archipelago.json docs ../dist/stage/apw/valheimapworld/ &&
+  python3 -I -c 'import json, sys; p = sys.argv[1]; m = json.load(open(p)); m.update(version=7, compatible_version=7); json.dump(m, open(p, "w"), indent=2)' \
+    ../dist/stage/apw/valheimapworld/archipelago.json &&
   cd ../dist/stage/apw && python3 -I -m zipfile -c ../valheimapworld.apworld valheimapworld) && rm -rf "$stage/apw"
 zip="dist/ValheimArchipelagoRandomizer-$tag.zip"
 cp LICENSE README.md THIRD_PARTY_NOTICES.md "$stage/" && cp docs/Valheim.yaml "$stage/Valheim-template.yaml"

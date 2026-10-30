@@ -1,8 +1,9 @@
 {
   "game": "Valheim",
-  "authors": ["Samupo", "JustEyeTee"],
-  "world_version": "0.7.0",
-  "minimum_ap_version": "0.6.4",
-  "compatible_version": 7,
-  "version": 7
+  "authors": [
+    "Samupo",
+    "JustEyeTee"
+  ],
+  "world_version": "0.7.1",
+  "minimum_ap_version": "0.6.4"
 }

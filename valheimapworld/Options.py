@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionSet, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionGroup, OptionSet, PerGameCommonOptions, Range, Toggle
 
 
 class Goal(Choice):
@@ -305,3 +305,22 @@ class ValheimOptions(PerGameCommonOptions):
     death_link_mode: DeathLinkMode
     death_link_amnesty: DeathLinkAmnesty
     trap_link: TrapLink
+
+
+# How the options are grouped on the website and in generated templates.
+option_groups = [
+    OptionGroup("Goal", [Goal, IncludeDeepNorth, ResearchCostPercent]),
+    OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, KillChecks, SkillChecks, DiscoveryChecks,
+                           BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
+    OptionGroup("Items", [BossItems, GearItems, StarterKit, BoostPercentage]),
+    OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
+    OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
+]
+
+options_presets = {
+    "Quick Eikthyr run": {"goal": "eikthyr", "research_cost_percent": 25},
+    "The Elder run": {"goal": "the_elder", "research_cost_percent": 50},
+    "Full game": {"goal": "fader"},
+    "Full game with Deep North and every check": {"goal": "fader", "include_deep_north": True, "kill_checks": True,
+                                                   "skill_checks": 50},
+}
