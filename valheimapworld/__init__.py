@@ -86,4 +86,5 @@ class ValheimWorld(World):
     def fill_slot_data(self) -> Dict[str, Any]:
         return {
             "goal_trophy": self.goal_trophy,
+            "research_cost_percent": self.options.research_cost_percent.value,
         }

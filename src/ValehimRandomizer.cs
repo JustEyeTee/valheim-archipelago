@@ -98,6 +98,7 @@ public class ValheimRandomizer : BaseUnityPlugin
             if (currentPlayer != null && currentPlayer.GetInventory() != null)
             {
                 currentPlayer.GetInventory().m_onChanged += OnInventoryChanged;
+                RandomizerUtils.ReapplyResearchCostPercent();
             }
         }
 

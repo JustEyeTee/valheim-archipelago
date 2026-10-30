@@ -8,6 +8,30 @@ using System.Text;
 
 public static class RandomizerUtils
 {
+    // Research recipes with their research.tsv amounts, so the room's cost percentage can be
+    // applied (and re-applied) after connecting. Valheim uses these same Recipe objects in-world.
+    private static readonly List<(CustomRecipe recipe, int[] amounts)> researchRecipes = new List<(CustomRecipe, int[])>();
+
+    private static int researchCostPercent = 100;
+
+    // Re-applied when a world loads, in case the recipes were rebuilt since connecting.
+    public static void ReapplyResearchCostPercent() => ApplyResearchCostPercent(researchCostPercent);
+
+    public static void ApplyResearchCostPercent(int percent)
+    {
+        researchCostPercent = percent;
+        foreach (var (recipe, amounts) in researchRecipes)
+        {
+            var resources = recipe.Recipe?.m_resources;
+            if (resources == null) continue;
+            for (int i = 0; i < resources.Length && i < amounts.Length; i++)
+            {
+                resources[i].m_amount = Math.Max(1, (int)Math.Round(amounts[i] * percent / 100.0));
+            }
+        }
+        ValheimRandomizer.Log.LogInfo($"Research costs set to {percent}% ({researchRecipes.Count} recipes).");
+    }
+
     public static void RegisterResearchBench()
     {
         PrefabManager.OnVanillaPrefabsAvailable -= RegisterResearchBench;
@@ -175,7 +199,9 @@ public static class RandomizerUtils
             CraftingStation = ValheimRandomizer.ResearchBenchPrefabName, // our custom bench
             Requirements = researchRecipeRequirements
         };
-        ItemManager.Instance.AddRecipe(new CustomRecipe(researchRecipeCfg));
+        var researchRecipe = new CustomRecipe(researchRecipeCfg);
+        ItemManager.Instance.AddRecipe(researchRecipe);
+        researchRecipes.Add((researchRecipe, researchRecipe.Recipe.m_resources.Select(r => r.m_amount).ToArray()));
 
         ValheimRandomizer.Log.LogInfo($"Created research item '{researchItemID}' and its recipe at '{ValheimRandomizer.ResearchBenchPrefabName}'.");
 

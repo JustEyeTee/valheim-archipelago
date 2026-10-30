@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, PerGameCommonOptions
+from Options import Choice, NamedRange, PerGameCommonOptions
 
 
 class Goal(Choice):
@@ -31,6 +31,25 @@ GOAL_BOSSES = {
 }
 
 
+class ResearchCostPercent(NamedRange):
+    """
+    Scales how many materials each research costs at the Research Bench, as a percentage.
+    Every ingredient still costs at least 1, so 1 makes every research cost 1 of each.
+    """
+    display_name = "Research Cost Percent"
+    range_start = 1
+    range_end = 200
+    default = 100
+    special_range_names = {
+        "minimal": 1,
+        "quarter": 25,
+        "half": 50,
+        "normal": 100,
+        "double": 200,
+    }
+
+
 @dataclass
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
+    research_cost_percent: ResearchCostPercent

@@ -41,6 +41,14 @@ internal static class ArchipelagoConnection
         }
         ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
 
+        // Slot data numbers arrive as Int64; rooms from before this option use full costs.
+        int costPercent = 100;
+        if (slotData != null && slotData.TryGetValue("research_cost_percent", out var cost) && cost != null)
+        {
+            try { costPercent = Convert.ToInt32(cost); } catch (Exception) { }
+        }
+        RandomizerUtils.ApplyResearchCostPercent(costPercent);
+
         // Hook item reception
         session.Items.ItemReceived += OnApItemReceived;
 
