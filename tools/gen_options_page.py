@@ -26,6 +26,7 @@ import valheimapworld as world  # noqa: E402
 from valheimapworld.Options import ValheimOptions, option_groups, options_presets  # noqa: E402
 
 manifest = json.load(open(root / "valheimapworld" / "archipelago.json"))
+GAME_VERSION = "1.0.21"  # the Valheim version the mod is built and tested against
 hints = ValheimOptions.type_hints
 name_of = {cls: name for name, cls in hints.items()}
 
@@ -111,6 +112,7 @@ goals = [{"key": key, "boss": world.GOAL_BOSSES[value][0], "era": eras.get(key, 
 data = {
     "game": "Valheim",
     "world_version": manifest["world_version"],
+    "game_version": GAME_VERSION,
     "minimum_ap_version": manifest["minimum_ap_version"],
     "groups": groups,
     "presets": options_presets,

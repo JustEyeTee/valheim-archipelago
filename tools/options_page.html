@@ -205,7 +205,7 @@ pre.yaml .k { color: var(--code-key); }
     $("total").append(el("strong", { text: String(totalFor(b)) }), ` checks for ${g.boss} with these options`);
   }
 
-  $("version").textContent = `APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
+  $("version").textContent = `Valheim ${data.game_version} · APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
   for (const name of Object.keys(data.presets)) {
     const o = document.createElement("option"); o.value = name; o.textContent = name; $("preset").append(o);
   }
@@ -330,7 +330,8 @@ pre.yaml .k { color: var(--code-key); }
     const lines = [
       `# Made with the Valheim Options Builder (APWorld ${data.world_version}).`,
       `name: ${q(name || "Viking")}`, `game: ${data.game}`,
-      "requires:", `  version: ${data.minimum_ap_version}`, "  game:", `    ${data.game}: ${data.world_version}`,
+      "requires:", `  version: ${data.minimum_ap_version}  # Archipelago`, "  game:",
+      `    ${data.game}: ${data.world_version}  # the Valheim randomizer (APWorld), not the game`,
       `${data.game}:`,
     ];
     for (const g of data.groups) {
