@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, NamedRange, PerGameCommonOptions, Toggle
+from Options import Choice, DefaultOnToggle, NamedRange, PerGameCommonOptions, Range, Toggle
 
 
 class Goal(Choice):
@@ -58,8 +58,31 @@ class IncludeDeepNorth(Toggle):
     display_name = "Include Deep North"
 
 
+class BiomeChecks(DefaultOnToggle):
+    """
+    Adds a check for entering each biome for the first time (Black Forest, Swamp, Mountains,
+    Ocean, Plains, Mistlands, Ashlands, and Deep North when included), up to the goal's tier.
+    These checks are filled with resource bundles and traps; bundles arrive in an
+    Archipelago Chest you build with the Hammer.
+    """
+    display_name = "Biome Checks"
+
+
+class TrapPercentage(Range):
+    """
+    Percentage of the filler items (the items beyond one per research and trophy) that are
+    traps instead of resource bundles: Greydwarf Ambush, Thunderstorm, Burning, Soaked, Famine.
+    """
+    display_name = "Trap Percentage"
+    range_start = 0
+    range_end = 100
+    default = 20
+
+
 @dataclass
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
     research_cost_percent: ResearchCostPercent
     include_deep_north: IncludeDeepNorth
+    biome_checks: BiomeChecks
+    trap_percentage: TrapPercentage

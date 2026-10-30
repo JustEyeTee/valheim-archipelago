@@ -330,6 +330,16 @@ Trophy: TrophyJotunWitch,item:researchTrophyJotunWitch,1,Item,Useful
 Trophy: TrophyMole,item:researchTrophyMole,1,Item,Useful
 Trophy: TrophyMoose,item:researchTrophyMoose,1,Item,Useful
 Trophy: TrophySeal,item:researchTrophySeal,1,Item,Useful
+20 Wood,filler:Wood:20,1,Filler,Filler
+20 Stone,filler:Stone:20,1,Filler,Filler
+10 Resin,filler:Resin:10,1,Filler,Filler
+50 Coins,filler:Coins:50,1,Filler,Filler
+5 Cooked Meat,filler:CookedMeat:5,1,Filler,Filler
+Greydwarf Ambush Trap,trap:ambush,1,Trap,Trap
+Thunderstorm Trap,trap:storm,1,Trap,Trap
+Burning Trap,trap:burning,1,Trap,Trap
+Soaked Trap,trap:soaked,1,Trap,Trap
+Famine Trap,trap:famine,1,Trap,Trap
 '''
 
 # Map string classifications to `ItemClassification`

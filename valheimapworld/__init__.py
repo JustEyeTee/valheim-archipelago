@@ -7,7 +7,7 @@ from worlds.generic.Rules import add_rule
 
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
-from .Items import create_items, item_table
+from .Items import create_items, item_table, item_data_table
 from .Options import ValheimOptions, Goal, GOAL_BOSSES
 from .research_data import RESEARCH_PREREQS
 
@@ -19,6 +19,10 @@ LOGIC_ITEMS = frozenset(
 )
 
 DEEP_NORTH_TIER = 12
+
+# Resource bundles (delivered to the Archipelago Chest) and traps, from the item table.
+FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
+TRAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("trap:"))
 
 # Location (and same-named item) -> tier number, from its region ("Tier4" -> 4).
 LOCATION_TIERS = {location.user_friendly_name: int(location.region[len("Tier"):])
@@ -64,6 +68,8 @@ class ValheimWorld(World):
                 logging.warning(f"Valheim: {self.player_name} has include_deep_north on, but it only "
                                 f"applies with goal: fader, so it is ignored.")
         self.scope = goal_scope(scope_tier)
+        if not self.options.biome_checks:
+            self.scope = frozenset(name for name in self.scope if not name.startswith("Biome: "))
 
     def create_regions(self):
         """
@@ -84,6 +90,23 @@ class ValheimWorld(World):
         Populates the item pool with items for the world.
         """
         create_items(self, self.scope, LOGIC_ITEMS)
+
+        # Checks without a same-named item (biomes) are filled with bundles and traps.
+        missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
+            sum(1 for item in self.multiworld.itempool if item.player == self.player)
+        traps = round(missing * self.options.trap_percentage.value / 100)
+        for i in range(missing):
+            name = self.random.choice(TRAP_ITEMS) if i < traps else self.get_filler_item_name()
+            self.multiworld.itempool.append(self.create_item(name))
+
+    def create_item(self, name: str) -> Item:
+        classification = ItemClassification.trap if name in TRAP_ITEMS else \
+            ItemClassification.filler if name in FILLER_ITEMS else \
+            ItemClassification.progression if name in LOGIC_ITEMS else ItemClassification.useful
+        return Item(name, classification, item_table[name], self.player)
+
+    def get_filler_item_name(self) -> str:
+        return self.random.choice(FILLER_ITEMS)
 
     def set_rules(self):
         # The mod keeps a research's recipe locked until all of its prerequisites are received.

@@ -330,6 +330,14 @@ Trophy,Trophy: TrophyJotunWitch,loc:researchTrophyJotunWitch,Not Missable,Tier12
 Trophy,Trophy: TrophyMole,loc:researchTrophyMole,Not Missable,Tier12
 Trophy,Trophy: TrophyMoose,loc:researchTrophyMoose,Not Missable,Tier12
 Trophy,Trophy: TrophySeal,loc:researchTrophySeal,Not Missable,Tier12
+Biome,Biome: Black Forest,loc:biomeBlackForest,Not Missable,Tier0
+Biome,Biome: Swamp,loc:biomeSwamp,Not Missable,Tier1
+Biome,Biome: Mountains,loc:biomeMountain,Not Missable,Tier1
+Biome,Biome: Ocean,loc:biomeOcean,Not Missable,Tier3
+Biome,Biome: Plains,loc:biomePlains,Not Missable,Tier7
+Biome,Biome: Mistlands,loc:biomeMistlands,Not Missable,Tier9
+Biome,Biome: Ashlands,loc:biomeAshLands,Not Missable,Tier11
+Biome,Biome: Deep North,loc:biomeDeepNorth,Not Missable,Tier12
 '''
 
 # Map string classifications to `LocationProgressType`
