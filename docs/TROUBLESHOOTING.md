@@ -61,6 +61,11 @@ The log shows `Queue location <name>` when a check is done and `Unlock location 
 `/ap logic obtain` lists one kind. "Not yet" checks need an item you haven't received, a boss, or (with
 combat logic) gear. The key can be changed in the mod's config (`LogicPanelKey`).
 
+**Buying hints.** Stand by a trader (Haldor, Hildir or the Bog Witch) and type `/ap shop hint` (or
+`/ap shop hint obtain`): it takes `hint_shop_price` Coins and reveals what's at one of your checks in
+logic, for everyone. It costs no hint points. In the F9 window, a check's Hint button asks the server
+instead (`!hint_location`), which does cost hint points.
+
 **I did my goal but didn't win.** Type `/ap goal` in chat: it lists each goal condition and how far along it
 is. You have to be connected; progress made offline counts once you reconnect. Trophy Hunt and Researcher
 count trophies and researches from your goal's era only; Skill Master counts a skill once it reaches the

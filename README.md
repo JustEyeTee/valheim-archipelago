@@ -1,5 +1,7 @@
 # Valheim Archipelago Randomizer
 
+[![CI](https://github.com/JustEyeTee/valheim-archipelago/actions/workflows/ci.yml/badge.svg)](https://github.com/JustEyeTee/valheim-archipelago/actions/workflows/ci.yml)
+
 A [Valheim](https://www.valheimgame.com/) mod and APWorld for [Archipelago](https://archipelago.gg/), the
 multi-game randomizer. Recipes and building pieces are locked behind researches you craft at a Research
 Bench; each research, trophy and many other things you do in the game are checks that send items to you
@@ -17,7 +19,7 @@ updated for Valheim 1.0.21 ("Deep North") and current Archipelago, with many add
 - Valheim 1.0.21 (Deep North)
 - [BepInExPack Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/) and
   [Jotunn](https://thunderstore.io/c/valheim/p/ValheimModding/Jotunn/) (2.30 or newer)
-- Archipelago 0.6.4 or newer (tested on 0.6.4 and 0.6.8)
+- Archipelago 0.6.8 or newer
 
 ## Installing
 
@@ -60,7 +62,8 @@ folder, found with r2modman's Settings > Browse profile folder).
 |---|---|
 | `/ap status` | Connection, Death Link and Trap Link settings |
 | `/ap goal` | Your goal and how far along each condition is |
-| `/ap logic`, `/ap logic <kind>` | The checks you can do now (in logic); **F8** shows them in a panel |
+| `/ap logic`, `/ap logic <kind>` | The checks you can do now (in logic); **F8** shows them in a panel, **F9** opens the full list (mouse free, with a Hint button per check) |
+| `/ap shop`, `/ap shop hint [kind]` | Haldor's hint shop: by a trader, pay Coins to reveal one of your checks in logic as a hint |
 | `/ap checks` | Checks done, and what's left by category |
 | `/ap missing <category>` | Lists what's left, e.g. `/ap missing obtain` |
 | `/ap hint <item>` | Asks the server for a hint |
@@ -104,6 +107,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
+| `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
 | `gear_items` | on | Tools from your goal's era. |
 | `starter_kit` | on | Start with a Club, Stone Axe, Torch and Raspberries. |

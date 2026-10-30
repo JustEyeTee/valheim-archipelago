@@ -380,6 +380,25 @@ public static class Patches
         }
     }
 
+    // ---------- The logic window takes the mouse and keyboard while it's open ----------
+    [HarmonyPatch(typeof(Player), "TakeInput")]
+    private static class Player_TakeInput_LogicWindow_Patch
+    {
+        private static void Postfix(ref bool __result)
+        {
+            if (ArchipelagoLogicWindow.IsOpen) __result = false;
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerController), "TakeInput")]
+    private static class PlayerController_TakeInput_LogicWindow_Patch
+    {
+        private static void Postfix(ref bool __result)
+        {
+            if (ArchipelagoLogicWindow.IsOpen) __result = false;
+        }
+    }
+
     // ---------- Eat, build, buy and tame checks ----------
     [HarmonyPatch(typeof(Player), nameof(Player.EatFood))]
     private static class Player_EatFood_Check_Patch

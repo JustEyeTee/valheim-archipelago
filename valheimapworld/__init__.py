@@ -553,6 +553,7 @@ class ValheimWorld(World):
             "goal_trophy": self.goal_trophy,
             "goal": self.goal_slot_data(),
             "progressive": self.progressive,
+            "hint_shop_price": self.options.hint_shop_price.value,
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),
             "death_link_mode": self.options.death_link_mode.current_key,

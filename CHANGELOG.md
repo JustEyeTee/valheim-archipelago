@@ -2,6 +2,17 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.15.0
+
+- **Haldor's hint shop** (`hint_shop_price`, 100 Coins by default, 0 closes it): by a trader (Haldor, Hildir
+  or the Bog Witch), `/ap shop hint [kind]` pays Coins to reveal one of your checks in logic as a hint for
+  everyone. It costs no hint points.
+- **Logic window** (F9, config `LogicWindowKey`): every check in logic now, by kind, with the mouse free to
+  scroll, and a Hint button per check (`!hint_location`, which costs hint points). F8 still shows the panel.
+- **CI**: every push runs Archipelago's test suites, test generations and the network test on GitHub; a
+  `v*` tag drafts a release with the APWorld and the PopTracker pack (the mod zip is built locally).
+- **Archipelago 0.6.8 or newer** is now required.
+
 ## 0.14.0
 
 - **Co-op modes, chosen per world**: the first player to connect in a world picks **shared slot** (one player

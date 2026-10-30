@@ -97,3 +97,10 @@ b.Locations.CompleteLocationChecks(loc);
 a.Say("!hint Crafting");
 Thread.Sleep(2000);
 Console.WriteLine($"A: {a.Locations.AllLocations.Count} locations, {a.Locations.AllMissingLocations.Count} missing");
+
+// Hint shop: A scouts one of its own locations as a hint (no hint points), announced to everyone.
+var shopLoc = a.Locations.AllMissingLocations.Last();
+Console.WriteLine($"A buys a hint for {a.Locations.GetLocationNameFromId(shopLoc, "Valheim")}");
+var scouted = a.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, shopLoc).Result;
+foreach (var info in scouted.Values) Console.WriteLine($"  scouted: {info.ItemName} for {info.Player.Name}");
+Thread.Sleep(2000);

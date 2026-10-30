@@ -1,0 +1,71 @@
+# Tests the APWorld on every push and pull request, against the Archipelago version it supports:
+# Archipelago's own test suites, test generations (beatable seeds for several goals and option sets) and the
+# network test (the mod's client library against a live server). The mod itself needs Valheim's game files
+# to build, so it's built locally (./build.sh).
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Archipelago ${{ matrix.archipelago }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        archipelago: ["0.6.8"]  # the APWorld's minimum_ap_version (the current release)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: valheim-archipelago
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install Archipelago ${{ matrix.archipelago }}
+        run: |
+          git clone --depth 1 --branch "${{ matrix.archipelago }}" https://github.com/ArchipelagoMW/Archipelago.git archipelago
+          python -m venv archipelago/.venv
+          archipelago/.venv/bin/pip install -q -r archipelago/requirements.txt -r archipelago/WebHostLib/requirements.txt pytest pytest-subtests
+      - name: Archipelago's test suites
+        run: AP_DIR="$GITHUB_WORKSPACE/archipelago" valheim-archipelago/tools/ap_tests.sh
+      - name: Test generations
+        env:
+          AP_DIR: ${{ github.workspace }}/archipelago
+        run: |
+          cd valheim-archipelago
+          tools/test_generate.sh kall_fimbulbringer 3
+          tools/test_generate.sh eikthyr 2
+          EXTRA_OPTIONS=$'combat_logic: strict\n  progressive_items: true\n  goal_conditions: ["All Bosses", "Great Hall", "Trophy Hunt"]' tools/test_generate.sh fader 2
+          EXTRA_OPTIONS=$'goal_conditions: ["Relic Hunt", "Hildir\'s Quests"]\n  kill_checks: true\n  skill_checks: 100\n  exploration_checks: 20' tools/test_generate.sh yagluth 2
+          git diff --exit-code mod/logic.tsv || { echo "::error::mod/logic.tsv is out of date: run tools/gen_mod_logic.py"; exit 1; }
+      - name: Network test
+        run: AP_DIR="$GITHUB_WORKSPACE/archipelago" valheim-archipelago/tools/net_test.sh
+
+  # A tag like v0.15.0 drafts a GitHub Release with the APWorld and the PopTracker pack. The mod zip (built
+  # locally with ./build.sh) is added to the draft by hand before publishing.
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package the APWorld and the PopTracker pack
+        run: APWORLD_ONLY=1 ./build.sh
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: |
+            dist/valheimapworld-*.apworld
+            dist/ValheimArchipelagoPopTracker-*.zip

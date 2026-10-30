@@ -31,6 +31,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoPassword;
     internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicPanelKey;
     internal static BepInEx.Configuration.ConfigEntry<string> coopMode;
+    internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicWindowKey;
 
     public class TrophyResearch
     {
@@ -80,6 +81,8 @@ public class ValheimRandomizer : BaseUnityPlugin
                 new BepInEx.Configuration.AcceptableValueList<string>(ArchipelagoCoop.Shared, ArchipelagoCoop.Separate)));
         logicPanelKey = Config.Bind("Archipelago", "LogicPanelKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F8),
             "Shows or hides the panel of checks you can do now (in logic)");
+        logicWindowKey = Config.Bind("Archipelago", "LogicWindowKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F9),
+            "Opens the window listing every check in logic, with the mouse free to scroll and ask for hints");
 
         ValheimRandomizer.Log = this.Logger;
         PrefabManager.OnVanillaPrefabsAvailable += DoOnPrefabsAvailable;
@@ -90,6 +93,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         DontDestroyOnLoad(go);
         go.AddComponent<ArchipelagoUI>().Init();
         go.AddComponent<ArchipelagoLogicPanel>();
+        go.AddComponent<ArchipelagoLogicWindow>();
     }
 
     void DoOnPrefabsAvailable()

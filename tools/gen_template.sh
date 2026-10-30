@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenerates docs/Valheim.yaml, the options template, with Archipelago's own template generator
 # (every option with its description, grouped, defaults weighted 50). Run before a release.
-#   tools/gen_template.sh            AP_DIR=~/projects/archipelago-0.6.4 tools/gen_template.sh
+#   tools/gen_template.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}

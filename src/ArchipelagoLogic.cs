@@ -187,7 +187,7 @@ public class ArchipelagoLogicPanel : MonoBehaviour
             lines.Add($"{group.Key} ({names.Count}): " + string.Join(", ", names.Take(NamesPerCategory)) +
                       (names.Count > NamesPerCategory ? $", +{names.Count - NamesPerCategory} more" : ""));
         }
-        lines.Add("/ap logic <category> lists a category.");
+        lines.Add($"{ValheimRandomizer.logicWindowKey.Value} opens the full list.");
         return string.Join("\n", lines);
     }
 
@@ -203,5 +203,101 @@ public class ArchipelagoLogicPanel : MonoBehaviour
         var content = new GUIContent("Archipelago logic (" + ValheimRandomizer.logicPanelKey.Value + ")\n" + text);
         float height = style.CalcHeight(content, width);
         GUI.Box(new Rect(Screen.width - width - 16f, 80f, width, height), content, style);
+    }
+}
+
+// The logic window (LogicWindowKey, F9 by default): every check in logic now, by category, with the mouse
+// free to scroll and to ask the server for a hint on one (!hint_location, which costs hint points).
+public class ArchipelagoLogicWindow : MonoBehaviour
+{
+    private const float RefreshSeconds = 2f;
+
+    public static bool IsOpen { get; private set; }
+
+    private Rect window = new Rect(80, 80, 560, 620);
+    private Vector2 scroll;
+    private string category = "All";
+    private float nextRefresh;
+    private List<string> inLogic = new List<string>();
+    private int outOfLogic;
+    private string message = "";
+
+    private void Update()
+    {
+        bool toggle = ValheimRandomizer.logicWindowKey.Value.IsDown() && Player.m_localPlayer != null &&
+                      !(Chat.instance && Chat.instance.HasFocus()) && !Console.IsVisible() && !TextInput.IsVisible();
+        if (toggle || (IsOpen && (Input.GetKeyDown(KeyCode.Escape) || Player.m_localPlayer == null)))
+        {
+            SetOpen(!IsOpen && toggle);
+        }
+        if (IsOpen && Time.unscaledTime >= nextRefresh)
+        {
+            nextRefresh = Time.unscaledTime + RefreshSeconds;
+            (inLogic, outOfLogic) = ArchipelagoLinks.Connected ? ArchipelagoLogic.Missing() : (new List<string>(), 0);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!IsOpen) return;
+        ZCursor.LockState = CursorLockMode.None;
+        ZCursor.Show();
+    }
+
+    private void SetOpen(bool open)
+    {
+        if (open == IsOpen) return;
+        IsOpen = open;
+        nextRefresh = 0f;
+        message = "";
+        if (!open && !InventoryGui.IsVisible() && !Menu.IsVisible())
+        {
+            ZCursor.LockState = CursorLockMode.Locked;
+            ZCursor.Hide();
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (!IsOpen) return;
+        window = GUILayout.Window(GetInstanceID(), window, Draw, $"Archipelago: in logic now ({inLogic.Count}, not yet {outOfLogic})");
+    }
+
+    private void Draw(int id)
+    {
+        if (!ArchipelagoLinks.Connected)
+        {
+            GUILayout.Label("Not connected to Archipelago.");
+        }
+        else
+        {
+            var categories = new[] { "All" }.Concat(inLogic.Select(ArchipelagoLinks.Category).Distinct().OrderBy(c => c)).ToArray();
+            int selected = Math.Max(0, Array.IndexOf(categories, category));
+            selected = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({inLogic.Count})" :
+                $"{c} ({inLogic.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 4);
+            category = categories[selected];
+
+            scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(440));
+            foreach (var name in inLogic.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(name);
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Hint", GUILayout.Width(60)))
+                {
+                    ArchipelagoLinks.Say("!hint_location " + name);
+                    message = $"Asked for a hint on {name} (costs hint points).";
+                }
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
+            if (message.Length > 0) GUILayout.Label(message);
+        }
+        GUILayout.BeginHorizontal();
+        GUILayout.Label($"{ValheimRandomizer.logicWindowKey.Value} or Esc closes.");
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Close", GUILayout.Width(80))) SetOpen(false);
+        GUILayout.EndHorizontal();
+        GUI.DragWindow(new Rect(0, 0, 10000, 22));
     }
 }

@@ -2,7 +2,7 @@
 # Network test against a live MultiServer: generates a 2-player Valheim seed, hosts it on
 # 127.0.0.1 and runs tools/nettest (the mod's client library and calls): login and slot data,
 # goal conditions, Trap Link, Death Link, Energy Link deposit and withdraw, hints and the item feed.
-#   tools/net_test.sh            AP_DIR=~/projects/archipelago-0.6.4 tools/net_test.sh
+#   tools/net_test.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}
@@ -10,8 +10,8 @@ port=${PORT:-38997}
 work=$(mktemp -d); server=""
 trap '[ -n "$server" ] && kill "$server" 2>/dev/null; rm -rf "$work"' EXIT
 
-./build.sh >/dev/null
-cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"
+APWORLD_ONLY=1 ./build.sh >/dev/null
+mkdir -p "$ap/custom_worlds" && cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"
 mkdir -p "$work/players" "$work/out"
 for p in A B; do
   printf 'name: Viking%s\ngame: Valheim\nValheim:\n  goal: eikthyr\n  death_link: true\n  trap_link: true\n' "$p" > "$work/players/$p.yaml"

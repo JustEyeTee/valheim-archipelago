@@ -2,7 +2,7 @@
 # Runs Archipelago's own test suites (general, options, multiworld, programs, webhost) for this world:
 # the checks every world is expected to pass (ids, names and groups, fill, manifest, docs pages...).
 # Needs pytest, pytest-subtests and WebHostLib/requirements.txt in the Archipelago venv.
-#   tools/ap_tests.sh            AP_DIR=~/projects/archipelago-0.6.4 tools/ap_tests.sh
+#   tools/ap_tests.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}

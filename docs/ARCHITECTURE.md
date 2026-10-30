@@ -248,6 +248,7 @@ flowchart LR
 | `test_generate.sh <goal> <n>` | generates seeds and checks they can be beaten | after any APWorld change |
 | `ap_tests.sh` | runs Archipelago's own test suites for this world | before a release |
 | `net_test.sh` | runs the mod's network code against a live server | after changing the links or connection code |
+| `.github/workflows/ci.yml` | on GitHub: the test suites, test generations and network test on every push; a `v*` tag drafts a release with the APWorld and PopTracker pack | automatically |
 | `options_page_test.sh` | checks the Options Builder's counts of checks and items against real generation | after changing options, checks or the item pool |
 
 ## Adding a check: an example

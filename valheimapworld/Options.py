@@ -339,6 +339,18 @@ class ProgressiveItems(Toggle):
     display_name = "Progressive Items"
 
 
+class HintShopPrice(Range):
+    """
+    Haldor's hint shop: standing by a trader (Haldor, Hildir or the Bog Witch), type /ap shop hint in chat to
+    pay this many Coins and have one of your checks that's in logic revealed as a hint for everyone
+    (/ap shop hint obtain picks an obtain check, and so on). 0 closes the shop.
+    """
+    display_name = "Hint Shop Price"
+    range_start = 0
+    range_end = 1000
+    default = 100
+
+
 class StarterKit(DefaultOnToggle):
     """
     Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
@@ -481,6 +493,7 @@ class ValheimOptions(PerGameCommonOptions):
     gear_items: GearItems
     starter_kit: StarterKit
     progressive_items: ProgressiveItems
+    hint_shop_price: HintShopPrice
     trap_percentage: TrapPercentage
     excluded_traps: ExcludedTraps
     boost_percentage: BoostPercentage
@@ -498,7 +511,7 @@ option_groups = [
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
-    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, StarterKit, BoostPercentage]),
+    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, StarterKit, BoostPercentage, HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
 ]

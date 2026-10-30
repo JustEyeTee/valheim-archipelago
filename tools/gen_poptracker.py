@@ -4,7 +4,7 @@ and boss gates (a boss counts as defeated when its trophy check is done, or its 
 received).
 
 Needs Archipelago's Python (for BaseClasses) and Pillow, e.g.:
-    ~/projects/archipelago-0.6.4/.venv/bin/python tools/gen_poptracker.py ~/projects/archipelago-0.6.4
+    ~/projects/archipelago-0.6.8/.venv/bin/python tools/gen_poptracker.py ~/projects/archipelago-0.6.8
 
 Layout: one map with a grid of pins, a row per tier and a column per kind of check; each
 pin holds that tier's checks of that kind. Checks the connected seed doesn't have (options,

@@ -85,6 +85,7 @@ public static class ArchipelagoLinks
         deathLinkMode = slotData != null && slotData.TryGetValue("death_link_mode", out var mode) && mode is string m ? m : "kill";
         deathLinkAmnesty = GetInt(slotData, "death_link_amnesty");
         trapLink = GetInt(slotData, "trap_link") != 0;
+        hintShopPrice = GetInt(slotData, "hint_shop_price");
 
         deathLinkService = session.CreateDeathLinkService();
         deathLinkService.OnDeathLinkReceived += dl => incomingDeaths.Enqueue(dl);
@@ -243,6 +244,40 @@ public static class ArchipelagoLinks
 
     public static void Say(string text) => session.Say(text);
 
+    // ---------- Hint shop ----------
+    // By a trader, pay Coins to reveal one of your checks that's in logic as a hint for everyone (scouting your
+    // own location with a hint costs no hint points). A check bought once isn't offered again.
+    private static int hintShopPrice;
+    private const float ShopDistance = 10f;
+
+    public static string ShopHint(Player player, string category)
+    {
+        if (hintShopPrice <= 0) return "The hint shop is closed in this game (hint_shop_price is 0).";
+        if (player == null) return "Load your world first.";
+        bool nearTrader = UnityEngine.Object.FindObjectsByType<Trader>(FindObjectsSortMode.None)
+            .Any(t => t && Vector3.Distance(t.transform.position, player.transform.position) <= ShopDistance);
+        if (!nearTrader) return "Stand by a trader (Haldor, Hildir or the Bog Witch) to shop.";
+        var inventory = player.GetInventory();
+        int coins = inventory.CountItems("$item_coins");
+        if (coins < hintShopPrice) return $"A hint costs {hintShopPrice} Coins; you have {coins}.";
+
+        string Bought(string name) => ArchipelagoCoop.Scoped("ap_shophint:" + name.ToLowerInvariant().Replace(' ', '_'));
+        var choices = ArchipelagoLogic.Missing(category).inLogic.Where(n => !ZoneSystem.instance.GetGlobalKey(Bought(n))).ToList();
+        if (choices.Count == 0)
+            return category == null ? "Nothing in logic is left to hint." : $"Nothing in logic is left to hint in '{category}'.";
+        var name = choices[UnityEngine.Random.Range(0, choices.Count)];
+        long id = session.Locations.GetLocationIdFromName("Valheim", name);
+        if (id < 0) return "That check isn't in this seed.";
+
+        inventory.RemoveItem("$item_coins", hintShopPrice);
+        ZoneSystem.instance.SetGlobalKey(Bought(name));
+        session.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, id);
+        return $"Paid {hintShopPrice} Coins: the hint for {name} is on its way.";
+    }
+
+    public static string ShopInfo() => hintShopPrice <= 0 ? "The hint shop is closed in this game." :
+        $"Hint shop: by a trader, /ap shop hint [category] pays {hintShopPrice} Coins to reveal one of your checks in logic.";
+
     // ---------- Trap Link ----------
 
     public static void SendTrapLink(string trap)
@@ -383,13 +418,13 @@ public static class ArchipelagoLinks
     }
 }
 
-// Chat command (type /ap in chat): /ap status | goal | logic [category] | checks | missing <category> | hint <item> | say <text> |
+// Chat command (type /ap in chat): /ap status | goal | logic [category] | shop [hint [category]] | checks | missing <category> | hint <item> | say <text> |
 // energy | deposit <coins> | withdraw <coins> | deathlink on|off
 public class ArchipelagoCommand : ConsoleCommand
 {
     public override string Name => "ap";
     public override string Help =>
-        "Archipelago: status, goal, logic [category], checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
+        "Archipelago: status, goal, logic [category], shop, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
 
     public override void Run(string[] args, Terminal context)
     {
@@ -399,7 +434,7 @@ public class ArchipelagoCommand : ConsoleCommand
         {
             Reply(ArchipelagoLinks.Status());
             if (ZoneSystem.instance != null) Reply(ArchipelagoCoop.Describe());
-            Reply("Commands: /ap goal, /ap logic [category], /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
+            Reply("Commands: /ap goal, /ap logic [category], /ap shop, /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
@@ -411,6 +446,10 @@ public class ArchipelagoCommand : ConsoleCommand
         {
             case "goal":
                 foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
+                break;
+            case "shop":
+                if (args.Length < 2 || args[1].ToLowerInvariant() != "hint") { Reply(ArchipelagoLinks.ShopInfo()); return; }
+                Reply(ArchipelagoLinks.ShopHint(player, args.Length > 2 ? string.Join(" ", args.Skip(2)) : null));
                 break;
             case "logic":
                 if (rest.Length == 0)

@@ -24,6 +24,9 @@ Sections, all keyed by prefab (GameObject) name where there is one:
   traders      trader stock with prices and required keys
   tameables    creatures that can be tamed
   fish         each fish's baits
+  vegvisirs    Vegvisir stones: the location (boss altar) each one reveals
+  runestones   rune stones: the location a stone pins, if any, and how many lore texts it has
+  plants       saplings and crops: biome, needs cultivated ground, what it grows into
 Asset references are (file, path id); refs to components resolve to the GameObject owning them.
 """
 import json
@@ -73,6 +76,13 @@ def kind_of(t):
     if isinstance(t.get("m_locations"), list) and t["m_locations"] and isinstance(t["m_locations"][0], dict) \
             and "m_biome" in t["m_locations"][0]:
         return "locationlist"
+    if isinstance(t.get("m_locations"), list) and t["m_locations"] and isinstance(t["m_locations"][0], dict) \
+            and "m_locationName" in t["m_locations"][0]:
+        return "vegvisir"
+    if "m_randomTexts" in t and "m_locationName" in t:
+        return "runestone"
+    if "m_grownPrefabs" in t and "m_growTime" in t:
+        return "plant"
     if "m_exteriorRadius" in t and "m_noBuild" in t:
         return "location"
     if isinstance(t.get("m_spawners"), list):
@@ -191,6 +201,16 @@ for kind, cab, pid, ex, t in kept:
         db["vegetation"].setdefault(owner, []).extend(
             {"prefab": resolve(v.get("m_prefab"), cab, ex), "name": v.get("m_name"), "enabled": v.get("m_enable"),
              "biome": v.get("m_biome")} for v in t["m_vegetation"])
+    elif kind == "vegvisir":
+        db["vegvisirs"][owner] = {"name": t.get("m_name"), "hover": t.get("m_hoverName"),
+                                  "locations": [l.get("m_locationName") for l in t["m_locations"]]}
+    elif kind == "runestone":
+        db["runestones"][owner] = {"name": t.get("m_name"), "location": t.get("m_locationName"),
+                                   "texts": len(t.get("m_randomTexts") or [])}
+    elif kind == "plant":
+        db["plants"][owner] = {"name": t.get("m_name"), "biome": t.get("m_biome"),
+                               "cultivated": t.get("m_needCultivatedGround"),
+                               "grows": [resolve(g, cab, ex) for g in t.get("m_grownPrefabs") or []]}
     elif kind == "offering":
         db["offerings"][owner] = {"name": t.get("m_name"), "boss": resolve(t.get("m_bossPrefab"), cab, ex),
                                   "item": resolve(t.get("m_bossItem"), cab, ex), "count": t.get("m_bossItems")}

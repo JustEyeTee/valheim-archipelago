@@ -2,7 +2,7 @@
 # Generates test seeds with a local Archipelago checkout and checks each one is beatable.
 #   tools/test_generate.sh [goal] [seeds]      e.g. tools/test_generate.sh fader 10
 #   EXTRA_OPTIONS='kill_checks: true' tools/test_generate.sh fader 5   (extra lines under Valheim:)
-# AP_DIR defaults to ../archipelago-0.6.8 (0.6.4, the minimum, also works) (a venv in .venv, see notes in the project memory).
+# AP_DIR defaults to ../archipelago-0.6.8 (with a venv in .venv).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 goal=${1:-fader}; seeds=${2:-5}
@@ -15,7 +15,7 @@ cp mod/logic.tsv "$work/logic.tsv"
 if ! cmp -s mod/logic.tsv "$work/logic.tsv"; then
   echo "mod/logic.tsv was out of date with the APWorld: regenerated it (commit the change)"
 fi
-./build.sh >/dev/null
+APWORLD_ONLY=1 ./build.sh >/dev/null
 mkdir -p "$ap/custom_worlds" "$work/players" "$work/out"
 cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"
 { printf 'name: Tester\ngame: Valheim\nValheim:\n  goal: %s\n' "$goal"
