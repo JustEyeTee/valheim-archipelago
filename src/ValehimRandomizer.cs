@@ -70,6 +70,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         ValheimRandomizer.Log = this.Logger;
         PrefabManager.OnVanillaPrefabsAvailable += DoOnPrefabsAvailable;
         new Harmony(ValheimRandomizer.ModGuid).PatchAll();
+        CommandManager.Instance.AddConsoleCommand(new ArchipelagoCommand());
 
         var go = new GameObject("ValheimRandomizer.AP_UI");
         DontDestroyOnLoad(go);

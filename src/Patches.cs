@@ -367,6 +367,19 @@ public static class Patches
         }
     }
 
+    // ---------- Death Link ----------
+    [HarmonyPatch(typeof(Player), nameof(Player.OnDeath))]
+    private static class Player_OnDeath_DeathLink_Patch
+    {
+        private static void Prefix(Player __instance)
+        {
+            if (ValheimRandomizer.randomized.Value && __instance != null && __instance == Player.m_localPlayer)
+            {
+                ArchipelagoLinks.OnLocalPlayerDied(__instance);
+            }
+        }
+    }
+
     // ---------- Kill checks ----------
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
     private static class Character_OnDeath_KillCheck_Patch

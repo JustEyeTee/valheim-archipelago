@@ -52,6 +52,7 @@ internal static class ArchipelagoConnection
         RandomizerUtils.ApplyResearchCostPercent(costPercent);
 
         slotName = slot;
+        ArchipelagoLinks.OnConnected(session, slot, slotData);
 
         // Hook item reception
         session.Items.ItemReceived += OnApItemReceived;

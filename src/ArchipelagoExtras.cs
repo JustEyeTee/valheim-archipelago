@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -10,8 +11,9 @@ using Jotunn.Entities;
 using Jotunn.Managers;
 using UnityEngine;
 
-// Checks and items beyond researches and trophies: biome discovery, obtain, kill and explore
-// checks, resource bundles (delivered to an Archipelago Chest the player builds) and traps.
+// Checks and items beyond researches and trophies: biome, obtain, kill, skill, discover and
+// explore checks, resource bundles (delivered to an Archipelago Chest the player builds),
+// boosts and traps.
 public static class ArchipelagoExtras
 {
     public const string ChestPrefabName = "piece_randomizer_apchest";
@@ -36,6 +38,10 @@ public static class ArchipelagoExtras
         { "10 Resin", ("Resin", 10) },
         { "50 Coins", ("Coins", 50) },
         { "5 Cooked Meat", ("CookedMeat", 5) },
+        { "3 Minor Healing Meads", ("MeadHealthMinor", 3) },
+        { "3 Minor Stamina Meads", ("MeadStaminaMinor", 3) },
+        { "20 Fire Arrows", ("ArrowFire", 20) },
+        { "10 Flint", ("Flint", 10) },
     };
 
     // From checks.tsv (embedded in the DLL; the APWorld is generated from the same file).
@@ -43,10 +49,26 @@ public static class ArchipelagoExtras
     private static readonly Dictionary<string, string> KillLocations = new Dictionary<string, string>();
     private static readonly List<(float percent, string location)> ExploreLocations = new List<(float, string)>();
 
-    private static readonly HashSet<string> Traps = new HashSet<string>
+    private static readonly List<(Skills.SkillType skill, int level, string location)> SkillLocations =
+        new List<(Skills.SkillType, int, string)>();
+    private static readonly List<(string prefix, string location)> DiscoverLocations = new List<(string, string)>();
+
+    public static readonly string[] TrapNames =
     {
         "Greydwarf Ambush Trap", "Thunderstorm Trap", "Burning Trap", "Soaked Trap", "Famine Trap",
+        "Skeleton Ambush Trap", "Poison Trap", "Frost Trap", "Raid Trap", "Butterfingers Trap", "Heavy Load Trap",
     };
+    private static readonly HashSet<string> Traps = new HashSet<string>(TrapNames);
+
+    private static readonly HashSet<string> Boosts = new HashSet<string>
+    {
+        "Combat Training", "Woodcutting Training", "Mining Training",
+        "Rested Blessing", "Eikthyr's Blessing", "Moder's Blessing",
+    };
+
+    // Traps from other games (Trap Link, Death Link in trap mode), fired on the main thread.
+    private static readonly ConcurrentQueue<string> externalTraps = new ConcurrentQueue<string>();
+    public static void QueueTrap(string trap) => externalTraps.Enqueue(trap);
 
     private const float TrapSpacingSeconds = 10f;
     private const float StormSeconds = 120f;
@@ -64,7 +86,8 @@ public static class ArchipelagoExtras
     private static int[] exploredWords;
 
     public static IEnumerable<string> LocationNames => BiomeLocations.Values
-        .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location));
+        .Concat(ObtainLocations.Values).Concat(KillLocations.Values).Concat(ExploreLocations.Select(e => e.location))
+        .Concat(SkillLocations.Select(e => e.location)).Concat(DiscoverLocations.Select(e => e.location));
 
     static ArchipelagoExtras()
     {
@@ -83,12 +106,18 @@ public static class ArchipelagoExtras
                     case "explore":
                         ExploreLocations.Add((float.Parse(cols[1], CultureInfo.InvariantCulture), cols[2]));
                         break;
+                    case "skill":
+                        var parts = cols[1].Split(':');
+                        SkillLocations.Add(((Skills.SkillType)Enum.Parse(typeof(Skills.SkillType), parts[0]),
+                            int.Parse(parts[1], CultureInfo.InvariantCulture), cols[2]));
+                        break;
+                    case "discover": DiscoverLocations.Add((cols[1], cols[2])); break;
                 }
             }
         }
     }
 
-    public static bool IsExtraItem(string name) => Bundles.ContainsKey(name) || Traps.Contains(name);
+    public static bool IsExtraItem(string name) => Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name);
 
     public static void RegisterChest()
     {
@@ -123,6 +152,29 @@ public static class ArchipelagoExtras
         {
             ArchipelagoConnection.SendLocationOnce(location);
         }
+
+        foreach (var (skill, level, skillLocation) in SkillLocations)
+        {
+            if (player.GetSkills().GetSkillLevel(skill) >= level) ArchipelagoConnection.SendLocationOnce(skillLocation);
+        }
+
+        var here = Location.GetLocation(player.transform.position);
+        if (here != null)
+        {
+            var prefab = here.gameObject.name;
+            foreach (var (prefix, discoverLocation) in DiscoverLocations)
+            {
+                if (prefab.StartsWith(prefix, StringComparison.Ordinal)) ArchipelagoConnection.SendLocationOnce(discoverLocation);
+            }
+        }
+
+        if (Time.time >= nextTrapTime && !player.IsDead() && externalTraps.TryDequeue(out var trap))
+        {
+            FireTrap(player, trap);
+            nextTrapTime = Time.time + TrapSpacingSeconds;
+        }
+
+        ArchipelagoLinks.Tick(player);
 
         if (Time.time >= nextExploreTime)
         {
@@ -208,7 +260,8 @@ public static class ArchipelagoExtras
 
         int bundlesDone = GetCount(player, progressKey + ":bundles");
         int trapsDone = GetCount(player, progressKey + ":traps");
-        int bundleIndex = 0, trapIndex = 0, waiting = 0;
+        int boostsDone = GetCount(player, progressKey + ":boosts");
+        int bundleIndex = 0, trapIndex = 0, boostIndex = 0, waiting = 0;
         bool bundlesBlocked = false;
         Container chest = null;
         bool chestFull = false;
@@ -234,10 +287,17 @@ public static class ArchipelagoExtras
             else if (Traps.Contains(name))
             {
                 if (trapIndex++ < trapsDone) continue;
-                if (Time.time < nextTrapTime) continue;
+                if (Time.time < nextTrapTime || player.IsDead()) continue;
                 FireTrap(player, name);
                 SetCount(player, progressKey + ":traps", ++trapsDone);
                 nextTrapTime = Time.time + TrapSpacingSeconds;
+                ArchipelagoLinks.SendTrapLink(name);
+            }
+            else if (Boosts.Contains(name))
+            {
+                if (boostIndex++ < boostsDone || player.IsDead()) continue;
+                ApplyBoost(player, name);
+                SetCount(player, progressKey + ":boosts", ++boostsDone);
             }
         }
 
@@ -279,13 +339,32 @@ public static class ArchipelagoExtras
         return inventory.AddItem(prefab, amount);
     }
 
-    private static void FireTrap(Player player, string trap)
+    public static void FireTrap(Player player, string trap)
     {
         ValheimRandomizer.Log.LogInfo("[AP] Trap: " + trap);
         switch (trap)
         {
             case "Greydwarf Ambush Trap":
                 SpawnAround(player, "Greydwarf", 3, 10f);
+                break;
+            case "Skeleton Ambush Trap":
+                SpawnAround(player, "Skeleton", 3, 10f);
+                break;
+            case "Raid Trap":
+                StartRaid(player);
+                break;
+            case "Poison Trap":
+                if (AddEffect(player, "Poison") is SE_Poison poison) poison.AddDamage(player.GetMaxHealth() * 0.3f);
+                break;
+            case "Frost Trap":
+                if (AddEffect(player, "Frost") is SE_Frost frost) frost.AddDamage(player.GetMaxHealth() * 0.1f);
+                break;
+            case "Butterfingers Trap":
+                player.UnequipAllItems();
+                break;
+            case "Heavy Load Trap":
+                var stone = ObjectDB.instance ? ObjectDB.instance.GetItemPrefab("Stone") : null;
+                if (stone) player.GetInventory().AddItem(stone, 50);
                 break;
             case "Thunderstorm Trap":
                 if (EnvMan.instance != null && EnvMan.instance.m_environments.Any(env => env.m_name == "ThunderStorm"))
@@ -296,7 +375,7 @@ public static class ArchipelagoExtras
                 else ValheimRandomizer.Log.LogWarning("[AP] Environment 'ThunderStorm' not found");
                 break;
             case "Burning Trap":
-                AddEffect(player, "Burning");
+                if (AddEffect(player, "Burning") is SE_Burning burning) burning.AddFireDamage(player.GetMaxHealth() * 0.25f);
                 break;
             case "Soaked Trap":
                 AddEffect(player, "Wet");
@@ -306,6 +385,71 @@ public static class ArchipelagoExtras
                 break;
         }
         player.Message(MessageHud.MessageType.Center, $"Archipelago: {trap}!");
+    }
+
+    // A raid the player is ready for (by the game's own rules) in the biome they're in. Only
+    // the host runs raids, so other players, or anyone no raid fits, get a bigger ambush.
+    private static void StartRaid(Player player)
+    {
+        var events = RandEventSystem.instance;
+        var zones = ZoneSystem.instance;
+        if (events != null && zones != null && ZNet.instance != null && ZNet.instance.IsServer())
+        {
+            var biome = player.GetCurrentBiome();
+            bool playerEvents = zones.GetGlobalKey(GlobalKeys.PlayerEvents);
+            var candidates = events.m_events.Where(e => e.m_enabled && e.m_random && (e.m_biome & biome) != 0 &&
+                (playerEvents && (e.m_altRequiredKnownItems.Count > 0 || e.m_altRequiredNotKnownItems.Count > 0 ||
+                                  e.m_altNotRequiredPlayerKeys.Count > 0 || e.m_altRequiredPlayerKeysAny.Count > 0 ||
+                                  e.m_altRequiredPlayerKeysAll.Count > 0)
+                    ? events.PlayerIsReadyForEvent(player, e)
+                    : e.m_requiredGlobalKeys.All(zones.GetGlobalKey) && !e.m_notRequiredGlobalKeys.Any(zones.GetGlobalKey)))
+                .ToList();
+            if (candidates.Count > 0)
+            {
+                var raid = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+                ValheimRandomizer.Log.LogInfo("[AP] Raid: " + raid.m_name);
+                events.SetRandomEventByName(raid.m_name, player.transform.position);
+                return;
+            }
+        }
+        SpawnAround(player, "Greydwarf", 5, 12f);
+    }
+
+    private static void ApplyBoost(Player player, string boost)
+    {
+        ValheimRandomizer.Log.LogInfo("[AP] Boost: " + boost);
+        switch (boost)
+        {
+            case "Combat Training":
+                var skill = player.GetCurrentWeapon()?.m_shared?.m_skillType ?? Skills.SkillType.Unarmed;
+                if (skill == Skills.SkillType.None) skill = Skills.SkillType.Unarmed;
+                RaiseSkill(player, skill, 5f);
+                break;
+            case "Woodcutting Training":
+                RaiseSkill(player, Skills.SkillType.WoodCutting, 5f);
+                break;
+            case "Mining Training":
+                RaiseSkill(player, Skills.SkillType.Pickaxes, 5f);
+                break;
+            case "Rested Blessing":
+                AddEffect(player, "Rested");
+                break;
+            case "Eikthyr's Blessing":
+                AddEffect(player, "GP_Eikthyr");
+                break;
+            case "Moder's Blessing":
+                AddEffect(player, "GP_Moder");
+                break;
+        }
+        player.Message(MessageHud.MessageType.Center, $"Archipelago: {boost}!");
+    }
+
+    private static void RaiseSkill(Player player, Skills.SkillType skill, float levels)
+    {
+        // CheatRaiseSkill doesn't mark the character as cheated; it prints to the console,
+        // which may not exist, after raising the level.
+        try { player.GetSkills().CheatRaiseSkill(skill.ToString(), levels, true); }
+        catch (NullReferenceException) { }
     }
 
     private static void SpawnAround(Player player, string prefabName, int count, float distance)
@@ -325,15 +469,15 @@ public static class ArchipelagoExtras
         }
     }
 
-    private static void AddEffect(Player player, string effectName)
+    private static StatusEffect AddEffect(Player player, string effectName)
     {
         int hash = effectName.GetStableHashCode();
         if (ObjectDB.instance == null || ObjectDB.instance.GetStatusEffect(hash) == null)
         {
             ValheimRandomizer.Log.LogWarning($"[AP] Status effect '{effectName}' not found");
-            return;
+            return null;
         }
-        player.GetSEMan().AddStatusEffect(hash, true);
+        return player.GetSEMan().AddStatusEffect(hash, true);
     }
 
     private static int GetCount(Player player, string key)

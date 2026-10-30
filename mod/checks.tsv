@@ -2,6 +2,8 @@
 # kind	key	location name	tier	required research items (|-separated)
 # obtain: key = item prefab, sent when it enters your inventory (picked up or crafted)
 # kill: key = trophy prefab the creature drops, sent when you kill one
+# skill: key = SkillType:level, sent when the skill reaches that level
+# discover: key = location prefab name prefix, sent when you first reach one
 # explore: key = percent of the world map you have explored
 obtain	Wood	Obtain: Wood	0	
 obtain	Stone	Obtain: Stone	0	
@@ -158,3 +160,143 @@ explore	3	Explore: 3% of the World	8
 explore	4	Explore: 4% of the World	9	
 explore	5	Explore: 5% of the World	11	
 explore	6	Explore: 6% of the World	12	
+skill	WoodCutting:10	Skill: Woodcutting 10	1	Axes Tier 1
+skill	Pickaxes:10	Skill: Pickaxes 10	2	Pickaxes Tier 1
+skill	Axes:10	Skill: Axes 10	1	Axes Tier 1
+skill	Clubs:10	Skill: Clubs 10	0	Clubs Tier 1
+skill	Swords:10	Skill: Swords 10	1	Blades Tier 1
+skill	Knives:10	Skill: Knives 10	1	Short Blades Tier 1
+skill	Spears:10	Skill: Spears 10	1	Spears Tier 1
+skill	Polearms:10	Skill: Polearms 10	4	Polearms Tier 1
+skill	Bows:10	Skill: Bows 10	1	Bows Tier 1
+skill	Crossbows:10	Skill: Crossbows 10	9	Crossbows Tier 1
+skill	Blocking:10	Skill: Blocking 10	1	Shields Tier 1
+skill	Unarmed:10	Skill: Fists 10	0	
+skill	ElementalMagic:10	Skill: Elemental Magic 10	10	Elemental Magic Tier 1
+skill	BloodMagic:10	Skill: Blood Magic 10	10	Blood Magic Tier 1
+skill	Jump:10	Skill: Jump 10	0	
+skill	Sneak:10	Skill: Sneak 10	0	
+skill	Run:10	Skill: Run 10	0	
+skill	Swim:10	Skill: Swim 10	0	
+skill	Dodge:10	Skill: Dodge 10	0	
+skill	Fishing:10	Skill: Fishing 10	2	
+skill	Cooking:10	Skill: Cooking 10	1	Cooking Station
+skill	Farming:10	Skill: Farming 10	4	Cultivator
+skill	Crafting:10	Skill: Crafting 10	0	Crafting
+skill	Ride:10	Skill: Ride 10	8	
+skill	WoodCutting:20	Skill: Woodcutting 20	3	Axes Tier 1
+skill	Pickaxes:20	Skill: Pickaxes 20	3	Pickaxes Tier 1
+skill	Axes:20	Skill: Axes 20	3	Axes Tier 1
+skill	Clubs:20	Skill: Clubs 20	3	Clubs Tier 1
+skill	Swords:20	Skill: Swords 20	3	Blades Tier 1
+skill	Knives:20	Skill: Knives 20	3	Short Blades Tier 1
+skill	Spears:20	Skill: Spears 20	3	Spears Tier 1
+skill	Polearms:20	Skill: Polearms 20	4	Polearms Tier 1
+skill	Bows:20	Skill: Bows 20	3	Bows Tier 1
+skill	Crossbows:20	Skill: Crossbows 20	9	Crossbows Tier 1
+skill	Blocking:20	Skill: Blocking 20	3	Shields Tier 1
+skill	Unarmed:20	Skill: Fists 20	3	
+skill	ElementalMagic:20	Skill: Elemental Magic 20	10	Elemental Magic Tier 1
+skill	BloodMagic:20	Skill: Blood Magic 20	10	Blood Magic Tier 1
+skill	Jump:20	Skill: Jump 20	3	
+skill	Sneak:20	Skill: Sneak 20	3	
+skill	Run:20	Skill: Run 20	3	
+skill	Swim:20	Skill: Swim 20	3	
+skill	Dodge:20	Skill: Dodge 20	3	
+skill	Fishing:20	Skill: Fishing 20	3	
+skill	Cooking:20	Skill: Cooking 20	3	Cooking Station
+skill	Farming:20	Skill: Farming 20	4	Cultivator
+skill	Crafting:20	Skill: Crafting 20	3	Crafting
+skill	Ride:20	Skill: Ride 20	8	
+skill	WoodCutting:30	Skill: Woodcutting 30	6	Axes Tier 1
+skill	Pickaxes:30	Skill: Pickaxes 30	6	Pickaxes Tier 1
+skill	Axes:30	Skill: Axes 30	6	Axes Tier 1
+skill	Clubs:30	Skill: Clubs 30	6	Clubs Tier 1
+skill	Swords:30	Skill: Swords 30	6	Blades Tier 1
+skill	Knives:30	Skill: Knives 30	6	Short Blades Tier 1
+skill	Spears:30	Skill: Spears 30	6	Spears Tier 1
+skill	Polearms:30	Skill: Polearms 30	6	Polearms Tier 1
+skill	Bows:30	Skill: Bows 30	6	Bows Tier 1
+skill	Crossbows:30	Skill: Crossbows 30	9	Crossbows Tier 1
+skill	Blocking:30	Skill: Blocking 30	6	Shields Tier 1
+skill	Unarmed:30	Skill: Fists 30	6	
+skill	ElementalMagic:30	Skill: Elemental Magic 30	10	Elemental Magic Tier 1
+skill	BloodMagic:30	Skill: Blood Magic 30	10	Blood Magic Tier 1
+skill	Jump:30	Skill: Jump 30	6	
+skill	Sneak:30	Skill: Sneak 30	6	
+skill	Run:30	Skill: Run 30	6	
+skill	Swim:30	Skill: Swim 30	6	
+skill	Dodge:30	Skill: Dodge 30	6	
+skill	Fishing:30	Skill: Fishing 30	6	
+skill	Cooking:30	Skill: Cooking 30	6	Cooking Station
+skill	Farming:30	Skill: Farming 30	6	Cultivator
+skill	Crafting:30	Skill: Crafting 30	6	Crafting
+skill	Ride:30	Skill: Ride 30	8	
+skill	WoodCutting:40	Skill: Woodcutting 40	8	Axes Tier 1
+skill	Pickaxes:40	Skill: Pickaxes 40	8	Pickaxes Tier 1
+skill	Axes:40	Skill: Axes 40	8	Axes Tier 1
+skill	Clubs:40	Skill: Clubs 40	8	Clubs Tier 1
+skill	Swords:40	Skill: Swords 40	8	Blades Tier 1
+skill	Knives:40	Skill: Knives 40	8	Short Blades Tier 1
+skill	Spears:40	Skill: Spears 40	8	Spears Tier 1
+skill	Polearms:40	Skill: Polearms 40	8	Polearms Tier 1
+skill	Bows:40	Skill: Bows 40	8	Bows Tier 1
+skill	Crossbows:40	Skill: Crossbows 40	9	Crossbows Tier 1
+skill	Blocking:40	Skill: Blocking 40	8	Shields Tier 1
+skill	Unarmed:40	Skill: Fists 40	8	
+skill	ElementalMagic:40	Skill: Elemental Magic 40	10	Elemental Magic Tier 1
+skill	BloodMagic:40	Skill: Blood Magic 40	10	Blood Magic Tier 1
+skill	Jump:40	Skill: Jump 40	8	
+skill	Sneak:40	Skill: Sneak 40	8	
+skill	Run:40	Skill: Run 40	8	
+skill	Swim:40	Skill: Swim 40	8	
+skill	Dodge:40	Skill: Dodge 40	8	
+skill	Fishing:40	Skill: Fishing 40	8	
+skill	Cooking:40	Skill: Cooking 40	8	Cooking Station
+skill	Farming:40	Skill: Farming 40	8	Cultivator
+skill	Crafting:40	Skill: Crafting 40	8	Crafting
+skill	Ride:40	Skill: Ride 40	8	
+skill	WoodCutting:50	Skill: Woodcutting 50	10	Axes Tier 1
+skill	Pickaxes:50	Skill: Pickaxes 50	10	Pickaxes Tier 1
+skill	Axes:50	Skill: Axes 50	10	Axes Tier 1
+skill	Clubs:50	Skill: Clubs 50	10	Clubs Tier 1
+skill	Swords:50	Skill: Swords 50	10	Blades Tier 1
+skill	Knives:50	Skill: Knives 50	10	Short Blades Tier 1
+skill	Spears:50	Skill: Spears 50	10	Spears Tier 1
+skill	Polearms:50	Skill: Polearms 50	10	Polearms Tier 1
+skill	Bows:50	Skill: Bows 50	10	Bows Tier 1
+skill	Crossbows:50	Skill: Crossbows 50	10	Crossbows Tier 1
+skill	Blocking:50	Skill: Blocking 50	10	Shields Tier 1
+skill	Unarmed:50	Skill: Fists 50	10	
+skill	ElementalMagic:50	Skill: Elemental Magic 50	10	Elemental Magic Tier 1
+skill	BloodMagic:50	Skill: Blood Magic 50	10	Blood Magic Tier 1
+skill	Jump:50	Skill: Jump 50	10	
+skill	Sneak:50	Skill: Sneak 50	10	
+skill	Run:50	Skill: Run 50	10	
+skill	Swim:50	Skill: Swim 50	10	
+skill	Dodge:50	Skill: Dodge 50	10	
+skill	Fishing:50	Skill: Fishing 50	10	
+skill	Cooking:50	Skill: Cooking 50	10	Cooking Station
+skill	Farming:50	Skill: Farming 50	10	Cultivator
+skill	Crafting:50	Skill: Crafting 50	10	Crafting
+skill	Ride:50	Skill: Ride 50	10	
+discover	Eikthyrnir	Discover: Eikthyr's Altar	0	
+discover	Crypt	Discover: Burial Chamber	1	
+discover	TrollCave	Discover: Troll Cave	1	
+discover	Vendor_BlackForest	Discover: Haldor's Camp	1	
+discover	GDKing	Discover: The Elder's Altar	1	
+discover	Hildir_crypt	Discover: Smouldering Tomb	1	
+discover	Hildir_camp	Discover: Hildir's Camp	4	
+discover	SunkenCrypt	Discover: Sunken Crypt	4	
+discover	Bonemass	Discover: Bonemass's Altar	4	
+discover	MountainCave	Discover: Frost Cave	7	
+discover	Dragonqueen	Discover: Moder's Altar	7	
+discover	Hildir_cave	Discover: Howling Cavern	7	
+discover	GoblinCamp	Discover: Fuling Village	8	
+discover	GoblinKing	Discover: Yagluth's Altar	8	
+discover	Hildir_plainsfortress	Discover: Sealed Tower	8	
+discover	Mistlands_DvergrTownEntrance	Discover: Infested Mine	9	
+discover	Mistlands_DvergrBossEntrance	Discover: Infested Citadel	9	
+discover	CharredFortress	Discover: Charred Fortress	11	
+discover	MorgenHole	Discover: Putrid Hole	11	
+discover	FaderLocation	Discover: Fader's Altar	11	
