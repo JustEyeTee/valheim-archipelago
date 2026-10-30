@@ -130,6 +130,7 @@ class ValheimWeb(WebWorld):
     )]
     option_groups = option_groups
     options_presets = options_presets
+    bug_report_page = "https://github.com/JustEyeTee/valheim-archipelago/issues"
 
 
 def _location_groups() -> Dict[str, set]:

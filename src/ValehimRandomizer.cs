@@ -227,7 +227,7 @@ public class ValheimRandomizer : BaseUnityPlugin
 
         try
         {
-            string file = Path.Combine(Paths.PluginPath, "research.tsv");
+            string file = DataFile("research.tsv");
 
             // Seed a tiny example if missing
             if (!File.Exists(file))
@@ -307,11 +307,23 @@ public class ValheimRandomizer : BaseUnityPlugin
             => string.IsNullOrWhiteSpace(s) ? Array.Empty<string>() : s.Split('|');
     }
 
+    // Mod managers (r2modman, Thunderstore) install each mod into its own subfolder of
+    // BepInEx/plugins; a manual install puts the files in BepInEx/plugins itself. Data files are
+    // looked up next to this DLL first, then in BepInEx/plugins.
+    private static string PluginFolder => Path.GetDirectoryName(typeof(ValheimRandomizer).Assembly.Location);
+
+    public static string DataFile(string name)
+    {
+        string next = Path.Combine(PluginFolder, name);
+        string root = Path.Combine(Paths.PluginPath, name);
+        return File.Exists(next) || !File.Exists(root) ? next : root;
+    }
+
     private void CheckRecipesAndPiecesWithoutResearch()
     {
         try
         {
-            string pluginFolder = Paths.PluginPath;
+            string pluginFolder = PluginFolder;
             string recipesFile = System.IO.Path.Combine(pluginFolder, "RecipesWithoutResearch.txt");
             string piecesFile = System.IO.Path.Combine(pluginFolder, "PiecesWithoutResearch.txt");
 
@@ -377,7 +389,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     {
         try
         {
-            string file = System.IO.Path.Combine(Paths.PluginPath, "trophies.tsv");
+            string file = DataFile("trophies.tsv");
             if (!System.IO.File.Exists(file))
             {
                 Logger.LogWarning($"Trophy research file not found at {file}. Skipping trophy researches.");

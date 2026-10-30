@@ -64,3 +64,16 @@ if [ -d poptracker ]; then
   rm -f "$pack" && (cd poptracker && python3 -I -m zipfile -c "../$pack" ./*)
   echo "$pack"
 fi
+
+# Thunderstore package: manifest.json, icon.png, README.md and CHANGELOG.md at the root, plus the mod's
+# files (mod managers install them into BepInEx/plugins/<team>-ValheimArchipelago/). The version in
+# thunderstore/manifest.json must match the APWorld's world_version.
+world_version=$(python3 -I -c 'import json; print(json.load(open("valheimapworld/archipelago.json"))["world_version"])')
+ts_version=$(python3 -I -c 'import json; print(json.load(open("thunderstore/manifest.json"))["version_number"])')
+[ "$world_version" = "$ts_version" ] || echo "warning: thunderstore/manifest.json is $ts_version, APWorld is $world_version" >&2
+ts="$stage/thunderstore" && rm -rf "$ts" && mkdir -p "$ts"
+cp thunderstore/manifest.json thunderstore/icon.png README.md CHANGELOG.md LICENSE THIRD_PARTY_NOTICES.md "$ts/"
+cp "$stage"/BepInEx/plugins/* "$stage/valheimapworld.apworld" "$ts/"
+tszip="dist/ValheimArchipelago-Thunderstore-$tag.zip"
+rm -f "$tszip" && (cd "$ts" && python3 -I -m zipfile -c "../../$(basename "$tszip")" ./*)
+echo "$tszip"

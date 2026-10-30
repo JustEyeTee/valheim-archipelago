@@ -22,13 +22,19 @@ updated for Valheim 1.0.21 ("Deep North") and current Archipelago, with many add
 ## Installing
 
 **APWorld.** Put `valheimapworld.apworld` in your Archipelago `custom_worlds` folder (or double-click it
-to install with the Archipelago Launcher).
+to install with the Archipelago Launcher). Get it from the
+[GitHub releases](https://github.com/JustEyeTee/valheim-archipelago/releases).
 
-**Mod.** With r2modman (or Thunderstore Mod Manager): make a profile, install BepInExPack Valheim and
-Jotunn, then open the profile folder (Settings > Browse profile folder) and copy the contents of the
-release zip's `BepInEx/plugins` into the profile's `BepInEx/plugins` folder. The files must sit directly
-in `BepInEx/plugins` (not in a subfolder): `ValheimRandomizer.dll`, `Archipelago.MultiClient.Net.dll`,
-`Newtonsoft.Json.dll`, `research.tsv` and `trophies.tsv`.
+**Mod, with a mod manager (easiest).** In r2modman (or Thunderstore Mod Manager), find **ValheimArchipelago**
+and install it; BepInExPack Valheim and Jotunn are installed with it.
+
+**Mod, by hand.** With BepInExPack Valheim and Jotunn installed, copy the files from the release zip's
+`BepInEx/plugins` folder into your `BepInEx/plugins` folder (directly, or in a subfolder of their own):
+`ValheimRandomizer.dll`, `Archipelago.MultiClient.Net.dll`, `Newtonsoft.Json.dll`, `research.tsv` and
+`trophies.tsv`.
+
+The APWorld (`valheimapworld.apworld`) is in the GitHub release and in the Thunderstore package (in the mod's
+folder, found with r2modman's Settings > Browse profile folder).
 
 ## Setting up a game
 

@@ -10,11 +10,13 @@
 
 ## Installing the mod
 
-1. In r2modman, select Valheim, create a profile and install BepInExPack Valheim and Jotunn.
-2. Open the profile folder (Settings > Browse profile folder).
-3. Copy the files from the release zip's `BepInEx/plugins` folder into the profile's `BepInEx/plugins` folder.
-   They must be directly in that folder, not in a subfolder.
-4. Install `valheimapworld.apworld` into Archipelago (double-click it, or put it in `custom_worlds`).
+1. In r2modman, select Valheim, create a profile, and install **ValheimArchipelago** (BepInExPack Valheim and
+   Jotunn are installed with it).
+2. Install `valheimapworld.apworld` into Archipelago (double-click it, or put it in `custom_worlds`). It is in
+   the [GitHub releases](https://github.com/JustEyeTee/valheim-archipelago/releases), and in the mod's folder in
+   your r2modman profile.
+
+To install by hand instead, copy the release zip's `BepInEx/plugins` files into your `BepInEx/plugins` folder.
 
 ## Creating a config file
 
