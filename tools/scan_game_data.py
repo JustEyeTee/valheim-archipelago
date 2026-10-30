@@ -42,6 +42,19 @@ def cab_of(assets_file):
     return os.path.basename(assets_file.name).lower()
 
 
+def kinds_of(t):
+    """Every kind of data in this component (ZoneSystem holds both locations and vegetation)."""
+    found = []
+    if isinstance(t.get("m_spawners"), list):
+        found.append("spawnlist")
+    if isinstance(t.get("m_vegetation"), list):
+        found.append("vegetationlist")
+    kind = kind_of(t)
+    if kind and kind not in found:
+        found.append(kind)
+    return found
+
+
 def kind_of(t):
     if "m_itemData" in t:
         return "itemdrop"
@@ -107,8 +120,7 @@ for i, path in enumerate(files):
                 target = cab if f == 0 else (externals[f - 1] if f - 1 < len(externals) else None)
                 if target:
                     owners[(cab, o.path_id)] = (target, go["m_PathID"])
-            kind = kind_of(t)
-            if kind:
+            for kind in kinds_of(t):
                 kept.append((kind, cab, o.path_id, externals, t))
     print(f"{i + 1}/{len(files)} {os.path.basename(path)}: {len(kept)} kept", file=sys.stderr, flush=True)
 

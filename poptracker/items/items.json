@@ -1078,5 +1078,11 @@
   "type": "toggle",
   "img": "images/items/boss_fader.png",
   "codes": "boss_fader"
+ },
+ {
+  "name": "Kall Fimbulbringer Defeated",
+  "type": "toggle",
+  "img": "images/items/boss_kall_fimbulbringer.png",
+  "codes": "boss_kall_fimbulbringer"
  }
 ]

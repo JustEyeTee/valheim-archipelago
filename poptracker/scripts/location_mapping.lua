@@ -724,6 +724,18 @@ LOCATION_MAPPING = {
   [722] = "@Buy - Tier 4/Buy: Sparkler",
   [723] = "@Buy - Tier 4/Buy: Iron Pit",
   [724] = "@Buy - Tier 4/Buy: Barber Kit",
+  [725] = "@Obtain - Tier 12/Obtain: Malicious Blood",
+  [726] = "@Obtain - Tier 12/Obtain: Sacrificial Blood",
+  [727] = "@Discover - Tier 4/Discover: Bog Witch's Camp",
+  [728] = "@Discover - Tier 12/Discover: The First Prison",
+  [729] = "@Buy - Tier 4/Buy: Candle Wick",
+  [730] = "@Buy - Tier 4/Buy: Fresh Seaweed",
+  [731] = "@Buy - Tier 4/Buy: Cured Squirrel Hamstring",
+  [732] = "@Buy - Tier 4/Buy: Pungent Pebbles",
+  [733] = "@Buy - Tier 4/Buy: Powdered Dragon Eggshells",
+  [734] = "@Buy - Tier 4/Buy: Love Potion",
+  [735] = "@Buy - Tier 4/Buy: Woodland Herb Blend",
+  [736] = "@Buy - Tier 4/Buy: Corked Vial",
 }
 TROPHY_BOSS = {
   [233] = "boss_eikthyr",
@@ -733,4 +745,5 @@ TROPHY_BOSS = {
   [262] = "boss_yagluth",
   [272] = "boss_the_queen",
   [279] = "boss_fader",
+  [726] = "boss_kall_fimbulbringer",
 }

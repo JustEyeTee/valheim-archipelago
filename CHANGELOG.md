@@ -2,6 +2,18 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.8.0
+
+- New goal: **Kall Fimbulbringer**, the Deep North boss (win by picking up his Sacrificial Blood); it
+  includes the Deep North and every boss before him.
+- New checks: Obtain Malicious Blood and Sacrificial Blood, Discover The First Prison (Kall's arena) and
+  the Bog Witch's Camp, and buying 8 items from the Bog Witch.
+- A later boss's goal location is never in an earlier goal's game (Fader with the Deep North doesn't ask
+  you to beat Kall).
+- `tools/scan_game_data.py` reads every game file into one database; `tools/verify_game_data.py` checks
+  every name the randomizer uses against it.
+- Docs: architecture and troubleshooting guides.
+
 ## 0.7.2
 
 - Installs through a mod manager: the mod finds its data files in its own folder. Thunderstore package.

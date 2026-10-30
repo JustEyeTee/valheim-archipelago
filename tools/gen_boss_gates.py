@@ -18,7 +18,7 @@ import sys
 root = pathlib.Path(__file__).resolve().parent.parent
 data = json.load(open(sys.argv[1]))
 
-BOSS_ORDER = ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader"]
+BOSS_ORDER = ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader", "Kall Fimbulbringer"]
 
 # Raw materials that need a boss: its drop, or a tool made from its drop.
 BASE = {
@@ -34,6 +34,8 @@ BASE = {
     # Haldor sells these only after the boss is killed (the trader's required keys), so
     # receiving the boss's drop as an item doesn't help: "kill:" marks those.
     "YmirRemains": {"kill:The Elder"}, "Thunderstone": {"kill:The Elder"},
+    # The Bog Witch's stock behind boss keys.
+    "SpiceForests": {"kill:The Elder"}, "BlobVial": {"kill:The Elder"},
     # Hens come from Haldor's eggs, sold after Yagluth.
     "ChickenEgg": {"kill:Yagluth"}, "ChickenMeat": {"kill:Yagluth"}, "Hen": {"kill:Yagluth"},
 }

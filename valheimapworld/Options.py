@@ -5,8 +5,9 @@ from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionGroup,
 
 class Goal(Choice):
     """
-    The boss you must defeat to win. You win when you pick up that boss's trophy.
-    Earlier bosses make a shorter game; Fader is the full game.
+    The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
+    has none: you win when you pick up his Sacrificial Blood). Earlier bosses make a shorter game;
+    Fader is the full game, and Kall Fimbulbringer adds the Deep North.
     """
     display_name = "Goal"
     option_eikthyr = 0
@@ -16,6 +17,7 @@ class Goal(Choice):
     option_yagluth = 4
     option_the_queen = 5
     option_fader = 6
+    option_kall_fimbulbringer = 7
     default = option_fader
 
 
@@ -28,6 +30,7 @@ GOAL_BOSSES = {
     Goal.option_yagluth: ("Yagluth", "TrophyGoblinKing"),
     Goal.option_the_queen: ("The Queen", "TrophySeekerQueen"),
     Goal.option_fader: ("Fader", "TrophyFader"),
+    Goal.option_kall_fimbulbringer: ("Kall Fimbulbringer", "FrozenKingDrop"),
 }
 
 
@@ -53,7 +56,8 @@ class IncludeDeepNorth(Toggle):
     """
     Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
     there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    upgrades) and 8 Deep North trophies. Only applies when the goal is Fader.
+    upgrades) and 8 Deep North trophies, when the goal is Fader. The Kall Fimbulbringer goal
+    always includes the Deep North.
     """
     display_name = "Include Deep North"
 

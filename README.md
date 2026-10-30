@@ -50,7 +50,8 @@ folder, found with r2modman's Settings > Browse profile folder).
   locked until you receive the research item for them.
 - Build an **Archipelago Chest** (Hammer > Randomizer, 10 Wood). Resource bundles, tools and boss drops
   sent to you are delivered into it.
-- You win by picking up the trophy of your goal boss.
+- You win by picking up the trophy of your goal boss (for Kall Fimbulbringer, who has no trophy, his
+  Sacrificial Blood).
 
 **Chat commands** (type them in the in-game chat):
 
@@ -79,8 +80,8 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 
 | Option | Default | |
 |---|---|---|
-| `goal` | `fader` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen or Fader. Checks and items past the goal are left out. |
-| `include_deep_north` | off | Adds the Deep North tier (goal Fader only). |
+| `goal` | `fader` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer. Checks and items past the goal are left out. |
+| `include_deep_north` | off | Adds the Deep North tier to a Fader goal (Kall Fimbulbringer always includes it). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
 | `biome_checks`, `obtain_checks`, `exploration_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks` | on | Extra kinds of checks. |
 | `kill_checks` | off | First kill of each creature. |

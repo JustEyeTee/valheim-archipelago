@@ -20,8 +20,10 @@ CHECK_REQS = {name: reqs for _, name, _, reqs in CHECKS if reqs}
 CHECK_REQS["Trophy: TrophySerpent"] = ("Boat Tier 2",)
 LOCATION_REQS = {**RESEARCH_PREREQS, **CHECK_REQS}
 
-# Boss -> its trophy location; defeating it is an event there ("Eikthyr Defeated").
+# Boss -> the location its defeat is an event at ("Eikthyr Defeated"): its trophy, or for Kall
+# Fimbulbringer, who has none, picking up his Sacrificial Blood.
 BOSS_TROPHIES = {boss: f"Trophy: {trophy}" for boss, trophy in GOAL_BOSSES.values()}
+BOSS_TROPHIES["Kall Fimbulbringer"] = "Obtain: Sacrificial Blood"
 
 
 def bosses_to_use(items) -> set:
@@ -111,9 +113,11 @@ def goal_scope(goal_tier: int, goal_boss: str) -> frozenset:
     trophy name is both a location and an item; the extra checks are locations only.
     """
     earlier = frozenset(BOSS_ORDER[:BOSS_ORDER.index(goal_boss)])
+    later_bosses = {BOSS_TROPHIES[boss] for boss in BOSS_ORDER[BOSS_ORDER.index(goal_boss) + 1:]}
     region = {location.user_friendly_name: location.region for location in location_data_table}
     scope = {name for name, tier in LOCATION_TIERS.items()
-             if tier <= goal_tier and {boss_name(b) for b in LOCATION_BOSSES[name] | REGION_BOSSES[region[name]]} <= earlier}
+             if tier <= goal_tier and name not in later_bosses
+             and {boss_name(b) for b in LOCATION_BOSSES[name] | REGION_BOSSES[region[name]]} <= earlier}
     while True:
         stranded = {name for name in scope if any(p not in scope for p in LOCATION_REQS.get(name, ()))}
         if not stranded:
@@ -188,8 +192,8 @@ class ValheimWorld(World):
         # A lower goal ends the game earlier, so checks and items past the goal are left out
         # instead of sitting where they can never be reached.
         self.goal_boss, self.goal_trophy = GOAL_BOSSES[self.options.goal.value]
-        scope_tier = LOCATION_TIERS[f"Trophy: {self.goal_trophy}"]
-        if self.options.include_deep_north:
+        scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
+        if self.options.include_deep_north and self.options.goal != Goal.option_kall_fimbulbringer:
             if self.options.goal == Goal.option_fader:
                 scope_tier = DEEP_NORTH_TIER
             else:

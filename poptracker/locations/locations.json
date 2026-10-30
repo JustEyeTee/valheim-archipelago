@@ -2667,6 +2667,13 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
     ]
+   },
+   {
+    "name": "Discover: Bog Witch's Camp",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
    }
   ],
   "map_locations": [
@@ -2799,6 +2806,25 @@
     "map": "Overview",
     "x": 475,
     "y": 786
+   }
+  ]
+ },
+ {
+  "name": "Discover - Tier 12",
+  "sections": [
+   {
+    "name": "Discover: The First Prison",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 475,
+    "y": 850
    }
   ]
  },
@@ -3544,6 +3570,20 @@
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,frost_foundry,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth"
+    ]
+   },
+   {
+    "name": "Obtain: Malicious Blood",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth"
+    ]
+   },
+   {
+    "name": "Obtain: Sacrificial Blood",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,artisan_press,boat_tier_4,ceramic_plates,black_forge_upgrade_4,flametal_armor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth"
     ]
    }
   ],
@@ -4666,6 +4706,62 @@
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Candle Wick",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Fresh Seaweed",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Cured Squirrel Hamstring",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Pungent Pebbles",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Powdered Dragon Eggshells",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Love Potion",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Buy: Woodland Herb Blend",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$kill|the_elder"
+    ]
+   },
+   {
+    "name": "Buy: Corked Vial",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr,$kill|the_elder"
     ]
    }
   ],
