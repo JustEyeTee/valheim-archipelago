@@ -43,7 +43,9 @@ def describe(name, cls):
         entry.update(kind="range", min=cls.range_start, max=cls.range_end, default=cls.default,
                      names=dict(getattr(cls, "special_range_names", {}) or {}))
     elif issubclass(cls, Options.OptionSet):
-        entry.update(kind="set", keys=sorted(cls.valid_keys), default=sorted(cls.default))
+        # Goal conditions keep their own order (Goal Boss first); others are alphabetical.
+        keys = list(cls.valid_keys) if name == "goal_conditions" else sorted(cls.valid_keys)
+        entry.update(kind="set", keys=keys, default=sorted(cls.default))
     else:
         return None
     return entry
@@ -65,8 +67,8 @@ CHECK_OPTIONS = {"Biome: ": "biome_checks", "Obtain: ": "obtain_checks",
                  "Eat: ": "eat_checks", "Catch: ": "fishing_checks", "Tame: ": "taming_checks", "Buy: ": "trader_checks"}
 
 
-def locations(options):
-    """Location names of a world built with these options (others default)."""
+def build(options):
+    """A world built with these options (others default), through create_regions."""
     w = AutoWorldRegister.world_types["Valheim"]
     mw = MultiWorld(1)
     mw.game[1] = "Valheim"
@@ -78,7 +80,25 @@ def locations(options):
     mw.set_options(args)
     for step in ("generate_early", "create_regions"):
         call_all(mw, step)
-    return [loc.name for loc in mw.get_locations(1) if loc.address is not None]
+    return mw.worlds[1]
+
+
+def locations(options):
+    """Location names of a world built with these options (others default)."""
+    world = build(options)
+    return [loc.name for loc in world.multiworld.get_locations(1) if loc.address is not None]
+
+
+def goal_info(goal):
+    """What each goal condition has to work with in this goal's era: how many trophies, researches,
+    skills, Hildir's quests and bosses, and the most of the map Explorer can ask for (0: none)."""
+    world = build({"goal": goal, "explorer_percent": 20})
+    targets = world.goal_targets
+    explore = targets["Explorer"]
+    return {"All Bosses": len(world.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
+            "Researcher": len(targets["Researcher"]), "Skill Master": len(targets["Skill Master"]),
+            "Hildir's Quests": len(targets["Hildir's Quests"]),
+            "Explorer": int(float(explore[0][len("Explore: "):].split("%")[0])) if explore else 0}
 
 
 def count_checks(goal):
@@ -110,7 +130,7 @@ goal_cls = hints["goal"]
 eras = {"eikthyr": "Meadows", "the_elder": "Black Forest", "bonemass": "Swamp", "moder": "Mountains",
         "yagluth": "Plains", "the_queen": "Mistlands", "fader": "Ashlands", "kall_fimbulbringer": "Deep North"}
 goals = [{"key": key, "boss": world.GOAL_BOSSES[value][0], "era": eras.get(key, ""), "checks": count_checks(key),
-          "breakdown": breakdown(key)}
+          "breakdown": breakdown(key), "conditions": goal_info(key)}
          for value, key in sorted(goal_cls.name_lookup.items())]
 
 data = {

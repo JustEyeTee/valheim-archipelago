@@ -172,7 +172,18 @@ public static class ArchipelagoExtras
     }
 
     public static bool IsExtraItem(string name) =>
-        Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name) || name == "Starter Kit";
+        Bundles.ContainsKey(name) || Traps.Contains(name) || Boosts.Contains(name) || name == "Starter Kit" ||
+        name == ArchipelagoGoal.RelicName;
+
+    // The skill a skill check is for ("Skill: Woodcutting 10" -> WoodCutting).
+    public static Skills.SkillType? SkillOf(string location)
+    {
+        foreach (var (skill, _, skillLocation) in SkillLocations)
+        {
+            if (skillLocation == location) return skill;
+        }
+        return null;
+    }
 
     public static void RegisterChest()
     {
@@ -212,6 +223,7 @@ public static class ArchipelagoExtras
         {
             if (player.GetSkills().GetSkillLevel(skill) >= level) ArchipelagoConnection.SendLocationOnce(skillLocation);
         }
+        ArchipelagoGoal.MarkSkills(player);
 
         var here = Location.GetLocation(player.transform.position);
         if (here != null)

@@ -87,6 +87,9 @@ input[type="range"] { flex: 1 1 180px; accent-color: var(--accent); }
 .checks { display: grid; gap: 4px 16px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
 .checks label { font-weight: 400; display: flex; gap: 8px; align-items: center; }
 .checks input { accent-color: var(--accent); }
+.checks label { flex-wrap: wrap; }
+.checks .why { flex-basis: 100%; padding-left: 26px; margin-top: -2px; font: 400 0.8rem var(--font-mono); color: var(--muted); }
+.checks label.off { opacity: 0.5; }
 .preview { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 12px; min-width: 0; }
 @media (max-width: 959px) { .preview { position: static; } }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -165,7 +168,11 @@ pre.yaml .k { color: var(--code-key); }
   // building a world with every kind of check on).
   const CHECK_OPTIONS = ["biome_checks", "obtain_checks", "kill_checks", "discovery_checks",
                          "build_checks", "eat_checks", "fishing_checks", "taming_checks", "trader_checks"];
-  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks"];
+  // Goal conditions and the options that only matter with them.
+  const CONDITION_OPTIONS = { relic_hunt_total: "Relic Hunt", relic_hunt_percent: "Relic Hunt",
+    trophy_hunt_percent: "Trophy Hunt", researcher_percent: "Researcher", explorer_percent: "Explorer",
+    skill_master_count: "Skill Master", skill_master_level: "Skill Master" };
+  const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks", ...Object.keys(CONDITION_OPTIONS)];
   const goalData = () => data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
   // The same rules as the APWorld (ValheimWorld.wanted).
   const SKILL_STEP = { every_10: 10, every_20: 20, every_25: 25 };
@@ -208,8 +215,42 @@ pre.yaml .k { color: var(--code-key); }
     setOption("exploration_checks", !b.explore.length ? "none for this goal" : `+${checks(explore.length)}` +
               (values.exploration_checks > top ? ` (up to ${top}% in this goal)` : ""), explore.length > 0, !b.explore.length);
     setOption("exploration_check_spacing", "", false, !b.explore.length || values.exploration_checks === 0);
+    updateConditions(g);
     $("total").innerHTML = "";
     $("total").append(el("strong", { text: String(totalFor(b)) }), ` check${totalFor(b) === 1 ? "" : "s"} for ${g.boss} with these options`);
+  }
+
+  // Goal conditions: what each asks for in the chosen goal's era (the same rules as ValheimWorld.setup_goal),
+  // greyed out when there's nothing to do; their options are greyed out while the condition is off.
+  const share = (n, percent) => Math.max(1, Math.ceil(n * percent / 100));
+  const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+  function conditionText(key, g) {
+    const c = g.conditions, v = values;
+    switch (key) {
+      case "Goal Boss": return `defeat ${g.boss}`;
+      case "All Bosses": return `${plural(c[key], "boss").replace("bosss", "bosses")}, any order`;
+      case "Relic Hunt": return `${share(v.relic_hunt_total, v.relic_hunt_percent)} of ${plural(v.relic_hunt_total, "relic")}`;
+      case "Trophy Hunt": return `${share(c[key], v.trophy_hunt_percent)} of ${plural(c[key], "trophy").replace("trophys", "trophies")}`;
+      case "Researcher": return `${share(c[key], v.researcher_percent)} of ${plural(c[key], "research").replace("researchs", "researches")}`;
+      case "Explorer": return c[key] ? `${Math.min(v.explorer_percent, c[key])}% of the map` +
+        (v.explorer_percent > c[key] ? ` (the most in this era)` : "") : "nothing in this era";
+      case "Skill Master": return `${Math.min(v.skill_master_count, c[key])} of ${plural(c[key], "skill")} to level ${v.skill_master_level}`;
+      case "Hildir's Quests": return c[key] ? plural(c[key], "chest") + " to return" : "nothing in this era";
+    }
+    return "";
+  }
+  function updateConditions(g) {
+    const chosen = values.goal_conditions.length ? values.goal_conditions : ["Goal Boss"];
+    document.querySelectorAll('input[id^="opt-goal_conditions-"]').forEach(input => {
+      const key = input.value, empty = key in g.conditions && !g.conditions[key];
+      const label = input.closest("label");
+      label.classList.toggle("off", empty);
+      label.querySelector(".why").textContent = conditionText(key, g);
+    });
+    for (const [name, key] of Object.entries(CONDITION_OPTIONS)) {
+      const on = chosen.includes(key) && !(key in g.conditions && !g.conditions[key]);
+      setOption(name, on ? conditionText(key, g) : `for ${key}`, false, !on);
+    }
   }
 
   $("version").textContent = `Valheim ${data.game_version} · APWorld ${data.world_version} · Archipelago ${data.minimum_ap_version}+`;
@@ -286,7 +327,9 @@ pre.yaml .k { color: var(--code-key); }
         input.addEventListener("change", () => {
           const cur = new Set(values[o.name]); input.checked ? cur.add(k) : cur.delete(k); set(o.name, [...cur].sort());
         });
-        box.append(el("label", { for: input.id }, input, k));
+        const label = el("label", { for: input.id }, input, k);
+        if (o.name === "goal_conditions") label.append(el("span", { class: "why" }));
+        box.append(label);
       }
       return box;
     }

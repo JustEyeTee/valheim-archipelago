@@ -25,7 +25,7 @@ for seed in $(seq 1 "$seeds"); do
   fi
   spoiler=$(cd "$work/out" && python3 -I -c 'import zipfile,glob; z=zipfile.ZipFile(glob.glob("*.zip")[0]); print(z.read([n for n in z.namelist() if n.endswith("_Spoiler.txt")][0]).decode())')
   spheres=$(printf '%s\n' "$spoiler" | grep -c -E '^[0-9]+: \{')
-  if printf '%s\n' "$spoiler" | grep -q 'Defeat .*: Victory'; then
+  if printf '%s\n' "$spoiler" | grep -q 'Goal Complete.*: Victory'; then
     echo "seed $seed: ok ($spheres spheres)"
   else
     echo "seed $seed: NO VICTORY IN PLAYTHROUGH"; fails=$((fails+1))

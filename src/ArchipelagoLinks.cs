@@ -380,13 +380,13 @@ public static class ArchipelagoLinks
     }
 }
 
-// Chat command (type /ap in chat): /ap status | checks | missing <category> | hint <item> | say <text> |
+// Chat command (type /ap in chat): /ap status | goal | checks | missing <category> | hint <item> | say <text> |
 // energy | deposit <coins> | withdraw <coins> | deathlink on|off
 public class ArchipelagoCommand : ConsoleCommand
 {
     public override string Name => "ap";
     public override string Help =>
-        "Archipelago: status, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
+        "Archipelago: status, goal, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
 
     public override void Run(string[] args, Terminal context)
     {
@@ -395,7 +395,7 @@ public class ArchipelagoCommand : ConsoleCommand
         if (sub == "status" || sub == "help")
         {
             Reply(ArchipelagoLinks.Status());
-            Reply("Commands: /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
+            Reply("Commands: /ap goal, /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
@@ -405,6 +405,9 @@ public class ArchipelagoCommand : ConsoleCommand
         string rest = string.Join(" ", args.Skip(1));
         switch (sub)
         {
+            case "goal":
+                foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
+                break;
             case "checks":
                 Reply(ArchipelagoLinks.CheckSummary());
                 break;

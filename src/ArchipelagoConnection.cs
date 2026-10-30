@@ -47,7 +47,8 @@ internal static class ArchipelagoConnection
         {
             GoalTrophy = trophy;
         }
-        ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
+        ArchipelagoGoal.Load(slotData);
+        if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
 
         // Slot data numbers arrive as Int64; rooms from before this option use full costs.
         int costPercent = 100;
@@ -139,6 +140,7 @@ internal static class ArchipelagoConnection
         if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
         TryGetAllItems();
         if (HasGlobal("ap_goal_pending")) CompleteGame();
+        ArchipelagoGoal.Check(ReceivedCount);
 
         foreach (var key in ZoneSystem.instance.GetGlobalKeys())
         {
@@ -179,6 +181,10 @@ internal static class ArchipelagoConnection
         }
     }
 
+    // How many of an item the slot has received (Relic Hunt counts its relics).
+    public static int ReceivedCount(string itemName)
+        => session == null ? 0 : session.Items.AllItemsReceived.Count(item => item.ItemName == itemName);
+
     private static bool WorldLoaded()
         => ZoneSystem.instance != null && Player.m_localPlayer != null; // simple & reliable
 
@@ -197,8 +203,9 @@ internal static class ArchipelagoConnection
         ZoneSystem.instance.RemoveGlobalKey(k);
     }
 
-    // Called whenever the goal trophy is in the inventory. Sends the goal once per world; if
-    // not connected yet, it is remembered in the world and sent by TryFlushPendingLocations.
+    // Called once the goal is done (every goal condition, or for older rooms, the goal trophy in the
+    // inventory). Sends the goal once per world; if not connected yet, it is remembered in the world and
+    // sent by TryFlushPendingLocations.
     public static void CompleteGame()
     {
         if (!WorldLoaded() || HasGlobal("ap_goal_sent")) return;
@@ -207,6 +214,7 @@ internal static class ArchipelagoConnection
 
         session.SetGoalAchieved();
         SetGlobal("ap_goal_sent");
-        ValheimRandomizer.Log.LogInfo("[AP] Goal complete: " + GoalTrophy);
+        ValheimRandomizer.Log.LogInfo("[AP] Goal complete");
+        Player.m_localPlayer?.Message(MessageHud.MessageType.Center, "Archipelago: goal complete!");
     }
 }

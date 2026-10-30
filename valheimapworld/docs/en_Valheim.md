@@ -18,9 +18,22 @@ creature.
 
 ## What is the goal of Valheim when randomized?
 
-Defeat the boss chosen in your options and pick up its trophy: Eikthyr, The Elder, Bonemass, Moder, Yagluth, The
-Queen, Fader, or Kall Fimbulbringer in the Deep North (the full game; he has no trophy, so you pick up his
-Sacrificial Blood). Checks and items from after your goal are left out of the game.
+Your goal boss sets how far the game goes: Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader, or
+Kall Fimbulbringer in the Deep North (the full game). Checks and items from after it are left out of the game.
+
+By default you win by defeating that boss and picking up its trophy (Kall Fimbulbringer has none, so his
+Sacrificial Blood). With `goal_conditions` you can instead (or also) have to do any combination of these,
+counted within your goal's era:
+
+- **All Bosses**: defeat every boss up to your goal, in any order.
+- **Relic Hunt**: receive a share of the Forsaken Relics spread through the multiworld.
+- **Trophy Hunt**: collect a share of the era's trophies.
+- **Researcher**: craft a share of the era's researches.
+- **Explorer**: uncover a share of the world map.
+- **Skill Master**: raise a number of skills to a level.
+- **Hildir's Quests**: return the chests Hildir asks for (from The Elder's era on).
+
+Type `/ap goal` in the in-game chat to see your progress.
 
 ## What items can be sent to me?
 
@@ -29,6 +42,7 @@ Sacrificial Blood). Checks and items from after your goal are left out of the ga
 - The drops of earlier bosses (Hard Antler, Swamp Key, Wishbone, Dragon Tears, Torn Spirit, Majestic Carapace),
   which open the next part of the game without the fight.
 - Tools, resource bundles and boosts (skill training, blessings).
+- Forsaken Relics, in a Relic Hunt.
 - Traps, such as ambushes, raids, storms, Floor Is Lava and Butterfingers.
 
 Physical items arrive in an Archipelago Chest you build (Hammer > Randomizer).

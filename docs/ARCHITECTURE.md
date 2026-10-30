@@ -44,7 +44,8 @@ They share three data files in `mod/`, so a name always means the same thing on 
 | `ValehimRandomizer.cs` | Plugin entry point: config, Harmony patches, loading the `.tsv` files, research flow, the 2-second tick |
 | `RandomizerUtils.cs` | Creates the Research Bench and the research items and recipes; research cost percentage |
 | `Patches.cs` | Harmony patches: recipe and piece locking, trophy boosts, and hooks for eat, build, buy, tame, kill and Death Link |
-| `ArchipelagoConnection.cs` | Connecting, sending checks, receiving items, the goal |
+| `ArchipelagoConnection.cs` | Connecting, sending checks, receiving items, sending the goal |
+| `ArchipelagoGoal.cs` | The goal conditions from slot data: progress, `/ap goal`, Skill Master's skill keys |
 | `ArchipelagoExtras.cs` | Every check beyond researches and trophies, the Archipelago Chest, bundles, boss drops, tools, traps, boosts |
 | `ArchipelagoLinks.cs` | Death Link, Trap Link, Energy Link, the item feed and the `/ap` chat command |
 | `ArchipelagoUI.cs` | The connection window on the main menu |
@@ -138,8 +139,14 @@ Kill checks are keyed by the trophy in the creature's drop table, so every varia
 
 ### The goal
 
-Picking up the goal boss's trophy (from slot data) calls `CompleteGame`, which tells the server once per
-world (keys `ap_goal_pending` / `ap_goal_sent`).
+Slot data's `goal` lists the goal conditions, each with its targets and how many are needed.
+`ArchipelagoGoal.Check` runs on the 2-second tick while connected and counts each condition from the world:
+checks done (Goal Boss, All Bosses, Trophy Hunt, Researcher, Explorer: the target is a location), the keys
+`Hildir1`-`Hildir3` the game sets when Hildir's chests are handed in, received Forsaken Relics, and for
+Skill Master, keys `ap_goal_skill:<skill>` that every player's mod sets once a skill reaches the level in
+`ap_goal_skill_level` (so co-op players count too). Once all are done it calls `CompleteGame`, which tells
+the server once per world (keys `ap_goal_pending` / `ap_goal_sent`). Rooms from before goal conditions have
+no `goal`: picking up the goal trophy (`goal_trophy`) completes them.
 
 ### Links with other games
 
@@ -177,14 +184,17 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
 1. **`generate_early`** works out the **scope**: every location up to the goal boss's tier, minus anything
    that needs the goal boss (or a later one) defeated first, minus researches whose prerequisites are out
    of scope, minus checks turned off by options.
-2. **`create_regions`** creates the tiers and the locations in scope, plus an **event** at each boss's
-   trophy: "Eikthyr Defeated"..., and "Victory" for the goal boss.
+2. **`create_regions`** creates the tiers and the locations in scope, plus **events**: one at each boss's
+   trophy ("Eikthyr Defeated"...); for the counted goal conditions, one per target ("Trophy Hunt: Trophy:
+   TrophyBoar", holding "Trophy Hunt Progress") with the rules of the location it stands for, even one an
+   option left out; and "Victory" in Menu, reachable once every goal condition is met.
 3. **`create_items`** adds one item per research and trophy in scope, the drops of the bosses before the
-   goal, tools from the goal's era and the Starter Kit; every other check gets a trap, boost or bundle.
+   goal, tools from the goal's era and the Starter Kit, and for a Relic Hunt the Forsaken Relics; every other
+   check gets a trap, boost or bundle.
 4. **`set_rules`** adds the logic: research prerequisites, the stations some checks need, and **boss
    gates**: a location or tier that needs a boss's drop needs "<Boss> Defeated" **or** that drop as an
    item (Haldor's boss-unlocked stock needs the kill itself).
-5. **`fill_slot_data`** sends the mod the goal trophy, research cost, link settings and, for Universal
+5. **`fill_slot_data`** sends the mod the goal (conditions, targets, counts), research cost, link settings and, for Universal
    Tracker, the options that decide which locations exist.
 
 ## Tools and the data pipeline

@@ -1,4 +1,6 @@
-from typing import Any, Dict
+import logging
+import math
+from typing import Any, Callable, Dict, List
 
 from BaseClasses import Item, ItemClassification, Location, LocationProgressType, Tutorial
 from worlds.AutoWorld import WebWorld, World
@@ -7,8 +9,8 @@ from worlds.generic.Rules import add_rule
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table
-from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, SkillCheckSpacing, GOAL_BOSSES,
-                      option_groups, options_presets)
+from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, GoalConditions, SkillCheckSpacing,
+                      GOAL_BOSSES, option_groups, options_presets)
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_PREREQS
 from .check_data import CHECKS
@@ -65,7 +67,8 @@ LOGIC_ITEMS = frozenset(
 )
 
 
-TRACKER_OPTIONS = ("goal", "combat_logic", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
+TRACKER_OPTIONS = ("goal", "goal_conditions", "explorer_percent", "combat_logic", "boss_items", "biome_checks",
+                   "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks")
@@ -124,6 +127,17 @@ def goal_scope(goal_tier: int, goal_boss: str) -> frozenset:
         if not stranded:
             return frozenset(scope)
         scope -= stranded
+
+
+# Hildir's quests: the world key the game sets when her chest is handed in -> where you find her and
+# the dungeon the chest is in (Brenna's Smouldering Tomb, Geirrhafa's Howling Cavern, Zil and
+# Thungr's Sealed Tower).
+HILDIR_QUESTS = {
+    "Hildir1": ("Discover: Hildir's Camp", "Discover: Smouldering Tomb"),
+    "Hildir2": ("Discover: Hildir's Camp", "Discover: Howling Cavern"),
+    "Hildir3": ("Discover: Hildir's Camp", "Discover: Sealed Tower"),
+}
+RELIC = "Forsaken Relic"
 
 
 class ValheimWeb(WebWorld):
@@ -196,6 +210,7 @@ class ValheimWorld(World):
         # Kall Fimbulbringer's game runs through the Deep North (tier 12); every other goal ends before it.
         scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
         self.scope = goal_scope(scope_tier, self.goal_boss)
+        self.era_scope = self.scope  # before the options below take checks out
         self.scope_tier = scope_tier
         # With combat logic, armor and weapons gate fights, so logic has to count them.
         self.logic_items = LOGIC_ITEMS | (COMBAT_ITEMS if self.options.combat_logic else frozenset())
@@ -211,6 +226,50 @@ class ValheimWorld(World):
         if off:
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
         self.scope = frozenset(name for name in self.scope if self.wanted(name))
+        self.setup_goal()
+
+    def setup_goal(self):
+        """
+        The goal conditions that have something to do in this era, and for the counted ones, what counts:
+        the locations (in the era, whether or not an option left them out of the seed) whose rules say
+        when each target can be done, and how many are needed.
+        """
+        era = self.era_scope
+        self.era_bosses = BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss) + 1]
+        explore = [name for name in era if name.startswith("Explore: ")
+                   and float(name[len("Explore: "):].split("%")[0]).is_integer()
+                   and float(name[len("Explore: "):].split("%")[0]) <= self.options.explorer_percent.value]
+        self.goal_targets: Dict[str, List[str]] = {
+            "Trophy Hunt": sorted(name for name in era if name.startswith("Trophy: ")),
+            "Researcher": sorted(name for name in era if name in RESEARCH_PREREQS),
+            # A skill can be trained once its first check (level 10) can be done.
+            "Skill Master": sorted(name for name in era if name.startswith("Skill: ") and name.endswith(" 10")),
+            "Hildir's Quests": [quest for quest, places in HILDIR_QUESTS.items() if all(p in era for p in places)],
+            "Explorer": [max(explore, key=lambda n: float(n[len("Explore: "):].split("%")[0]))] if explore else [],
+        }
+        percent = {"Trophy Hunt": self.options.trophy_hunt_percent.value,
+                   "Researcher": self.options.researcher_percent.value}
+        self.goal_needed = {name: max(1, math.ceil(len(self.goal_targets[name]) * share / 100))
+                            for name, share in percent.items()}
+        self.goal_needed["Skill Master"] = min(self.options.skill_master_count.value,
+                                               len(self.goal_targets["Skill Master"]))
+        self.goal_needed["Hildir's Quests"] = len(self.goal_targets["Hildir's Quests"])
+        self.goal_needed["Explorer"] = len(self.goal_targets["Explorer"])
+
+        conditions = set(self.options.goal_conditions.value) or {"Goal Boss"}
+        for name in sorted(conditions):
+            if name in self.goal_targets and not self.goal_targets[name]:
+                logging.warning(f"Valheim: {self.player_name} has nothing to do for {name} in "
+                                f"{self.goal_boss}'s era, so it isn't a goal condition.")
+                conditions.discard(name)
+        if "Explorer" in conditions:
+            reached = self.goal_targets["Explorer"][0]
+            if reached != f"Explore: {self.options.explorer_percent.value}% of the World":
+                logging.warning(f"Valheim: {self.player_name}'s Explorer goal is lowered to "
+                                f"{reached[len('Explore: '):]}, the most in {self.goal_boss}'s era.")
+        self.goal_conditions = [name for name in GoalConditions.valid_keys if name in conditions] or ["Goal Boss"]
+        # Relics are counted in create_items, once it's known how many fit.
+        self.relics = 0
 
     def wanted(self, name: str) -> bool:
         """Whether a skill or exploration check is in by its level or percentage and the spacing options."""
@@ -246,15 +305,33 @@ class ValheimWorld(World):
                 location.progress_type = LocationProgressType.EXCLUDED
 
         # An event at each boss's trophy, reachable exactly when that trophy is: "Eikthyr
-        # Defeated", which later progress needs, and Victory for the goal boss.
+        # Defeated", which later progress and the goal need.
         self.boss_events = []
-        for boss in BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss) + 1]:
+        for boss in self.era_bosses:
             trophy_location = self.get_location(BOSS_TROPHIES[boss])
             event = Location(self.player, f"Defeat {boss}", None, trophy_location.parent_region)
-            name = "Victory" if boss == self.goal_boss else f"{boss} Defeated"
-            event.place_locked_item(Item(name, ItemClassification.progression, None, self.player))
+            event.place_locked_item(Item(f"{boss} Defeated", ItemClassification.progression, None, self.player))
             trophy_location.parent_region.locations.append(event)
             self.boss_events.append((event, trophy_location))
+
+        # The counted goal conditions: an event for each target, with the rules of the location it stands
+        # for ("Trophy Hunt: Trophy: TrophyBoar" can be done when that trophy can), so logic can count them.
+        self.goal_events = []
+        region_of = {location.user_friendly_name: location.region for location in location_data_table}
+        for condition in self.goal_conditions:
+            for target in self.goal_targets.get(condition, ()):
+                places = HILDIR_QUESTS.get(target, (target,))
+                region = self.get_region(max((region_of[p] for p in places), key=lambda r: int(r[len("Tier"):])))
+                event = Location(self.player, f"{condition}: {target}", None, region)
+                event.place_locked_item(Item(f"{condition} Progress", ItemClassification.progression, None,
+                                             self.player))
+                region.locations.append(event)
+                self.goal_events.append((event, places))
+
+        menu = self.get_region("Menu")
+        self.victory = Location(self.player, "Goal Complete", None, menu)
+        self.victory.place_locked_item(Item("Victory", ItemClassification.progression, None, self.player))
+        menu.locations.append(self.victory)
 
     def create_items(self):
         """
@@ -274,7 +351,7 @@ class ValheimWorld(World):
             self.multiworld.push_precollected(self.create_item("Starter Kit"))
 
         # Checks without a same-named item (biome, obtain, explore, kill, skill, discover) are
-        # filled with traps, then boosts, then bundles.
+        # filled with relics (for a Relic Hunt), then traps, then boosts, then bundles.
         missing = len(self.multiworld.get_unfilled_locations(self.player)) - \
             sum(1 for item in self.multiworld.itempool if item.player == self.player)
         if missing < 0:
@@ -282,6 +359,20 @@ class ValheimWorld(World):
             for item in [i for i in self.multiworld.itempool if i.player == self.player and i.name in GEAR_ITEMS][:-missing]:
                 self.multiworld.itempool.remove(item)
             missing = 0
+        if "Relic Hunt" in self.goal_conditions:
+            room = missing + sum(1 for i in self.multiworld.itempool if i.player == self.player and i.name in GEAR_ITEMS)
+            self.relics = min(self.options.relic_hunt_total.value, room)
+            if self.relics < self.options.relic_hunt_total.value:
+                logging.warning(f"Valheim: only {self.relics} of {self.player_name}'s "
+                                f"{self.options.relic_hunt_total.value} relics fit among the checks.")
+            if self.relics > missing:
+                for item in [i for i in self.multiworld.itempool if i.player == self.player and i.name in GEAR_ITEMS][:self.relics - missing]:
+                    self.multiworld.itempool.remove(item)
+                missing = self.relics
+            for _ in range(self.relics):
+                self.multiworld.itempool.append(self.create_item(RELIC))
+            missing -= self.relics
+            self.goal_needed["Relic Hunt"] = max(1, math.ceil(self.relics * self.options.relic_hunt_percent.value / 100))
         allowed_traps = [trap for trap in TRAP_ITEMS if trap not in self.options.excluded_traps.value]
         traps = round(missing * self.options.trap_percentage.value / 100) if allowed_traps else 0
         boosts = min(missing - traps, round(missing * self.options.boost_percentage.value / 100))
@@ -294,7 +385,7 @@ class ValheimWorld(World):
         classification = ItemClassification.trap if name in TRAP_ITEMS else \
             ItemClassification.filler if name in FILLER_ITEMS else \
             ItemClassification.progression if name in getattr(self, "logic_items", LOGIC_ITEMS) \
-            or name in BOSS_DROP_ITEMS.values() \
+            or name in BOSS_DROP_ITEMS.values() or name == RELIC \
             else ItemClassification.useful
         return Item(name, classification, item_table[name], self.player)
 
@@ -304,40 +395,66 @@ class ValheimWorld(World):
         tier = getattr(self, "scope_tier", 0)
         return self.random.choice([name for name in FILLER_ITEMS if ITEM_TIERS.get(name, 0) <= tier])
 
-    def set_rules(self):
-        # The mod keeps a research's recipe locked until all of its prerequisites are received;
-        # some obtain checks need a station's research too.
-        for location_name, prereqs in LOCATION_REQS.items():
-            if prereqs and location_name in self.scope:
-                add_rule(self.get_location(location_name),
-                         lambda state, reqs=prereqs: state.has_all(reqs, self.player))
+    def location_rules(self, name: str) -> List[Callable]:
+        """
+        A location's rules beyond reaching its tier: its research prerequisites (the mod keeps a
+        research's recipe locked until all of them are received; some obtain checks need a station's
+        research too), the bosses whose drops it needs, and, with combat logic, the gear its fight needs.
+        """
+        rules = []
+        prereqs = LOCATION_REQS.get(name)
+        if prereqs:
+            rules.append(lambda state, reqs=prereqs: state.has_all(reqs, self.player))
+        bosses = LOCATION_BOSSES[name]
+        if bosses:
+            rules.append(boss_rule(bosses, self.player))
+        if name in self.combat_rules:
+            rules.append(self.combat_rules[name])
+        return rules
 
-        # Boss drops: locations and tier entrances that need a boss defeated first.
-        for location_name in self.scope:
-            bosses = LOCATION_BOSSES[location_name]
-            if bosses:
-                add_rule(self.get_location(location_name), boss_rule(bosses, self.player))
-        for region_name, bosses in ENTRANCE_BOSSES.items():
-            if bosses:
-                add_rule(self.get_region(region_name).entrances[0], boss_rule(bosses, self.player))
+    def set_rules(self):
         # Combat readiness: armor, a weapon (and with strict, a bow or crossbow) from the era each fight
-        # expects, among the gear that's in this seed.
+        # expects, among the gear that's in this seed. Tier gates go on the tier's entrance.
+        self.combat_rules = {}
         if self.options.combat_logic:
             kinds = ("armor", "weapons", "ranged") if self.options.combat_logic == CombatLogic.option_strict \
                 else ("armor", "weapons")
             for gate, era in COMBAT_GATES.items():
                 needs = [names for names in ([n for n in COMBAT_ERAS[era][k] if n in self.scope] for k in kinds) if names]
-                if not needs:
-                    continue
-                rule = lambda state, needs=needs: all(state.has_any(names, self.player) for names in needs)
-                if gate.startswith("Tier"):
-                    add_rule(self.get_region(gate).entrances[0], rule)
-                elif gate in self.scope:
-                    add_rule(self.get_location(gate), rule)
+                if needs:
+                    self.combat_rules[gate] = lambda state, needs=needs: \
+                        all(state.has_any(names, self.player) for names in needs)
+
+        for location_name in self.scope:
+            for rule in self.location_rules(location_name):
+                add_rule(self.get_location(location_name), rule)
+        # Boss drops and combat on tier entrances.
+        for region_name, bosses in ENTRANCE_BOSSES.items():
+            if bosses:
+                add_rule(self.get_region(region_name).entrances[0], boss_rule(bosses, self.player))
+        for gate, rule in self.combat_rules.items():
+            if gate.startswith("Tier"):
+                add_rule(self.get_region(gate).entrances[0], rule)
 
         for event, trophy_location in self.boss_events:
             event.access_rule = trophy_location.access_rule
+        for event, places in self.goal_events:
+            for place in places:
+                for rule in self.location_rules(place):
+                    add_rule(event, rule)
 
+        needs = []
+        for condition in self.goal_conditions:
+            if condition == "Goal Boss":
+                needs.append(lambda state: state.has(f"{self.goal_boss} Defeated", self.player))
+            elif condition == "All Bosses":
+                needs.append(lambda state: state.has_all([f"{boss} Defeated" for boss in self.era_bosses], self.player))
+            elif condition == "Relic Hunt":
+                needs.append(lambda state: state.has(RELIC, self.player, self.goal_needed["Relic Hunt"]))
+            else:
+                needs.append(lambda state, condition=condition:
+                             state.has(f"{condition} Progress", self.player, self.goal_needed[condition]))
+        self.victory.access_rule = lambda state: all(need(state) for need in needs)
         self.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", self.player)
 
     def fill_slot_data(self) -> Dict[str, Any]:
@@ -345,9 +462,28 @@ class ValheimWorld(World):
             # Everything that decides which locations exist and their logic, for Universal Tracker.
             "options": self.options.as_dict(*TRACKER_OPTIONS),
             "goal_trophy": self.goal_trophy,
+            "goal": self.goal_slot_data(),
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),
             "death_link_mode": self.options.death_link_mode.current_key,
             "death_link_amnesty": self.options.death_link_amnesty.value,
             "trap_link": bool(self.options.trap_link.value),
+        }
+
+    def goal_slot_data(self) -> Dict[str, Any]:
+        """
+        What the mod checks to know the goal is done: for each condition, its targets and how many of them
+        are needed. Targets are location names (done once that check is), except for Skill Master (a
+        skill's first check, standing for the skill), Hildir's Quests (the world keys handing in her
+        chests sets) and Relic Hunt (none: received relics are counted).
+        """
+        targets = {"Goal Boss": [BOSS_TROPHIES[self.goal_boss]],
+                   "All Bosses": [BOSS_TROPHIES[boss] for boss in self.era_bosses],
+                   "Relic Hunt": [], **self.goal_targets}
+        needed = {"Goal Boss": 1, "All Bosses": len(self.era_bosses), **self.goal_needed}
+        return {
+            "conditions": self.goal_conditions,
+            "targets": {condition: targets[condition] for condition in self.goal_conditions},
+            "needed": {condition: needed[condition] for condition in self.goal_conditions},
+            "skill_level": self.options.skill_master_level.value,
         }

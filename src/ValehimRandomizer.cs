@@ -144,7 +144,8 @@ public class ValheimRandomizer : BaseUnityPlugin
                 var dropName = it?.m_dropPrefab?.name;
                 if (string.IsNullOrEmpty(dropName)) continue;
 
-                if (Randomized && dropName == ArchipelagoConnection.GoalTrophy)
+                // Rooms with goal conditions are checked by ArchipelagoGoal (the trophy's check counts).
+                if (Randomized && dropName == ArchipelagoConnection.GoalTrophy && !ArchipelagoGoal.HasConditions)
                 {
                     ArchipelagoConnection.CompleteGame();
                 }

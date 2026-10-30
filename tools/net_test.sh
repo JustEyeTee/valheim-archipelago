@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Network test against a live MultiServer: generates a 2-player Valheim seed, hosts it on
 # 127.0.0.1 and runs tools/nettest (the mod's client library and calls): login and slot data,
-# Trap Link, Death Link, Energy Link deposit and withdraw, hints and the item feed.
+# goal conditions, Trap Link, Death Link, Energy Link deposit and withdraw, hints and the item feed.
 #   tools/net_test.sh            AP_DIR=~/projects/archipelago-0.6.4 tools/net_test.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -16,6 +16,8 @@ mkdir -p "$work/players" "$work/out"
 for p in A B; do
   printf 'name: Viking%s\ngame: Valheim\nValheim:\n  goal: eikthyr\n  death_link: true\n  trap_link: true\n' "$p" > "$work/players/$p.yaml"
 done
+# A has goal conditions (B keeps the default, Goal Boss).
+printf '  goal_conditions: ["Goal Boss", "Relic Hunt", "Trophy Hunt", "Skill Master"]\n' >> "$work/players/A.yaml"
 (cd "$ap" && SKIP_REQUIREMENTS_UPDATE=1 .venv/bin/python Generate.py --player_files_path "$work/players" \
    --outputpath "$work/out" --seed 21 < /dev/null > "$work/gen.log" 2>&1)
 (cd "$ap" && SKIP_REQUIREMENTS_UPDATE=1 exec .venv/bin/python MultiServer.py --host 127.0.0.1 --port "$port" \

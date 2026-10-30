@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.10.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.11.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -69,9 +69,11 @@ Valheim:
   # Goal #
   ########
   goal:
-    # The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
-    # has none: you win when you pick up his Sacrificial Blood). Kall Fimbulbringer, in the Deep North,
-    # is the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games.
+    # How far the game goes: the boss whose era ends it. Kall Fimbulbringer, in the Deep North, is
+    # the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games. Only
+    # checks and items up to this era are in the game. By default you win by defeating this boss
+    # (you win when you pick up its trophy; Kall Fimbulbringer has none, so his Sacrificial
+    # Blood); goal_conditions can change or add to what you have to do.
     eikthyr: 0
     the_elder: 0
     bonemass: 0
@@ -80,6 +82,111 @@ Valheim:
     the_queen: 0
     fader: 0
     kall_fimbulbringer: 50
+
+  goal_conditions:
+    # What you have to do to win, within the goal's era. Pick any combination: you win once all of
+    # them are done. Leave it empty to just defeat the goal boss.
+    # Goal Boss: defeat the goal boss.
+    # All Bosses: defeat every boss in the era (any order).
+    # Relic Hunt: receive relic_hunt_percent of the relic_hunt_total Forsaken Relics spread
+    #   through the multiworld.
+    # Trophy Hunt: collect trophy_hunt_percent of the trophies you can get in the era.
+    # Researcher: craft researcher_percent of the researches in the era.
+    # Explorer: uncover explorer_percent of the world map.
+    # Skill Master: raise skill_master_count skills to skill_master_level (from the skills you can
+    #   train in the era).
+    # Hildir's Quests: return each chest Hildir asks for that's in the era (from The Elder's era
+    #   on: the Smouldering Tomb; then the Howling Cavern in the Mountains; then the Sealed Tower in
+    #   the Plains).
+    # A condition with nothing to do in the era (Hildir's Quests in an Eikthyr game) is dropped.
+    ['Goal Boss']
+
+  relic_hunt_total:
+    # Relic Hunt: how many Forsaken Relics are placed in the multiworld (they take the place of filler).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 50
+    20: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-50: 0 # random value between 1 and 50
+
+  relic_hunt_percent:
+    # Relic Hunt: the percentage of the relics you have to receive (rounded up).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 100
+    75: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-100: 0 # random value between 1 and 100
+
+  trophy_hunt_percent:
+    # Trophy Hunt: the percentage of the trophies you can get in the goal's era (creatures and bosses) that
+    # you have to collect (rounded up).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 100
+    50: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-100: 0 # random value between 1 and 100
+
+  researcher_percent:
+    # Researcher: the percentage of the goal era's researches you have to craft (rounded up).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 100
+    75: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-100: 0 # random value between 1 and 100
+
+  explorer_percent:
+    # Explorer: how much of the world map you have to uncover, in percent. Walking 1 km uncovers about
+    # 0.06% of the world; sailing is faster. Larger percentages need a boat in logic.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 20
+    5: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-20: 0 # random value between 1 and 20
+
+  skill_master_count:
+    # Skill Master: how many skills you have to raise to skill_master_level. Lowered to the number of skills
+    # you can train in the goal's era if it's more.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 24
+    5: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-24: 0 # random value between 1 and 24
+
+  skill_master_level:
+    # Skill Master: the level those skills have to reach.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 100
+    50: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-100: 0 # random value between 1 and 100
 
   research_cost_percent:
     # Scales how many materials each research costs at the Research Bench, as a percentage.

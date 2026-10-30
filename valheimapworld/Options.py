@@ -5,9 +5,11 @@ from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionGroup,
 
 class Goal(Choice):
     """
-    The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
-    has none: you win when you pick up his Sacrificial Blood). Kall Fimbulbringer, in the Deep North,
-    is the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games.
+    How far the game goes: the boss whose era ends it. Kall Fimbulbringer, in the Deep North, is
+    the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games. Only
+    checks and items up to this era are in the game. By default you win by defeating this boss
+    (you win when you pick up its trophy; Kall Fimbulbringer has none, so his Sacrificial
+    Blood); goal_conditions can change or add to what you have to do.
     """
     display_name = "Goal"
     option_eikthyr = 0
@@ -32,6 +34,103 @@ GOAL_BOSSES = {
     Goal.option_fader: ("Fader", "TrophyFader"),
     Goal.option_kall_fimbulbringer: ("Kall Fimbulbringer", "FrozenKingDrop"),
 }
+
+
+class GoalConditions(OptionSet):
+    """
+    What you have to do to win, within the goal's era. Pick any combination: you win once all of
+    them are done. Leave it empty to just defeat the goal boss.
+    Goal Boss: defeat the goal boss.
+    All Bosses: defeat every boss in the era (any order).
+    Relic Hunt: receive relic_hunt_percent of the relic_hunt_total Forsaken Relics spread
+      through the multiworld.
+    Trophy Hunt: collect trophy_hunt_percent of the trophies you can get in the era.
+    Researcher: craft researcher_percent of the researches in the era.
+    Explorer: uncover explorer_percent of the world map.
+    Skill Master: raise skill_master_count skills to skill_master_level (from the skills you can
+      train in the era).
+    Hildir's Quests: return each chest Hildir asks for that's in the era (from The Elder's era
+      on: the Smouldering Tomb; then the Howling Cavern in the Mountains; then the Sealed Tower in
+      the Plains).
+    A condition with nothing to do in the era (Hildir's Quests in an Eikthyr game) is dropped.
+    """
+    display_name = "Goal Conditions"
+    valid_keys = ["Goal Boss", "All Bosses", "Relic Hunt", "Trophy Hunt", "Researcher", "Explorer",
+                  "Skill Master", "Hildir's Quests"]
+    default = frozenset({"Goal Boss"})
+
+
+class RelicHuntTotal(Range):
+    """
+    Relic Hunt: how many Forsaken Relics are placed in the multiworld (they take the place of filler).
+    """
+    display_name = "Relic Hunt Total"
+    range_start = 1
+    range_end = 50
+    default = 20
+
+
+class RelicHuntPercent(Range):
+    """
+    Relic Hunt: the percentage of the relics you have to receive (rounded up).
+    """
+    display_name = "Relic Hunt Percent"
+    range_start = 1
+    range_end = 100
+    default = 75
+
+
+class TrophyHuntPercent(Range):
+    """
+    Trophy Hunt: the percentage of the trophies you can get in the goal's era (creatures and bosses) that
+    you have to collect (rounded up).
+    """
+    display_name = "Trophy Hunt Percent"
+    range_start = 1
+    range_end = 100
+    default = 50
+
+
+class ResearcherPercent(Range):
+    """
+    Researcher: the percentage of the goal era's researches you have to craft (rounded up).
+    """
+    display_name = "Researcher Percent"
+    range_start = 1
+    range_end = 100
+    default = 75
+
+
+class ExplorerPercent(Range):
+    """
+    Explorer: how much of the world map you have to uncover, in percent. Walking 1 km uncovers about
+    0.06% of the world; sailing is faster. Larger percentages need a boat in logic.
+    """
+    display_name = "Explorer Percent"
+    range_start = 1
+    range_end = 20
+    default = 5
+
+
+class SkillMasterCount(Range):
+    """
+    Skill Master: how many skills you have to raise to skill_master_level. Lowered to the number of skills
+    you can train in the goal's era if it's more.
+    """
+    display_name = "Skill Master Count"
+    range_start = 1
+    range_end = 24
+    default = 5
+
+
+class SkillMasterLevel(Range):
+    """
+    Skill Master: the level those skills have to reach.
+    """
+    display_name = "Skill Master Level"
+    range_start = 1
+    range_end = 100
+    default = 50
 
 
 class ResearchCostPercent(NamedRange):
@@ -317,6 +416,14 @@ class TrapLink(Toggle):
 @dataclass
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
+    goal_conditions: GoalConditions
+    relic_hunt_total: RelicHuntTotal
+    relic_hunt_percent: RelicHuntPercent
+    trophy_hunt_percent: TrophyHuntPercent
+    researcher_percent: ResearcherPercent
+    explorer_percent: ExplorerPercent
+    skill_master_count: SkillMasterCount
+    skill_master_level: SkillMasterLevel
     research_cost_percent: ResearchCostPercent
     combat_logic: CombatLogic
     biome_checks: BiomeChecks
@@ -346,7 +453,8 @@ class ValheimOptions(PerGameCommonOptions):
 
 # How the options are grouped on the website and in generated templates.
 option_groups = [
-    OptionGroup("Goal", [Goal, ResearchCostPercent, CombatLogic]),
+    OptionGroup("Goal", [Goal, GoalConditions, RelicHuntTotal, RelicHuntPercent, TrophyHuntPercent, ResearcherPercent,
+                         ExplorerPercent, SkillMasterCount, SkillMasterLevel, ResearchCostPercent, CombatLogic]),
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
@@ -359,6 +467,8 @@ options_presets = {
     "Quick Eikthyr run": {"goal": "eikthyr", "research_cost_percent": 25},
     "The Elder run": {"goal": "the_elder", "research_cost_percent": 50},
     "Full game": {"goal": "kall_fimbulbringer"},
+    "Relic hunt to Moder": {"goal": "moder", "goal_conditions": ["Relic Hunt"]},
+    "Trophy and Hildir hunt to Yagluth": {"goal": "yagluth", "goal_conditions": ["Trophy Hunt", "Hildir's Quests"]},
     "Full game with every check": {"goal": "kall_fimbulbringer", "kill_checks": True, "skill_checks": 100,
                                    "exploration_checks": 20},
 }

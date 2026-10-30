@@ -398,6 +398,7 @@ Mining Training,boost:mining,1,Boost,Useful
 Rested Blessing,boost:rested,1,Boost,Useful
 Eikthyr's Blessing,boost:eikthyr,1,Boost,Useful
 Moder's Blessing,boost:moder,1,Boost,Useful
+Forsaken Relic,goal:relic,1,Goal,Progression
 '''
 
 # Map string classifications to `ItemClassification`

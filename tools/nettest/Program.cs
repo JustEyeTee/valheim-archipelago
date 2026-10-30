@@ -16,6 +16,15 @@ ArchipelagoSession Login(string slot)
     if (!r.Successful) throw new Exception(slot + ": " + string.Join("; ", ((LoginFailure)r).Errors));
     var sd = ((LoginSuccessful)r).SlotData;
     Console.WriteLine($"{slot} logged in; slot data death_link={sd["death_link"]} trap_link={sd["trap_link"]} mode={sd["death_link_mode"]} goal={sd["goal_trophy"]}");
+    // Goal conditions, read the way ArchipelagoGoal.Load reads them.
+    var goal = sd["goal"] as JObject ?? JObject.FromObject(sd["goal"]);
+    foreach (var name in goal["conditions"]!.Values<string>())
+    {
+        var targets = (goal["targets"] as JObject)?[name]?.Values<string>().ToList() ?? new List<string?>();
+        Console.WriteLine($"  goal condition {name}: need {(goal["needed"] as JObject)?[name]?.Value<int>()} of " +
+                          $"{(targets.Count > 0 ? targets.Count + " (" + string.Join(", ", targets.Take(3)) + "...)" : "received")}");
+    }
+    Console.WriteLine($"  skill_level={goal["skill_level"]?.Value<int>()}");
     return s;
 }
 var a = Login("VikingA");

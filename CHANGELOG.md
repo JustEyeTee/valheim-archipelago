@@ -2,6 +2,20 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.11.0
+
+- **Goal conditions** (`goal_conditions`): pick any combination of Goal Boss (the default), All Bosses, Relic
+  Hunt, Trophy Hunt, Researcher, Explorer, Skill Master and Hildir's Quests; you win once all are done. The
+  `goal` boss still sets the era, and Trophy Hunt, Researcher, Skill Master, Explorer and Hildir's Quests
+  count only what's possible in it (a condition with nothing to do is dropped, Explorer is lowered to the
+  era's most). Settings: `relic_hunt_total`, `relic_hunt_percent`, `trophy_hunt_percent`,
+  `researcher_percent`, `explorer_percent`, `skill_master_count`, `skill_master_level`.
+- Relic Hunt places Forsaken Relics in the multiworld in place of filler.
+- `/ap goal` in chat shows your progress; the game shows each step and each condition done.
+- Presets "Relic hunt to Moder" and "Trophy and Hildir hunt to Yagluth".
+- Options Builder: each goal condition says what it means for the chosen goal (e.g. "21 of 42 trophies"),
+  and is greyed out when there's nothing to do in that era.
+
 ## 0.10.0
 
 - Skill checks go to level 100 (`skill_checks`), every 10, 20 or 25 levels (`skill_check_spacing`). A goal no
