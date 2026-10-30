@@ -15,6 +15,11 @@
     <ValheimRefs Condition="'$(ValheimRefs)' == ''">$(MSBuildThisFileDirectory)../../valheim-archipelago-refs</ValheimRefs>
   </PropertyGroup>
 
+  <!-- dotnet build -p:FastTest=true: playtest build with a 1 Wood + 1 Stone Research Bench. -->
+  <PropertyGroup Condition="'$(FastTest)' == 'true'">
+    <DefineConstants>$(DefineConstants);FASTTEST</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.6.1" />
   </ItemGroup>

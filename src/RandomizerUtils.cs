@@ -52,8 +52,13 @@ public static class RandomizerUtils
             Category = "Randomizer",
             Requirements = new[]
             {
+#if FASTTEST
+                new RequirementConfig("Wood", 1, recover: true),
+                new RequirementConfig("Stone", 1, recover: true)
+#else
                 new RequirementConfig("Wood", 20, recover: true),
                 new RequirementConfig("Stone", 10, recover: true)
+#endif
             }
         };
 
