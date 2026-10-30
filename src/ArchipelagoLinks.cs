@@ -34,6 +34,8 @@ public static class ArchipelagoLinks
 
     private static readonly ConcurrentQueue<DeathLink> incomingDeaths = new ConcurrentQueue<DeathLink>();
     private static readonly ConcurrentQueue<int> incomingCoins = new ConcurrentQueue<int>();
+    // Energy Link withdrawals waiting for the server's reply (by the id sent with the request).
+    private static readonly ConcurrentDictionary<string, int> pendingWithdrawals = new ConcurrentDictionary<string, int>();
     private static readonly ConcurrentQueue<string> messages = new ConcurrentQueue<string>();
 
     private static readonly AccessTools.FieldRef<Character, HitData> LastHitRef =
@@ -90,6 +92,9 @@ public static class ArchipelagoLinks
         if (trapLink) AddTag("TrapLink");
         session.Socket.PacketReceived += OnPacketReceived;
         session.MessageLog.OnMessageReceived += OnMessageReceived;
+        // Data storage operations on a key that doesn't exist yet fail on the server (it adds to
+        // a null default), so make sure the team's pool exists; this never changes a set value.
+        session.DataStorage[Scope.Global, EnergyKey].Initialize(0);
 
         ValheimRandomizer.Log.LogInfo($"[AP] Death Link: {(deathLink ? deathLinkMode : "off")}, amnesty {deathLinkAmnesty}; Trap Link: {(trapLink ? "on" : "off")}");
     }
@@ -254,6 +259,11 @@ public static class ArchipelagoLinks
 
     private static void OnPacketReceived(ArchipelagoPacketBase packet)
     {
+        if (packet is SetReplyPacket reply)
+        {
+            OnSetReply(reply);
+            return;
+        }
         if (!trapLink || !(packet is BouncedPacket bounced) || bounced.Tags == null || !bounced.Tags.Contains("TrapLink")) return;
         if (bounced.Data == null || !bounced.Data.TryGetValue("trap_name", out var trapToken)) return;
         var source = bounced.Data.TryGetValue("source", out var s) ? s.ToString() : "?";
@@ -307,20 +317,32 @@ public static class ArchipelagoLinks
         if (!prefab || coins <= 0) return "Nothing to withdraw.";
         if (!player.GetInventory().CanAddItem(prefab, coins)) return "Not enough room in your inventory for that many Coins.";
 
+        // Subtract and clamp at 0 in one server operation, so two games withdrawing at once
+        // can't both take the same energy. The library's own reply callback never fires (it
+        // expects its reference as a GUID token, but replies carry it as a string), so the
+        // request carries our id and OnSetReply handles the reply; the empty callback is what
+        // asks the server for a reply.
+        var id = Guid.NewGuid().ToString("N");
+        pendingWithdrawals[id] = coins;
         long want = coins * JoulesPerCoin;
         session.DataStorage[Scope.Global, EnergyKey] = session.DataStorage[Scope.Global, EnergyKey] - want
             + Operation.Max(0)
-            + Callback.Add((original, value, _) =>
-            {
-                double taken = ToDouble(original) - ToDouble(value);
-                int got = (int)Math.Floor(taken / JoulesPerCoin);
-                double change = taken - (double)got * JoulesPerCoin;
-                // Part of a coin's worth goes back into the pool.
-                if (change > 0) session.DataStorage[Scope.Global, EnergyKey] += change;
-                if (got > 0) incomingCoins.Enqueue(got);
-                messages.Enqueue(got > 0 ? $"Withdrew {got} Coins from Energy Link." : "The Energy Link pool is empty.");
-            });
+            + Callback.Add((original, value, _) => { })
+            + AdditionalArgument.Add("valheim_withdraw", id);
         return "Withdrawing...";
+    }
+
+    private static void OnSetReply(SetReplyPacket reply)
+    {
+        if (reply.AdditionalArguments == null || !reply.AdditionalArguments.TryGetValue("valheim_withdraw", out var idToken) ||
+            !pendingWithdrawals.TryRemove(idToken.ToString(), out _)) return;
+        double taken = ToDouble(reply.OriginalValue) - ToDouble(reply.Value);
+        int got = (int)Math.Floor(taken / JoulesPerCoin);
+        double change = taken - (double)got * JoulesPerCoin;
+        // Part of a coin's worth goes back into the pool.
+        if (change > 0) session.DataStorage[Scope.Global, EnergyKey] += change;
+        if (got > 0) incomingCoins.Enqueue(got);
+        messages.Enqueue(got > 0 ? $"Withdrew {got} Coins from Energy Link." : "The Energy Link pool is empty.");
     }
 
     // ---------- Main thread ----------
