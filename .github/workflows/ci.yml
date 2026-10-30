@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Package the APWorld and the PopTracker pack
         run: APWORLD_ONLY=1 ./build.sh
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           draft: true
           files: |
