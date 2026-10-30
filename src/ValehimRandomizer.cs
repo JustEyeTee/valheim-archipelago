@@ -79,6 +79,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     void DoOnPrefabsAvailable()
     {
         RandomizerUtils.RegisterResearchBench();
+        ArchipelagoExtras.RegisterChest();
         Invoke(nameof(AddResearchRecipes), 5.0f);
         Invoke(nameof(AddTrophyResearches), 5.5f);
         Invoke(nameof(CheckRecipesAndPiecesWithoutResearch), 10.0f);
@@ -107,6 +108,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         {
             time = 0.0f;
             ArchipelagoConnection.TryFlushPendingLocations();
+            if (randomized.Value) ArchipelagoExtras.Tick();
         }
     }
 

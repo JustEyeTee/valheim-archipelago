@@ -15,6 +15,8 @@ internal static class ArchipelagoConnection
     // goal option existed send none, and their goal was always Fader.
     public static string GoalTrophy { get; private set; } = "TrophyFader";
 
+    private static string slotName;
+
     public static void Connect(string host, int port, string slot, string password)
     {
         // Dispose previous session if any
@@ -49,10 +51,19 @@ internal static class ArchipelagoConnection
         }
         RandomizerUtils.ApplyResearchCostPercent(costPercent);
 
+        slotName = slot;
+
         // Hook item reception
         session.Items.ItemReceived += OnApItemReceived;
 
         connected = true;
+    }
+
+    // For checks re-detected every tick (biomes): only queue them the first time.
+    public static void SendLocationOnce(string locationName)
+    {
+        if (!WorldLoaded() || HasGlobal($"ap_sent:{locationName}") || HasGlobal($"ap_pending:{locationName}")) return;
+        SendLocation(locationName);
     }
 
     public static void SendLocation(string locationName)
@@ -69,27 +80,11 @@ internal static class ArchipelagoConnection
         TryFlushPendingLocations();
     }
 
+    // Runs on the websocket thread, where Unity and game calls aren't safe. Received items are
+    // applied on the main thread by TryGetAllItems (every couple of seconds), so just drain.
     private static void OnApItemReceived(ReceivedItemsHelper helper)
     {
-        if (!WorldLoaded()) return;
-        while (true)
-        {
-            var item = helper.DequeueItem();
-            if (item == null) break;
-
-            var name = item.ItemName;
-            if (string.IsNullOrEmpty(name)) continue;
-
-            if (ValheimRandomizer.archipelagoToResearch.TryGetValue(name, out var researchId))
-            {
-                ValheimRandomizer.DoUnlockResearch(researchId);
-            }
-            else
-            {
-                ValheimRandomizer.Log.LogWarning(
-                    $"Received AP item '{name}' but no research mapping was found.");
-            }
-        }
+        while (helper.DequeueItem() != null) { }
     }
 
     static System.Collections.Generic.List<string> gottenItems = new System.Collections.Generic.List<string>();
@@ -109,12 +104,15 @@ internal static class ArchipelagoConnection
             {
                 ValheimRandomizer.DoUnlockResearch(researchId);
             }
-            else
+            else if (!ArchipelagoExtras.IsExtraItem(name))
             {
                 ValheimRandomizer.Log.LogWarning(
                     $"Received AP item '{name}' but no research mapping was found.");
             }
         }
+
+        var progressKey = $"ap:{session.RoomState.Seed}:{slotName}:{ZNet.instance.GetWorldUID()}";
+        ArchipelagoExtras.ProcessItems(session.Items.AllItemsReceived.Select(i => i.ItemName), progressKey);
     }
 
     public static void TryFlushPendingLocations()
@@ -135,7 +133,7 @@ internal static class ArchipelagoConnection
 
             try
             {
-                foreach (string str in ValheimRandomizer.archipelagoToResearch.Keys)
+                foreach (string str in ValheimRandomizer.archipelagoToResearch.Keys.Concat(ArchipelagoExtras.LocationNames))
                 {
                     if (str.ToLower() == locationName)
                     {
