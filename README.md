@@ -82,7 +82,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 
 | Option | Default | |
 |---|---|---|
-| `goal` | `fader` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer. Checks and items past the goal are left out. |
+| `goal` | `kall_fimbulbringer` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer (the full game, through the Deep North). Checks and items past the goal are left out. |
 | `include_deep_north` | off | Adds the Deep North tier to a Fader goal (Kall Fimbulbringer always includes it). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
 | `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |

@@ -18,8 +18,9 @@ creature.
 
 ## What is the goal of Valheim when randomized?
 
-Defeat the boss chosen in your options (Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen or Fader) and pick
-up its trophy. Checks and items from after your goal are left out of the game.
+Defeat the boss chosen in your options and pick up its trophy: Eikthyr, The Elder, Bonemass, Moder, Yagluth, The
+Queen, Fader, or Kall Fimbulbringer in the Deep North (the full game; he has no trophy, so you pick up his
+Sacrificial Blood). Checks and items from after your goal are left out of the game.
 
 ## What items can be sent to me?
 

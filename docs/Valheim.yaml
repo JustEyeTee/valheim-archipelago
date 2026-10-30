@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.9.0 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.9.1 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -70,22 +70,22 @@ Valheim:
   ########
   goal:
     # The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
-    # has none: you win when you pick up his Sacrificial Blood). Earlier bosses make a shorter game;
-    # Fader is the full game, and Kall Fimbulbringer adds the Deep North.
+    # has none: you win when you pick up his Sacrificial Blood). Kall Fimbulbringer, in the Deep North,
+    # is the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games.
     eikthyr: 0
     the_elder: 0
     bonemass: 0
     moder: 0
     yagluth: 0
     the_queen: 0
-    fader: 50
-    kall_fimbulbringer: 0
+    fader: 0
+    kall_fimbulbringer: 50
 
   include_deep_north:
     # Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
     # there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    # upgrades) and 8 Deep North trophies, when the goal is Fader. The Kall Fimbulbringer goal
-    # always includes the Deep North.
+    # upgrades) and 8 Deep North trophies to a Fader game, without its boss. The Kall Fimbulbringer
+    # goal (the full game) always includes the Deep North.
     'false': 50
     'true': 0
 

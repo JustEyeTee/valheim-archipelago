@@ -2,6 +2,13 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.9.1
+
+- **Kall Fimbulbringer is now the default goal**: the full game, through the Deep North. Fader ends the game
+  after the Ashlands; presets "Full game", "Full game with every check" and "Classic (ends at Fader)".
+- The Options Builder shows live check counts per option for your goal, and says which version is the game's
+  and which the randomizer's.
+
 ## 0.9.0
 
 - `combat_logic` (normal by default): entering the Swamp, Mountains, Plains, Mistlands, Ashlands and Deep

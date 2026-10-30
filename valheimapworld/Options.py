@@ -6,8 +6,8 @@ from Options import Choice, DeathLink, DefaultOnToggle, NamedRange, OptionGroup,
 class Goal(Choice):
     """
     The boss you must defeat to win. You win when you pick up that boss's trophy (Kall Fimbulbringer
-    has none: you win when you pick up his Sacrificial Blood). Earlier bosses make a shorter game;
-    Fader is the full game, and Kall Fimbulbringer adds the Deep North.
+    has none: you win when you pick up his Sacrificial Blood). Kall Fimbulbringer, in the Deep North,
+    is the full game; Fader ends it after the Ashlands, and earlier bosses make shorter games.
     """
     display_name = "Goal"
     option_eikthyr = 0
@@ -18,7 +18,7 @@ class Goal(Choice):
     option_the_queen = 5
     option_fader = 6
     option_kall_fimbulbringer = 7
-    default = option_fader
+    default = option_kall_fimbulbringer
 
 
 # Goal option -> (boss name, trophy prefab the mod watches for)
@@ -56,8 +56,8 @@ class IncludeDeepNorth(Toggle):
     """
     Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
     there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
-    upgrades) and 8 Deep North trophies, when the goal is Fader. The Kall Fimbulbringer goal
-    always includes the Deep North.
+    upgrades) and 8 Deep North trophies to a Fader game, without its boss. The Kall Fimbulbringer
+    goal (the full game) always includes the Deep North.
     """
     display_name = "Include Deep North"
 
@@ -342,7 +342,7 @@ option_groups = [
 options_presets = {
     "Quick Eikthyr run": {"goal": "eikthyr", "research_cost_percent": 25},
     "The Elder run": {"goal": "the_elder", "research_cost_percent": 50},
-    "Full game": {"goal": "fader"},
-    "Full game with Deep North and every check": {"goal": "fader", "include_deep_north": True, "kill_checks": True,
-                                                   "skill_checks": 50},
+    "Full game": {"goal": "kall_fimbulbringer"},
+    "Full game with every check": {"goal": "kall_fimbulbringer", "kill_checks": True, "skill_checks": 50},
+    "Classic (ends at Fader)": {"goal": "fader"},
 }
