@@ -72,6 +72,12 @@
   "codes": "artisan_table"
  },
  {
+  "name": "Ask Armor",
+  "type": "toggle",
+  "img": "images/items/ask_armor.png",
+  "codes": "ask_armor"
+ },
+ {
   "name": "Axes Tier 1",
   "type": "toggle",
   "img": "images/items/axes_tier_1.png",
@@ -84,10 +90,22 @@
   "codes": "axes_tier_2"
  },
  {
+  "name": "Axes Tier 3",
+  "type": "toggle",
+  "img": "images/items/axes_tier_3.png",
+  "codes": "axes_tier_3"
+ },
+ {
   "name": "Axes Tier 4",
   "type": "toggle",
   "img": "images/items/axes_tier_4.png",
   "codes": "axes_tier_4"
+ },
+ {
+  "name": "Axes Tier 5",
+  "type": "toggle",
+  "img": "images/items/axes_tier_5.png",
+  "codes": "axes_tier_5"
  },
  {
   "name": "Battleaxes Tier 1",
@@ -118,6 +136,18 @@
   "type": "toggle",
   "img": "images/items/battleaxes_tier_5.png",
   "codes": "battleaxes_tier_5"
+ },
+ {
+  "name": "Battleaxes Tier 6",
+  "type": "toggle",
+  "img": "images/items/battleaxes_tier_6.png",
+  "codes": "battleaxes_tier_6"
+ },
+ {
+  "name": "Bear Armor",
+  "type": "toggle",
+  "img": "images/items/bear_armor.png",
+  "codes": "bear_armor"
  },
  {
   "name": "Bed Tier 1",
@@ -216,6 +246,12 @@
   "codes": "blades_tier_7"
  },
  {
+  "name": "Blades Tier 8",
+  "type": "toggle",
+  "img": "images/items/blades_tier_8.png",
+  "codes": "blades_tier_8"
+ },
+ {
   "name": "Blast Furnace",
   "type": "toggle",
   "img": "images/items/blast_furnace.png",
@@ -226,6 +262,12 @@
   "type": "toggle",
   "img": "images/items/blood_magic_tier_1.png",
   "codes": "blood_magic_tier_1"
+ },
+ {
+  "name": "Blood Magic Tier 2",
+  "type": "toggle",
+  "img": "images/items/blood_magic_tier_2.png",
+  "codes": "blood_magic_tier_2"
  },
  {
   "name": "Boat Tier 1",
@@ -312,10 +354,22 @@
   "codes": "bows_tier_6"
  },
  {
+  "name": "Bows Tier 7",
+  "type": "toggle",
+  "img": "images/items/bows_tier_7.png",
+  "codes": "bows_tier_7"
+ },
+ {
   "name": "Bronze",
   "type": "toggle",
   "img": "images/items/bronze.png",
   "codes": "bronze"
+ },
+ {
+  "name": "Bronze Armor",
+  "type": "toggle",
+  "img": "images/items/bronze_armor.png",
+  "codes": "bronze_armor"
  },
  {
   "name": "Bucklers Tier 1",
@@ -328,6 +382,12 @@
   "type": "toggle",
   "img": "images/items/bucklers_tier_2.png",
   "codes": "bucklers_tier_2"
+ },
+ {
+  "name": "Caller Armor",
+  "type": "toggle",
+  "img": "images/items/caller_armor.png",
+  "codes": "caller_armor"
  },
  {
   "name": "Cape Tier 1",
@@ -376,6 +436,12 @@
   "type": "toggle",
   "img": "images/items/cape_tier_8.png",
   "codes": "cape_tier_8"
+ },
+ {
+  "name": "Carapace Armor",
+  "type": "toggle",
+  "img": "images/items/carapace_armor.png",
+  "codes": "carapace_armor"
  },
  {
   "name": "Cauldron",
@@ -462,6 +528,12 @@
   "codes": "clubs_tier_6"
  },
  {
+  "name": "Clubs Tier 7",
+  "type": "toggle",
+  "img": "images/items/clubs_tier_7.png",
+  "codes": "clubs_tier_7"
+ },
+ {
   "name": "Cooking Station",
   "type": "toggle",
   "img": "images/items/cooking_station.png",
@@ -486,10 +558,22 @@
   "codes": "crossbows_tier_2"
  },
  {
+  "name": "Crossbows Tier 3",
+  "type": "toggle",
+  "img": "images/items/crossbows_tier_3.png",
+  "codes": "crossbows_tier_3"
+ },
+ {
   "name": "Cultivator",
   "type": "toggle",
   "img": "images/items/cultivator.png",
   "codes": "cultivator"
+ },
+ {
+  "name": "Eitr Armor",
+  "type": "toggle",
+  "img": "images/items/eitr_armor.png",
+  "codes": "eitr_armor"
  },
  {
   "name": "Eitr Refinery",
@@ -508,6 +592,24 @@
   "type": "toggle",
   "img": "images/items/elemental_magic_tier_2.png",
   "codes": "elemental_magic_tier_2"
+ },
+ {
+  "name": "Elemental Magic Tier 3",
+  "type": "toggle",
+  "img": "images/items/elemental_magic_tier_3.png",
+  "codes": "elemental_magic_tier_3"
+ },
+ {
+  "name": "Embla Armor",
+  "type": "toggle",
+  "img": "images/items/embla_armor.png",
+  "codes": "embla_armor"
+ },
+ {
+  "name": "Fenris Armor",
+  "type": "toggle",
+  "img": "images/items/fenris_armor.png",
+  "codes": "fenris_armor"
  },
  {
   "name": "Fermenter",
@@ -570,6 +672,12 @@
   "codes": "frost_foundry"
  },
  {
+  "name": "Frostfire Weapons",
+  "type": "toggle",
+  "img": "images/items/frostfire_weapons.png",
+  "codes": "frostfire_weapons"
+ },
+ {
   "name": "Galdr Table",
   "type": "toggle",
   "img": "images/items/galdr_table.png",
@@ -606,6 +714,12 @@
   "codes": "hearth"
  },
  {
+  "name": "Iron Armor",
+  "type": "toggle",
+  "img": "images/items/iron_armor.png",
+  "codes": "iron_armor"
+ },
+ {
   "name": "Iron Cooking Station",
   "type": "toggle",
   "img": "images/items/iron_cooking_station.png",
@@ -622,6 +736,18 @@
   "type": "toggle",
   "img": "images/items/knuckles_tier_2.png",
   "codes": "knuckles_tier_2"
+ },
+ {
+  "name": "Knuckles Tier 3",
+  "type": "toggle",
+  "img": "images/items/knuckles_tier_3.png",
+  "codes": "knuckles_tier_3"
+ },
+ {
+  "name": "Leather Armor",
+  "type": "toggle",
+  "img": "images/items/leather_armor.png",
+  "codes": "leather_armor"
  },
  {
   "name": "Long Blades Tier 1",
@@ -660,6 +786,12 @@
   "codes": "nord_bows_and_crossbows"
  },
  {
+  "name": "Nord Staffs",
+  "type": "toggle",
+  "img": "images/items/nord_staffs.png",
+  "codes": "nord_staffs"
+ },
+ {
   "name": "Nord Weapons Tier 1",
   "type": "toggle",
   "img": "images/items/nord_weapons_tier_1.png",
@@ -670,6 +802,12 @@
   "type": "toggle",
   "img": "images/items/nord_weapons_tier_2.png",
   "codes": "nord_weapons_tier_2"
+ },
+ {
+  "name": "Padded Armor",
+  "type": "toggle",
+  "img": "images/items/padded_armor.png",
+  "codes": "padded_armor"
  },
  {
   "name": "Pickaxes Tier 1",
@@ -714,10 +852,28 @@
   "codes": "polearms_tier_3"
  },
  {
+  "name": "Polearms Tier 4",
+  "type": "toggle",
+  "img": "images/items/polearms_tier_4.png",
+  "codes": "polearms_tier_4"
+ },
+ {
+  "name": "Protector Armor",
+  "type": "toggle",
+  "img": "images/items/protector_armor.png",
+  "codes": "protector_armor"
+ },
+ {
   "name": "Rag Armor",
   "type": "toggle",
   "img": "images/items/rag_armor.png",
   "codes": "rag_armor"
+ },
+ {
+  "name": "Root Armor",
+  "type": "toggle",
+  "img": "images/items/root_armor.png",
+  "codes": "root_armor"
  },
  {
   "name": "Sap Extractor",
@@ -786,6 +942,12 @@
   "codes": "short_blades_tier_5"
  },
  {
+  "name": "Short Blades Tier 6",
+  "type": "toggle",
+  "img": "images/items/short_blades_tier_6.png",
+  "codes": "short_blades_tier_6"
+ },
+ {
   "name": "Siege",
   "type": "toggle",
   "img": "images/items/siege.png",
@@ -802,6 +964,12 @@
   "type": "toggle",
   "img": "images/items/sledgehammers_tier_2.png",
   "codes": "sledgehammers_tier_2"
+ },
+ {
+  "name": "Sledgehammers Tier 3",
+  "type": "toggle",
+  "img": "images/items/sledgehammers_tier_3.png",
+  "codes": "sledgehammers_tier_3"
  },
  {
   "name": "Smelter",
@@ -846,6 +1014,12 @@
   "codes": "spears_tier_6"
  },
  {
+  "name": "Spears Tier 7",
+  "type": "toggle",
+  "img": "images/items/spears_tier_7.png",
+  "codes": "spears_tier_7"
+ },
+ {
   "name": "Spinning Wheel",
   "type": "toggle",
   "img": "images/items/spinning_wheel.png",
@@ -880,6 +1054,12 @@
   "type": "toggle",
   "img": "images/items/storage_tier_3.png",
   "codes": "storage_tier_3"
+ },
+ {
+  "name": "Thunderblood Weapons",
+  "type": "toggle",
+  "img": "images/items/thunderblood_weapons.png",
+  "codes": "thunderblood_weapons"
  },
  {
   "name": "Tower Shields Tier 1",
@@ -960,6 +1140,18 @@
   "codes": "troll_armor"
  },
  {
+  "name": "Vanguard Armor",
+  "type": "toggle",
+  "img": "images/items/vanguard_armor.png",
+  "codes": "vanguard_armor"
+ },
+ {
+  "name": "Vilebone Armor",
+  "type": "toggle",
+  "img": "images/items/vilebone_armor.png",
+  "codes": "vilebone_armor"
+ },
+ {
   "name": "Warmth Tier 1",
   "type": "toggle",
   "img": "images/items/warmth_tier_1.png",
@@ -982,6 +1174,12 @@
   "type": "toggle",
   "img": "images/items/wisplight.png",
   "codes": "wisplight"
+ },
+ {
+  "name": "Wolf Armor",
+  "type": "toggle",
+  "img": "images/items/wolf_armor.png",
+  "codes": "wolf_armor"
  },
  {
   "name": "Workbench Upgrade 1",

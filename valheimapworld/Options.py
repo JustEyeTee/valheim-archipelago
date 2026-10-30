@@ -197,6 +197,23 @@ class StarterKit(DefaultOnToggle):
     display_name = "Starter Kit"
 
 
+class CombatLogic(Choice):
+    """
+    Whether logic expects you to be equipped for each fight before sending you into it: entering
+    the Swamp, Mountains, Plains, Mistlands, Ashlands and Deep North, and fighting each boss, need
+    armor and a weapon from the era before (Black Forest armor and weapons for the Swamp, iron gear
+    for the Mountains, and so on).
+    off: only tools, stations and boss drops count.
+    normal: armor and a weapon.
+    strict: armor, a weapon, and a bow or crossbow.
+    """
+    display_name = "Combat Logic"
+    option_off = 0
+    option_normal = 1
+    option_strict = 2
+    default = option_normal
+
+
 class TrapPercentage(Range):
     """
     Percentage of the extra items (the items beyond one per research and trophy) that are
@@ -287,6 +304,7 @@ class TrapLink(Toggle):
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
     research_cost_percent: ResearchCostPercent
+    combat_logic: CombatLogic
     include_deep_north: IncludeDeepNorth
     biome_checks: BiomeChecks
     obtain_checks: ObtainChecks
@@ -313,7 +331,7 @@ class ValheimOptions(PerGameCommonOptions):
 
 # How the options are grouped on the website and in generated templates.
 option_groups = [
-    OptionGroup("Goal", [Goal, IncludeDeepNorth, ResearchCostPercent]),
+    OptionGroup("Goal", [Goal, IncludeDeepNorth, ResearchCostPercent, CombatLogic]),
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, KillChecks, SkillChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
     OptionGroup("Items", [BossItems, GearItems, StarterKit, BoostPercentage]),

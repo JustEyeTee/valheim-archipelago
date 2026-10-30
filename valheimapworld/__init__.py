@@ -8,7 +8,8 @@ from worlds.generic.Rules import add_rule
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table
-from .Options import ValheimOptions, Goal, GOAL_BOSSES, option_groups, options_presets
+from .Options import ValheimOptions, Goal, CombatLogic, GOAL_BOSSES, option_groups, options_presets
+from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_PREREQS
 from .check_data import CHECKS
 from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CHECK_BOSSES
@@ -65,7 +66,7 @@ LOGIC_ITEMS = frozenset(
 
 DEEP_NORTH_TIER = 12
 
-TRACKER_OPTIONS = ("goal", "include_deep_north", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
+TRACKER_OPTIONS = ("goal", "include_deep_north", "combat_logic", "boss_items", "biome_checks", "obtain_checks", "exploration_checks",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
                    "fishing_checks", "taming_checks", "trader_checks")
 
@@ -201,6 +202,8 @@ class ValheimWorld(World):
                                 f"applies with goal: fader, so it is ignored.")
         self.scope = goal_scope(scope_tier, self.goal_boss)
         self.scope_tier = scope_tier
+        # With combat logic, armor and weapons gate fights, so logic has to count them.
+        self.logic_items = LOGIC_ITEMS | (COMBAT_ITEMS if self.options.combat_logic else frozenset())
         off = tuple(prefix for prefix, option in (("Biome: ", self.options.biome_checks),
                                                   ("Obtain: ", self.options.obtain_checks),
                                                   ("Explore: ", self.options.exploration_checks),
@@ -241,7 +244,7 @@ class ValheimWorld(World):
         """
         Populates the item pool with items for the world.
         """
-        create_items(self, self.scope, LOGIC_ITEMS)
+        create_items(self, self.scope, self.logic_items)
         earlier = BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss)]
         if self.options.boss_items:
             for boss in earlier:
@@ -274,7 +277,8 @@ class ValheimWorld(World):
     def create_item(self, name: str) -> Item:
         classification = ItemClassification.trap if name in TRAP_ITEMS else \
             ItemClassification.filler if name in FILLER_ITEMS else \
-            ItemClassification.progression if name in LOGIC_ITEMS or name in BOSS_DROP_ITEMS.values() \
+            ItemClassification.progression if name in getattr(self, "logic_items", LOGIC_ITEMS) \
+            or name in BOSS_DROP_ITEMS.values() \
             else ItemClassification.useful
         return Item(name, classification, item_table[name], self.player)
 
@@ -300,6 +304,21 @@ class ValheimWorld(World):
         for region_name, bosses in ENTRANCE_BOSSES.items():
             if bosses:
                 add_rule(self.get_region(region_name).entrances[0], boss_rule(bosses, self.player))
+        # Combat readiness: armor, a weapon (and with strict, a bow or crossbow) from the era each fight
+        # expects, among the gear that's in this seed.
+        if self.options.combat_logic:
+            kinds = ("armor", "weapons", "ranged") if self.options.combat_logic == CombatLogic.option_strict \
+                else ("armor", "weapons")
+            for gate, era in COMBAT_GATES.items():
+                needs = [names for names in ([n for n in COMBAT_ERAS[era][k] if n in self.scope] for k in kinds) if names]
+                if not needs:
+                    continue
+                rule = lambda state, needs=needs: all(state.has_any(names, self.player) for names in needs)
+                if gate.startswith("Tier"):
+                    add_rule(self.get_region(gate).entrances[0], rule)
+                elif gate in self.scope:
+                    add_rule(self.get_location(gate), rule)
+
         for event, trophy_location in self.boss_events:
             event.access_rule = trophy_location.access_rule
 

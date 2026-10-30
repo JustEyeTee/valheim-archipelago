@@ -21,3 +21,33 @@ end
 function kill(name)
   return has("boss_" .. name)
 end
+
+-- Combat logic (the seed's combat_logic option, read when autotracking connects): armor and a weapon
+-- from an era, and with strict a bow or crossbow too. 0 = off, 1 = normal, 2 = strict.
+COMBAT_MODE = 1
+
+local function any_of(list)
+  if #list == 0 then return true end
+  for _, item in ipairs(list) do
+    if has(item) then return true end
+  end
+  return false
+end
+
+function combat(era)
+  if COMBAT_MODE == 0 then return true end
+  local gear = COMBAT_ERAS[era]
+  if not gear then return true end
+  return any_of(gear.armor) and any_of(gear.weapons) and (COMBAT_MODE < 2 or any_of(gear.ranged))
+end
+COMBAT_ERAS = {
+  meadows = { armor = {}, weapons = {"clubs_tier_1", "axes_tier_1", "blades_tier_1", "spears_tier_1", "knuckles_tier_1", "short_blades_tier_1"}, ranged = {"bows_tier_1"} },
+  black_forest = { armor = {"leather_armor", "rag_armor", "troll_armor", "bear_armor"}, weapons = {"clubs_tier_1", "axes_tier_1", "blades_tier_1", "spears_tier_1", "knuckles_tier_1", "short_blades_tier_1", "sledgehammers_tier_1"}, ranged = {"bows_tier_1"} },
+  bronze = { armor = {"troll_armor", "bear_armor", "bronze_armor"}, weapons = {"axes_tier_2", "blades_tier_2", "clubs_tier_2", "spears_tier_2", "polearms_tier_1", "sledgehammers_tier_1", "short_blades_tier_2"}, ranged = {"bows_tier_1", "bows_tier_2"} },
+  iron = { armor = {"bronze_armor", "root_armor", "iron_armor"}, weapons = {"axes_tier_3", "blades_tier_3", "clubs_tier_3", "spears_tier_3", "polearms_tier_2", "battleaxes_tier_1", "sledgehammers_tier_2", "short_blades_tier_3"}, ranged = {"bows_tier_2", "bows_tier_3"} },
+  silver = { armor = {"iron_armor", "root_armor", "wolf_armor", "fenris_armor"}, weapons = {"blades_tier_4", "clubs_tier_4", "spears_tier_4", "battleaxes_tier_2", "knuckles_tier_2", "short_blades_tier_4"}, ranged = {"bows_tier_3", "bows_tier_4"} },
+  black_metal = { armor = {"wolf_armor", "fenris_armor", "padded_armor", "vilebone_armor"}, weapons = {"axes_tier_4", "blades_tier_5", "clubs_tier_5", "battleaxes_tier_3", "polearms_tier_3", "knuckles_tier_3", "short_blades_tier_5", "short_blades_tier_6"}, ranged = {"bows_tier_4"} },
+  mistlands = { armor = {"padded_armor", "vilebone_armor", "carapace_armor", "eitr_armor"}, weapons = {"spears_tier_5", "blades_tier_6", "battleaxes_tier_4", "polearms_tier_4", "axes_tier_5", "sledgehammers_tier_3", "elemental_magic_tier_1", "blood_magic_tier_1"}, ranged = {"crossbows_tier_1", "bows_tier_5"} },
+  ashlands = { armor = {"carapace_armor", "eitr_armor", "flametal_armor", "ask_armor", "embla_armor"}, weapons = {"blades_tier_7", "blades_tier_8", "battleaxes_tier_5", "battleaxes_tier_6", "clubs_tier_6", "clubs_tier_7", "spears_tier_6", "spears_tier_7", "elemental_magic_tier_2", "elemental_magic_tier_3", "blood_magic_tier_2"}, ranged = {"bows_tier_6", "bows_tier_7", "crossbows_tier_2", "crossbows_tier_3"} },
+  deep_north = { armor = {"protector_armor", "vanguard_armor", "caller_armor"}, weapons = {"nord_weapons_tier_1", "nord_weapons_tier_2", "thunderblood_weapons", "frostfire_weapons", "nord_staffs"}, ranged = {"nord_bows_and_crossbows"} },
+}

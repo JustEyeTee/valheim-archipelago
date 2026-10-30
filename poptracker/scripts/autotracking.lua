@@ -10,6 +10,9 @@ end
 
 function onClear(slot_data)
   CUR_INDEX = -1
+  if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
+    COMBAT_MODE = slot_data.options.combat_logic
+  end
   for _, code in pairs(ITEM_MAPPING) do
     local obj = find(code)
     if obj then obj.Active = false end

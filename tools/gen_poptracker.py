@@ -44,7 +44,7 @@ def boss_code(boss: str) -> str:
 
 
 # ---------- Items: everything logic looks at ----------
-logic_items = sorted(world.LOGIC_ITEMS)
+logic_items = sorted(world.LOGIC_ITEMS | world.COMBAT_ITEMS)
 key_items = list(world.BOSS_DROP_ITEMS.values())
 bosses = list(world.BOSS_ORDER)
 gate_items = []  # tier gate items in tier order, shown first
@@ -84,16 +84,19 @@ for boss in bosses:
 json.dump(items_json, open(out / "items/items.json", "w"), indent=1)
 
 # ---------- Locations ----------
-# Tier region -> (items, bosses) needed to get there, summed along the chain.
-region_items, region_bosses = {}, dict(world.REGION_BOSSES)
-_region, _items = "Menu", []
+# Tier region -> (items, bosses, combat eras) needed to get there, summed along the chain.
+region_items, region_bosses, region_combat = {}, dict(world.REGION_BOSSES), {}
+_region, _items, _combat = "Menu", [], []
 while True:
     region_items[_region] = list(_items)
+    region_combat[_region] = list(_combat)
     connections = region_data_table[_region].connections
     if not connections:
         break
     _items += [i for i in connections[0].required_items if i not in _items]
     _region = connections[0].destination
+    if _region in world.COMBAT_GATES:
+        _combat.append(world.COMBAT_GATES[_region])
 
 
 def boss_token(token):
@@ -104,7 +107,9 @@ def rule(location):
     name = location.user_friendly_name
     codes = [code(i) for i in region_items[location.region] + list(world.LOCATION_REQS.get(name, ()))]
     tokens = sorted({boss_token(b) for b in world.LOCATION_BOSSES[name] | region_bosses[location.region]})
-    return ",".join(dict.fromkeys(codes + tokens))
+    eras = region_combat[location.region] + ([world.COMBAT_GATES[name]] if name in world.COMBAT_GATES else [])
+    combat = [f"$combat|{code(era)}" for era in dict.fromkeys(eras)]
+    return ",".join(dict.fromkeys(codes + tokens + combat))
 
 
 def category(name):
@@ -205,7 +210,30 @@ end
 function kill(name)
   return has("boss_" .. name)
 end
-""")
+
+-- Combat logic (the seed's combat_logic option, read when autotracking connects): armor and a weapon
+-- from an era, and with strict a bow or crossbow too. 0 = off, 1 = normal, 2 = strict.
+COMBAT_MODE = 1
+
+local function any_of(list)
+  if #list == 0 then return true end
+  for _, item in ipairs(list) do
+    if has(item) then return true end
+  end
+  return false
+end
+
+function combat(era)
+  if COMBAT_MODE == 0 then return true end
+  local gear = COMBAT_ERAS[era]
+  if not gear then return true end
+  return any_of(gear.armor) and any_of(gear.weapons) and (COMBAT_MODE < 2 or any_of(gear.ranged))
+end
+""" + "COMBAT_ERAS = {\n" + "".join(
+        f"  {code(era)} = {{ armor = {{{', '.join(lua_str(code(n)) for n in g['armor'])}}}, "
+        f"weapons = {{{', '.join(lua_str(code(n)) for n in g['weapons'])}}}, "
+        f"ranged = {{{', '.join(lua_str(code(n)) for n in g['ranged'])}}} }},\n"
+        for era, g in world.COMBAT_ERAS.items()) + "}\n")
 (out / "scripts/autotracking.lua").write_text("""-- Archipelago autotracking (PopTracker's built-in AP client).
 ScriptHost:LoadScript("scripts/item_mapping.lua")
 ScriptHost:LoadScript("scripts/location_mapping.lua")
@@ -218,6 +246,9 @@ end
 
 function onClear(slot_data)
   CUR_INDEX = -1
+  if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
+    COMBAT_MODE = slot_data.options.combat_logic
+  end
   for _, code in pairs(ITEM_MAPPING) do
     local obj = find(code)
     if obj then obj.Active = false end

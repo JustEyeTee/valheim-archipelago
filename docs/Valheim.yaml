@@ -34,7 +34,7 @@ game: Valheim
 requires:
   version: 0.6.4 # Version of Archipelago required for this yaml to work as expected.
   game:
-    Valheim: 0.8.1 # Version of the world required for this yaml to work as expected.
+    Valheim: 0.9.0 # Version of the world required for this yaml to work as expected.
 
 Valheim:
   ################
@@ -105,6 +105,18 @@ Valheim:
     half: 0 # equivalent to 50
     normal: 50 # equivalent to 100
     double: 0 # equivalent to 200
+
+  combat_logic:
+    # Whether logic expects you to be equipped for each fight before sending you into it: entering
+    # the Swamp, Mountains, Plains, Mistlands, Ashlands and Deep North, and fighting each boss, need
+    # armor and a weapon from the era before (Black Forest armor and weapons for the Swamp, iron gear
+    # for the Mountains, and so on).
+    # off: only tools, stations and boss drops count.
+    # normal: armor and a weapon.
+    # strict: armor, a weapon, and a bow or crossbow.
+    'off': 0
+    normal: 50
+    strict: 0
 
   ##########
   # Checks #

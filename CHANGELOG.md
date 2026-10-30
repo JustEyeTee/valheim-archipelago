@@ -2,6 +2,13 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.9.0
+
+- `combat_logic` (normal by default): entering the Swamp, Mountains, Plains, Mistlands, Ashlands and Deep
+  North, and fighting each boss, need armor and a weapon from the era before; `strict` also needs a bow or
+  crossbow. The idea comes from xyzzy44's version of the randomizer. The PopTracker pack follows the
+  seed's setting.
+
 ## 0.8.1
 
 - No more "Randomized?" box. A game is randomized while you're connected, or in a world an Archipelago

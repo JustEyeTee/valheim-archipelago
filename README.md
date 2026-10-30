@@ -85,6 +85,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `goal` | `fader` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer. Checks and items past the goal are left out. |
 | `include_deep_north` | off | Adds the Deep North tier to a Fader goal (Kall Fimbulbringer always includes it). |
 | `research_cost_percent` | 100 | Research costs, 1-200%. |
+| `combat_logic` | normal | Logic expects armor and a weapon from the era before each new biome and boss fight (`strict` adds a bow or crossbow; `off` turns it off). |
 | `biome_checks`, `obtain_checks`, `exploration_checks`, `discovery_checks`, `build_checks`, `eat_checks`, `fishing_checks`, `taming_checks`, `trader_checks` | on | Extra kinds of checks. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks` | 20 | Skills to level 10, 20, 30, 40 or 50 (0 = off). |
