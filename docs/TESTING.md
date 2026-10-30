@@ -15,10 +15,10 @@ tools/test_room.sh tools/testing/solo-elder.yaml     # The Elder's era (Hildir, 
 PORT=38282 PASSWORD=secret tools/test_room.sh        # another port, a password to join
 ```
 
-`GENERATE_ONLY=1 tools/test_room.sh` only generates (to host the `.zip` elsewhere, e.g. as a separate service
-user). It builds the APWorld, generates a seed from the YAML and hosts it, printing the address to connect to. The server
+It builds the APWorld, generates a seed from the YAML and hosts it, printing the address to connect to. The server
 runs in that terminal: type its commands there (below), and `/exit` to stop it. Rooms are kept in
-`~/valheim-test-rooms/`.
+`~/valheim-test-rooms/`. `GENERATE_ONLY=1 tools/test_room.sh` only generates, to host the `.zip` somewhere else
+(for example as a separate service user).
 
 **On your own PC**: generate as usual (your YAML in Archipelago's `Players` folder, then Generate), then host the
 `.zip` from the Archipelago Launcher (Host). Item cheats are on unless your `host.yaml` has
