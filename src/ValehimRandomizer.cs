@@ -29,6 +29,7 @@ public class ValheimRandomizer : BaseUnityPlugin
     internal static BepInEx.Configuration.ConfigEntry<int> archipelagoPort;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoSlot;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoPassword;
+    internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicPanelKey;
 
     public class TrophyResearch
     {
@@ -72,6 +73,8 @@ public class ValheimRandomizer : BaseUnityPlugin
         archipelagoPort = Config.Bind("Archipelago", "Port", 38281, "Archipelago server port");
         archipelagoSlot = Config.Bind("Archipelago", "Slot", "Player", "Your Archipelago slot name");
         archipelagoPassword = Config.Bind("Archipelago", "Password", "", "Archipelago password (if any)");
+        logicPanelKey = Config.Bind("Archipelago", "LogicPanelKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F8),
+            "Shows or hides the panel of checks you can do now (in logic)");
 
         ValheimRandomizer.Log = this.Logger;
         PrefabManager.OnVanillaPrefabsAvailable += DoOnPrefabsAvailable;
@@ -81,6 +84,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         var go = new GameObject("ValheimRandomizer.AP_UI");
         DontDestroyOnLoad(go);
         go.AddComponent<ArchipelagoUI>().Init();
+        go.AddComponent<ArchipelagoLogicPanel>();
     }
 
     void DoOnPrefabsAvailable()

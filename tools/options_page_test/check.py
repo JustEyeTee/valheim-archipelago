@@ -13,7 +13,7 @@ PREFIXES = {"Biome: ": "Biomes", "Obtain: ": "Obtain", "Kill: ": "Kills", "Disco
             "Eat: ": "Eat", "Catch: ": "Fishing", "Tame: ": "Taming", "Buy: ": "Trader", "Skill: ": "Skills",
             "Explore: ": "Exploration", "Trophy: ": "Trophies", "Comfort: ": "Comfort"}
 def item_kind(n):
-    if n in vw.RESEARCH_PREREQS: return "Researches"
+    if n in vw.RESEARCH_PREREQS or n in vw.PROGRESSIVE_FAMILIES: return "Researches"
     if n.startswith("Trophy: "): return "Trophy boosts"
     if n in vw.BOSS_DROP_ITEMS.values(): return "Boss drops"
     if n in vw.GEAR_ITEMS: return "Tools"

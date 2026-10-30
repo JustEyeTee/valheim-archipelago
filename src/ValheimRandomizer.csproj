@@ -23,6 +23,7 @@
   <!-- Extra check definitions, shared with the APWorld (tools/gen_apworld_data.py). -->
   <ItemGroup>
     <EmbeddedResource Include="../mod/checks.tsv" LogicalName="checks.tsv" />
+    <EmbeddedResource Include="../mod/logic.tsv" LogicalName="logic.tsv" />
   </ItemGroup>
 
   <ItemGroup>

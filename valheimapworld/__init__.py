@@ -8,7 +8,7 @@ from worlds.generic.Rules import add_rule
 
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
-from .Items import create_items, item_table, item_data_table
+from .Items import create_items, item_table, item_data_table, PROGRESSIVE_FAMILIES
 from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, GoalConditions, SkillCheckSpacing,
                       GOAL_BOSSES, option_groups, options_presets)
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
@@ -68,7 +68,7 @@ LOGIC_ITEMS = frozenset(
 )
 
 
-TRACKER_OPTIONS = ("goal", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "progressive_items", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -199,6 +199,7 @@ class ValheimWorld(World):
         "Researches": {name for name in RESEARCH_PREREQS},
         "Trophies": {item.item_name for item in item_data_table if item.item_name.startswith("Trophy: ")},
         "Boss Drops": set(BOSS_DROP_ITEMS.values()),
+        "Progressive Items": set(PROGRESSIVE_FAMILIES),
         "Tools": set(GEAR_ITEMS),
         "Bundles": set(FILLER_ITEMS),
         "Traps": set(TRAP_ITEMS),
@@ -252,6 +253,38 @@ class ValheimWorld(World):
             self.scope = frozenset(name for name in self.scope if not name.startswith(off))
         self.scope = frozenset(name for name in self.scope if self.wanted(name))
         self.setup_goal()
+        self.setup_progressive()
+
+    def setup_progressive(self):
+        """
+        With progressive_items, each family's researches in this seed, in tier order: the k-th progressive item
+        received unlocks the k-th of them, so a rule needing it needs k copies.
+        """
+        self.progressive: Dict[str, List[str]] = {}
+        self.progressive_of: Dict[str, tuple] = {}  # research -> (progressive item, copies needed)
+        if not self.options.progressive_items:
+            return
+        for family, members in PROGRESSIVE_FAMILIES.items():
+            members = [m for m in members if m in self.scope]
+            if members:
+                self.progressive[family] = members
+                for k, member in enumerate(members, 1):
+                    self.progressive_of[member] = (family, k)
+        self.logic_items = self.logic_items | {self.progressive_of[n][0] for n in self.logic_items
+                                               if n in self.progressive_of}
+
+    def has(self, state, name: str) -> bool:
+        """Whether this item (a research, with progressive items enough copies of its family) is received."""
+        progressive = self.progressive_of.get(name)
+        if progressive:
+            return state.has(progressive[0], self.player, progressive[1])
+        return state.has(name, self.player)
+
+    def has_all(self, state, names) -> bool:
+        return all(self.has(state, name) for name in names)
+
+    def has_any(self, state, names) -> bool:
+        return any(self.has(state, name) for name in names)
 
     def setup_goal(self):
         """
@@ -373,7 +406,10 @@ class ValheimWorld(World):
         """
         Populates the item pool with items for the world.
         """
-        create_items(self, self.scope, self.logic_items)
+        create_items(self, self.scope - set(self.progressive_of), self.logic_items)
+        for family, members in self.progressive.items():
+            for _ in members:
+                self.multiworld.itempool.append(self.create_item(family))
         earlier = BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss)]
         if self.options.boss_items:
             for boss in earlier:
@@ -440,7 +476,7 @@ class ValheimWorld(World):
         rules = []
         prereqs = LOCATION_REQS.get(name)
         if prereqs:
-            rules.append(lambda state, reqs=prereqs: state.has_all(reqs, self.player))
+            rules.append(lambda state, reqs=prereqs: self.has_all(state, reqs))
         bosses = LOCATION_BOSSES[name]
         if bosses:
             rules.append(boss_rule(bosses, self.player))
@@ -453,7 +489,7 @@ class ValheimWorld(World):
     def comfort(self, state) -> int:
         """The most comfort you can build: pieces whose researches you have and whose materials you can get."""
         def can_build(items, obtains):
-            return state.has_all(items, self.player) and all(
+            return self.has_all(state, items) and all(
                 state.can_reach_region(region, self.player) and all(rule(state) for rule in rules)
                 for region, rules in (self.obtain_rules[o] for o in obtains))
         if not can_build(*SHELTER[:2]):
@@ -471,7 +507,7 @@ class ValheimWorld(World):
                 needs = [names for names in ([n for n in COMBAT_ERAS[era][k] if n in self.scope] for k in kinds) if names]
                 if needs:
                     self.combat_rules[gate] = lambda state, needs=needs: \
-                        all(state.has_any(names, self.player) for names in needs)
+                        all(self.has_any(state, names) for names in needs)
 
         # Comfort: where each material is obtained and that check's rules (whether or not it's in the seed).
         region_of = {location.user_friendly_name: location.region for location in location_data_table}
@@ -516,6 +552,7 @@ class ValheimWorld(World):
             "options": self.options.as_dict(*TRACKER_OPTIONS),
             "goal_trophy": self.goal_trophy,
             "goal": self.goal_slot_data(),
+            "progressive": self.progressive,
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),
             "death_link_mode": self.options.death_link_mode.current_key,

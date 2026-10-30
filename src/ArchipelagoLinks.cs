@@ -213,7 +213,7 @@ public static class ArchipelagoLinks
 
     // ---------- Checks and hints ----------
 
-    private static string Category(string location)
+    public static string Category(string location)
     {
         int colon = location.IndexOf(':');
         return colon > 0 ? location.Substring(0, colon) : "Research";
@@ -229,6 +229,9 @@ public static class ArchipelagoLinks
         return $"{total - missing.Count}/{total} checks done. Left: " + string.Join(", ", byCategory) +
                ". /ap missing <category> lists them.";
     }
+
+    public static IEnumerable<string> MissingNames() => session == null ? Enumerable.Empty<string>() :
+        session.Locations.AllMissingLocations.Select(id => session.Locations.GetLocationNameFromId(id, "Valheim") ?? id.ToString());
 
     public static IEnumerable<string> MissingIn(string category)
     {
@@ -380,13 +383,13 @@ public static class ArchipelagoLinks
     }
 }
 
-// Chat command (type /ap in chat): /ap status | goal | checks | missing <category> | hint <item> | say <text> |
+// Chat command (type /ap in chat): /ap status | goal | logic [category] | checks | missing <category> | hint <item> | say <text> |
 // energy | deposit <coins> | withdraw <coins> | deathlink on|off
 public class ArchipelagoCommand : ConsoleCommand
 {
     public override string Name => "ap";
     public override string Help =>
-        "Archipelago: status, goal, checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
+        "Archipelago: status, goal, logic [category], checks, missing <category>, hint <item>, say <text>, energy, deposit <coins>, withdraw <coins>, deathlink on|off";
 
     public override void Run(string[] args, Terminal context)
     {
@@ -395,7 +398,7 @@ public class ArchipelagoCommand : ConsoleCommand
         if (sub == "status" || sub == "help")
         {
             Reply(ArchipelagoLinks.Status());
-            Reply("Commands: /ap goal, /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
+            Reply("Commands: /ap goal, /ap logic [category], /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
                   "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
             return;
         }
@@ -407,6 +410,19 @@ public class ArchipelagoCommand : ConsoleCommand
         {
             case "goal":
                 foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
+                break;
+            case "logic":
+                if (rest.Length == 0)
+                {
+                    var (all, notYet) = ArchipelagoLogic.Missing();
+                    Reply($"In logic now: {all.Count} (not yet: {notYet}). " + string.Join(", ",
+                          all.GroupBy(ArchipelagoLinks.Category).OrderBy(g => g.Key).Select(g => $"{g.Key} {g.Count()}")) +
+                          $". /ap logic <category> lists them; {ValheimRandomizer.logicPanelKey.Value} shows the panel.");
+                    return;
+                }
+                var (names2, later) = ArchipelagoLogic.Missing(rest);
+                Reply(names2.Count == 0 ? $"Nothing in logic in '{rest}' ({later} not yet)." :
+                      $"{names2.Count} in logic ({later} not yet): " + string.Join(", ", names2.Take(40)) + (names2.Count > 40 ? ", ..." : ""));
                 break;
             case "checks":
                 Reply(ArchipelagoLinks.CheckSummary());

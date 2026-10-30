@@ -57,6 +57,10 @@ The log shows `Queue location <name>` when a check is done and `Unlock location 
 - `AP location lookup failed`: the mod and the APWorld are different versions; install both from the
   same release.
 
+**What can I do next?** Press **F8** (or type `/ap logic`) for the checks that are in logic now, by kind;
+`/ap logic obtain` lists one kind. "Not yet" checks need an item you haven't received, a boss, or (with
+combat logic) gear. The key can be changed in the mod's config (`LogicPanelKey`).
+
 **I did my goal but didn't win.** Type `/ap goal` in chat: it lists each goal condition and how far along it
 is. You have to be connected; progress made offline counts once you reconnect. Trophy Hunt and Researcher
 count trophies and researches from your goal's era only; Skill Master counts a skill once it reaches the

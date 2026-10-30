@@ -2,6 +2,17 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.13.0
+
+- **Progressive items** (`progressive_items`, off by default): tiered researches come as progressive items
+  (Progressive Axes, Progressive Bows, Progressive Forge Upgrade... 32 families); each copy unlocks the next
+  tier in the seed. Logic counts copies; the PopTracker pack lights up each tier as copies arrive.
+- **Logic panel**: press F8 in game (config `LogicPanelKey`) for the checks you can do now, by kind;
+  `/ap logic` and `/ap logic <kind>` in chat. It follows the APWorld's rules (`mod/logic.tsv`, written by
+  `tools/gen_mod_logic.py`): checked against generation on random item sets, it only differs on a few
+  comfort levels, where it waits a little longer.
+- Fixed: after loading a second world in the same game session, received researches weren't unlocked in it.
+
 ## 0.12.0
 
 - **Comfort checks** (`comfort_checks`, on by default): a check for each comfort level you reach, up to 14.

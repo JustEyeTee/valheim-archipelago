@@ -9,6 +9,12 @@ goal=${1:-fader}; seeds=${2:-5}
 ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}
 work=$(mktemp -d); trap 'rm -rf "$work"' EXIT
 
+# The mod's logic panel reads mod/logic.tsv, written from the APWorld: it has to be current.
+cp mod/logic.tsv "$work/logic.tsv"
+(SKIP_REQUIREMENTS_UPDATE=1 "$ap/.venv/bin/python" tools/gen_mod_logic.py "$ap" < /dev/null > /dev/null 2>&1)
+if ! cmp -s mod/logic.tsv "$work/logic.tsv"; then
+  echo "mod/logic.tsv was out of date with the APWorld: regenerated it (commit the change)"
+fi
 ./build.sh >/dev/null
 mkdir -p "$ap/custom_worlds" "$work/players" "$work/out"
 cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"

@@ -1,3 +1,4 @@
+import re
 from typing import Dict, NamedTuple, List, TYPE_CHECKING
 from BaseClasses import Item, ItemClassification
 
@@ -427,6 +428,30 @@ for line in items_txt.strip().splitlines():
         item_type=parts[3].strip(),
             classification=classification_map[parts[4].strip()],
     ))
+    current_id += 1
+
+
+def progressive_family(name: str):
+    """"Axes Tier 3" -> ("Progressive Axes", 3); "Forge Upgrade 2" -> ("Progressive Forge Upgrade", 2); else None."""
+    match = re.fullmatch(r"(.+) (Tier|Upgrade) (\d+)", name)
+    if not match:
+        return None
+    base, kind, number = match.groups()
+    return f"Progressive {base}" + (" Upgrade" if kind == "Upgrade" else ""), int(number)
+
+
+# Progressive items (progressive_items): one per family of tiered researches with two or more tiers. Each
+# copy received unlocks the next of that family's researches in the seed.
+_families: Dict[str, List[str]] = {}
+for _item in item_data_table:
+    if _item.game_id.startswith("item:research") and progressive_family(_item.item_name):
+        _families.setdefault(progressive_family(_item.item_name)[0], []).append(_item.item_name)
+PROGRESSIVE_FAMILIES: Dict[str, List[str]] = {
+    family: sorted(members, key=lambda n: progressive_family(n)[1])
+    for family, members in sorted(_families.items()) if len(members) >= 2}
+for family in PROGRESSIVE_FAMILIES:
+    item_data_table.append(ValheimItem(id=current_id, item_name=family, game_id="progressive:" + family, count=1,
+                                       item_type="Progressive", classification=ItemClassification.useful))
     current_id += 1
 
 

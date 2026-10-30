@@ -38,7 +38,8 @@ Type `/ap goal` in the in-game chat to see your progress.
 
 ## What items can be sent to me?
 
-- Researches, which unlock recipes and building pieces.
+- Researches, which unlock recipes and building pieces. With `progressive_items`, tiered researches come as
+  progressive items instead (each Progressive Axes unlocks the next axe tier).
 - Trophy researches, which give a permanent boost.
 - The drops of earlier bosses (Hard Antler, Swamp Key, Wishbone, Dragon Tears, Torn Spirit, Majestic Carapace),
   which open the next part of the game without the fight.

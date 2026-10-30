@@ -45,6 +45,7 @@ They share three data files in `mod/`, so a name always means the same thing on 
 | `RandomizerUtils.cs` | Creates the Research Bench and the research items and recipes; research cost percentage |
 | `Patches.cs` | Harmony patches: recipe and piece locking, trophy boosts, and hooks for eat, build, buy, tame, kill and Death Link |
 | `ArchipelagoConnection.cs` | Connecting, sending checks, receiving items, sending the goal |
+| `ArchipelagoLogic.cs` | Which checks are in logic now (from `logic.tsv`); the F8 panel and `/ap logic` |
 | `ArchipelagoGoal.cs` | The goal conditions from slot data: progress, `/ap goal`, Skill Master's skill keys |
 | `ArchipelagoExtras.cs` | Every check beyond researches and trophies, the Archipelago Chest, bundles, boss drops, tools, traps, boosts |
 | `ArchipelagoLinks.cs` | Death Link, Trap Link, Energy Link, the item feed and the `/ap` chat command |
@@ -190,7 +191,9 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
    option left out; and "Victory" in Menu, reachable once every goal condition is met.
 3. **`create_items`** adds one item per research and trophy in scope, the drops of the bosses before the
    goal, tools from the goal's era and the Starter Kit, and for a Relic Hunt the Forsaken Relics; every other
-   check gets a trap, boost or bundle.
+   check gets a trap, boost or bundle. With `progressive_items`, each family's tiered researches in scope are
+   replaced by as many progressive items; rules ask for the k-th tier as k copies (`ValheimWorld.has`), and
+   slot data's `progressive` tells the mod which research each copy unlocks.
 4. **`set_rules`** adds the logic: research prerequisites, the stations some checks need, and **boss
    gates**: a location or tier that needs a boss's drop needs "<Boss> Defeated" **or** that drop as an
    item (Haldor's boss-unlocked stock needs the kill itself).
@@ -216,6 +219,7 @@ flowchart LR
     BD --> APW
     CF --> APW
     APW -- gen_poptracker.py --> PT["poptracker/"]
+    APW -- gen_mod_logic.py --> ML["mod/logic.tsv<br/>(the mod's logic panel)"]
     APW -- build.sh --> Z["dist/ zips: mod, APWorld,<br/>PopTracker, Thunderstore"]
     PT -- build.sh --> Z
 ```
@@ -228,6 +232,7 @@ flowchart LR
 | `gen_boss_gates.py` | writes `boss_data.py`: which bosses each research and check needs | after editing the tables |
 | `gen_comfort_data.py` | writes `comfort_data.py` (each buildable comfort piece and what it needs) and the comfort rows of `checks.tsv` | after a Valheim update, or editing `research.tsv` or the obtain checks (then run `gen_apworld_data.py`) |
 | `audit_tiers.py` | flags checks placed in a tier before their materials | after editing the tables |
+| `gen_mod_logic.py` | writes `mod/logic.tsv`, the rules the mod's logic panel uses | after any logic change (`test_generate.sh` checks it's current) |
 | `gen_poptracker.py` | writes the PopTracker pack from the APWorld's own tables | before a release |
 | `gen_options_page.py` | builds the Options Builder web page (`docs/options/`, served by GitHub Pages) from the APWorld's options, counting each goal's checks | before a release |
 | `gen_template.sh` | regenerates `docs/Valheim.yaml`, the options template, with Archipelago's own generator | before a release |

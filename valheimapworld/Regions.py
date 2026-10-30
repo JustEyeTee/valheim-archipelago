@@ -19,7 +19,7 @@ def create_connection_rule(required_items: Dict[str, int], world: "ValheimWorld"
     Generate an access rule for a connection based on required items.
     """
     def rule(state: CollectionState) -> bool:
-        return state.has_all_counts(required_items, world.player)
+        return world.has_all(state, required_items)
     return rule
 
 

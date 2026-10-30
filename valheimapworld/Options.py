@@ -329,6 +329,16 @@ class GearItems(DefaultOnToggle):
     display_name = "Gear Items"
 
 
+class ProgressiveItems(Toggle):
+    """
+    Tiered researches come as progressive items: instead of Axes Tier 1, Axes Tier 2..., the item pool has as
+    many Progressive Axes, and each one you receive unlocks the next tier. The same goes for every family of
+    tiered researches (weapons, armor families, tools, boats, beds, capes, station upgrades...). The checks
+    don't change.
+    """
+    display_name = "Progressive Items"
+
+
 class StarterKit(DefaultOnToggle):
     """
     Start with a Club, a Stone Axe, a Torch and 10 Raspberries in your inventory.
@@ -470,6 +480,7 @@ class ValheimOptions(PerGameCommonOptions):
     boss_items: BossItems
     gear_items: GearItems
     starter_kit: StarterKit
+    progressive_items: ProgressiveItems
     trap_percentage: TrapPercentage
     excluded_traps: ExcludedTraps
     boost_percentage: BoostPercentage
@@ -487,7 +498,7 @@ option_groups = [
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks]),
-    OptionGroup("Items", [BossItems, GearItems, StarterKit, BoostPercentage]),
+    OptionGroup("Items", [ProgressiveItems, BossItems, GearItems, StarterKit, BoostPercentage]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),
 ]

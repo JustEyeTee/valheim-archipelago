@@ -60,6 +60,7 @@ folder, found with r2modman's Settings > Browse profile folder).
 |---|---|
 | `/ap status` | Connection, Death Link and Trap Link settings |
 | `/ap goal` | Your goal and how far along each condition is |
+| `/ap logic`, `/ap logic <kind>` | The checks you can do now (in logic); **F8** shows them in a panel |
 | `/ap checks` | Checks done, and what's left by category |
 | `/ap missing <category>` | Lists what's left, e.g. `/ap missing obtain` |
 | `/ap hint <item>` | Asks the server for a hint |
@@ -97,6 +98,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
+| `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
 | `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
 | `gear_items` | on | Tools from your goal's era. |
 | `starter_kit` | on | Start with a Club, Stone Axe, Torch and Raspberries. |

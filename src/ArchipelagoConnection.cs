@@ -17,6 +17,11 @@ internal static class ArchipelagoConnection
 
     private static string slotName;
 
+    // progressive_items: each progressive item -> its family's researches in order; the k-th copy received
+    // unlocks the k-th. Empty when the option is off (or for rooms from before it).
+    private static readonly System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> Progressive =
+        new System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>();
+
     // Set in a world once an Archipelago player has played in it while connected.
     private const string WorldKey = "ap_world";
 
@@ -48,6 +53,8 @@ internal static class ArchipelagoConnection
             GoalTrophy = trophy;
         }
         ArchipelagoGoal.Load(slotData);
+        LoadProgressive(slotData);
+        ArchipelagoLogic.Load(slotData);
         if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
 
         // Slot data numbers arrive as Int64; rooms from before this option use full costs.
@@ -105,16 +112,44 @@ internal static class ArchipelagoConnection
         while (helper.DequeueItem() != null) { }
     }
 
+    private static void LoadProgressive(System.Collections.Generic.Dictionary<string, object> slotData)
+    {
+        Progressive.Clear();
+        if (slotData == null || !slotData.TryGetValue("progressive", out var raw) || raw == null) return;
+        try
+        {
+            var families = raw as Newtonsoft.Json.Linq.JObject ?? Newtonsoft.Json.Linq.JObject.FromObject(raw);
+            foreach (var family in families.Properties())
+            {
+                Progressive[family.Name] = family.Value.Values<string>().ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            ValheimRandomizer.Log.LogWarning("[AP] Couldn't read progressive items from the slot data: " + ex.Message);
+        }
+        if (Progressive.Count > 0) ValheimRandomizer.Log.LogInfo($"[AP] Progressive items: {Progressive.Count} families");
+    }
+
+    // Items already applied to the loaded world (unlocking a research sets a world key); reset when another
+    // world is loaded, which needs them applied too.
     static System.Collections.Generic.List<string> gottenItems = new System.Collections.Generic.List<string>();
+    static long gottenWorld;
     static void TryGetAllItems()
     {
         if (!WorldLoaded()) return;
+        if (ZNet.instance.GetWorldUID() != gottenWorld)
+        {
+            gottenWorld = ZNet.instance.GetWorldUID();
+            gottenItems.Clear();
+        }
 
         foreach (var item in session.Items.AllItemsReceived)
         {
             var name = item.ItemName;
             if (string.IsNullOrEmpty(name)) continue;
 
+            if (Progressive.ContainsKey(name)) continue; // counted below
             if (gottenItems.Contains(name)) continue;
             gottenItems.Add(name);
 
@@ -126,6 +161,26 @@ internal static class ArchipelagoConnection
             {
                 ValheimRandomizer.Log.LogWarning(
                     $"Received AP item '{name}' but no research mapping was found.");
+            }
+        }
+
+        // Progressive items: unlock as many of each family's researches as copies received (unlocking is a
+        // world key, so doing it again is harmless).
+        foreach (var family in Progressive)
+        {
+            int copies = session.Items.AllItemsReceived.Count(item => item.ItemName == family.Key);
+            foreach (var research in family.Value.Take(copies))
+            {
+                if (gottenItems.Contains(research)) continue;
+                gottenItems.Add(research);
+                if (ValheimRandomizer.archipelagoToResearch.TryGetValue(research, out var researchId))
+                {
+                    ValheimRandomizer.DoUnlockResearch(researchId);
+                }
+                else
+                {
+                    ValheimRandomizer.Log.LogWarning($"Progressive item '{family.Key}': no research '{research}'.");
+                }
             }
         }
 
