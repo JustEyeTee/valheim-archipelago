@@ -2,11 +2,11 @@
 # Generates test seeds with a local Archipelago checkout and checks each one is beatable.
 #   tools/test_generate.sh [goal] [seeds]      e.g. tools/test_generate.sh fader 10
 #   EXTRA_OPTIONS='include_deep_north: true' tools/test_generate.sh fader 5   (extra lines under Valheim:)
-# AP_DIR defaults to ../archipelago-0.6.4 (a venv in .venv, see notes in the project memory).
+# AP_DIR defaults to ../archipelago-0.6.8 (0.6.4, the minimum, also works) (a venv in .venv, see notes in the project memory).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 goal=${1:-fader}; seeds=${2:-5}
-ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.4}
+ap=${AP_DIR:-$(cd .. && pwd)/archipelago-0.6.8}
 work=$(mktemp -d); trap 'rm -rf "$work"' EXIT
 
 ./build.sh >/dev/null
