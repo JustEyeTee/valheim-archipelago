@@ -1,3 +1,4 @@
+import logging
 from typing import Any, Dict
 
 from BaseClasses import Item, ItemClassification, Location
@@ -7,7 +8,7 @@ from worlds.generic.Rules import add_rule
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table
-from .Options import ValheimOptions, GOAL_BOSSES
+from .Options import ValheimOptions, Goal, GOAL_BOSSES
 from .research_data import RESEARCH_PREREQS
 
 # Every item some rule depends on: research prerequisites and the region (tier) gates.
@@ -16,6 +17,8 @@ LOGIC_ITEMS = frozenset(
     | {name for region in region_data_table.values()
        for connection in region.connections for name in connection.required_items}
 )
+
+DEEP_NORTH_TIER = 12
 
 # Location (and same-named item) -> tier number, from its region ("Tier4" -> 4).
 LOCATION_TIERS = {location.user_friendly_name: int(location.region[len("Tier"):])
@@ -53,7 +56,14 @@ class ValheimWorld(World):
         # A lower goal ends the game earlier, so checks and items past the goal are left out
         # instead of sitting where they can never be reached.
         self.goal_boss, self.goal_trophy = GOAL_BOSSES[self.options.goal.value]
-        self.scope = goal_scope(LOCATION_TIERS[f"Trophy: {self.goal_trophy}"])
+        scope_tier = LOCATION_TIERS[f"Trophy: {self.goal_trophy}"]
+        if self.options.include_deep_north:
+            if self.options.goal == Goal.option_fader:
+                scope_tier = DEEP_NORTH_TIER
+            else:
+                logging.warning(f"Valheim: {self.player_name} has include_deep_north on, but it only "
+                                f"applies with goal: fader, so it is ignored.")
+        self.scope = goal_scope(scope_tier)
 
     def create_regions(self):
         """

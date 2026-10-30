@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, NamedRange, PerGameCommonOptions
+from Options import Choice, NamedRange, PerGameCommonOptions, Toggle
 
 
 class Goal(Choice):
@@ -49,7 +49,17 @@ class ResearchCostPercent(NamedRange):
     }
 
 
+class IncludeDeepNorth(Toggle):
+    """
+    Adds the Deep North (after Ashlands) as a final tier: a Frost Foundry research to get
+    there, 19 Deep North researches (Nord weapons and armor, Timber buildings, new station
+    upgrades) and 9 Deep North trophies. Only applies when the goal is Fader.
+    """
+    display_name = "Include Deep North"
+
+
 @dataclass
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
     research_cost_percent: ResearchCostPercent
+    include_deep_north: IncludeDeepNorth

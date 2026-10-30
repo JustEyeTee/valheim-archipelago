@@ -301,6 +301,35 @@ Trophy: TrophyCharredMelee,item:researchTrophyCharredWarrior,1,Item,Useful
 Trophy: TrophyFader,item:researchTrophyFader,1,Item,Useful
 Trophy: TrophyAsksvin,item:researchTrophyAsksvin,1,Item,Useful
 Trophy: TrophyVolture,item:researchTrophyVolture,1,Item,Useful
+Frost Foundry,item:researchFrostFoundry,1,Item,Useful
+Timber Buildings,item:researchTimberBuildings,1,Item,Filler
+Black Forge Upgrade 5,item:researchBlackForgeUpgrade5,1,Item,Useful
+Galdr Table Upgrade 4,item:researchGaldrTableUpgrade4,1,Item,Useful
+Cauldron Upgrade 6,item:researchCauldronUpgrade6,1,Item,Useful
+Nord Weapons Tier 1,item:researchNordWeaponsTier1,1,Item,Useful
+Nord Weapons Tier 2,item:researchNordWeaponsTier2,1,Item,Useful
+Nord Bows and Crossbows,item:researchNordRanged,1,Item,Useful
+Nord Shields,item:researchNordShields,1,Item,Useful
+Thunderblood Weapons,item:researchThunderbloodWeapons,1,Item,Useful
+Frostfire Weapons,item:researchFrostfireWeapons,1,Item,Useful
+Protector Armor,item:researchProtectorArmor,1,Item,Useful
+Vanguard Armor,item:researchVanguardArmor,1,Item,Useful
+Caller Armor,item:researchCallerArmor,1,Item,Useful
+Cape Tier 9,item:researchCapeTier9,1,Item,Useful
+Nord Staffs,item:researchNordStaffs,1,Item,Useful
+Trinkets Tier 7,item:researchTrinketTier7,1,Item,Useful
+Moose Saddle,item:researchMooseSaddle,1,Item,Filler
+Siege Tier 2,item:researchSiegeTier2,1,Item,Filler
+Northern Crops,item:researchNorthernCrops,1,Item,Useful
+Trophy: TrophyBarka,item:researchTrophyBarka,1,Item,Useful
+Trophy: TrophyBlob_Frost,item:researchTrophyBlob_Frost,1,Item,Useful
+Trophy: TrophyElaking,item:researchTrophyElaking,1,Item,Useful
+Trophy: TrophyFrostTroll,item:researchTrophyFrostTroll,1,Item,Useful
+Trophy: TrophyJotunWarrior,item:researchTrophyJotunWarrior,1,Item,Useful
+Trophy: TrophyJotunWitch,item:researchTrophyJotunWitch,1,Item,Useful
+Trophy: TrophyMole,item:researchTrophyMole,1,Item,Useful
+Trophy: TrophyMoose,item:researchTrophyMoose,1,Item,Useful
+Trophy: TrophySeal,item:researchTrophySeal,1,Item,Useful
 '''
 
 # Map string classifications to `ItemClassification`

@@ -301,6 +301,35 @@ Trophy,Trophy: TrophyCharredMelee,loc:researchTrophyCharredWarrior,Not Missable,
 Trophy,Trophy: TrophyFader,loc:researchTrophyFader,Not Missable,Tier11
 Trophy,Trophy: TrophyAsksvin,loc:researchTrophyAsksvin,Not Missable,Tier11
 Trophy,Trophy: TrophyVolture,loc:researchTrophyVolture,Not Missable,Tier11
+Research,Frost Foundry,loc:researchFrostFoundry,Not Missable,Tier12
+Research,Timber Buildings,loc:researchTimberBuildings,Not Missable,Tier12
+Research,Black Forge Upgrade 5,loc:researchBlackForgeUpgrade5,Not Missable,Tier12
+Research,Galdr Table Upgrade 4,loc:researchGaldrTableUpgrade4,Not Missable,Tier12
+Research,Cauldron Upgrade 6,loc:researchCauldronUpgrade6,Not Missable,Tier12
+Research,Nord Weapons Tier 1,loc:researchNordWeaponsTier1,Not Missable,Tier12
+Research,Nord Weapons Tier 2,loc:researchNordWeaponsTier2,Not Missable,Tier12
+Research,Nord Bows and Crossbows,loc:researchNordRanged,Not Missable,Tier12
+Research,Nord Shields,loc:researchNordShields,Not Missable,Tier12
+Research,Thunderblood Weapons,loc:researchThunderbloodWeapons,Not Missable,Tier12
+Research,Frostfire Weapons,loc:researchFrostfireWeapons,Not Missable,Tier12
+Research,Protector Armor,loc:researchProtectorArmor,Not Missable,Tier12
+Research,Vanguard Armor,loc:researchVanguardArmor,Not Missable,Tier12
+Research,Caller Armor,loc:researchCallerArmor,Not Missable,Tier12
+Research,Cape Tier 9,loc:researchCapeTier9,Not Missable,Tier12
+Research,Nord Staffs,loc:researchNordStaffs,Not Missable,Tier12
+Research,Trinkets Tier 7,loc:researchTrinketTier7,Not Missable,Tier12
+Research,Moose Saddle,loc:researchMooseSaddle,Not Missable,Tier12
+Research,Siege Tier 2,loc:researchSiegeTier2,Not Missable,Tier12
+Research,Northern Crops,loc:researchNorthernCrops,Not Missable,Tier12
+Trophy,Trophy: TrophyBarka,loc:researchTrophyBarka,Not Missable,Tier12
+Trophy,Trophy: TrophyBlob_Frost,loc:researchTrophyBlob_Frost,Not Missable,Tier12
+Trophy,Trophy: TrophyElaking,loc:researchTrophyElaking,Not Missable,Tier12
+Trophy,Trophy: TrophyFrostTroll,loc:researchTrophyFrostTroll,Not Missable,Tier12
+Trophy,Trophy: TrophyJotunWarrior,loc:researchTrophyJotunWarrior,Not Missable,Tier12
+Trophy,Trophy: TrophyJotunWitch,loc:researchTrophyJotunWitch,Not Missable,Tier12
+Trophy,Trophy: TrophyMole,loc:researchTrophyMole,Not Missable,Tier12
+Trophy,Trophy: TrophyMoose,loc:researchTrophyMoose,Not Missable,Tier12
+Trophy,Trophy: TrophySeal,loc:researchTrophySeal,Not Missable,Tier12
 '''
 
 # Map string classifications to `LocationProgressType`

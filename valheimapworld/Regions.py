@@ -40,6 +40,7 @@ Tier7,Tier8,Artisan Table,1,Blast Furnace,1
 Tier8,Tier9,Axes Tier 4,1,Forge Upgrade 2,1,Forge Upgrade 3,1,Spinning Wheel,1,Wisp Fountain,1,Wisplight,1
 Tier9,Tier10,Pickaxes Tier 4,1
 Tier10,Tier11,Artisan Press,1,Boat Tier 4,1,Ceramic Plates,1
+Tier11,Tier12,Black Forge Upgrade 4,1,Flametal Armor,1
 '''
 
 # Parse region data

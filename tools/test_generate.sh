@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Generates test seeds with a local Archipelago checkout and checks each one is beatable.
 #   tools/test_generate.sh [goal] [seeds]      e.g. tools/test_generate.sh fader 10
+#   EXTRA_OPTIONS='include_deep_north: true' tools/test_generate.sh fader 5   (extra lines under Valheim:)
 # AP_DIR defaults to ../archipelago-0.6.4 (a venv in .venv, see notes in the project memory).
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -11,7 +12,8 @@ work=$(mktemp -d); trap 'rm -rf "$work"' EXIT
 ./build.sh >/dev/null
 mkdir -p "$ap/custom_worlds" "$work/players" "$work/out"
 cp dist/stage/valheimapworld.apworld "$ap/custom_worlds/"
-printf 'name: Tester\ngame: Valheim\nValheim:\n  goal: %s\n' "$goal" > "$work/players/test.yaml"
+{ printf 'name: Tester\ngame: Valheim\nValheim:\n  goal: %s\n' "$goal"
+  [ -n "${EXTRA_OPTIONS:-}" ] && printf '  %s\n' "$EXTRA_OPTIONS"; } > "$work/players/test.yaml"
 
 fails=0
 for seed in $(seq 1 "$seeds"); do

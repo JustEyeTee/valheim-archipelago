@@ -165,7 +165,7 @@ CrossbowArbalest	researchDvergrFences	Dvergr Fences		researchAxeTier4	CarrotSeed
 CrossbowArbalest	researchDvergrStairs	Dvergr Stairs		researchAxeTier4	Blueberries:2|Ooze:1|Bilebag:9	piece_dvergr_spiralstair|piece_dvergr_spiralstair_right	9	Filler	
 CeramicPlate	researchCeramicPlate	Ceramic Plates		researchArtisanUpgrade1	RoundLog:9|WitheredBone:1|Softtissue:1	CeramicPlate	10	Progression	Tier 10 to Tier 11
 Fish1	researchBoatTier4	Boat Tier 4		researchCeramicPlate	Sap:7	VikingShip_Ashlands	10	Progression	Tier 10 to Tier 11
-DragonTear	researchArtisanUpgrade1	Artisan Press		researchPickaxeTier4	Bloodbag:3|LoxPelt:6|Sap:5	piece_artisanstation	10	Progression	Tier 10 to Tier 11
+DragonTear	researchArtisanUpgrade1	Artisan Press		researchPickaxeTier4	Bloodbag:3|LoxPelt:6|Sap:5	artisan_ext1	10	Progression	Tier 10 to Tier 11
 Eitr	researchGaldrTable	Galdr Table		researchEitrRefinery	RoundLog:10|Softtissue:8	piece_magetable	10	Useful	
 Eitr	researchGaldrTableUpgrade1	Galdr Table Upgrade 1		researchGaldrTable	Wisp:5	piece_magetable_ext2	10	Useful	
 Eitr	researchGaldrTableUpgrade2	Galdr Table Upgrade 2		researchGaldrTableUpgrade1	FineWood:1|BlackMarble:3	piece_magetable_ext	10	Useful	
@@ -222,3 +222,23 @@ MarinatedGreens	researchCauldronUpgrade5	Cauldron Upgrade 5		researchCauldronUpg
 Wood	researchBedTier3	Bed Tier 3		researchBedTier2|researchBoatTier4	LoxPelt:8|Needle:10|MushroomSmokePuff:10	ashwood_bed	11	Useful	
 ShieldFlametal	researchShieldTier6	Shields Tier 6		researchShieldTier5|researchBoatTier4	Softtissue:9|CharredBone:5	ShieldFlametal	11	Useful	
 ShieldFlametalTower	researchTowerShieldTier4	Tower Shields Tier 4		researchTowerShieldTier3|researchBoatTier4	Tin:2|TinOre:5|BonemawSerpentTooth:4	ShieldFlametalTower	11	Useful	
+FrostCore	researchFrostFoundry	Frost Foundry		researchBlackForgeUpgrade4|researchBoatTier4	FlametalNew:5|Iron:10	piece_FrostFoundry|piece_FrostKiln	12	Useful	DEEP NORTH
+Frostwood	researchTimberBuildings	Timber Buildings		researchFrostFoundry	Frostwood:10	stave_wall_2x2|stave_pole_2m|stave_pole_4m|stave_beam_2m|stave_beam_4m|stave_beam_26|stave_beam_45|stave_beam_67|stave_wall_cross_26|stave_wall_cross_45|stave_wall_cross_67|stave_deco_wall_2x2|stave_deco_pole_2m|stave_deco_beam_2m|stave_deco_beam_26|stave_deco_beam_45|stave_deco_beam_67|stave_gate|piece_drawbridge	12	Filler	
+Gold	researchBlackForgeUpgrade5	Black Forge Upgrade 5		researchFrostFoundry|researchBlackForgeUpgrade4	Gold:5|Frostwood:5	blackforge_ext5_apron	12	Useful	
+NornThread	researchGaldrTableUpgrade4	Galdr Table Upgrade 4		researchFrostFoundry|researchGaldrTableUpgrade3	NornThread:5|Frostwood:5	piece_magetable_ext4	12	Useful	
+SmokedMooseMeat	researchCauldronUpgrade6	Cauldron Upgrade 6		researchFrostFoundry|researchCauldronUpgrade5	Gold:3|Frostwood:5	cauldron_ext7_smoker	12	Useful	
+SwordGold	researchNordWeaponsTier1	Nord Weapons Tier 1		researchFrostFoundry	Gold:5|Frostwood:10	SwordGold|SwordGoldUncooked|KnifeGold|KnifeGoldUncooked|AxeGold|AxeGoldUncooked|MaceGold|MaceGoldUncooked|FistGold|FistGoldUncooked	12	Useful	
+THSwordGold	researchNordWeaponsTier2	Nord Weapons Tier 2		researchNordWeaponsTier1|researchBlackForgeUpgrade5	Gold:8|MooseHide:4	SpearGold|SpearGoldUncooked|AtgeirGold|AtgeirGoldUncooked|BattleaxeGold|BattleaxeGoldUncooked|SledgeGold|SledgeGoldUncooked|THSwordGold|THSwordGoldUncooked	12	Useful	
+BowGold	researchNordRanged	Nord Bows and Crossbows		researchFrostFoundry	Gold:5|Frostwood:10|Feathers:5	BowGold|BowGoldUncooked|CrossbowGold|CrossbowGoldUncooked|ArrowBloodGold|BoltBloodGold	12	Useful	
+ShieldGold	researchNordShields	Nord Shields		researchFrostFoundry	Gold:5|SealHide:3	ShieldGold|ShieldRoundGoldUncooked|ShieldGoldBuckler|ShieldBucklerGoldUncooked|ShieldGoldTower|ShieldTowerGoldUncooked	12	Useful	
+OrbThunderBlood	researchThunderbloodWeapons	Thunderblood Weapons		researchNordWeaponsTier2|researchNordRanged	OrbThunderBlood:1|Gold:10	AtgeirGold_BloodLightning|AxeGold_BloodLightning|BattleaxeGold_BloodLightning|BowGold_BloodLightning|CrossbowGold_BloodLightning|FistGold_BloodLightning|KnifeGold_BloodLightning|MaceGold_BloodLightning|SledgeGold_BloodLightning|SpearGold_BloodLightning|SwordGold_BloodLightning|THSwordGold_BloodLightning	12	Useful	
+OrbFrostFire	researchFrostfireWeapons	Frostfire Weapons		researchNordWeaponsTier2|researchNordRanged	OrbFrostFire:1|Gold:10	AtgeirGold_FrostFire|AxeGold_FrostFire|BattleaxeGold_FrostFire|BowGold_FrostFire|CrossbowGold_FrostFire|FistGold_FrostFire|KnifeGold_FrostFire|MaceGold_FrostFire|SledgeGold_FrostFire|SpearGold_FrostFire|SwordGold_FrostFire|THSwordGold_FrostFire	12	Useful	
+ArmorDeepNorthHeavyChest	researchProtectorArmor	Protector Armor		researchFrostFoundry|researchBlackForgeUpgrade5	Gold:8|MooseHide:6	ArmorDeepNorthHeavyChest|ArmorGoldHeavyChestUncooked|ArmorDeepNorthHeavylegs|ArmorGoldHeavyLegsUncooked|HelmetDNHeavy|ArmorGoldHeavyHelmetUncooked	12	Useful	
+ArmorDeepNorthMediumChest	researchVanguardArmor	Vanguard Armor		researchFrostFoundry|researchBlackForgeUpgrade5	Gold:6|SealHide:6	ArmorDeepNorthMediumChest|ArmorGoldMediumChestUncooked|ArmorDeepNorthMediumlegs|ArmorGoldMediumLegsUncooked|HelmetDNMediumHood|ArmorGoldMediumHelmetUncooked	12	Useful	
+ArmorDeepNorthMageChest	researchCallerArmor	Caller Armor		researchFrostFoundry|researchGaldrTableUpgrade4	NornThread:8|SealHide:4	ArmorDeepNorthMageChest|ArmorGoldMageChestUncooked|ArmorDeepNorthMagelegs|ArmorGoldMageLegsUncooked|HelmetDNMage|ArmorGoldMageHelmetUncooked|CapeDeepNorthMage	12	Useful	
+CapeDeepNorth	researchCapeTier9	Cape Tier 9		researchCapeTier8|researchFrostFoundry	MooseHide:4|MooseSinew:2	CapeDeepNorth	12	Useful	
+StaffSpiritCaller	researchNordStaffs	Nord Staffs		researchGaldrTableUpgrade4	NornThread:6|Ice:10	StaffFrostOrbs|StaffFrostOrbsUncooked|StaffOrbofAhri|StaffOrbofAhriUncooked|StaffSpiritCaller|StaffSpiritCallerUncooked|StaffThunderBlood|StaffThunderbloodUncooked	12	Useful	
+TrinketBloodGoldHealth	researchTrinketTier7	Trinkets Tier 7		researchTrinketTier6|researchFrostFoundry	Gold:4|MoleClaws:3	TrinketBloodGoldHealth|TrinketBloodGoldStamina	12	Useful	
+SaddleMoose	researchMooseSaddle	Moose Saddle		researchFrostFoundry	SealHide:4|Gold:2	SaddleMoose	12	Filler	
+Catapult_Ammo_BloodGold	researchSiegeTier2	Siege Tier 2		researchSiege|researchFrostFoundry	Gold:3|Ice:5	Catapult_Ammo_BloodGold	12	Filler	
+Kale	researchNorthernCrops	Northern Crops		researchFrostFoundry	Kale:3|Lingonberry:5	sapling_Kale|sapling_seedkale|sapling_oat|sapling_poteitr	12	Useful	
