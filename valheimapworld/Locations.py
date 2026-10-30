@@ -330,13 +330,16 @@ for line in locations_txt.strip().splitlines():
     current_id += 1
 
 
-def create_locations(world: "ValheimWorld"):
+def create_locations(world: "ValheimWorld", included: frozenset):
     """
     Dynamically create locations for the game world and assign them to regions.
+    Only locations named in `included` (the goal's scope) are created.
     """
     for location in location_data_table:
         # Use the user-friendly name as the location name
         location_name = location.user_friendly_name
+        if location_name not in included:
+            continue
 
         # Determine the progress type based on classification
         progress_type = progress_type_map.get(location.classification, LocationProgressType.DEFAULT)

@@ -332,13 +332,17 @@ for line in items_txt.strip().splitlines():
     current_id += 1
 
 
-def create_items(world: "ValheimWorld", logic_items: frozenset = frozenset()):
+def create_items(world: "ValheimWorld", included: frozenset, logic_items: frozenset = frozenset()):
     """
     Dynamically create items for the game world using BaseClasses.Item.
+    Only items named in `included` (the goal's scope) are created; each research and trophy
+    item shares its name with a location, so the pool matches the location count.
     Items in `logic_items` (research prerequisites and tier gates) are made progression
     whatever the table says, since logic can only count progression items.
     """
     for item in item_data_table:
+        if item.item_name not in included:
+            continue
         classification = ItemClassification.progression if item.item_name in logic_items else item.classification
         for _ in range(item.count):  # Create as many instances as specified by `count`
             # Create the item using Archipelago's Item class
