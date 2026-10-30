@@ -2,6 +2,14 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
+## 0.7.2
+
+- Installs through a mod manager: the mod finds its data files in its own folder. Thunderstore package.
+- Fish use the bait the game actually requires (Pike: plain bait; Giant Herring: Swamp bait).
+- Ocean checks that need sailing (Serpent, Tuna, Coral Cod, Serpent Scale) need the Karve.
+- No check is placed before its materials (new `tools/audit_tiers.py`): Karve, Portal, Forge, Charcoal
+  Kiln, Eitr Refinery and Black Forge builds, and several obtain checks moved to their right tiers.
+
 ## 0.7.1
 
 - Passes Archipelago's own test suites (run with `tools/ap_tests.sh`).

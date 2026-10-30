@@ -268,7 +268,7 @@ Trophy,Trophy: TrophyWraith,loc:researchTrophyWraith,Not Missable,Tier4
 Trophy,Trophy: TrophyTheElder,loc:researchTrophyTheElder,Not Missable,Tier4
 Trophy,Trophy: TrophyDraugr,loc:researchTrophyDraugr,Not Missable,Tier4
 Trophy,Trophy: TrophySurtling,loc:researchTrophySurtling,Not Missable,Tier4
-Trophy,Trophy: TrophySerpent,loc:researchTrophySerpent,Not Missable,Tier4
+Trophy,Trophy: TrophySerpent,loc:researchTrophySerpent,Not Missable,Tier5
 Trophy,Trophy: TrophyCultist_Hildir,loc:researchTrophyGeirrhafa,Not Missable,Tier7
 Trophy,Trophy: TrophyFenring,loc:researchTrophyFenring,Not Missable,Tier7
 Trophy,Trophy: TrophyWolf,loc:researchTrophyWolf,Not Missable,Tier7

@@ -16,6 +16,8 @@ from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CH
 # Location -> research items it needs beyond its tier: research prerequisites, and the
 # stations some obtain checks need (Bloodgold needs the Frost Foundry).
 CHECK_REQS = {name: reqs for _, name, _, reqs in CHECKS if reqs}
+# Serpents are out at sea, which needs a real boat: the Karve (a Raft won't get you there).
+CHECK_REQS["Trophy: TrophySerpent"] = ("Boat Tier 2",)
 LOCATION_REQS = {**RESEARCH_PREREQS, **CHECK_REQS}
 
 # Boss -> its trophy location; defeating it is an event there ("Eikthyr Defeated").

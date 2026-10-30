@@ -25,21 +25,21 @@ obtain	NeckTail	Obtain: Neck Tail	0
 obtain	Honey	Obtain: Honey	0	
 obtain	HardAntler	Obtain: Hard Antler	1	
 obtain	GreydwarfEye	Obtain: Greydwarf Eye	1	
-obtain	BoneFragments	Obtain: Bone Fragments	1	
+obtain	BoneFragments	Obtain: Bone Fragments	0	
 obtain	Blueberries	Obtain: Blueberries	1	
 obtain	Thistle	Obtain: Thistle	1	
 obtain	TrollHide	Obtain: Troll Hide	1	
 obtain	CarrotSeeds	Obtain: Carrot Seeds	1	
 obtain	BjornHide	Obtain: Bear Hide	1	
 obtain	RoundLog	Obtain: Corewood	2	
-obtain	SurtlingCore	Obtain: Surtling Core	2	
-obtain	MushroomYellow	Obtain: Yellow Mushroom	2	
+obtain	SurtlingCore	Obtain: Surtling Core	1	
+obtain	MushroomYellow	Obtain: Yellow Mushroom	1	
 obtain	CopperOre	Obtain: Copper Ore	3	
 obtain	TinOre	Obtain: Tin Ore	3	
 obtain	Copper	Obtain: Copper	3	
 obtain	Tin	Obtain: Tin	3	
 obtain	Bronze	Obtain: Bronze	4	
-obtain	Coal	Obtain: Coal	4	
+obtain	Coal	Obtain: Coal	3	
 obtain	IronScrap	Obtain: Scrap Iron	4	
 obtain	Iron	Obtain: Iron	4	
 obtain	Guck	Obtain: Guck	4	
@@ -47,8 +47,8 @@ obtain	Bloodbag	Obtain: Bloodbag	4
 obtain	Entrails	Obtain: Entrails	4	
 obtain	Ooze	Obtain: Ooze	4	
 obtain	WitheredBone	Obtain: Withered Bone	4	
-obtain	Chitin	Obtain: Chitin	4	
-obtain	SerpentScale	Obtain: Serpent Scale	4	
+obtain	Chitin	Obtain: Chitin	3	
+obtain	SerpentScale	Obtain: Serpent Scale	5	Boat Tier 2
 obtain	TurnipSeeds	Obtain: Turnip Seeds	4	
 obtain	Wishbone	Obtain: Wishbone	4	
 obtain	ElderBark	Obtain: Ancient Bark	5	
@@ -121,7 +121,7 @@ kill	TrophyBlob	Kill: Blob	4
 kill	TrophyLeech	Kill: Leech	4	
 kill	TrophyWraith	Kill: Wraith	4	
 kill	TrophySurtling	Kill: Surtling	4	
-kill	TrophySerpent	Kill: Serpent	4	
+kill	TrophySerpent	Kill: Serpent	5	Boat Tier 2
 kill	TrophyWolf	Kill: Wolf	7	
 kill	TrophyFenring	Kill: Fenring	7	
 kill	TrophyCultist	Kill: Cultist	7	
@@ -311,12 +311,12 @@ build	charcoal_kiln	Build: Charcoal Kiln	1	Charcoal Kiln
 build	piece_beehive	Build: Beehive	1	Beekeping
 build	Raft	Build: Raft	2	Boat Tier 1
 build	smelter	Build: Smelter	2	Smelter
-build	forge	Build: Forge	2	Forge
-build	Karve	Build: Karve	4	Boat Tier 2
+build	forge	Build: Forge	3	Forge
+build	Karve	Build: Karve	5	Boat Tier 2
 build	piece_cauldron	Build: Cauldron	3	Cauldron
 build	piece_MeadCauldron	Build: Mead Ketill	3	Mead ketill
 build	fermenter	Build: Fermenter	5	Fermenter
-build	portal_wood	Build: Portal	4	Transportation Tier 2
+build	portal_wood	Build: Portal	5	Transportation Tier 2
 build	piece_stonecutter	Build: Stonecutter	6	Stonecutter
 build	piece_cookingstation_iron	Build: Iron Cooking Station	6	Iron Cooking Station
 build	piece_preptable	Build: Food Preparation Table	6	Food Preparation Table
@@ -328,8 +328,8 @@ build	piece_spinningwheel	Build: Spinning Wheel	8	Spinning Wheel
 build	piece_oven	Build: Stone Oven	8	Stone Oven
 build	piece_wisplure	Build: Wisp Fountain	8	Wisp Fountain
 build	piece_sapcollector	Build: Sap Extractor	9	Sap Extractor
-build	eitrrefinery	Build: Eitr Refinery	9	Eitr Refinery
-build	blackforge	Build: Black Forge	9	Black Forge
+build	eitrrefinery	Build: Eitr Refinery	10	Eitr Refinery
+build	blackforge	Build: Black Forge	10	Black Forge
 build	piece_magetable	Build: Galdr Table	10	Galdr Table
 build	portal_stone	Build: Stone Portal	11	Transportation Tier 3
 build	VikingShip_Ashlands	Build: Drakkar	10	Boat Tier 4
@@ -386,11 +386,11 @@ eat	RoastedCrustPie	Eat: Roasted Crust Pie	11	Stone Oven|Windmill
 eat	CookedMooseMeat	Eat: Cooked Moose Meat	12	Iron Cooking Station
 eat	CookedSealBlubber	Eat: Cooked Seal Blubber	12	Iron Cooking Station
 catch	Fish1	Catch: Perch	1	
-catch	Fish2	Catch: Pike	2	Food Preparation Table
+catch	Fish2	Catch: Pike	1	
 catch	Fish5	Catch: Trollfish	4	Food Preparation Table
-catch	Fish3	Catch: Tuna	4	Food Preparation Table
-catch	Fish8	Catch: Coral Cod	4	Food Preparation Table
-catch	Fish6	Catch: Giant Herring	7	Food Preparation Table
+catch	Fish3	Catch: Tuna	5	Food Preparation Table|Boat Tier 2
+catch	Fish8	Catch: Coral Cod	5	Food Preparation Table|Boat Tier 2
+catch	Fish6	Catch: Giant Herring	4	Food Preparation Table
 catch	Fish4_cave	Catch: Tetra	7	Food Preparation Table
 catch	Fish7	Catch: Grouper	8	Food Preparation Table
 catch	Fish9	Catch: Anglerfish	9	Food Preparation Table

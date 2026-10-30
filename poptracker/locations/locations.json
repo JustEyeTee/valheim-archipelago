@@ -2018,13 +2018,6 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
     ]
-   },
-   {
-    "name": "Trophy: TrophySerpent",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
-    ]
    }
   ],
   "map_locations": [
@@ -2032,6 +2025,25 @@
     "map": "Overview",
     "x": 255,
     "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Trophy - Tier 5",
+  "sections": [
+   {
+    "name": "Trophy: TrophySerpent",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,boat_tier_2,$boss|eikthyr"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 255,
+    "y": 402
    }
   ]
  },
@@ -2844,6 +2856,10 @@
    {
     "name": "Obtain: Honey",
     "item_count": 1
+   },
+   {
+    "name": "Obtain: Bone Fragments",
+    "item_count": 1
    }
   ],
   "map_locations": [
@@ -2866,13 +2882,6 @@
    },
    {
     "name": "Obtain: Greydwarf Eye",
-    "item_count": 1,
-    "access_rules": [
-     "crafting"
-    ]
-   },
-   {
-    "name": "Obtain: Bone Fragments",
     "item_count": 1,
     "access_rules": [
      "crafting"
@@ -2912,6 +2921,20 @@
     "access_rules": [
      "crafting"
     ]
+   },
+   {
+    "name": "Obtain: Surtling Core",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
+   },
+   {
+    "name": "Obtain: Yellow Mushroom",
+    "item_count": 1,
+    "access_rules": [
+     "crafting"
+    ]
    }
   ],
   "map_locations": [
@@ -2927,20 +2950,6 @@
   "sections": [
    {
     "name": "Obtain: Corewood",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
-    ]
-   },
-   {
-    "name": "Obtain: Surtling Core",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
-    ]
-   },
-   {
-    "name": "Obtain: Yellow Mushroom",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1"
@@ -2985,6 +2994,20 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
     ]
+   },
+   {
+    "name": "Obtain: Coal",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Obtain: Chitin",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
+    ]
    }
   ],
   "map_locations": [
@@ -3000,13 +3023,6 @@
   "sections": [
    {
     "name": "Obtain: Bronze",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Obtain: Coal",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
@@ -3062,20 +3078,6 @@
     ]
    },
    {
-    "name": "Obtain: Chitin",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
-    ]
-   },
-   {
-    "name": "Obtain: Serpent Scale",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
-    ]
-   },
-   {
     "name": "Obtain: Turnip Seeds",
     "item_count": 1,
     "access_rules": [
@@ -3101,6 +3103,13 @@
  {
   "name": "Obtain - Tier 5",
   "sections": [
+   {
+    "name": "Obtain: Serpent Scale",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,boat_tier_2,$boss|eikthyr"
+    ]
+   },
    {
     "name": "Obtain: Ancient Bark",
     "item_count": 1,
@@ -4035,24 +4044,12 @@
     "access_rules": [
      "crafting"
     ]
-   }
-  ],
-  "map_locations": [
-   {
-    "map": "Overview",
-    "x": 805,
-    "y": 146
-   }
-  ]
- },
- {
-  "name": "Catch - Tier 2",
-  "sections": [
+   },
    {
     "name": "Catch: Pike",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,food_preparation_table,$boss|the_elder"
+     "crafting"
     ]
    }
   ],
@@ -4060,7 +4057,7 @@
    {
     "map": "Overview",
     "x": 805,
-    "y": 210
+    "y": 146
    }
   ]
  },
@@ -4075,14 +4072,7 @@
     ]
    },
    {
-    "name": "Catch: Tuna",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,food_preparation_table,$boss|eikthyr,$boss|the_elder"
-    ]
-   },
-   {
-    "name": "Catch: Coral Cod",
+    "name": "Catch: Giant Herring",
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,food_preparation_table,$boss|eikthyr,$boss|the_elder"
@@ -4098,15 +4088,34 @@
   ]
  },
  {
-  "name": "Catch - Tier 7",
+  "name": "Catch - Tier 5",
   "sections": [
    {
-    "name": "Catch: Giant Herring",
+    "name": "Catch: Tuna",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,food_preparation_table,$boss|eikthyr,$boss|the_elder"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,food_preparation_table,boat_tier_2,$boss|eikthyr,$boss|the_elder"
     ]
    },
+   {
+    "name": "Catch: Coral Cod",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,food_preparation_table,boat_tier_2,$boss|eikthyr,$boss|the_elder"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 805,
+    "y": 402
+   }
+  ]
+ },
+ {
+  "name": "Catch - Tier 7",
+  "sections": [
    {
     "name": "Catch: Tetra",
     "item_count": 1,
@@ -4274,13 +4283,6 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,smelter"
     ]
-   },
-   {
-    "name": "Build: Forge",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,forge,$boss|eikthyr"
-    ]
    }
   ],
   "map_locations": [
@@ -4294,6 +4296,13 @@
  {
   "name": "Build - Tier 3",
   "sections": [
+   {
+    "name": "Build: Forge",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,$boss|eikthyr"
+    ]
+   },
    {
     "name": "Build: Cauldron",
     "item_count": 1,
@@ -4318,39 +4327,27 @@
   ]
  },
  {
-  "name": "Build - Tier 4",
+  "name": "Build - Tier 5",
   "sections": [
    {
     "name": "Build: Karve",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,boat_tier_2,$boss|eikthyr"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,boat_tier_2,$boss|eikthyr"
+    ]
+   },
+   {
+    "name": "Build: Fermenter",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,fermenter,$boss|eikthyr"
     ]
    },
    {
     "name": "Build: Portal",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,transportation_tier_2,$boss|eikthyr"
-    ]
-   }
-  ],
-  "map_locations": [
-   {
-    "map": "Overview",
-    "x": 915,
-    "y": 338
-   }
-  ]
- },
- {
-  "name": "Build - Tier 5",
-  "sections": [
-   {
-    "name": "Build: Fermenter",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,fermenter,$boss|eikthyr"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,transportation_tier_2,$boss|eikthyr"
     ]
    }
   ],
@@ -4477,20 +4474,6 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,sap_extractor,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth"
     ]
-   },
-   {
-    "name": "Build: Eitr Refinery",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,eitr_refinery,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth"
-    ]
-   },
-   {
-    "name": "Build: Black Forge",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,black_forge,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth"
-    ]
    }
   ],
   "map_locations": [
@@ -4504,6 +4487,20 @@
  {
   "name": "Build - Tier 10",
   "sections": [
+   {
+    "name": "Build: Eitr Refinery",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,eitr_refinery,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth"
+    ]
+   },
+   {
+    "name": "Build: Black Forge",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,black_forge,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth"
+    ]
+   },
    {
     "name": "Build: Galdr Table",
     "item_count": 1,
@@ -4953,13 +4950,6 @@
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
     ]
-   },
-   {
-    "name": "Kill: Serpent",
-    "item_count": 1,
-    "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|eikthyr"
-    ]
    }
   ],
   "map_locations": [
@@ -4967,6 +4957,25 @@
     "map": "Overview",
     "x": 1245,
     "y": 338
+   }
+  ]
+ },
+ {
+  "name": "Kill - Tier 5",
+  "sections": [
+   {
+    "name": "Kill: Serpent",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,boat_tier_2,$boss|eikthyr"
+    ]
+   }
+  ],
+  "map_locations": [
+   {
+    "map": "Overview",
+    "x": 1245,
+    "y": 402
    }
   ]
  },
