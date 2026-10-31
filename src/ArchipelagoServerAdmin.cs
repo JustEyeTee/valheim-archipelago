@@ -8,6 +8,7 @@ using UnityEngine;
 //     spawn <player|*> <prefab> [count]     e.g. spawn TestViking TrophyDeer 2, spawn * Greyling 3
 //     say <text>
 //     players
+//     keys | setkey <name> [value] | removekey <name>     the world's global keys (setkey replaces a key's value)
 // Only active on a dedicated server with that variable set; players' games never have it.
 public class ArchipelagoServerAdmin : MonoBehaviour
 {
@@ -66,12 +67,24 @@ public class ArchipelagoServerAdmin : MonoBehaviour
                 ValheimRandomizer.Log.LogInfo("[AP] Admin: players " + string.Join(", ",
                     ZNet.instance.GetPeers().Select(p => $"{p.m_playerName} at {p.m_refPos:F0}")));
                 break;
+            case "keys":
+                ValheimRandomizer.Log.LogInfo("[AP] Admin: global keys " + string.Join(", ", ZoneSystem.instance.GetGlobalKeys()));
+                break;
+            case "setkey" when words.Length >= 2:
+                // The game replaces the key's old value, if it had one.
+                ZoneSystem.instance.SetGlobalKey(string.Join(" ", words.Skip(1)));
+                ValheimRandomizer.Log.LogInfo($"[AP] Admin: set key '{string.Join(" ", words.Skip(1))}'");
+                break;
+            case "removekey" when words.Length >= 2:
+                ZoneSystem.instance.RemoveGlobalKey(words[1]);
+                ValheimRandomizer.Log.LogInfo($"[AP] Admin: removed key '{words[1]}'");
+                break;
             case "spawn" when words.Length >= 3:
                 int count = words.Length >= 4 && int.TryParse(words[3], out var n) ? Mathf.Clamp(n, 1, 500) : 1;
                 Spawn(words[1], words[2], count);
                 break;
             default:
-                ValheimRandomizer.Log.LogWarning($"[AP] Admin: unknown command '{line}' (spawn <player|*> <prefab> [count], say <text>, players)");
+                ValheimRandomizer.Log.LogWarning($"[AP] Admin: unknown command '{line}' (spawn <player|*> <prefab> [count], say <text>, players, keys, setkey <name> [value], removekey <name>)");
                 break;
         }
     }

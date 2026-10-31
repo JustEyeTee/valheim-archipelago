@@ -12,6 +12,9 @@ From the first playtest:
   many of each kind. F9 hides skill, exploration and comfort checks unless you ask (they come as you play), sorts
   its tabs by size and drops the repeated "Obtain:" inside a tab.
 - A Map Fragment pins the spot it uncovers on your map.
+- **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a
+  window when the world loads (it was a setting in the connection window, easy to miss, that quietly made the
+  world shared). The `CoopMode` config setting is gone.
 - F9 has a **Hints** tab: every hint involving you (items for you, and your checks holding someone else's item),
   marked found or not, with its priority; the ones still to find come first.
 - Traps: the Lightning Strike no longer kills a new character outright (the bolt lands beside you; you take a

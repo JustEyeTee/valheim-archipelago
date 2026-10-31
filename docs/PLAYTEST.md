@@ -44,7 +44,7 @@ Generate both in one room (or one room each) and keep the server console open.
 
 ## Session 2: The Elder
 
-- [ ] **Co-op, a slot each** (if two players): the first to connect picks "A slot each" in the connection window.
+- [ ] **Co-op, a slot each** (if two players): the first to connect is asked for the world's co-op mode when it loads: pick "A slot each".
       Each player has their own unlocks (one's research doesn't unlock the other's recipes); bundles go to the
       Archipelago Chest each one built. Pass The Elder's trophy around.
 - [ ] **Farming**: plant carrot seeds with the Cultivator: "Plant: Carrot" is sent.

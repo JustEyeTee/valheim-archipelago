@@ -72,18 +72,7 @@ public class ArchipelagoUI : MonoBehaviour
         GUILayout.Label("Connect to your Archipelago room, then load your world.");
         GUILayout.Space(4);
 
-        // Co-op mode for a new world (a world keeps the mode it was first played with).
-        bool separate = ValheimRandomizer.coopMode.Value == ArchipelagoCoop.Separate;
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Co-op (new worlds):", GUILayout.Width(130));
-        if (GUILayout.Toggle(!separate, "Shared slot", GUILayout.Width(110)) && separate)
-            ValheimRandomizer.coopMode.Value = ArchipelagoCoop.Shared;
-        if (GUILayout.Toggle(separate, "A slot each", GUILayout.Width(110)) && !separate)
-            ValheimRandomizer.coopMode.Value = ArchipelagoCoop.Separate;
-        GUILayout.EndHorizontal();
-        GUILayout.Label(separate
-            ? "Every player connects to their own slot, with their own researches and checks."
-            : "One player connects; the others just join the world, and their checks count too.");
+        GUILayout.Label("Co-op: in a new world, the first player to connect picks Shared slot or A slot each.");
         GUILayout.Space(6);
 
         GUILayout.BeginHorizontal();

@@ -106,8 +106,8 @@ move Coins in and out (1 Coin = 1 MJ). Withdrawals need room in your inventory.
 
 ## Co-op
 
-`/ap status` shows the world's co-op mode. It's set by the first player to connect in the world (the
-connection window's "Co-op (new worlds)" choice, or `CoopMode` in the config) and never changes; worlds
+`/ap status` shows the world's co-op mode. It's picked by the first player connected in the world (asked
+when the world loads) and never changes; worlds
 played before co-op modes existed are shared.
 
 **Shared slot.** Only **one** player connects to the slot. Everyone else just joins that world with the mod

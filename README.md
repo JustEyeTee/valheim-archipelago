@@ -82,7 +82,7 @@ Items you send and receive, hints and other players' chat are shown on screen an
 
 ### Co-op
 
-Each world has a co-op mode, picked in the connection window by the first player who connects in it:
+Each world has a co-op mode: the first player connected in a new world is asked to pick one when the world loads:
 
 - **Shared slot** (the default): **one** player connects; everyone else just joins that world, with the mod
   installed and without connecting. Their researches, pickups, kills and other checks are sent by the

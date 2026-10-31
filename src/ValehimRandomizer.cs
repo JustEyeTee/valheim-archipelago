@@ -30,7 +30,6 @@ public class ValheimRandomizer : BaseUnityPlugin
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoSlot;
     internal static BepInEx.Configuration.ConfigEntry<string> archipelagoPassword;
     internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicPanelKey;
-    internal static BepInEx.Configuration.ConfigEntry<string> coopMode;
     internal static BepInEx.Configuration.ConfigEntry<BepInEx.Configuration.KeyboardShortcut> logicWindowKey;
 
     public class TrophyResearch
@@ -75,10 +74,6 @@ public class ValheimRandomizer : BaseUnityPlugin
         archipelagoPort = Config.Bind("Archipelago", "Port", 38281, "Archipelago server port");
         archipelagoSlot = Config.Bind("Archipelago", "Slot", "Player", "Your Archipelago slot name");
         archipelagoPassword = Config.Bind("Archipelago", "Password", "", "Archipelago password (if any)");
-        coopMode = Config.Bind("Archipelago", "CoopMode", ArchipelagoCoop.Shared,
-            new BepInEx.Configuration.ConfigDescription("For a world nobody has connected in yet: shared (one slot for " +
-                "the world) or separate (each player connects to their own slot). A world keeps the mode it starts with.",
-                new BepInEx.Configuration.AcceptableValueList<string>(ArchipelagoCoop.Shared, ArchipelagoCoop.Separate)));
         logicPanelKey = Config.Bind("Archipelago", "LogicPanelKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F8),
             "Shows or hides the panel of checks you can do now (in logic)");
         logicWindowKey = Config.Bind("Archipelago", "LogicWindowKey", new BepInEx.Configuration.KeyboardShortcut(KeyCode.F9),
@@ -94,6 +89,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         go.AddComponent<ArchipelagoUI>().Init();
         go.AddComponent<ArchipelagoLogicPanel>();
         go.AddComponent<ArchipelagoLogicWindow>();
+        go.AddComponent<ArchipelagoCoopPrompt>();
         ArchipelagoServerAdmin.Install(go);
     }
 

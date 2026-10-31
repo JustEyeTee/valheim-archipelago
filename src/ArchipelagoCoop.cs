@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// Co-op modes, chosen per world: the first time anyone connects in a world, their CoopMode setting is stored
-// in it (world key "ap_coop shared" or "ap_coop separate") and the world keeps that mode for good.
+// Co-op modes, chosen per world: the first player connected in a world picks one when asked (ArchipelagoCoopPrompt);
+// it's stored in the world (world key "ap_coop shared" or "ap_coop separate") and the world keeps it for good.
 //   shared:   one Archipelago slot for the world. One player connects; everyone's checks count for that slot,
 //             and every received research unlocks for everyone. Worlds from before co-op modes are shared.
 //   separate: each player connects to their own slot. Everything the mod keeps in the world (researches
@@ -36,7 +36,7 @@ internal static class ArchipelagoCoop
     // A key the mod keeps in the world, for this player's slot.
     public static string Scoped(string key) => IsSeparate ? key + "@" + Tag(Slot) : key;
 
-    // Whether per-slot keys can be written: a connected player chooses the world's mode on connecting, and the
+    // Whether per-slot keys can be written: a connected player chooses the world's mode when asked, and the
     // choice comes back from the server a moment later; until then a key could go under the wrong mode. A
     // player who isn't connected never chooses, and a world without a mode is shared.
     public static bool Ready
@@ -105,13 +105,22 @@ internal static class ArchipelagoCoop
         return at >= 0 && key.Substring(at + 1) == Tag(Slot);
     }
 
-    // Called once a connected player has a world loaded: a world without a mode takes this player's setting.
+    // Whether the connected player is being asked to pick this world's mode (ArchipelagoCoopPrompt).
+    public static bool Asking { get; private set; }
+
+    // Called once a connected player has a world loaded: a world without a mode asks this player for one.
     public static void ChooseMode()
     {
-        if (ZoneSystem.instance == null || ZoneSystem.instance.GetGlobalKey(ModeKey)) return;
+        if (ZoneSystem.instance == null || ZoneSystem.instance.GetGlobalKey(ModeKey)) { Asking = false; return; }
         // Worlds already played before co-op modes existed stay shared.
-        bool played = ZoneSystem.instance.GetGlobalKey("ap_world");
-        string mode = !played && ValheimRandomizer.coopMode.Value == Separate ? Separate : Shared;
+        if (ZoneSystem.instance.GetGlobalKey("ap_world")) SetMode(Shared);
+        else if (!Asking) { Asking = true; ValheimRandomizer.Log.LogInfo("[AP] This world has no co-op mode yet: asking"); }
+    }
+
+    public static void SetMode(string mode)
+    {
+        Asking = false;
+        if (ZoneSystem.instance == null || ZoneSystem.instance.GetGlobalKey(ModeKey)) return;
         ZoneSystem.instance.SetGlobalKey($"{ModeKey} {mode}");
         ValheimRandomizer.Log.LogInfo($"[AP] This world's co-op mode: {mode}");
     }

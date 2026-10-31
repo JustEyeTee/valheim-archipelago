@@ -470,7 +470,7 @@ public static class Patches
     {
         private static void Postfix(ref bool __result)
         {
-            if (ArchipelagoLogicWindow.IsOpen) __result = false;
+            if (ArchipelagoLogicWindow.IsOpen || ArchipelagoCoopPrompt.IsOpen) __result = false;
         }
     }
 
@@ -479,7 +479,7 @@ public static class Patches
     {
         private static void Postfix(ref bool __result)
         {
-            if (ArchipelagoLogicWindow.IsOpen) __result = false;
+            if (ArchipelagoLogicWindow.IsOpen || ArchipelagoCoopPrompt.IsOpen) __result = false;
         }
     }
 

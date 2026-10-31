@@ -46,6 +46,8 @@ They share three data files in `mod/`, so a name always means the same thing on 
 | `Patches.cs` | Harmony patches: recipe and piece locking, trophy boosts, and hooks for eat, build, buy, tame, kill and Death Link |
 | `ArchipelagoConnection.cs` | Connecting, sending checks, receiving items, sending the goal |
 | `ArchipelagoCoop.cs` | Co-op modes per world: shared slot, or a slot each (per-slot keys) |
+| `ArchipelagoCoopPrompt.cs` | Asks the first connected player in a new world for its co-op mode |
+| `ArchipelagoServerAdmin.cs` | Dedicated test server only (`AP_ADMIN_QUEUE`): spawn items, messages, world keys |
 | `ArchipelagoLogic.cs` | Which checks are in logic now (from `logic.tsv`); the F8 panel and `/ap logic` |
 | `ArchipelagoGoal.cs` | The goal conditions from slot data: progress, `/ap goal`, Skill Master's skill keys |
 | `ArchipelagoExtras.cs` | Every check beyond researches and trophies, the Archipelago Chest, bundles, boss drops, tools, traps, boosts |
@@ -91,7 +93,7 @@ Because they're world keys:
 - checks done while disconnected are sent on the next connect,
 - in co-op with a shared slot, a player who isn't connected sets the pending key and the connected player sends it.
 
-**Co-op modes** (`ArchipelagoCoop.cs`): the first connected player in a world stores `ap_coop shared` or
+**Co-op modes** (`ArchipelagoCoop.cs`): the first connected player in a world is asked (`ArchipelagoCoopPrompt`) and stores `ap_coop shared` or
 `ap_coop separate` in it (worlds without it are shared). With separate slots, every key the mod keeps per
 slot (researches received and crafted, `ap_pending:`/`ap_sent:`, goal keys) gets `@<slot>` appended
 (`ArchipelagoCoop.Scoped`), and the flush only sends this slot's pending keys (`IsMine`). Recipe and piece
