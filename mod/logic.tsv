@@ -1059,6 +1059,2118 @@ location	Obtain: Oat Seeds	12
 location	Obtain: Poteitr Seeds	12	
 location	Plant: Oats	12	Cultivator|Northern Crops
 location	Plant: Poteitr	12	Cultivator|Northern Crops
+location	Skill: Woodcutting 1	1	Axes Tier 1
+location	Skill: Woodcutting 2	1	Axes Tier 1
+location	Skill: Woodcutting 3	1	Axes Tier 1
+location	Skill: Woodcutting 4	1	Axes Tier 1
+location	Skill: Woodcutting 5	1	Axes Tier 1
+location	Skill: Woodcutting 6	1	Axes Tier 1
+location	Skill: Woodcutting 7	1	Axes Tier 1
+location	Skill: Woodcutting 8	1	Axes Tier 1
+location	Skill: Woodcutting 9	1	Axes Tier 1
+location	Skill: Woodcutting 11	1	Axes Tier 1
+location	Skill: Woodcutting 12	1	Axes Tier 1
+location	Skill: Woodcutting 13	1	Axes Tier 1
+location	Skill: Woodcutting 14	1	Axes Tier 1
+location	Skill: Woodcutting 15	1	Axes Tier 1
+location	Skill: Woodcutting 16	1	Axes Tier 1
+location	Skill: Woodcutting 17	1	Axes Tier 1
+location	Skill: Woodcutting 18	1	Axes Tier 1
+location	Skill: Woodcutting 19	1	Axes Tier 1
+location	Skill: Woodcutting 21	1	Axes Tier 1
+location	Skill: Woodcutting 22	1	Axes Tier 1
+location	Skill: Woodcutting 23	1	Axes Tier 1
+location	Skill: Woodcutting 24	1	Axes Tier 1
+location	Skill: Woodcutting 26	1	Axes Tier 1
+location	Skill: Woodcutting 27	1	Axes Tier 1
+location	Skill: Woodcutting 28	1	Axes Tier 1
+location	Skill: Woodcutting 29	1	Axes Tier 1
+location	Skill: Woodcutting 31	1	Axes Tier 1
+location	Skill: Woodcutting 32	1	Axes Tier 1
+location	Skill: Woodcutting 33	1	Axes Tier 1
+location	Skill: Woodcutting 34	1	Axes Tier 1
+location	Skill: Woodcutting 35	1	Axes Tier 1
+location	Skill: Woodcutting 36	1	Axes Tier 1
+location	Skill: Woodcutting 37	1	Axes Tier 1
+location	Skill: Woodcutting 38	1	Axes Tier 1
+location	Skill: Woodcutting 39	1	Axes Tier 1
+location	Skill: Woodcutting 41	1	Axes Tier 1
+location	Skill: Woodcutting 42	1	Axes Tier 1
+location	Skill: Woodcutting 43	1	Axes Tier 1
+location	Skill: Woodcutting 44	1	Axes Tier 1
+location	Skill: Woodcutting 45	1	Axes Tier 1
+location	Skill: Woodcutting 46	1	Axes Tier 1
+location	Skill: Woodcutting 47	1	Axes Tier 1
+location	Skill: Woodcutting 48	1	Axes Tier 1
+location	Skill: Woodcutting 49	1	Axes Tier 1
+location	Skill: Woodcutting 51	1	Axes Tier 1
+location	Skill: Woodcutting 52	1	Axes Tier 1
+location	Skill: Woodcutting 53	1	Axes Tier 1
+location	Skill: Woodcutting 54	1	Axes Tier 1
+location	Skill: Woodcutting 55	1	Axes Tier 1
+location	Skill: Woodcutting 56	1	Axes Tier 1
+location	Skill: Woodcutting 57	1	Axes Tier 1
+location	Skill: Woodcutting 58	1	Axes Tier 1
+location	Skill: Woodcutting 59	1	Axes Tier 1
+location	Skill: Woodcutting 61	1	Axes Tier 1
+location	Skill: Woodcutting 62	1	Axes Tier 1
+location	Skill: Woodcutting 63	1	Axes Tier 1
+location	Skill: Woodcutting 64	1	Axes Tier 1
+location	Skill: Woodcutting 65	1	Axes Tier 1
+location	Skill: Woodcutting 66	1	Axes Tier 1
+location	Skill: Woodcutting 67	1	Axes Tier 1
+location	Skill: Woodcutting 68	1	Axes Tier 1
+location	Skill: Woodcutting 69	1	Axes Tier 1
+location	Skill: Woodcutting 71	1	Axes Tier 1
+location	Skill: Woodcutting 72	1	Axes Tier 1
+location	Skill: Woodcutting 73	1	Axes Tier 1
+location	Skill: Woodcutting 74	1	Axes Tier 1
+location	Skill: Woodcutting 76	1	Axes Tier 1
+location	Skill: Woodcutting 77	1	Axes Tier 1
+location	Skill: Woodcutting 78	1	Axes Tier 1
+location	Skill: Woodcutting 79	1	Axes Tier 1
+location	Skill: Woodcutting 81	1	Axes Tier 1
+location	Skill: Woodcutting 82	1	Axes Tier 1
+location	Skill: Woodcutting 83	1	Axes Tier 1
+location	Skill: Woodcutting 84	1	Axes Tier 1
+location	Skill: Woodcutting 85	1	Axes Tier 1
+location	Skill: Woodcutting 86	1	Axes Tier 1
+location	Skill: Woodcutting 87	1	Axes Tier 1
+location	Skill: Woodcutting 88	1	Axes Tier 1
+location	Skill: Woodcutting 89	1	Axes Tier 1
+location	Skill: Woodcutting 91	1	Axes Tier 1
+location	Skill: Woodcutting 92	1	Axes Tier 1
+location	Skill: Woodcutting 93	1	Axes Tier 1
+location	Skill: Woodcutting 94	1	Axes Tier 1
+location	Skill: Woodcutting 95	1	Axes Tier 1
+location	Skill: Woodcutting 96	1	Axes Tier 1
+location	Skill: Woodcutting 97	1	Axes Tier 1
+location	Skill: Woodcutting 98	1	Axes Tier 1
+location	Skill: Woodcutting 99	1	Axes Tier 1
+location	Skill: Pickaxes 1	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 2	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 3	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 4	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 5	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 6	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 7	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 8	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 9	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 11	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 12	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 13	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 14	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 15	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 16	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 17	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 18	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 19	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 21	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 22	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 23	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 24	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 26	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 27	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 28	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 29	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 31	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 32	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 33	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 34	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 35	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 36	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 37	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 38	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 39	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 41	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 42	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 43	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 44	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 45	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 46	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 47	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 48	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 49	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 51	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 52	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 53	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 54	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 55	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 56	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 57	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 58	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 59	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 61	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 62	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 63	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 64	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 65	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 66	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 67	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 68	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 69	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 71	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 72	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 73	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 74	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 76	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 77	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 78	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 79	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 81	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 82	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 83	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 84	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 85	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 86	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 87	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 88	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 89	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 91	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 92	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 93	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 94	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 95	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 96	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 97	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 98	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Pickaxes 99	2	Pickaxes Tier 1|boss:Eikthyr
+location	Skill: Axes 1	1	Axes Tier 1
+location	Skill: Axes 2	1	Axes Tier 1
+location	Skill: Axes 3	1	Axes Tier 1
+location	Skill: Axes 4	1	Axes Tier 1
+location	Skill: Axes 5	1	Axes Tier 1
+location	Skill: Axes 6	1	Axes Tier 1
+location	Skill: Axes 7	1	Axes Tier 1
+location	Skill: Axes 8	1	Axes Tier 1
+location	Skill: Axes 9	1	Axes Tier 1
+location	Skill: Axes 11	1	Axes Tier 1
+location	Skill: Axes 12	1	Axes Tier 1
+location	Skill: Axes 13	1	Axes Tier 1
+location	Skill: Axes 14	1	Axes Tier 1
+location	Skill: Axes 15	1	Axes Tier 1
+location	Skill: Axes 16	1	Axes Tier 1
+location	Skill: Axes 17	1	Axes Tier 1
+location	Skill: Axes 18	1	Axes Tier 1
+location	Skill: Axes 19	1	Axes Tier 1
+location	Skill: Axes 21	1	Axes Tier 1
+location	Skill: Axes 22	1	Axes Tier 1
+location	Skill: Axes 23	1	Axes Tier 1
+location	Skill: Axes 24	1	Axes Tier 1
+location	Skill: Axes 26	1	Axes Tier 1
+location	Skill: Axes 27	1	Axes Tier 1
+location	Skill: Axes 28	1	Axes Tier 1
+location	Skill: Axes 29	1	Axes Tier 1
+location	Skill: Axes 31	1	Axes Tier 1
+location	Skill: Axes 32	1	Axes Tier 1
+location	Skill: Axes 33	1	Axes Tier 1
+location	Skill: Axes 34	1	Axes Tier 1
+location	Skill: Axes 35	1	Axes Tier 1
+location	Skill: Axes 36	1	Axes Tier 1
+location	Skill: Axes 37	1	Axes Tier 1
+location	Skill: Axes 38	1	Axes Tier 1
+location	Skill: Axes 39	1	Axes Tier 1
+location	Skill: Axes 41	1	Axes Tier 1
+location	Skill: Axes 42	1	Axes Tier 1
+location	Skill: Axes 43	1	Axes Tier 1
+location	Skill: Axes 44	1	Axes Tier 1
+location	Skill: Axes 45	1	Axes Tier 1
+location	Skill: Axes 46	1	Axes Tier 1
+location	Skill: Axes 47	1	Axes Tier 1
+location	Skill: Axes 48	1	Axes Tier 1
+location	Skill: Axes 49	1	Axes Tier 1
+location	Skill: Axes 51	1	Axes Tier 1
+location	Skill: Axes 52	1	Axes Tier 1
+location	Skill: Axes 53	1	Axes Tier 1
+location	Skill: Axes 54	1	Axes Tier 1
+location	Skill: Axes 55	1	Axes Tier 1
+location	Skill: Axes 56	1	Axes Tier 1
+location	Skill: Axes 57	1	Axes Tier 1
+location	Skill: Axes 58	1	Axes Tier 1
+location	Skill: Axes 59	1	Axes Tier 1
+location	Skill: Axes 61	1	Axes Tier 1
+location	Skill: Axes 62	1	Axes Tier 1
+location	Skill: Axes 63	1	Axes Tier 1
+location	Skill: Axes 64	1	Axes Tier 1
+location	Skill: Axes 65	1	Axes Tier 1
+location	Skill: Axes 66	1	Axes Tier 1
+location	Skill: Axes 67	1	Axes Tier 1
+location	Skill: Axes 68	1	Axes Tier 1
+location	Skill: Axes 69	1	Axes Tier 1
+location	Skill: Axes 71	1	Axes Tier 1
+location	Skill: Axes 72	1	Axes Tier 1
+location	Skill: Axes 73	1	Axes Tier 1
+location	Skill: Axes 74	1	Axes Tier 1
+location	Skill: Axes 76	1	Axes Tier 1
+location	Skill: Axes 77	1	Axes Tier 1
+location	Skill: Axes 78	1	Axes Tier 1
+location	Skill: Axes 79	1	Axes Tier 1
+location	Skill: Axes 81	1	Axes Tier 1
+location	Skill: Axes 82	1	Axes Tier 1
+location	Skill: Axes 83	1	Axes Tier 1
+location	Skill: Axes 84	1	Axes Tier 1
+location	Skill: Axes 85	1	Axes Tier 1
+location	Skill: Axes 86	1	Axes Tier 1
+location	Skill: Axes 87	1	Axes Tier 1
+location	Skill: Axes 88	1	Axes Tier 1
+location	Skill: Axes 89	1	Axes Tier 1
+location	Skill: Axes 91	1	Axes Tier 1
+location	Skill: Axes 92	1	Axes Tier 1
+location	Skill: Axes 93	1	Axes Tier 1
+location	Skill: Axes 94	1	Axes Tier 1
+location	Skill: Axes 95	1	Axes Tier 1
+location	Skill: Axes 96	1	Axes Tier 1
+location	Skill: Axes 97	1	Axes Tier 1
+location	Skill: Axes 98	1	Axes Tier 1
+location	Skill: Axes 99	1	Axes Tier 1
+location	Skill: Clubs 1	0	Clubs Tier 1
+location	Skill: Clubs 2	0	Clubs Tier 1
+location	Skill: Clubs 3	0	Clubs Tier 1
+location	Skill: Clubs 4	0	Clubs Tier 1
+location	Skill: Clubs 5	0	Clubs Tier 1
+location	Skill: Clubs 6	0	Clubs Tier 1
+location	Skill: Clubs 7	0	Clubs Tier 1
+location	Skill: Clubs 8	0	Clubs Tier 1
+location	Skill: Clubs 9	0	Clubs Tier 1
+location	Skill: Clubs 11	0	Clubs Tier 1
+location	Skill: Clubs 12	0	Clubs Tier 1
+location	Skill: Clubs 13	0	Clubs Tier 1
+location	Skill: Clubs 14	0	Clubs Tier 1
+location	Skill: Clubs 15	0	Clubs Tier 1
+location	Skill: Clubs 16	0	Clubs Tier 1
+location	Skill: Clubs 17	0	Clubs Tier 1
+location	Skill: Clubs 18	0	Clubs Tier 1
+location	Skill: Clubs 19	0	Clubs Tier 1
+location	Skill: Clubs 21	0	Clubs Tier 1
+location	Skill: Clubs 22	0	Clubs Tier 1
+location	Skill: Clubs 23	0	Clubs Tier 1
+location	Skill: Clubs 24	0	Clubs Tier 1
+location	Skill: Clubs 26	0	Clubs Tier 1
+location	Skill: Clubs 27	0	Clubs Tier 1
+location	Skill: Clubs 28	0	Clubs Tier 1
+location	Skill: Clubs 29	0	Clubs Tier 1
+location	Skill: Clubs 31	0	Clubs Tier 1
+location	Skill: Clubs 32	0	Clubs Tier 1
+location	Skill: Clubs 33	0	Clubs Tier 1
+location	Skill: Clubs 34	0	Clubs Tier 1
+location	Skill: Clubs 35	0	Clubs Tier 1
+location	Skill: Clubs 36	0	Clubs Tier 1
+location	Skill: Clubs 37	0	Clubs Tier 1
+location	Skill: Clubs 38	0	Clubs Tier 1
+location	Skill: Clubs 39	0	Clubs Tier 1
+location	Skill: Clubs 41	0	Clubs Tier 1
+location	Skill: Clubs 42	0	Clubs Tier 1
+location	Skill: Clubs 43	0	Clubs Tier 1
+location	Skill: Clubs 44	0	Clubs Tier 1
+location	Skill: Clubs 45	0	Clubs Tier 1
+location	Skill: Clubs 46	0	Clubs Tier 1
+location	Skill: Clubs 47	0	Clubs Tier 1
+location	Skill: Clubs 48	0	Clubs Tier 1
+location	Skill: Clubs 49	0	Clubs Tier 1
+location	Skill: Clubs 51	0	Clubs Tier 1
+location	Skill: Clubs 52	0	Clubs Tier 1
+location	Skill: Clubs 53	0	Clubs Tier 1
+location	Skill: Clubs 54	0	Clubs Tier 1
+location	Skill: Clubs 55	0	Clubs Tier 1
+location	Skill: Clubs 56	0	Clubs Tier 1
+location	Skill: Clubs 57	0	Clubs Tier 1
+location	Skill: Clubs 58	0	Clubs Tier 1
+location	Skill: Clubs 59	0	Clubs Tier 1
+location	Skill: Clubs 61	0	Clubs Tier 1
+location	Skill: Clubs 62	0	Clubs Tier 1
+location	Skill: Clubs 63	0	Clubs Tier 1
+location	Skill: Clubs 64	0	Clubs Tier 1
+location	Skill: Clubs 65	0	Clubs Tier 1
+location	Skill: Clubs 66	0	Clubs Tier 1
+location	Skill: Clubs 67	0	Clubs Tier 1
+location	Skill: Clubs 68	0	Clubs Tier 1
+location	Skill: Clubs 69	0	Clubs Tier 1
+location	Skill: Clubs 71	0	Clubs Tier 1
+location	Skill: Clubs 72	0	Clubs Tier 1
+location	Skill: Clubs 73	0	Clubs Tier 1
+location	Skill: Clubs 74	0	Clubs Tier 1
+location	Skill: Clubs 76	0	Clubs Tier 1
+location	Skill: Clubs 77	0	Clubs Tier 1
+location	Skill: Clubs 78	0	Clubs Tier 1
+location	Skill: Clubs 79	0	Clubs Tier 1
+location	Skill: Clubs 81	0	Clubs Tier 1
+location	Skill: Clubs 82	0	Clubs Tier 1
+location	Skill: Clubs 83	0	Clubs Tier 1
+location	Skill: Clubs 84	0	Clubs Tier 1
+location	Skill: Clubs 85	0	Clubs Tier 1
+location	Skill: Clubs 86	0	Clubs Tier 1
+location	Skill: Clubs 87	0	Clubs Tier 1
+location	Skill: Clubs 88	0	Clubs Tier 1
+location	Skill: Clubs 89	0	Clubs Tier 1
+location	Skill: Clubs 91	0	Clubs Tier 1
+location	Skill: Clubs 92	0	Clubs Tier 1
+location	Skill: Clubs 93	0	Clubs Tier 1
+location	Skill: Clubs 94	0	Clubs Tier 1
+location	Skill: Clubs 95	0	Clubs Tier 1
+location	Skill: Clubs 96	0	Clubs Tier 1
+location	Skill: Clubs 97	0	Clubs Tier 1
+location	Skill: Clubs 98	0	Clubs Tier 1
+location	Skill: Clubs 99	0	Clubs Tier 1
+location	Skill: Swords 1	1	Blades Tier 1
+location	Skill: Swords 2	1	Blades Tier 1
+location	Skill: Swords 3	1	Blades Tier 1
+location	Skill: Swords 4	1	Blades Tier 1
+location	Skill: Swords 5	1	Blades Tier 1
+location	Skill: Swords 6	1	Blades Tier 1
+location	Skill: Swords 7	1	Blades Tier 1
+location	Skill: Swords 8	1	Blades Tier 1
+location	Skill: Swords 9	1	Blades Tier 1
+location	Skill: Swords 11	1	Blades Tier 1
+location	Skill: Swords 12	1	Blades Tier 1
+location	Skill: Swords 13	1	Blades Tier 1
+location	Skill: Swords 14	1	Blades Tier 1
+location	Skill: Swords 15	1	Blades Tier 1
+location	Skill: Swords 16	1	Blades Tier 1
+location	Skill: Swords 17	1	Blades Tier 1
+location	Skill: Swords 18	1	Blades Tier 1
+location	Skill: Swords 19	1	Blades Tier 1
+location	Skill: Swords 21	1	Blades Tier 1
+location	Skill: Swords 22	1	Blades Tier 1
+location	Skill: Swords 23	1	Blades Tier 1
+location	Skill: Swords 24	1	Blades Tier 1
+location	Skill: Swords 26	1	Blades Tier 1
+location	Skill: Swords 27	1	Blades Tier 1
+location	Skill: Swords 28	1	Blades Tier 1
+location	Skill: Swords 29	1	Blades Tier 1
+location	Skill: Swords 31	1	Blades Tier 1
+location	Skill: Swords 32	1	Blades Tier 1
+location	Skill: Swords 33	1	Blades Tier 1
+location	Skill: Swords 34	1	Blades Tier 1
+location	Skill: Swords 35	1	Blades Tier 1
+location	Skill: Swords 36	1	Blades Tier 1
+location	Skill: Swords 37	1	Blades Tier 1
+location	Skill: Swords 38	1	Blades Tier 1
+location	Skill: Swords 39	1	Blades Tier 1
+location	Skill: Swords 41	1	Blades Tier 1
+location	Skill: Swords 42	1	Blades Tier 1
+location	Skill: Swords 43	1	Blades Tier 1
+location	Skill: Swords 44	1	Blades Tier 1
+location	Skill: Swords 45	1	Blades Tier 1
+location	Skill: Swords 46	1	Blades Tier 1
+location	Skill: Swords 47	1	Blades Tier 1
+location	Skill: Swords 48	1	Blades Tier 1
+location	Skill: Swords 49	1	Blades Tier 1
+location	Skill: Swords 51	1	Blades Tier 1
+location	Skill: Swords 52	1	Blades Tier 1
+location	Skill: Swords 53	1	Blades Tier 1
+location	Skill: Swords 54	1	Blades Tier 1
+location	Skill: Swords 55	1	Blades Tier 1
+location	Skill: Swords 56	1	Blades Tier 1
+location	Skill: Swords 57	1	Blades Tier 1
+location	Skill: Swords 58	1	Blades Tier 1
+location	Skill: Swords 59	1	Blades Tier 1
+location	Skill: Swords 61	1	Blades Tier 1
+location	Skill: Swords 62	1	Blades Tier 1
+location	Skill: Swords 63	1	Blades Tier 1
+location	Skill: Swords 64	1	Blades Tier 1
+location	Skill: Swords 65	1	Blades Tier 1
+location	Skill: Swords 66	1	Blades Tier 1
+location	Skill: Swords 67	1	Blades Tier 1
+location	Skill: Swords 68	1	Blades Tier 1
+location	Skill: Swords 69	1	Blades Tier 1
+location	Skill: Swords 71	1	Blades Tier 1
+location	Skill: Swords 72	1	Blades Tier 1
+location	Skill: Swords 73	1	Blades Tier 1
+location	Skill: Swords 74	1	Blades Tier 1
+location	Skill: Swords 76	1	Blades Tier 1
+location	Skill: Swords 77	1	Blades Tier 1
+location	Skill: Swords 78	1	Blades Tier 1
+location	Skill: Swords 79	1	Blades Tier 1
+location	Skill: Swords 81	1	Blades Tier 1
+location	Skill: Swords 82	1	Blades Tier 1
+location	Skill: Swords 83	1	Blades Tier 1
+location	Skill: Swords 84	1	Blades Tier 1
+location	Skill: Swords 85	1	Blades Tier 1
+location	Skill: Swords 86	1	Blades Tier 1
+location	Skill: Swords 87	1	Blades Tier 1
+location	Skill: Swords 88	1	Blades Tier 1
+location	Skill: Swords 89	1	Blades Tier 1
+location	Skill: Swords 91	1	Blades Tier 1
+location	Skill: Swords 92	1	Blades Tier 1
+location	Skill: Swords 93	1	Blades Tier 1
+location	Skill: Swords 94	1	Blades Tier 1
+location	Skill: Swords 95	1	Blades Tier 1
+location	Skill: Swords 96	1	Blades Tier 1
+location	Skill: Swords 97	1	Blades Tier 1
+location	Skill: Swords 98	1	Blades Tier 1
+location	Skill: Swords 99	1	Blades Tier 1
+location	Skill: Knives 1	1	Short Blades Tier 1
+location	Skill: Knives 2	1	Short Blades Tier 1
+location	Skill: Knives 3	1	Short Blades Tier 1
+location	Skill: Knives 4	1	Short Blades Tier 1
+location	Skill: Knives 5	1	Short Blades Tier 1
+location	Skill: Knives 6	1	Short Blades Tier 1
+location	Skill: Knives 7	1	Short Blades Tier 1
+location	Skill: Knives 8	1	Short Blades Tier 1
+location	Skill: Knives 9	1	Short Blades Tier 1
+location	Skill: Knives 11	1	Short Blades Tier 1
+location	Skill: Knives 12	1	Short Blades Tier 1
+location	Skill: Knives 13	1	Short Blades Tier 1
+location	Skill: Knives 14	1	Short Blades Tier 1
+location	Skill: Knives 15	1	Short Blades Tier 1
+location	Skill: Knives 16	1	Short Blades Tier 1
+location	Skill: Knives 17	1	Short Blades Tier 1
+location	Skill: Knives 18	1	Short Blades Tier 1
+location	Skill: Knives 19	1	Short Blades Tier 1
+location	Skill: Knives 21	1	Short Blades Tier 1
+location	Skill: Knives 22	1	Short Blades Tier 1
+location	Skill: Knives 23	1	Short Blades Tier 1
+location	Skill: Knives 24	1	Short Blades Tier 1
+location	Skill: Knives 26	1	Short Blades Tier 1
+location	Skill: Knives 27	1	Short Blades Tier 1
+location	Skill: Knives 28	1	Short Blades Tier 1
+location	Skill: Knives 29	1	Short Blades Tier 1
+location	Skill: Knives 31	1	Short Blades Tier 1
+location	Skill: Knives 32	1	Short Blades Tier 1
+location	Skill: Knives 33	1	Short Blades Tier 1
+location	Skill: Knives 34	1	Short Blades Tier 1
+location	Skill: Knives 35	1	Short Blades Tier 1
+location	Skill: Knives 36	1	Short Blades Tier 1
+location	Skill: Knives 37	1	Short Blades Tier 1
+location	Skill: Knives 38	1	Short Blades Tier 1
+location	Skill: Knives 39	1	Short Blades Tier 1
+location	Skill: Knives 41	1	Short Blades Tier 1
+location	Skill: Knives 42	1	Short Blades Tier 1
+location	Skill: Knives 43	1	Short Blades Tier 1
+location	Skill: Knives 44	1	Short Blades Tier 1
+location	Skill: Knives 45	1	Short Blades Tier 1
+location	Skill: Knives 46	1	Short Blades Tier 1
+location	Skill: Knives 47	1	Short Blades Tier 1
+location	Skill: Knives 48	1	Short Blades Tier 1
+location	Skill: Knives 49	1	Short Blades Tier 1
+location	Skill: Knives 51	1	Short Blades Tier 1
+location	Skill: Knives 52	1	Short Blades Tier 1
+location	Skill: Knives 53	1	Short Blades Tier 1
+location	Skill: Knives 54	1	Short Blades Tier 1
+location	Skill: Knives 55	1	Short Blades Tier 1
+location	Skill: Knives 56	1	Short Blades Tier 1
+location	Skill: Knives 57	1	Short Blades Tier 1
+location	Skill: Knives 58	1	Short Blades Tier 1
+location	Skill: Knives 59	1	Short Blades Tier 1
+location	Skill: Knives 61	1	Short Blades Tier 1
+location	Skill: Knives 62	1	Short Blades Tier 1
+location	Skill: Knives 63	1	Short Blades Tier 1
+location	Skill: Knives 64	1	Short Blades Tier 1
+location	Skill: Knives 65	1	Short Blades Tier 1
+location	Skill: Knives 66	1	Short Blades Tier 1
+location	Skill: Knives 67	1	Short Blades Tier 1
+location	Skill: Knives 68	1	Short Blades Tier 1
+location	Skill: Knives 69	1	Short Blades Tier 1
+location	Skill: Knives 71	1	Short Blades Tier 1
+location	Skill: Knives 72	1	Short Blades Tier 1
+location	Skill: Knives 73	1	Short Blades Tier 1
+location	Skill: Knives 74	1	Short Blades Tier 1
+location	Skill: Knives 76	1	Short Blades Tier 1
+location	Skill: Knives 77	1	Short Blades Tier 1
+location	Skill: Knives 78	1	Short Blades Tier 1
+location	Skill: Knives 79	1	Short Blades Tier 1
+location	Skill: Knives 81	1	Short Blades Tier 1
+location	Skill: Knives 82	1	Short Blades Tier 1
+location	Skill: Knives 83	1	Short Blades Tier 1
+location	Skill: Knives 84	1	Short Blades Tier 1
+location	Skill: Knives 85	1	Short Blades Tier 1
+location	Skill: Knives 86	1	Short Blades Tier 1
+location	Skill: Knives 87	1	Short Blades Tier 1
+location	Skill: Knives 88	1	Short Blades Tier 1
+location	Skill: Knives 89	1	Short Blades Tier 1
+location	Skill: Knives 91	1	Short Blades Tier 1
+location	Skill: Knives 92	1	Short Blades Tier 1
+location	Skill: Knives 93	1	Short Blades Tier 1
+location	Skill: Knives 94	1	Short Blades Tier 1
+location	Skill: Knives 95	1	Short Blades Tier 1
+location	Skill: Knives 96	1	Short Blades Tier 1
+location	Skill: Knives 97	1	Short Blades Tier 1
+location	Skill: Knives 98	1	Short Blades Tier 1
+location	Skill: Knives 99	1	Short Blades Tier 1
+location	Skill: Spears 1	1	Spears Tier 1
+location	Skill: Spears 2	1	Spears Tier 1
+location	Skill: Spears 3	1	Spears Tier 1
+location	Skill: Spears 4	1	Spears Tier 1
+location	Skill: Spears 5	1	Spears Tier 1
+location	Skill: Spears 6	1	Spears Tier 1
+location	Skill: Spears 7	1	Spears Tier 1
+location	Skill: Spears 8	1	Spears Tier 1
+location	Skill: Spears 9	1	Spears Tier 1
+location	Skill: Spears 11	1	Spears Tier 1
+location	Skill: Spears 12	1	Spears Tier 1
+location	Skill: Spears 13	1	Spears Tier 1
+location	Skill: Spears 14	1	Spears Tier 1
+location	Skill: Spears 15	1	Spears Tier 1
+location	Skill: Spears 16	1	Spears Tier 1
+location	Skill: Spears 17	1	Spears Tier 1
+location	Skill: Spears 18	1	Spears Tier 1
+location	Skill: Spears 19	1	Spears Tier 1
+location	Skill: Spears 21	1	Spears Tier 1
+location	Skill: Spears 22	1	Spears Tier 1
+location	Skill: Spears 23	1	Spears Tier 1
+location	Skill: Spears 24	1	Spears Tier 1
+location	Skill: Spears 26	1	Spears Tier 1
+location	Skill: Spears 27	1	Spears Tier 1
+location	Skill: Spears 28	1	Spears Tier 1
+location	Skill: Spears 29	1	Spears Tier 1
+location	Skill: Spears 31	1	Spears Tier 1
+location	Skill: Spears 32	1	Spears Tier 1
+location	Skill: Spears 33	1	Spears Tier 1
+location	Skill: Spears 34	1	Spears Tier 1
+location	Skill: Spears 35	1	Spears Tier 1
+location	Skill: Spears 36	1	Spears Tier 1
+location	Skill: Spears 37	1	Spears Tier 1
+location	Skill: Spears 38	1	Spears Tier 1
+location	Skill: Spears 39	1	Spears Tier 1
+location	Skill: Spears 41	1	Spears Tier 1
+location	Skill: Spears 42	1	Spears Tier 1
+location	Skill: Spears 43	1	Spears Tier 1
+location	Skill: Spears 44	1	Spears Tier 1
+location	Skill: Spears 45	1	Spears Tier 1
+location	Skill: Spears 46	1	Spears Tier 1
+location	Skill: Spears 47	1	Spears Tier 1
+location	Skill: Spears 48	1	Spears Tier 1
+location	Skill: Spears 49	1	Spears Tier 1
+location	Skill: Spears 51	1	Spears Tier 1
+location	Skill: Spears 52	1	Spears Tier 1
+location	Skill: Spears 53	1	Spears Tier 1
+location	Skill: Spears 54	1	Spears Tier 1
+location	Skill: Spears 55	1	Spears Tier 1
+location	Skill: Spears 56	1	Spears Tier 1
+location	Skill: Spears 57	1	Spears Tier 1
+location	Skill: Spears 58	1	Spears Tier 1
+location	Skill: Spears 59	1	Spears Tier 1
+location	Skill: Spears 61	1	Spears Tier 1
+location	Skill: Spears 62	1	Spears Tier 1
+location	Skill: Spears 63	1	Spears Tier 1
+location	Skill: Spears 64	1	Spears Tier 1
+location	Skill: Spears 65	1	Spears Tier 1
+location	Skill: Spears 66	1	Spears Tier 1
+location	Skill: Spears 67	1	Spears Tier 1
+location	Skill: Spears 68	1	Spears Tier 1
+location	Skill: Spears 69	1	Spears Tier 1
+location	Skill: Spears 71	1	Spears Tier 1
+location	Skill: Spears 72	1	Spears Tier 1
+location	Skill: Spears 73	1	Spears Tier 1
+location	Skill: Spears 74	1	Spears Tier 1
+location	Skill: Spears 76	1	Spears Tier 1
+location	Skill: Spears 77	1	Spears Tier 1
+location	Skill: Spears 78	1	Spears Tier 1
+location	Skill: Spears 79	1	Spears Tier 1
+location	Skill: Spears 81	1	Spears Tier 1
+location	Skill: Spears 82	1	Spears Tier 1
+location	Skill: Spears 83	1	Spears Tier 1
+location	Skill: Spears 84	1	Spears Tier 1
+location	Skill: Spears 85	1	Spears Tier 1
+location	Skill: Spears 86	1	Spears Tier 1
+location	Skill: Spears 87	1	Spears Tier 1
+location	Skill: Spears 88	1	Spears Tier 1
+location	Skill: Spears 89	1	Spears Tier 1
+location	Skill: Spears 91	1	Spears Tier 1
+location	Skill: Spears 92	1	Spears Tier 1
+location	Skill: Spears 93	1	Spears Tier 1
+location	Skill: Spears 94	1	Spears Tier 1
+location	Skill: Spears 95	1	Spears Tier 1
+location	Skill: Spears 96	1	Spears Tier 1
+location	Skill: Spears 97	1	Spears Tier 1
+location	Skill: Spears 98	1	Spears Tier 1
+location	Skill: Spears 99	1	Spears Tier 1
+location	Skill: Polearms 1	4	Polearms Tier 1
+location	Skill: Polearms 2	4	Polearms Tier 1
+location	Skill: Polearms 3	4	Polearms Tier 1
+location	Skill: Polearms 4	4	Polearms Tier 1
+location	Skill: Polearms 5	4	Polearms Tier 1
+location	Skill: Polearms 6	4	Polearms Tier 1
+location	Skill: Polearms 7	4	Polearms Tier 1
+location	Skill: Polearms 8	4	Polearms Tier 1
+location	Skill: Polearms 9	4	Polearms Tier 1
+location	Skill: Polearms 11	4	Polearms Tier 1
+location	Skill: Polearms 12	4	Polearms Tier 1
+location	Skill: Polearms 13	4	Polearms Tier 1
+location	Skill: Polearms 14	4	Polearms Tier 1
+location	Skill: Polearms 15	4	Polearms Tier 1
+location	Skill: Polearms 16	4	Polearms Tier 1
+location	Skill: Polearms 17	4	Polearms Tier 1
+location	Skill: Polearms 18	4	Polearms Tier 1
+location	Skill: Polearms 19	4	Polearms Tier 1
+location	Skill: Polearms 21	4	Polearms Tier 1
+location	Skill: Polearms 22	4	Polearms Tier 1
+location	Skill: Polearms 23	4	Polearms Tier 1
+location	Skill: Polearms 24	4	Polearms Tier 1
+location	Skill: Polearms 26	4	Polearms Tier 1
+location	Skill: Polearms 27	4	Polearms Tier 1
+location	Skill: Polearms 28	4	Polearms Tier 1
+location	Skill: Polearms 29	4	Polearms Tier 1
+location	Skill: Polearms 31	4	Polearms Tier 1
+location	Skill: Polearms 32	4	Polearms Tier 1
+location	Skill: Polearms 33	4	Polearms Tier 1
+location	Skill: Polearms 34	4	Polearms Tier 1
+location	Skill: Polearms 35	4	Polearms Tier 1
+location	Skill: Polearms 36	4	Polearms Tier 1
+location	Skill: Polearms 37	4	Polearms Tier 1
+location	Skill: Polearms 38	4	Polearms Tier 1
+location	Skill: Polearms 39	4	Polearms Tier 1
+location	Skill: Polearms 41	4	Polearms Tier 1
+location	Skill: Polearms 42	4	Polearms Tier 1
+location	Skill: Polearms 43	4	Polearms Tier 1
+location	Skill: Polearms 44	4	Polearms Tier 1
+location	Skill: Polearms 45	4	Polearms Tier 1
+location	Skill: Polearms 46	4	Polearms Tier 1
+location	Skill: Polearms 47	4	Polearms Tier 1
+location	Skill: Polearms 48	4	Polearms Tier 1
+location	Skill: Polearms 49	4	Polearms Tier 1
+location	Skill: Polearms 51	4	Polearms Tier 1
+location	Skill: Polearms 52	4	Polearms Tier 1
+location	Skill: Polearms 53	4	Polearms Tier 1
+location	Skill: Polearms 54	4	Polearms Tier 1
+location	Skill: Polearms 55	4	Polearms Tier 1
+location	Skill: Polearms 56	4	Polearms Tier 1
+location	Skill: Polearms 57	4	Polearms Tier 1
+location	Skill: Polearms 58	4	Polearms Tier 1
+location	Skill: Polearms 59	4	Polearms Tier 1
+location	Skill: Polearms 61	4	Polearms Tier 1
+location	Skill: Polearms 62	4	Polearms Tier 1
+location	Skill: Polearms 63	4	Polearms Tier 1
+location	Skill: Polearms 64	4	Polearms Tier 1
+location	Skill: Polearms 65	4	Polearms Tier 1
+location	Skill: Polearms 66	4	Polearms Tier 1
+location	Skill: Polearms 67	4	Polearms Tier 1
+location	Skill: Polearms 68	4	Polearms Tier 1
+location	Skill: Polearms 69	4	Polearms Tier 1
+location	Skill: Polearms 71	4	Polearms Tier 1
+location	Skill: Polearms 72	4	Polearms Tier 1
+location	Skill: Polearms 73	4	Polearms Tier 1
+location	Skill: Polearms 74	4	Polearms Tier 1
+location	Skill: Polearms 76	4	Polearms Tier 1
+location	Skill: Polearms 77	4	Polearms Tier 1
+location	Skill: Polearms 78	4	Polearms Tier 1
+location	Skill: Polearms 79	4	Polearms Tier 1
+location	Skill: Polearms 81	4	Polearms Tier 1
+location	Skill: Polearms 82	4	Polearms Tier 1
+location	Skill: Polearms 83	4	Polearms Tier 1
+location	Skill: Polearms 84	4	Polearms Tier 1
+location	Skill: Polearms 85	4	Polearms Tier 1
+location	Skill: Polearms 86	4	Polearms Tier 1
+location	Skill: Polearms 87	4	Polearms Tier 1
+location	Skill: Polearms 88	4	Polearms Tier 1
+location	Skill: Polearms 89	4	Polearms Tier 1
+location	Skill: Polearms 91	4	Polearms Tier 1
+location	Skill: Polearms 92	4	Polearms Tier 1
+location	Skill: Polearms 93	4	Polearms Tier 1
+location	Skill: Polearms 94	4	Polearms Tier 1
+location	Skill: Polearms 95	4	Polearms Tier 1
+location	Skill: Polearms 96	4	Polearms Tier 1
+location	Skill: Polearms 97	4	Polearms Tier 1
+location	Skill: Polearms 98	4	Polearms Tier 1
+location	Skill: Polearms 99	4	Polearms Tier 1
+location	Skill: Bows 1	1	Bows Tier 1
+location	Skill: Bows 2	1	Bows Tier 1
+location	Skill: Bows 3	1	Bows Tier 1
+location	Skill: Bows 4	1	Bows Tier 1
+location	Skill: Bows 5	1	Bows Tier 1
+location	Skill: Bows 6	1	Bows Tier 1
+location	Skill: Bows 7	1	Bows Tier 1
+location	Skill: Bows 8	1	Bows Tier 1
+location	Skill: Bows 9	1	Bows Tier 1
+location	Skill: Bows 11	1	Bows Tier 1
+location	Skill: Bows 12	1	Bows Tier 1
+location	Skill: Bows 13	1	Bows Tier 1
+location	Skill: Bows 14	1	Bows Tier 1
+location	Skill: Bows 15	1	Bows Tier 1
+location	Skill: Bows 16	1	Bows Tier 1
+location	Skill: Bows 17	1	Bows Tier 1
+location	Skill: Bows 18	1	Bows Tier 1
+location	Skill: Bows 19	1	Bows Tier 1
+location	Skill: Bows 21	1	Bows Tier 1
+location	Skill: Bows 22	1	Bows Tier 1
+location	Skill: Bows 23	1	Bows Tier 1
+location	Skill: Bows 24	1	Bows Tier 1
+location	Skill: Bows 26	1	Bows Tier 1
+location	Skill: Bows 27	1	Bows Tier 1
+location	Skill: Bows 28	1	Bows Tier 1
+location	Skill: Bows 29	1	Bows Tier 1
+location	Skill: Bows 31	1	Bows Tier 1
+location	Skill: Bows 32	1	Bows Tier 1
+location	Skill: Bows 33	1	Bows Tier 1
+location	Skill: Bows 34	1	Bows Tier 1
+location	Skill: Bows 35	1	Bows Tier 1
+location	Skill: Bows 36	1	Bows Tier 1
+location	Skill: Bows 37	1	Bows Tier 1
+location	Skill: Bows 38	1	Bows Tier 1
+location	Skill: Bows 39	1	Bows Tier 1
+location	Skill: Bows 41	1	Bows Tier 1
+location	Skill: Bows 42	1	Bows Tier 1
+location	Skill: Bows 43	1	Bows Tier 1
+location	Skill: Bows 44	1	Bows Tier 1
+location	Skill: Bows 45	1	Bows Tier 1
+location	Skill: Bows 46	1	Bows Tier 1
+location	Skill: Bows 47	1	Bows Tier 1
+location	Skill: Bows 48	1	Bows Tier 1
+location	Skill: Bows 49	1	Bows Tier 1
+location	Skill: Bows 51	1	Bows Tier 1
+location	Skill: Bows 52	1	Bows Tier 1
+location	Skill: Bows 53	1	Bows Tier 1
+location	Skill: Bows 54	1	Bows Tier 1
+location	Skill: Bows 55	1	Bows Tier 1
+location	Skill: Bows 56	1	Bows Tier 1
+location	Skill: Bows 57	1	Bows Tier 1
+location	Skill: Bows 58	1	Bows Tier 1
+location	Skill: Bows 59	1	Bows Tier 1
+location	Skill: Bows 61	1	Bows Tier 1
+location	Skill: Bows 62	1	Bows Tier 1
+location	Skill: Bows 63	1	Bows Tier 1
+location	Skill: Bows 64	1	Bows Tier 1
+location	Skill: Bows 65	1	Bows Tier 1
+location	Skill: Bows 66	1	Bows Tier 1
+location	Skill: Bows 67	1	Bows Tier 1
+location	Skill: Bows 68	1	Bows Tier 1
+location	Skill: Bows 69	1	Bows Tier 1
+location	Skill: Bows 71	1	Bows Tier 1
+location	Skill: Bows 72	1	Bows Tier 1
+location	Skill: Bows 73	1	Bows Tier 1
+location	Skill: Bows 74	1	Bows Tier 1
+location	Skill: Bows 76	1	Bows Tier 1
+location	Skill: Bows 77	1	Bows Tier 1
+location	Skill: Bows 78	1	Bows Tier 1
+location	Skill: Bows 79	1	Bows Tier 1
+location	Skill: Bows 81	1	Bows Tier 1
+location	Skill: Bows 82	1	Bows Tier 1
+location	Skill: Bows 83	1	Bows Tier 1
+location	Skill: Bows 84	1	Bows Tier 1
+location	Skill: Bows 85	1	Bows Tier 1
+location	Skill: Bows 86	1	Bows Tier 1
+location	Skill: Bows 87	1	Bows Tier 1
+location	Skill: Bows 88	1	Bows Tier 1
+location	Skill: Bows 89	1	Bows Tier 1
+location	Skill: Bows 91	1	Bows Tier 1
+location	Skill: Bows 92	1	Bows Tier 1
+location	Skill: Bows 93	1	Bows Tier 1
+location	Skill: Bows 94	1	Bows Tier 1
+location	Skill: Bows 95	1	Bows Tier 1
+location	Skill: Bows 96	1	Bows Tier 1
+location	Skill: Bows 97	1	Bows Tier 1
+location	Skill: Bows 98	1	Bows Tier 1
+location	Skill: Bows 99	1	Bows Tier 1
+location	Skill: Crossbows 1	9	Crossbows Tier 1
+location	Skill: Crossbows 2	9	Crossbows Tier 1
+location	Skill: Crossbows 3	9	Crossbows Tier 1
+location	Skill: Crossbows 4	9	Crossbows Tier 1
+location	Skill: Crossbows 5	9	Crossbows Tier 1
+location	Skill: Crossbows 6	9	Crossbows Tier 1
+location	Skill: Crossbows 7	9	Crossbows Tier 1
+location	Skill: Crossbows 8	9	Crossbows Tier 1
+location	Skill: Crossbows 9	9	Crossbows Tier 1
+location	Skill: Crossbows 11	9	Crossbows Tier 1
+location	Skill: Crossbows 12	9	Crossbows Tier 1
+location	Skill: Crossbows 13	9	Crossbows Tier 1
+location	Skill: Crossbows 14	9	Crossbows Tier 1
+location	Skill: Crossbows 15	9	Crossbows Tier 1
+location	Skill: Crossbows 16	9	Crossbows Tier 1
+location	Skill: Crossbows 17	9	Crossbows Tier 1
+location	Skill: Crossbows 18	9	Crossbows Tier 1
+location	Skill: Crossbows 19	9	Crossbows Tier 1
+location	Skill: Crossbows 21	9	Crossbows Tier 1
+location	Skill: Crossbows 22	9	Crossbows Tier 1
+location	Skill: Crossbows 23	9	Crossbows Tier 1
+location	Skill: Crossbows 24	9	Crossbows Tier 1
+location	Skill: Crossbows 26	9	Crossbows Tier 1
+location	Skill: Crossbows 27	9	Crossbows Tier 1
+location	Skill: Crossbows 28	9	Crossbows Tier 1
+location	Skill: Crossbows 29	9	Crossbows Tier 1
+location	Skill: Crossbows 31	9	Crossbows Tier 1
+location	Skill: Crossbows 32	9	Crossbows Tier 1
+location	Skill: Crossbows 33	9	Crossbows Tier 1
+location	Skill: Crossbows 34	9	Crossbows Tier 1
+location	Skill: Crossbows 35	9	Crossbows Tier 1
+location	Skill: Crossbows 36	9	Crossbows Tier 1
+location	Skill: Crossbows 37	9	Crossbows Tier 1
+location	Skill: Crossbows 38	9	Crossbows Tier 1
+location	Skill: Crossbows 39	9	Crossbows Tier 1
+location	Skill: Crossbows 41	9	Crossbows Tier 1
+location	Skill: Crossbows 42	9	Crossbows Tier 1
+location	Skill: Crossbows 43	9	Crossbows Tier 1
+location	Skill: Crossbows 44	9	Crossbows Tier 1
+location	Skill: Crossbows 45	9	Crossbows Tier 1
+location	Skill: Crossbows 46	9	Crossbows Tier 1
+location	Skill: Crossbows 47	9	Crossbows Tier 1
+location	Skill: Crossbows 48	9	Crossbows Tier 1
+location	Skill: Crossbows 49	9	Crossbows Tier 1
+location	Skill: Crossbows 51	9	Crossbows Tier 1
+location	Skill: Crossbows 52	9	Crossbows Tier 1
+location	Skill: Crossbows 53	9	Crossbows Tier 1
+location	Skill: Crossbows 54	9	Crossbows Tier 1
+location	Skill: Crossbows 55	9	Crossbows Tier 1
+location	Skill: Crossbows 56	9	Crossbows Tier 1
+location	Skill: Crossbows 57	9	Crossbows Tier 1
+location	Skill: Crossbows 58	9	Crossbows Tier 1
+location	Skill: Crossbows 59	9	Crossbows Tier 1
+location	Skill: Crossbows 61	9	Crossbows Tier 1
+location	Skill: Crossbows 62	9	Crossbows Tier 1
+location	Skill: Crossbows 63	9	Crossbows Tier 1
+location	Skill: Crossbows 64	9	Crossbows Tier 1
+location	Skill: Crossbows 65	9	Crossbows Tier 1
+location	Skill: Crossbows 66	9	Crossbows Tier 1
+location	Skill: Crossbows 67	9	Crossbows Tier 1
+location	Skill: Crossbows 68	9	Crossbows Tier 1
+location	Skill: Crossbows 69	9	Crossbows Tier 1
+location	Skill: Crossbows 71	9	Crossbows Tier 1
+location	Skill: Crossbows 72	9	Crossbows Tier 1
+location	Skill: Crossbows 73	9	Crossbows Tier 1
+location	Skill: Crossbows 74	9	Crossbows Tier 1
+location	Skill: Crossbows 76	9	Crossbows Tier 1
+location	Skill: Crossbows 77	9	Crossbows Tier 1
+location	Skill: Crossbows 78	9	Crossbows Tier 1
+location	Skill: Crossbows 79	9	Crossbows Tier 1
+location	Skill: Crossbows 81	9	Crossbows Tier 1
+location	Skill: Crossbows 82	9	Crossbows Tier 1
+location	Skill: Crossbows 83	9	Crossbows Tier 1
+location	Skill: Crossbows 84	9	Crossbows Tier 1
+location	Skill: Crossbows 85	9	Crossbows Tier 1
+location	Skill: Crossbows 86	9	Crossbows Tier 1
+location	Skill: Crossbows 87	9	Crossbows Tier 1
+location	Skill: Crossbows 88	9	Crossbows Tier 1
+location	Skill: Crossbows 89	9	Crossbows Tier 1
+location	Skill: Crossbows 91	9	Crossbows Tier 1
+location	Skill: Crossbows 92	9	Crossbows Tier 1
+location	Skill: Crossbows 93	9	Crossbows Tier 1
+location	Skill: Crossbows 94	9	Crossbows Tier 1
+location	Skill: Crossbows 95	9	Crossbows Tier 1
+location	Skill: Crossbows 96	9	Crossbows Tier 1
+location	Skill: Crossbows 97	9	Crossbows Tier 1
+location	Skill: Crossbows 98	9	Crossbows Tier 1
+location	Skill: Crossbows 99	9	Crossbows Tier 1
+location	Skill: Blocking 1	1	Shields Tier 1
+location	Skill: Blocking 2	1	Shields Tier 1
+location	Skill: Blocking 3	1	Shields Tier 1
+location	Skill: Blocking 4	1	Shields Tier 1
+location	Skill: Blocking 5	1	Shields Tier 1
+location	Skill: Blocking 6	1	Shields Tier 1
+location	Skill: Blocking 7	1	Shields Tier 1
+location	Skill: Blocking 8	1	Shields Tier 1
+location	Skill: Blocking 9	1	Shields Tier 1
+location	Skill: Blocking 11	1	Shields Tier 1
+location	Skill: Blocking 12	1	Shields Tier 1
+location	Skill: Blocking 13	1	Shields Tier 1
+location	Skill: Blocking 14	1	Shields Tier 1
+location	Skill: Blocking 15	1	Shields Tier 1
+location	Skill: Blocking 16	1	Shields Tier 1
+location	Skill: Blocking 17	1	Shields Tier 1
+location	Skill: Blocking 18	1	Shields Tier 1
+location	Skill: Blocking 19	1	Shields Tier 1
+location	Skill: Blocking 21	1	Shields Tier 1
+location	Skill: Blocking 22	1	Shields Tier 1
+location	Skill: Blocking 23	1	Shields Tier 1
+location	Skill: Blocking 24	1	Shields Tier 1
+location	Skill: Blocking 26	1	Shields Tier 1
+location	Skill: Blocking 27	1	Shields Tier 1
+location	Skill: Blocking 28	1	Shields Tier 1
+location	Skill: Blocking 29	1	Shields Tier 1
+location	Skill: Blocking 31	1	Shields Tier 1
+location	Skill: Blocking 32	1	Shields Tier 1
+location	Skill: Blocking 33	1	Shields Tier 1
+location	Skill: Blocking 34	1	Shields Tier 1
+location	Skill: Blocking 35	1	Shields Tier 1
+location	Skill: Blocking 36	1	Shields Tier 1
+location	Skill: Blocking 37	1	Shields Tier 1
+location	Skill: Blocking 38	1	Shields Tier 1
+location	Skill: Blocking 39	1	Shields Tier 1
+location	Skill: Blocking 41	1	Shields Tier 1
+location	Skill: Blocking 42	1	Shields Tier 1
+location	Skill: Blocking 43	1	Shields Tier 1
+location	Skill: Blocking 44	1	Shields Tier 1
+location	Skill: Blocking 45	1	Shields Tier 1
+location	Skill: Blocking 46	1	Shields Tier 1
+location	Skill: Blocking 47	1	Shields Tier 1
+location	Skill: Blocking 48	1	Shields Tier 1
+location	Skill: Blocking 49	1	Shields Tier 1
+location	Skill: Blocking 51	1	Shields Tier 1
+location	Skill: Blocking 52	1	Shields Tier 1
+location	Skill: Blocking 53	1	Shields Tier 1
+location	Skill: Blocking 54	1	Shields Tier 1
+location	Skill: Blocking 55	1	Shields Tier 1
+location	Skill: Blocking 56	1	Shields Tier 1
+location	Skill: Blocking 57	1	Shields Tier 1
+location	Skill: Blocking 58	1	Shields Tier 1
+location	Skill: Blocking 59	1	Shields Tier 1
+location	Skill: Blocking 61	1	Shields Tier 1
+location	Skill: Blocking 62	1	Shields Tier 1
+location	Skill: Blocking 63	1	Shields Tier 1
+location	Skill: Blocking 64	1	Shields Tier 1
+location	Skill: Blocking 65	1	Shields Tier 1
+location	Skill: Blocking 66	1	Shields Tier 1
+location	Skill: Blocking 67	1	Shields Tier 1
+location	Skill: Blocking 68	1	Shields Tier 1
+location	Skill: Blocking 69	1	Shields Tier 1
+location	Skill: Blocking 71	1	Shields Tier 1
+location	Skill: Blocking 72	1	Shields Tier 1
+location	Skill: Blocking 73	1	Shields Tier 1
+location	Skill: Blocking 74	1	Shields Tier 1
+location	Skill: Blocking 76	1	Shields Tier 1
+location	Skill: Blocking 77	1	Shields Tier 1
+location	Skill: Blocking 78	1	Shields Tier 1
+location	Skill: Blocking 79	1	Shields Tier 1
+location	Skill: Blocking 81	1	Shields Tier 1
+location	Skill: Blocking 82	1	Shields Tier 1
+location	Skill: Blocking 83	1	Shields Tier 1
+location	Skill: Blocking 84	1	Shields Tier 1
+location	Skill: Blocking 85	1	Shields Tier 1
+location	Skill: Blocking 86	1	Shields Tier 1
+location	Skill: Blocking 87	1	Shields Tier 1
+location	Skill: Blocking 88	1	Shields Tier 1
+location	Skill: Blocking 89	1	Shields Tier 1
+location	Skill: Blocking 91	1	Shields Tier 1
+location	Skill: Blocking 92	1	Shields Tier 1
+location	Skill: Blocking 93	1	Shields Tier 1
+location	Skill: Blocking 94	1	Shields Tier 1
+location	Skill: Blocking 95	1	Shields Tier 1
+location	Skill: Blocking 96	1	Shields Tier 1
+location	Skill: Blocking 97	1	Shields Tier 1
+location	Skill: Blocking 98	1	Shields Tier 1
+location	Skill: Blocking 99	1	Shields Tier 1
+location	Skill: Fists 1	0	
+location	Skill: Fists 2	0	
+location	Skill: Fists 3	0	
+location	Skill: Fists 4	0	
+location	Skill: Fists 5	0	
+location	Skill: Fists 6	0	
+location	Skill: Fists 7	0	
+location	Skill: Fists 8	0	
+location	Skill: Fists 9	0	
+location	Skill: Fists 11	0	
+location	Skill: Fists 12	0	
+location	Skill: Fists 13	0	
+location	Skill: Fists 14	0	
+location	Skill: Fists 15	0	
+location	Skill: Fists 16	0	
+location	Skill: Fists 17	0	
+location	Skill: Fists 18	0	
+location	Skill: Fists 19	0	
+location	Skill: Fists 21	0	
+location	Skill: Fists 22	0	
+location	Skill: Fists 23	0	
+location	Skill: Fists 24	0	
+location	Skill: Fists 26	0	
+location	Skill: Fists 27	0	
+location	Skill: Fists 28	0	
+location	Skill: Fists 29	0	
+location	Skill: Fists 31	0	
+location	Skill: Fists 32	0	
+location	Skill: Fists 33	0	
+location	Skill: Fists 34	0	
+location	Skill: Fists 35	0	
+location	Skill: Fists 36	0	
+location	Skill: Fists 37	0	
+location	Skill: Fists 38	0	
+location	Skill: Fists 39	0	
+location	Skill: Fists 41	0	
+location	Skill: Fists 42	0	
+location	Skill: Fists 43	0	
+location	Skill: Fists 44	0	
+location	Skill: Fists 45	0	
+location	Skill: Fists 46	0	
+location	Skill: Fists 47	0	
+location	Skill: Fists 48	0	
+location	Skill: Fists 49	0	
+location	Skill: Fists 51	0	
+location	Skill: Fists 52	0	
+location	Skill: Fists 53	0	
+location	Skill: Fists 54	0	
+location	Skill: Fists 55	0	
+location	Skill: Fists 56	0	
+location	Skill: Fists 57	0	
+location	Skill: Fists 58	0	
+location	Skill: Fists 59	0	
+location	Skill: Fists 61	0	
+location	Skill: Fists 62	0	
+location	Skill: Fists 63	0	
+location	Skill: Fists 64	0	
+location	Skill: Fists 65	0	
+location	Skill: Fists 66	0	
+location	Skill: Fists 67	0	
+location	Skill: Fists 68	0	
+location	Skill: Fists 69	0	
+location	Skill: Fists 71	0	
+location	Skill: Fists 72	0	
+location	Skill: Fists 73	0	
+location	Skill: Fists 74	0	
+location	Skill: Fists 76	0	
+location	Skill: Fists 77	0	
+location	Skill: Fists 78	0	
+location	Skill: Fists 79	0	
+location	Skill: Fists 81	0	
+location	Skill: Fists 82	0	
+location	Skill: Fists 83	0	
+location	Skill: Fists 84	0	
+location	Skill: Fists 85	0	
+location	Skill: Fists 86	0	
+location	Skill: Fists 87	0	
+location	Skill: Fists 88	0	
+location	Skill: Fists 89	0	
+location	Skill: Fists 91	0	
+location	Skill: Fists 92	0	
+location	Skill: Fists 93	0	
+location	Skill: Fists 94	0	
+location	Skill: Fists 95	0	
+location	Skill: Fists 96	0	
+location	Skill: Fists 97	0	
+location	Skill: Fists 98	0	
+location	Skill: Fists 99	0	
+location	Skill: Elemental Magic 1	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 2	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 3	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 4	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 5	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 6	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 7	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 8	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 9	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 11	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 12	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 13	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 14	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 15	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 16	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 17	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 18	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 19	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 21	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 22	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 23	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 24	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 26	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 27	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 28	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 29	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 31	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 32	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 33	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 34	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 35	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 36	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 37	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 38	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 39	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 41	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 42	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 43	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 44	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 45	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 46	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 47	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 48	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 49	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 51	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 52	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 53	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 54	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 55	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 56	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 57	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 58	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 59	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 61	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 62	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 63	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 64	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 65	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 66	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 67	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 68	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 69	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 71	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 72	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 73	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 74	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 76	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 77	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 78	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 79	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 81	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 82	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 83	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 84	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 85	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 86	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 87	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 88	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 89	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 91	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 92	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 93	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 94	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 95	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 96	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 97	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 98	10	Elemental Magic Tier 1
+location	Skill: Elemental Magic 99	10	Elemental Magic Tier 1
+location	Skill: Blood Magic 1	10	Blood Magic Tier 1
+location	Skill: Blood Magic 2	10	Blood Magic Tier 1
+location	Skill: Blood Magic 3	10	Blood Magic Tier 1
+location	Skill: Blood Magic 4	10	Blood Magic Tier 1
+location	Skill: Blood Magic 5	10	Blood Magic Tier 1
+location	Skill: Blood Magic 6	10	Blood Magic Tier 1
+location	Skill: Blood Magic 7	10	Blood Magic Tier 1
+location	Skill: Blood Magic 8	10	Blood Magic Tier 1
+location	Skill: Blood Magic 9	10	Blood Magic Tier 1
+location	Skill: Blood Magic 11	10	Blood Magic Tier 1
+location	Skill: Blood Magic 12	10	Blood Magic Tier 1
+location	Skill: Blood Magic 13	10	Blood Magic Tier 1
+location	Skill: Blood Magic 14	10	Blood Magic Tier 1
+location	Skill: Blood Magic 15	10	Blood Magic Tier 1
+location	Skill: Blood Magic 16	10	Blood Magic Tier 1
+location	Skill: Blood Magic 17	10	Blood Magic Tier 1
+location	Skill: Blood Magic 18	10	Blood Magic Tier 1
+location	Skill: Blood Magic 19	10	Blood Magic Tier 1
+location	Skill: Blood Magic 21	10	Blood Magic Tier 1
+location	Skill: Blood Magic 22	10	Blood Magic Tier 1
+location	Skill: Blood Magic 23	10	Blood Magic Tier 1
+location	Skill: Blood Magic 24	10	Blood Magic Tier 1
+location	Skill: Blood Magic 26	10	Blood Magic Tier 1
+location	Skill: Blood Magic 27	10	Blood Magic Tier 1
+location	Skill: Blood Magic 28	10	Blood Magic Tier 1
+location	Skill: Blood Magic 29	10	Blood Magic Tier 1
+location	Skill: Blood Magic 31	10	Blood Magic Tier 1
+location	Skill: Blood Magic 32	10	Blood Magic Tier 1
+location	Skill: Blood Magic 33	10	Blood Magic Tier 1
+location	Skill: Blood Magic 34	10	Blood Magic Tier 1
+location	Skill: Blood Magic 35	10	Blood Magic Tier 1
+location	Skill: Blood Magic 36	10	Blood Magic Tier 1
+location	Skill: Blood Magic 37	10	Blood Magic Tier 1
+location	Skill: Blood Magic 38	10	Blood Magic Tier 1
+location	Skill: Blood Magic 39	10	Blood Magic Tier 1
+location	Skill: Blood Magic 41	10	Blood Magic Tier 1
+location	Skill: Blood Magic 42	10	Blood Magic Tier 1
+location	Skill: Blood Magic 43	10	Blood Magic Tier 1
+location	Skill: Blood Magic 44	10	Blood Magic Tier 1
+location	Skill: Blood Magic 45	10	Blood Magic Tier 1
+location	Skill: Blood Magic 46	10	Blood Magic Tier 1
+location	Skill: Blood Magic 47	10	Blood Magic Tier 1
+location	Skill: Blood Magic 48	10	Blood Magic Tier 1
+location	Skill: Blood Magic 49	10	Blood Magic Tier 1
+location	Skill: Blood Magic 51	10	Blood Magic Tier 1
+location	Skill: Blood Magic 52	10	Blood Magic Tier 1
+location	Skill: Blood Magic 53	10	Blood Magic Tier 1
+location	Skill: Blood Magic 54	10	Blood Magic Tier 1
+location	Skill: Blood Magic 55	10	Blood Magic Tier 1
+location	Skill: Blood Magic 56	10	Blood Magic Tier 1
+location	Skill: Blood Magic 57	10	Blood Magic Tier 1
+location	Skill: Blood Magic 58	10	Blood Magic Tier 1
+location	Skill: Blood Magic 59	10	Blood Magic Tier 1
+location	Skill: Blood Magic 61	10	Blood Magic Tier 1
+location	Skill: Blood Magic 62	10	Blood Magic Tier 1
+location	Skill: Blood Magic 63	10	Blood Magic Tier 1
+location	Skill: Blood Magic 64	10	Blood Magic Tier 1
+location	Skill: Blood Magic 65	10	Blood Magic Tier 1
+location	Skill: Blood Magic 66	10	Blood Magic Tier 1
+location	Skill: Blood Magic 67	10	Blood Magic Tier 1
+location	Skill: Blood Magic 68	10	Blood Magic Tier 1
+location	Skill: Blood Magic 69	10	Blood Magic Tier 1
+location	Skill: Blood Magic 71	10	Blood Magic Tier 1
+location	Skill: Blood Magic 72	10	Blood Magic Tier 1
+location	Skill: Blood Magic 73	10	Blood Magic Tier 1
+location	Skill: Blood Magic 74	10	Blood Magic Tier 1
+location	Skill: Blood Magic 76	10	Blood Magic Tier 1
+location	Skill: Blood Magic 77	10	Blood Magic Tier 1
+location	Skill: Blood Magic 78	10	Blood Magic Tier 1
+location	Skill: Blood Magic 79	10	Blood Magic Tier 1
+location	Skill: Blood Magic 81	10	Blood Magic Tier 1
+location	Skill: Blood Magic 82	10	Blood Magic Tier 1
+location	Skill: Blood Magic 83	10	Blood Magic Tier 1
+location	Skill: Blood Magic 84	10	Blood Magic Tier 1
+location	Skill: Blood Magic 85	10	Blood Magic Tier 1
+location	Skill: Blood Magic 86	10	Blood Magic Tier 1
+location	Skill: Blood Magic 87	10	Blood Magic Tier 1
+location	Skill: Blood Magic 88	10	Blood Magic Tier 1
+location	Skill: Blood Magic 89	10	Blood Magic Tier 1
+location	Skill: Blood Magic 91	10	Blood Magic Tier 1
+location	Skill: Blood Magic 92	10	Blood Magic Tier 1
+location	Skill: Blood Magic 93	10	Blood Magic Tier 1
+location	Skill: Blood Magic 94	10	Blood Magic Tier 1
+location	Skill: Blood Magic 95	10	Blood Magic Tier 1
+location	Skill: Blood Magic 96	10	Blood Magic Tier 1
+location	Skill: Blood Magic 97	10	Blood Magic Tier 1
+location	Skill: Blood Magic 98	10	Blood Magic Tier 1
+location	Skill: Blood Magic 99	10	Blood Magic Tier 1
+location	Skill: Jump 1	0	
+location	Skill: Jump 2	0	
+location	Skill: Jump 3	0	
+location	Skill: Jump 4	0	
+location	Skill: Jump 5	0	
+location	Skill: Jump 6	0	
+location	Skill: Jump 7	0	
+location	Skill: Jump 8	0	
+location	Skill: Jump 9	0	
+location	Skill: Jump 11	0	
+location	Skill: Jump 12	0	
+location	Skill: Jump 13	0	
+location	Skill: Jump 14	0	
+location	Skill: Jump 15	0	
+location	Skill: Jump 16	0	
+location	Skill: Jump 17	0	
+location	Skill: Jump 18	0	
+location	Skill: Jump 19	0	
+location	Skill: Jump 21	0	
+location	Skill: Jump 22	0	
+location	Skill: Jump 23	0	
+location	Skill: Jump 24	0	
+location	Skill: Jump 26	0	
+location	Skill: Jump 27	0	
+location	Skill: Jump 28	0	
+location	Skill: Jump 29	0	
+location	Skill: Jump 31	0	
+location	Skill: Jump 32	0	
+location	Skill: Jump 33	0	
+location	Skill: Jump 34	0	
+location	Skill: Jump 35	0	
+location	Skill: Jump 36	0	
+location	Skill: Jump 37	0	
+location	Skill: Jump 38	0	
+location	Skill: Jump 39	0	
+location	Skill: Jump 41	0	
+location	Skill: Jump 42	0	
+location	Skill: Jump 43	0	
+location	Skill: Jump 44	0	
+location	Skill: Jump 45	0	
+location	Skill: Jump 46	0	
+location	Skill: Jump 47	0	
+location	Skill: Jump 48	0	
+location	Skill: Jump 49	0	
+location	Skill: Jump 51	0	
+location	Skill: Jump 52	0	
+location	Skill: Jump 53	0	
+location	Skill: Jump 54	0	
+location	Skill: Jump 55	0	
+location	Skill: Jump 56	0	
+location	Skill: Jump 57	0	
+location	Skill: Jump 58	0	
+location	Skill: Jump 59	0	
+location	Skill: Jump 61	0	
+location	Skill: Jump 62	0	
+location	Skill: Jump 63	0	
+location	Skill: Jump 64	0	
+location	Skill: Jump 65	0	
+location	Skill: Jump 66	0	
+location	Skill: Jump 67	0	
+location	Skill: Jump 68	0	
+location	Skill: Jump 69	0	
+location	Skill: Jump 71	0	
+location	Skill: Jump 72	0	
+location	Skill: Jump 73	0	
+location	Skill: Jump 74	0	
+location	Skill: Jump 76	0	
+location	Skill: Jump 77	0	
+location	Skill: Jump 78	0	
+location	Skill: Jump 79	0	
+location	Skill: Jump 81	0	
+location	Skill: Jump 82	0	
+location	Skill: Jump 83	0	
+location	Skill: Jump 84	0	
+location	Skill: Jump 85	0	
+location	Skill: Jump 86	0	
+location	Skill: Jump 87	0	
+location	Skill: Jump 88	0	
+location	Skill: Jump 89	0	
+location	Skill: Jump 91	0	
+location	Skill: Jump 92	0	
+location	Skill: Jump 93	0	
+location	Skill: Jump 94	0	
+location	Skill: Jump 95	0	
+location	Skill: Jump 96	0	
+location	Skill: Jump 97	0	
+location	Skill: Jump 98	0	
+location	Skill: Jump 99	0	
+location	Skill: Sneak 1	0	
+location	Skill: Sneak 2	0	
+location	Skill: Sneak 3	0	
+location	Skill: Sneak 4	0	
+location	Skill: Sneak 5	0	
+location	Skill: Sneak 6	0	
+location	Skill: Sneak 7	0	
+location	Skill: Sneak 8	0	
+location	Skill: Sneak 9	0	
+location	Skill: Sneak 11	0	
+location	Skill: Sneak 12	0	
+location	Skill: Sneak 13	0	
+location	Skill: Sneak 14	0	
+location	Skill: Sneak 15	0	
+location	Skill: Sneak 16	0	
+location	Skill: Sneak 17	0	
+location	Skill: Sneak 18	0	
+location	Skill: Sneak 19	0	
+location	Skill: Sneak 21	0	
+location	Skill: Sneak 22	0	
+location	Skill: Sneak 23	0	
+location	Skill: Sneak 24	0	
+location	Skill: Sneak 26	0	
+location	Skill: Sneak 27	0	
+location	Skill: Sneak 28	0	
+location	Skill: Sneak 29	0	
+location	Skill: Sneak 31	0	
+location	Skill: Sneak 32	0	
+location	Skill: Sneak 33	0	
+location	Skill: Sneak 34	0	
+location	Skill: Sneak 35	0	
+location	Skill: Sneak 36	0	
+location	Skill: Sneak 37	0	
+location	Skill: Sneak 38	0	
+location	Skill: Sneak 39	0	
+location	Skill: Sneak 41	0	
+location	Skill: Sneak 42	0	
+location	Skill: Sneak 43	0	
+location	Skill: Sneak 44	0	
+location	Skill: Sneak 45	0	
+location	Skill: Sneak 46	0	
+location	Skill: Sneak 47	0	
+location	Skill: Sneak 48	0	
+location	Skill: Sneak 49	0	
+location	Skill: Sneak 51	0	
+location	Skill: Sneak 52	0	
+location	Skill: Sneak 53	0	
+location	Skill: Sneak 54	0	
+location	Skill: Sneak 55	0	
+location	Skill: Sneak 56	0	
+location	Skill: Sneak 57	0	
+location	Skill: Sneak 58	0	
+location	Skill: Sneak 59	0	
+location	Skill: Sneak 61	0	
+location	Skill: Sneak 62	0	
+location	Skill: Sneak 63	0	
+location	Skill: Sneak 64	0	
+location	Skill: Sneak 65	0	
+location	Skill: Sneak 66	0	
+location	Skill: Sneak 67	0	
+location	Skill: Sneak 68	0	
+location	Skill: Sneak 69	0	
+location	Skill: Sneak 71	0	
+location	Skill: Sneak 72	0	
+location	Skill: Sneak 73	0	
+location	Skill: Sneak 74	0	
+location	Skill: Sneak 76	0	
+location	Skill: Sneak 77	0	
+location	Skill: Sneak 78	0	
+location	Skill: Sneak 79	0	
+location	Skill: Sneak 81	0	
+location	Skill: Sneak 82	0	
+location	Skill: Sneak 83	0	
+location	Skill: Sneak 84	0	
+location	Skill: Sneak 85	0	
+location	Skill: Sneak 86	0	
+location	Skill: Sneak 87	0	
+location	Skill: Sneak 88	0	
+location	Skill: Sneak 89	0	
+location	Skill: Sneak 91	0	
+location	Skill: Sneak 92	0	
+location	Skill: Sneak 93	0	
+location	Skill: Sneak 94	0	
+location	Skill: Sneak 95	0	
+location	Skill: Sneak 96	0	
+location	Skill: Sneak 97	0	
+location	Skill: Sneak 98	0	
+location	Skill: Sneak 99	0	
+location	Skill: Run 1	0	
+location	Skill: Run 2	0	
+location	Skill: Run 3	0	
+location	Skill: Run 4	0	
+location	Skill: Run 5	0	
+location	Skill: Run 6	0	
+location	Skill: Run 7	0	
+location	Skill: Run 8	0	
+location	Skill: Run 9	0	
+location	Skill: Run 11	0	
+location	Skill: Run 12	0	
+location	Skill: Run 13	0	
+location	Skill: Run 14	0	
+location	Skill: Run 15	0	
+location	Skill: Run 16	0	
+location	Skill: Run 17	0	
+location	Skill: Run 18	0	
+location	Skill: Run 19	0	
+location	Skill: Run 21	0	
+location	Skill: Run 22	0	
+location	Skill: Run 23	0	
+location	Skill: Run 24	0	
+location	Skill: Run 26	0	
+location	Skill: Run 27	0	
+location	Skill: Run 28	0	
+location	Skill: Run 29	0	
+location	Skill: Run 31	0	
+location	Skill: Run 32	0	
+location	Skill: Run 33	0	
+location	Skill: Run 34	0	
+location	Skill: Run 35	0	
+location	Skill: Run 36	0	
+location	Skill: Run 37	0	
+location	Skill: Run 38	0	
+location	Skill: Run 39	0	
+location	Skill: Run 41	0	
+location	Skill: Run 42	0	
+location	Skill: Run 43	0	
+location	Skill: Run 44	0	
+location	Skill: Run 45	0	
+location	Skill: Run 46	0	
+location	Skill: Run 47	0	
+location	Skill: Run 48	0	
+location	Skill: Run 49	0	
+location	Skill: Run 51	0	
+location	Skill: Run 52	0	
+location	Skill: Run 53	0	
+location	Skill: Run 54	0	
+location	Skill: Run 55	0	
+location	Skill: Run 56	0	
+location	Skill: Run 57	0	
+location	Skill: Run 58	0	
+location	Skill: Run 59	0	
+location	Skill: Run 61	0	
+location	Skill: Run 62	0	
+location	Skill: Run 63	0	
+location	Skill: Run 64	0	
+location	Skill: Run 65	0	
+location	Skill: Run 66	0	
+location	Skill: Run 67	0	
+location	Skill: Run 68	0	
+location	Skill: Run 69	0	
+location	Skill: Run 71	0	
+location	Skill: Run 72	0	
+location	Skill: Run 73	0	
+location	Skill: Run 74	0	
+location	Skill: Run 76	0	
+location	Skill: Run 77	0	
+location	Skill: Run 78	0	
+location	Skill: Run 79	0	
+location	Skill: Run 81	0	
+location	Skill: Run 82	0	
+location	Skill: Run 83	0	
+location	Skill: Run 84	0	
+location	Skill: Run 85	0	
+location	Skill: Run 86	0	
+location	Skill: Run 87	0	
+location	Skill: Run 88	0	
+location	Skill: Run 89	0	
+location	Skill: Run 91	0	
+location	Skill: Run 92	0	
+location	Skill: Run 93	0	
+location	Skill: Run 94	0	
+location	Skill: Run 95	0	
+location	Skill: Run 96	0	
+location	Skill: Run 97	0	
+location	Skill: Run 98	0	
+location	Skill: Run 99	0	
+location	Skill: Swim 1	0	
+location	Skill: Swim 2	0	
+location	Skill: Swim 3	0	
+location	Skill: Swim 4	0	
+location	Skill: Swim 5	0	
+location	Skill: Swim 6	0	
+location	Skill: Swim 7	0	
+location	Skill: Swim 8	0	
+location	Skill: Swim 9	0	
+location	Skill: Swim 11	0	
+location	Skill: Swim 12	0	
+location	Skill: Swim 13	0	
+location	Skill: Swim 14	0	
+location	Skill: Swim 15	0	
+location	Skill: Swim 16	0	
+location	Skill: Swim 17	0	
+location	Skill: Swim 18	0	
+location	Skill: Swim 19	0	
+location	Skill: Swim 21	0	
+location	Skill: Swim 22	0	
+location	Skill: Swim 23	0	
+location	Skill: Swim 24	0	
+location	Skill: Swim 26	0	
+location	Skill: Swim 27	0	
+location	Skill: Swim 28	0	
+location	Skill: Swim 29	0	
+location	Skill: Swim 31	0	
+location	Skill: Swim 32	0	
+location	Skill: Swim 33	0	
+location	Skill: Swim 34	0	
+location	Skill: Swim 35	0	
+location	Skill: Swim 36	0	
+location	Skill: Swim 37	0	
+location	Skill: Swim 38	0	
+location	Skill: Swim 39	0	
+location	Skill: Swim 41	0	
+location	Skill: Swim 42	0	
+location	Skill: Swim 43	0	
+location	Skill: Swim 44	0	
+location	Skill: Swim 45	0	
+location	Skill: Swim 46	0	
+location	Skill: Swim 47	0	
+location	Skill: Swim 48	0	
+location	Skill: Swim 49	0	
+location	Skill: Swim 51	0	
+location	Skill: Swim 52	0	
+location	Skill: Swim 53	0	
+location	Skill: Swim 54	0	
+location	Skill: Swim 55	0	
+location	Skill: Swim 56	0	
+location	Skill: Swim 57	0	
+location	Skill: Swim 58	0	
+location	Skill: Swim 59	0	
+location	Skill: Swim 61	0	
+location	Skill: Swim 62	0	
+location	Skill: Swim 63	0	
+location	Skill: Swim 64	0	
+location	Skill: Swim 65	0	
+location	Skill: Swim 66	0	
+location	Skill: Swim 67	0	
+location	Skill: Swim 68	0	
+location	Skill: Swim 69	0	
+location	Skill: Swim 71	0	
+location	Skill: Swim 72	0	
+location	Skill: Swim 73	0	
+location	Skill: Swim 74	0	
+location	Skill: Swim 76	0	
+location	Skill: Swim 77	0	
+location	Skill: Swim 78	0	
+location	Skill: Swim 79	0	
+location	Skill: Swim 81	0	
+location	Skill: Swim 82	0	
+location	Skill: Swim 83	0	
+location	Skill: Swim 84	0	
+location	Skill: Swim 85	0	
+location	Skill: Swim 86	0	
+location	Skill: Swim 87	0	
+location	Skill: Swim 88	0	
+location	Skill: Swim 89	0	
+location	Skill: Swim 91	0	
+location	Skill: Swim 92	0	
+location	Skill: Swim 93	0	
+location	Skill: Swim 94	0	
+location	Skill: Swim 95	0	
+location	Skill: Swim 96	0	
+location	Skill: Swim 97	0	
+location	Skill: Swim 98	0	
+location	Skill: Swim 99	0	
+location	Skill: Dodge 1	0	
+location	Skill: Dodge 2	0	
+location	Skill: Dodge 3	0	
+location	Skill: Dodge 4	0	
+location	Skill: Dodge 5	0	
+location	Skill: Dodge 6	0	
+location	Skill: Dodge 7	0	
+location	Skill: Dodge 8	0	
+location	Skill: Dodge 9	0	
+location	Skill: Dodge 11	0	
+location	Skill: Dodge 12	0	
+location	Skill: Dodge 13	0	
+location	Skill: Dodge 14	0	
+location	Skill: Dodge 15	0	
+location	Skill: Dodge 16	0	
+location	Skill: Dodge 17	0	
+location	Skill: Dodge 18	0	
+location	Skill: Dodge 19	0	
+location	Skill: Dodge 21	0	
+location	Skill: Dodge 22	0	
+location	Skill: Dodge 23	0	
+location	Skill: Dodge 24	0	
+location	Skill: Dodge 26	0	
+location	Skill: Dodge 27	0	
+location	Skill: Dodge 28	0	
+location	Skill: Dodge 29	0	
+location	Skill: Dodge 31	0	
+location	Skill: Dodge 32	0	
+location	Skill: Dodge 33	0	
+location	Skill: Dodge 34	0	
+location	Skill: Dodge 35	0	
+location	Skill: Dodge 36	0	
+location	Skill: Dodge 37	0	
+location	Skill: Dodge 38	0	
+location	Skill: Dodge 39	0	
+location	Skill: Dodge 41	0	
+location	Skill: Dodge 42	0	
+location	Skill: Dodge 43	0	
+location	Skill: Dodge 44	0	
+location	Skill: Dodge 45	0	
+location	Skill: Dodge 46	0	
+location	Skill: Dodge 47	0	
+location	Skill: Dodge 48	0	
+location	Skill: Dodge 49	0	
+location	Skill: Dodge 51	0	
+location	Skill: Dodge 52	0	
+location	Skill: Dodge 53	0	
+location	Skill: Dodge 54	0	
+location	Skill: Dodge 55	0	
+location	Skill: Dodge 56	0	
+location	Skill: Dodge 57	0	
+location	Skill: Dodge 58	0	
+location	Skill: Dodge 59	0	
+location	Skill: Dodge 61	0	
+location	Skill: Dodge 62	0	
+location	Skill: Dodge 63	0	
+location	Skill: Dodge 64	0	
+location	Skill: Dodge 65	0	
+location	Skill: Dodge 66	0	
+location	Skill: Dodge 67	0	
+location	Skill: Dodge 68	0	
+location	Skill: Dodge 69	0	
+location	Skill: Dodge 71	0	
+location	Skill: Dodge 72	0	
+location	Skill: Dodge 73	0	
+location	Skill: Dodge 74	0	
+location	Skill: Dodge 76	0	
+location	Skill: Dodge 77	0	
+location	Skill: Dodge 78	0	
+location	Skill: Dodge 79	0	
+location	Skill: Dodge 81	0	
+location	Skill: Dodge 82	0	
+location	Skill: Dodge 83	0	
+location	Skill: Dodge 84	0	
+location	Skill: Dodge 85	0	
+location	Skill: Dodge 86	0	
+location	Skill: Dodge 87	0	
+location	Skill: Dodge 88	0	
+location	Skill: Dodge 89	0	
+location	Skill: Dodge 91	0	
+location	Skill: Dodge 92	0	
+location	Skill: Dodge 93	0	
+location	Skill: Dodge 94	0	
+location	Skill: Dodge 95	0	
+location	Skill: Dodge 96	0	
+location	Skill: Dodge 97	0	
+location	Skill: Dodge 98	0	
+location	Skill: Dodge 99	0	
+location	Skill: Fishing 1	2	
+location	Skill: Fishing 2	2	
+location	Skill: Fishing 3	2	
+location	Skill: Fishing 4	2	
+location	Skill: Fishing 5	2	
+location	Skill: Fishing 6	2	
+location	Skill: Fishing 7	2	
+location	Skill: Fishing 8	2	
+location	Skill: Fishing 9	2	
+location	Skill: Fishing 11	2	
+location	Skill: Fishing 12	2	
+location	Skill: Fishing 13	2	
+location	Skill: Fishing 14	2	
+location	Skill: Fishing 15	2	
+location	Skill: Fishing 16	2	
+location	Skill: Fishing 17	2	
+location	Skill: Fishing 18	2	
+location	Skill: Fishing 19	2	
+location	Skill: Fishing 21	2	
+location	Skill: Fishing 22	2	
+location	Skill: Fishing 23	2	
+location	Skill: Fishing 24	2	
+location	Skill: Fishing 26	2	
+location	Skill: Fishing 27	2	
+location	Skill: Fishing 28	2	
+location	Skill: Fishing 29	2	
+location	Skill: Fishing 31	2	
+location	Skill: Fishing 32	2	
+location	Skill: Fishing 33	2	
+location	Skill: Fishing 34	2	
+location	Skill: Fishing 35	2	
+location	Skill: Fishing 36	2	
+location	Skill: Fishing 37	2	
+location	Skill: Fishing 38	2	
+location	Skill: Fishing 39	2	
+location	Skill: Fishing 41	2	
+location	Skill: Fishing 42	2	
+location	Skill: Fishing 43	2	
+location	Skill: Fishing 44	2	
+location	Skill: Fishing 45	2	
+location	Skill: Fishing 46	2	
+location	Skill: Fishing 47	2	
+location	Skill: Fishing 48	2	
+location	Skill: Fishing 49	2	
+location	Skill: Fishing 51	2	
+location	Skill: Fishing 52	2	
+location	Skill: Fishing 53	2	
+location	Skill: Fishing 54	2	
+location	Skill: Fishing 55	2	
+location	Skill: Fishing 56	2	
+location	Skill: Fishing 57	2	
+location	Skill: Fishing 58	2	
+location	Skill: Fishing 59	2	
+location	Skill: Fishing 61	2	
+location	Skill: Fishing 62	2	
+location	Skill: Fishing 63	2	
+location	Skill: Fishing 64	2	
+location	Skill: Fishing 65	2	
+location	Skill: Fishing 66	2	
+location	Skill: Fishing 67	2	
+location	Skill: Fishing 68	2	
+location	Skill: Fishing 69	2	
+location	Skill: Fishing 71	2	
+location	Skill: Fishing 72	2	
+location	Skill: Fishing 73	2	
+location	Skill: Fishing 74	2	
+location	Skill: Fishing 76	2	
+location	Skill: Fishing 77	2	
+location	Skill: Fishing 78	2	
+location	Skill: Fishing 79	2	
+location	Skill: Fishing 81	2	
+location	Skill: Fishing 82	2	
+location	Skill: Fishing 83	2	
+location	Skill: Fishing 84	2	
+location	Skill: Fishing 85	2	
+location	Skill: Fishing 86	2	
+location	Skill: Fishing 87	2	
+location	Skill: Fishing 88	2	
+location	Skill: Fishing 89	2	
+location	Skill: Fishing 91	2	
+location	Skill: Fishing 92	2	
+location	Skill: Fishing 93	2	
+location	Skill: Fishing 94	2	
+location	Skill: Fishing 95	2	
+location	Skill: Fishing 96	2	
+location	Skill: Fishing 97	2	
+location	Skill: Fishing 98	2	
+location	Skill: Fishing 99	2	
+location	Skill: Cooking 1	1	Cooking Station
+location	Skill: Cooking 2	1	Cooking Station
+location	Skill: Cooking 3	1	Cooking Station
+location	Skill: Cooking 4	1	Cooking Station
+location	Skill: Cooking 5	1	Cooking Station
+location	Skill: Cooking 6	1	Cooking Station
+location	Skill: Cooking 7	1	Cooking Station
+location	Skill: Cooking 8	1	Cooking Station
+location	Skill: Cooking 9	1	Cooking Station
+location	Skill: Cooking 11	1	Cooking Station
+location	Skill: Cooking 12	1	Cooking Station
+location	Skill: Cooking 13	1	Cooking Station
+location	Skill: Cooking 14	1	Cooking Station
+location	Skill: Cooking 15	1	Cooking Station
+location	Skill: Cooking 16	1	Cooking Station
+location	Skill: Cooking 17	1	Cooking Station
+location	Skill: Cooking 18	1	Cooking Station
+location	Skill: Cooking 19	1	Cooking Station
+location	Skill: Cooking 21	1	Cooking Station
+location	Skill: Cooking 22	1	Cooking Station
+location	Skill: Cooking 23	1	Cooking Station
+location	Skill: Cooking 24	1	Cooking Station
+location	Skill: Cooking 26	1	Cooking Station
+location	Skill: Cooking 27	1	Cooking Station
+location	Skill: Cooking 28	1	Cooking Station
+location	Skill: Cooking 29	1	Cooking Station
+location	Skill: Cooking 31	1	Cooking Station
+location	Skill: Cooking 32	1	Cooking Station
+location	Skill: Cooking 33	1	Cooking Station
+location	Skill: Cooking 34	1	Cooking Station
+location	Skill: Cooking 35	1	Cooking Station
+location	Skill: Cooking 36	1	Cooking Station
+location	Skill: Cooking 37	1	Cooking Station
+location	Skill: Cooking 38	1	Cooking Station
+location	Skill: Cooking 39	1	Cooking Station
+location	Skill: Cooking 41	1	Cooking Station
+location	Skill: Cooking 42	1	Cooking Station
+location	Skill: Cooking 43	1	Cooking Station
+location	Skill: Cooking 44	1	Cooking Station
+location	Skill: Cooking 45	1	Cooking Station
+location	Skill: Cooking 46	1	Cooking Station
+location	Skill: Cooking 47	1	Cooking Station
+location	Skill: Cooking 48	1	Cooking Station
+location	Skill: Cooking 49	1	Cooking Station
+location	Skill: Cooking 51	1	Cooking Station
+location	Skill: Cooking 52	1	Cooking Station
+location	Skill: Cooking 53	1	Cooking Station
+location	Skill: Cooking 54	1	Cooking Station
+location	Skill: Cooking 55	1	Cooking Station
+location	Skill: Cooking 56	1	Cooking Station
+location	Skill: Cooking 57	1	Cooking Station
+location	Skill: Cooking 58	1	Cooking Station
+location	Skill: Cooking 59	1	Cooking Station
+location	Skill: Cooking 61	1	Cooking Station
+location	Skill: Cooking 62	1	Cooking Station
+location	Skill: Cooking 63	1	Cooking Station
+location	Skill: Cooking 64	1	Cooking Station
+location	Skill: Cooking 65	1	Cooking Station
+location	Skill: Cooking 66	1	Cooking Station
+location	Skill: Cooking 67	1	Cooking Station
+location	Skill: Cooking 68	1	Cooking Station
+location	Skill: Cooking 69	1	Cooking Station
+location	Skill: Cooking 71	1	Cooking Station
+location	Skill: Cooking 72	1	Cooking Station
+location	Skill: Cooking 73	1	Cooking Station
+location	Skill: Cooking 74	1	Cooking Station
+location	Skill: Cooking 76	1	Cooking Station
+location	Skill: Cooking 77	1	Cooking Station
+location	Skill: Cooking 78	1	Cooking Station
+location	Skill: Cooking 79	1	Cooking Station
+location	Skill: Cooking 81	1	Cooking Station
+location	Skill: Cooking 82	1	Cooking Station
+location	Skill: Cooking 83	1	Cooking Station
+location	Skill: Cooking 84	1	Cooking Station
+location	Skill: Cooking 85	1	Cooking Station
+location	Skill: Cooking 86	1	Cooking Station
+location	Skill: Cooking 87	1	Cooking Station
+location	Skill: Cooking 88	1	Cooking Station
+location	Skill: Cooking 89	1	Cooking Station
+location	Skill: Cooking 91	1	Cooking Station
+location	Skill: Cooking 92	1	Cooking Station
+location	Skill: Cooking 93	1	Cooking Station
+location	Skill: Cooking 94	1	Cooking Station
+location	Skill: Cooking 95	1	Cooking Station
+location	Skill: Cooking 96	1	Cooking Station
+location	Skill: Cooking 97	1	Cooking Station
+location	Skill: Cooking 98	1	Cooking Station
+location	Skill: Cooking 99	1	Cooking Station
+location	Skill: Farming 1	4	Cultivator
+location	Skill: Farming 2	4	Cultivator
+location	Skill: Farming 3	4	Cultivator
+location	Skill: Farming 4	4	Cultivator
+location	Skill: Farming 5	4	Cultivator
+location	Skill: Farming 6	4	Cultivator
+location	Skill: Farming 7	4	Cultivator
+location	Skill: Farming 8	4	Cultivator
+location	Skill: Farming 9	4	Cultivator
+location	Skill: Farming 11	4	Cultivator
+location	Skill: Farming 12	4	Cultivator
+location	Skill: Farming 13	4	Cultivator
+location	Skill: Farming 14	4	Cultivator
+location	Skill: Farming 15	4	Cultivator
+location	Skill: Farming 16	4	Cultivator
+location	Skill: Farming 17	4	Cultivator
+location	Skill: Farming 18	4	Cultivator
+location	Skill: Farming 19	4	Cultivator
+location	Skill: Farming 21	4	Cultivator
+location	Skill: Farming 22	4	Cultivator
+location	Skill: Farming 23	4	Cultivator
+location	Skill: Farming 24	4	Cultivator
+location	Skill: Farming 26	4	Cultivator
+location	Skill: Farming 27	4	Cultivator
+location	Skill: Farming 28	4	Cultivator
+location	Skill: Farming 29	4	Cultivator
+location	Skill: Farming 31	4	Cultivator
+location	Skill: Farming 32	4	Cultivator
+location	Skill: Farming 33	4	Cultivator
+location	Skill: Farming 34	4	Cultivator
+location	Skill: Farming 35	4	Cultivator
+location	Skill: Farming 36	4	Cultivator
+location	Skill: Farming 37	4	Cultivator
+location	Skill: Farming 38	4	Cultivator
+location	Skill: Farming 39	4	Cultivator
+location	Skill: Farming 41	4	Cultivator
+location	Skill: Farming 42	4	Cultivator
+location	Skill: Farming 43	4	Cultivator
+location	Skill: Farming 44	4	Cultivator
+location	Skill: Farming 45	4	Cultivator
+location	Skill: Farming 46	4	Cultivator
+location	Skill: Farming 47	4	Cultivator
+location	Skill: Farming 48	4	Cultivator
+location	Skill: Farming 49	4	Cultivator
+location	Skill: Farming 51	4	Cultivator
+location	Skill: Farming 52	4	Cultivator
+location	Skill: Farming 53	4	Cultivator
+location	Skill: Farming 54	4	Cultivator
+location	Skill: Farming 55	4	Cultivator
+location	Skill: Farming 56	4	Cultivator
+location	Skill: Farming 57	4	Cultivator
+location	Skill: Farming 58	4	Cultivator
+location	Skill: Farming 59	4	Cultivator
+location	Skill: Farming 61	4	Cultivator
+location	Skill: Farming 62	4	Cultivator
+location	Skill: Farming 63	4	Cultivator
+location	Skill: Farming 64	4	Cultivator
+location	Skill: Farming 65	4	Cultivator
+location	Skill: Farming 66	4	Cultivator
+location	Skill: Farming 67	4	Cultivator
+location	Skill: Farming 68	4	Cultivator
+location	Skill: Farming 69	4	Cultivator
+location	Skill: Farming 71	4	Cultivator
+location	Skill: Farming 72	4	Cultivator
+location	Skill: Farming 73	4	Cultivator
+location	Skill: Farming 74	4	Cultivator
+location	Skill: Farming 76	4	Cultivator
+location	Skill: Farming 77	4	Cultivator
+location	Skill: Farming 78	4	Cultivator
+location	Skill: Farming 79	4	Cultivator
+location	Skill: Farming 81	4	Cultivator
+location	Skill: Farming 82	4	Cultivator
+location	Skill: Farming 83	4	Cultivator
+location	Skill: Farming 84	4	Cultivator
+location	Skill: Farming 85	4	Cultivator
+location	Skill: Farming 86	4	Cultivator
+location	Skill: Farming 87	4	Cultivator
+location	Skill: Farming 88	4	Cultivator
+location	Skill: Farming 89	4	Cultivator
+location	Skill: Farming 91	4	Cultivator
+location	Skill: Farming 92	4	Cultivator
+location	Skill: Farming 93	4	Cultivator
+location	Skill: Farming 94	4	Cultivator
+location	Skill: Farming 95	4	Cultivator
+location	Skill: Farming 96	4	Cultivator
+location	Skill: Farming 97	4	Cultivator
+location	Skill: Farming 98	4	Cultivator
+location	Skill: Farming 99	4	Cultivator
+location	Skill: Crafting 1	0	Crafting
+location	Skill: Crafting 2	0	Crafting
+location	Skill: Crafting 3	0	Crafting
+location	Skill: Crafting 4	0	Crafting
+location	Skill: Crafting 5	0	Crafting
+location	Skill: Crafting 6	0	Crafting
+location	Skill: Crafting 7	0	Crafting
+location	Skill: Crafting 8	0	Crafting
+location	Skill: Crafting 9	0	Crafting
+location	Skill: Crafting 11	0	Crafting
+location	Skill: Crafting 12	0	Crafting
+location	Skill: Crafting 13	0	Crafting
+location	Skill: Crafting 14	0	Crafting
+location	Skill: Crafting 15	0	Crafting
+location	Skill: Crafting 16	0	Crafting
+location	Skill: Crafting 17	0	Crafting
+location	Skill: Crafting 18	0	Crafting
+location	Skill: Crafting 19	0	Crafting
+location	Skill: Crafting 21	0	Crafting
+location	Skill: Crafting 22	0	Crafting
+location	Skill: Crafting 23	0	Crafting
+location	Skill: Crafting 24	0	Crafting
+location	Skill: Crafting 26	0	Crafting
+location	Skill: Crafting 27	0	Crafting
+location	Skill: Crafting 28	0	Crafting
+location	Skill: Crafting 29	0	Crafting
+location	Skill: Crafting 31	0	Crafting
+location	Skill: Crafting 32	0	Crafting
+location	Skill: Crafting 33	0	Crafting
+location	Skill: Crafting 34	0	Crafting
+location	Skill: Crafting 35	0	Crafting
+location	Skill: Crafting 36	0	Crafting
+location	Skill: Crafting 37	0	Crafting
+location	Skill: Crafting 38	0	Crafting
+location	Skill: Crafting 39	0	Crafting
+location	Skill: Crafting 41	0	Crafting
+location	Skill: Crafting 42	0	Crafting
+location	Skill: Crafting 43	0	Crafting
+location	Skill: Crafting 44	0	Crafting
+location	Skill: Crafting 45	0	Crafting
+location	Skill: Crafting 46	0	Crafting
+location	Skill: Crafting 47	0	Crafting
+location	Skill: Crafting 48	0	Crafting
+location	Skill: Crafting 49	0	Crafting
+location	Skill: Crafting 51	0	Crafting
+location	Skill: Crafting 52	0	Crafting
+location	Skill: Crafting 53	0	Crafting
+location	Skill: Crafting 54	0	Crafting
+location	Skill: Crafting 55	0	Crafting
+location	Skill: Crafting 56	0	Crafting
+location	Skill: Crafting 57	0	Crafting
+location	Skill: Crafting 58	0	Crafting
+location	Skill: Crafting 59	0	Crafting
+location	Skill: Crafting 61	0	Crafting
+location	Skill: Crafting 62	0	Crafting
+location	Skill: Crafting 63	0	Crafting
+location	Skill: Crafting 64	0	Crafting
+location	Skill: Crafting 65	0	Crafting
+location	Skill: Crafting 66	0	Crafting
+location	Skill: Crafting 67	0	Crafting
+location	Skill: Crafting 68	0	Crafting
+location	Skill: Crafting 69	0	Crafting
+location	Skill: Crafting 71	0	Crafting
+location	Skill: Crafting 72	0	Crafting
+location	Skill: Crafting 73	0	Crafting
+location	Skill: Crafting 74	0	Crafting
+location	Skill: Crafting 76	0	Crafting
+location	Skill: Crafting 77	0	Crafting
+location	Skill: Crafting 78	0	Crafting
+location	Skill: Crafting 79	0	Crafting
+location	Skill: Crafting 81	0	Crafting
+location	Skill: Crafting 82	0	Crafting
+location	Skill: Crafting 83	0	Crafting
+location	Skill: Crafting 84	0	Crafting
+location	Skill: Crafting 85	0	Crafting
+location	Skill: Crafting 86	0	Crafting
+location	Skill: Crafting 87	0	Crafting
+location	Skill: Crafting 88	0	Crafting
+location	Skill: Crafting 89	0	Crafting
+location	Skill: Crafting 91	0	Crafting
+location	Skill: Crafting 92	0	Crafting
+location	Skill: Crafting 93	0	Crafting
+location	Skill: Crafting 94	0	Crafting
+location	Skill: Crafting 95	0	Crafting
+location	Skill: Crafting 96	0	Crafting
+location	Skill: Crafting 97	0	Crafting
+location	Skill: Crafting 98	0	Crafting
+location	Skill: Crafting 99	0	Crafting
+location	Skill: Ride 1	8	
+location	Skill: Ride 2	8	
+location	Skill: Ride 3	8	
+location	Skill: Ride 4	8	
+location	Skill: Ride 5	8	
+location	Skill: Ride 6	8	
+location	Skill: Ride 7	8	
+location	Skill: Ride 8	8	
+location	Skill: Ride 9	8	
+location	Skill: Ride 11	8	
+location	Skill: Ride 12	8	
+location	Skill: Ride 13	8	
+location	Skill: Ride 14	8	
+location	Skill: Ride 15	8	
+location	Skill: Ride 16	8	
+location	Skill: Ride 17	8	
+location	Skill: Ride 18	8	
+location	Skill: Ride 19	8	
+location	Skill: Ride 21	8	
+location	Skill: Ride 22	8	
+location	Skill: Ride 23	8	
+location	Skill: Ride 24	8	
+location	Skill: Ride 26	8	
+location	Skill: Ride 27	8	
+location	Skill: Ride 28	8	
+location	Skill: Ride 29	8	
+location	Skill: Ride 31	8	
+location	Skill: Ride 32	8	
+location	Skill: Ride 33	8	
+location	Skill: Ride 34	8	
+location	Skill: Ride 35	8	
+location	Skill: Ride 36	8	
+location	Skill: Ride 37	8	
+location	Skill: Ride 38	8	
+location	Skill: Ride 39	8	
+location	Skill: Ride 41	8	
+location	Skill: Ride 42	8	
+location	Skill: Ride 43	8	
+location	Skill: Ride 44	8	
+location	Skill: Ride 45	8	
+location	Skill: Ride 46	8	
+location	Skill: Ride 47	8	
+location	Skill: Ride 48	8	
+location	Skill: Ride 49	8	
+location	Skill: Ride 51	8	
+location	Skill: Ride 52	8	
+location	Skill: Ride 53	8	
+location	Skill: Ride 54	8	
+location	Skill: Ride 55	8	
+location	Skill: Ride 56	8	
+location	Skill: Ride 57	8	
+location	Skill: Ride 58	8	
+location	Skill: Ride 59	8	
+location	Skill: Ride 61	8	
+location	Skill: Ride 62	8	
+location	Skill: Ride 63	8	
+location	Skill: Ride 64	8	
+location	Skill: Ride 65	8	
+location	Skill: Ride 66	8	
+location	Skill: Ride 67	8	
+location	Skill: Ride 68	8	
+location	Skill: Ride 69	8	
+location	Skill: Ride 71	8	
+location	Skill: Ride 72	8	
+location	Skill: Ride 73	8	
+location	Skill: Ride 74	8	
+location	Skill: Ride 76	8	
+location	Skill: Ride 77	8	
+location	Skill: Ride 78	8	
+location	Skill: Ride 79	8	
+location	Skill: Ride 81	8	
+location	Skill: Ride 82	8	
+location	Skill: Ride 83	8	
+location	Skill: Ride 84	8	
+location	Skill: Ride 85	8	
+location	Skill: Ride 86	8	
+location	Skill: Ride 87	8	
+location	Skill: Ride 88	8	
+location	Skill: Ride 89	8	
+location	Skill: Ride 91	8	
+location	Skill: Ride 92	8	
+location	Skill: Ride 93	8	
+location	Skill: Ride 94	8	
+location	Skill: Ride 95	8	
+location	Skill: Ride 96	8	
+location	Skill: Ride 97	8	
+location	Skill: Ride 98	8	
+location	Skill: Ride 99	8	
 combat	Meadows	armor	
 combat	Meadows	weapons	Clubs Tier 1|Axes Tier 1|Blades Tier 1|Spears Tier 1|Knuckles Tier 1|Short Blades Tier 1
 combat	Meadows	ranged	Bows Tier 1

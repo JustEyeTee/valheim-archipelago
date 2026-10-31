@@ -74,6 +74,11 @@ LOGIC_ITEMS = frozenset(
 )
 
 
+# skill_check_spacing -> levels between skill checks (the mod has the same table).
+SKILL_STEPS = {SkillCheckSpacing.option_every_level: 1, SkillCheckSpacing.option_every_2: 2,
+               SkillCheckSpacing.option_every_5: 5, SkillCheckSpacing.option_every_10: 10,
+               SkillCheckSpacing.option_every_20: 20, SkillCheckSpacing.option_every_25: 25}
+
 TRACKER_OPTIONS = ("goal", "item_sanity", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
@@ -371,8 +376,7 @@ class ValheimWorld(World):
         """Whether a skill or exploration check is in by its level or percentage and the spacing options."""
         if name.startswith("Skill: "):
             level = int(name.rsplit(" ", 1)[1])  # "Skill: Woodcutting 30" -> 30
-            step = {SkillCheckSpacing.option_every_10: 10, SkillCheckSpacing.option_every_20: 20,
-                    SkillCheckSpacing.option_every_25: 25}[self.options.skill_check_spacing.value]
+            step = SKILL_STEPS[self.options.skill_check_spacing.value]
             return level <= self.options.skill_checks.value and level % step == 0
         if name.startswith("Explore: "):
             percent = float(name[len("Explore: "):].split("%")[0])  # "Explore: 2.5% of the World" -> 2.5

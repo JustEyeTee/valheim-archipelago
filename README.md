@@ -115,7 +115,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `raid_checks` | off | Checks for surviving each repeating raid (random, so they never hold progression items). |
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
-| `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
+| `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every level or every 2, 5, 10, 20 or 25 levels; each skill starts once you can train it. Dense spacing suits short games. |
 | `item_sanity` | off | Lock every recipe and building piece (workbench, smelter, walls, beds, boats...), not just equipment: about 95 more researches to find, each with its check. |
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
 | `boss_altar_keys` | off | Boss altars stay sealed until you receive each boss's Altar Key from the multiworld. |

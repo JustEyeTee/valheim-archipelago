@@ -7,6 +7,7 @@ TRAPS = "#opt-excluded_traps-"
 cases = [
     ("kall_fimbulbringer", []),
     ("eikthyr", [("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "50"),
+                 ("select", "#opt-skill_check_spacing", "every_level"), ("num", "#opt-skill_checks", "30"),
                  ("num", "#opt-trap_percentage", "33"), ("num", "#opt-boost_percentage", "50")]),
     ("the_elder", [("check", "#opt-item_sanity"), ("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",), ("num", "#opt-comfort_checks", "3"),
                    ("uncheck", "#opt-starter_kit")]),
@@ -29,6 +30,7 @@ with sync_playwright() as p:
             if a[0] == "check": page.check(a[1])
             elif a[0] == "uncheck": page.uncheck(a[1])
             elif a[0] == "click": page.click(a[1])
+            elif a[0] == "select": page.select_option(a[1], a[2])
             elif a[0] == "all_traps":
                 for c in page.locator(f'input[id^="{TRAPS[1:]}"]').all(): c.check()
             else: page.fill(a[1], a[2]); page.dispatch_event(a[1], "change")

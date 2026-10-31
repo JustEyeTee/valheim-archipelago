@@ -61,6 +61,7 @@ internal static class ArchipelagoConnection
         ArchipelagoGoal.Load(slotData);
         LoadProgressive(slotData);
         LoadFreeResearches(slotData);
+        LoadSkillChecks(slotData);
         ArchipelagoLogic.Load(slotData);
         altarKeys = slotData != null && slotData.TryGetValue("boss_altar_keys", out var keys) && keys is bool on && on;
         if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
@@ -181,6 +182,50 @@ internal static class ArchipelagoConnection
             : "[AP] Every research is locked (item-sanity)");
     }
 
+    // Which skill levels are checks in this seed (skill_checks, skill_check_spacing). checks.tsv has every level
+    // of every skill; sending the ones the seed doesn't have would only fill the world with keys. Kept in the
+    // world ("ap_skill_checks <max>x<step>") for co-op players who aren't connected.
+    private const string SkillChecksKey = "ap_skill_checks";
+    private static readonly int[] SkillSteps = { 10, 20, 25, 1, 2, 5 };  // skill_check_spacing's values, in order
+    private static int skillMax = -1, skillStep = 10;
+
+    private static void LoadSkillChecks(System.Collections.Generic.Dictionary<string, object> slotData)
+    {
+        skillMax = -1;
+        try
+        {
+            if (slotData != null && slotData.TryGetValue("options", out var raw) && raw != null)
+            {
+                var options = raw as Newtonsoft.Json.Linq.JObject ?? Newtonsoft.Json.Linq.JObject.FromObject(raw);
+                int spacing = options["skill_check_spacing"]?.ToObject<int>() ?? 0;
+                skillStep = spacing >= 0 && spacing < SkillSteps.Length ? SkillSteps[spacing] : 10;
+                skillMax = options["skill_checks"]?.ToObject<int>() ?? -1;
+            }
+        }
+        catch (Exception ex)
+        {
+            ValheimRandomizer.Log.LogWarning("[AP] Couldn't read the skill check options from the slot data: " + ex.Message);
+        }
+    }
+
+    public static bool IsSkillLevelChecked(int level)
+    {
+        int max = skillMax, step = skillStep;
+        if ((!connected || max < 0) && WorldLoaded() &&
+            ZoneSystem.instance.GetGlobalKey(ArchipelagoCoop.Scoped(SkillChecksKey), out var saved))
+        {
+            var parts = saved.Split('x');
+            if (parts.Length == 2 && int.TryParse(parts[0], out var m) && int.TryParse(parts[1], out var s) && s > 0)
+            {
+                max = m;
+                step = s;
+            }
+        }
+        // Rooms that don't say: the levels skill checks had before every level could be one.
+        if (max < 0) return level % 10 == 0 || level % 25 == 0;
+        return level <= max && level % step == 0;
+    }
+
     private static void UnlockFreeResearches()
     {
         foreach (var id in FreeResearchIds)
@@ -279,6 +324,7 @@ internal static class ArchipelagoConnection
         ArchipelagoAltars.OnConnected(altarKeys, session.RoomState.Seed);
         ResendLost();
         UnlockFreeResearches();
+        if (skillMax >= 0) SetGlobal(ArchipelagoCoop.Scoped($"{SkillChecksKey} {skillMax}x{skillStep}"));
         TryGetAllItems();
         if (HasGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"))) CompleteGame();
         ArchipelagoGoal.Check(ReceivedCount);

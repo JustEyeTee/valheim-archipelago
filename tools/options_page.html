@@ -184,7 +184,7 @@ pre.yaml .k { color: var(--code-key); }
   const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks", "comfort_checks", ...Object.keys(CONDITION_OPTIONS)];
   const goalData = () => data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
   // The same rules as the APWorld (ValheimWorld.wanted).
-  const SKILL_STEP = { every_10: 10, every_20: 20, every_25: 25 };
+  const SKILL_STEP = { every_level: 1, every_2: 2, every_5: 5, every_10: 10, every_20: 20, every_25: 25 };
   function skillLevels() {
     const step = SKILL_STEP[values.skill_check_spacing] || 10, out = [];
     for (let level = step; level <= values.skill_checks; level += step) out.push(level);

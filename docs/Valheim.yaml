@@ -305,11 +305,15 @@ Valheim:
     level_100: 0 # equivalent to 100
 
   skill_check_spacing:
-    # Which skill levels are checks: every 10 levels (10, 20, 30...), every 20 levels (20, 40, 60...) or every
-    # 25 levels (25, 50, 75, 100).
+    # Which skill levels are checks: every level, every 2, 5, 10 (10, 20, 30...), 20 (20, 40, 60...) or 25 levels
+    # (25, 50, 75, 100). Dense spacing suits short games (in an Eikthyr game few skills get past 10); in a long
+    # game, every level of every skill up to skill_checks adds a great many checks.
     every_10: 50
     every_20: 0
     every_25: 0
+    every_level: 0
+    every_2: 0
+    every_5: 0
 
   comfort_checks:
     # Adds a check for each comfort level you reach, from 2 up to this level (0 turns them off). Comfort is

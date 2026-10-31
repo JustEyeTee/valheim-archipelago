@@ -9,6 +9,8 @@ Versions are the APWorld's `world_version`; the mod is released alongside it.
   the start and are no longer items or checks, so a game is shorter (Eikthyr: 127 checks instead of 143; Fader:
   567 instead of 654). The new **`item_sanity`** option locks everything, as before. Older rooms work as before
   (everything locked).
+- **Skill checks can be every level**: `skill_check_spacing` also takes `every_level`, `every_2` and `every_5`
+  (in an Eikthyr game few skills get past 10). The mod only sends the levels the seed has.
 - **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a
   window when the world loads (it was a setting in the connection window, easy to miss, that quietly made the
   world shared). The `CoopMode` config setting is gone.

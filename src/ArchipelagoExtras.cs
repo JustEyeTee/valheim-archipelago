@@ -273,7 +273,8 @@ public static class ArchipelagoExtras
 
         foreach (var (skill, level, skillLocation) in SkillLocations)
         {
-            if (player.GetSkills().GetSkillLevel(skill) >= level) ArchipelagoConnection.SendLocationOnce(skillLocation);
+            if (player.GetSkills().GetSkillLevel(skill) >= level && ArchipelagoConnection.IsSkillLevelChecked(level))
+                ArchipelagoConnection.SendLocationOnce(skillLocation);
         }
         ArchipelagoGoal.MarkSkills(player);
 

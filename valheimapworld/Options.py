@@ -249,13 +249,17 @@ class SkillChecks(NamedRange):
 
 class SkillCheckSpacing(Choice):
     """
-    Which skill levels are checks: every 10 levels (10, 20, 30...), every 20 levels (20, 40, 60...) or every
-    25 levels (25, 50, 75, 100).
+    Which skill levels are checks: every level, every 2, 5, 10 (10, 20, 30...), 20 (20, 40, 60...) or 25 levels
+    (25, 50, 75, 100). Dense spacing suits short games (in an Eikthyr game few skills get past 10); in a long
+    game, every level of every skill up to skill_checks adds a great many checks.
     """
     display_name = "Skill Check Spacing"
     option_every_10 = 0
     option_every_20 = 1
     option_every_25 = 2
+    option_every_level = 3
+    option_every_2 = 4
+    option_every_5 = 5
     default = option_every_10
 
 
