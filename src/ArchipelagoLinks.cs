@@ -542,7 +542,7 @@ public class ArchipelagoCommand : ConsoleCommand
             Reply(ArchipelagoLinks.Status());
             if (ZoneSystem.instance != null) Reply(ArchipelagoCoop.Describe());
             Reply("Commands: /ap goal, /ap logic [category], /ap shop, /ap give [n] <item>, /ap items [search], /ap checks, /ap missing <category>, /ap hint <item>, /ap say <text>, " +
-                  "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off");
+                  "/ap energy, /ap deposit <coins>, /ap withdraw <coins>, /ap deathlink on|off, /ap clear [traps]");
             return;
         }
         if (!ArchipelagoLinks.Connected && sub != "clear") { Reply("Not connected to Archipelago."); return; }
@@ -553,6 +553,10 @@ public class ArchipelagoCommand : ConsoleCommand
         {
             case "goal":
                 foreach (var line in ArchipelagoGoal.Status(ArchipelagoConnection.ReceivedCount).Split('\n')) Reply(line);
+                break;
+            case "clear" when rest.Equals("traps", StringComparison.OrdinalIgnoreCase):
+                ArchipelagoExtras.ClearTraps();
+                Reply("Traps waiting to fire are skipped (counted as done).");
                 break;
             case "clear":
             {

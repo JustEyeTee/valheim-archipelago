@@ -15,6 +15,9 @@ From the first playtest:
 - **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a
   window when the world loads (it was a setting in the connection window, easy to miss, that quietly made the
   world shared). The `CoopMode` config setting is gone.
+- **Traps stop once your goal is done**: a finished slot's release sends everything at once, and with Trap Link
+  each trap hit both players, one every 10 seconds, for a quarter of an hour. Traps that arrive after your goal
+  are counted without firing or going to Trap Link. `/ap clear traps` skips the traps waiting now.
 - F9 has a **Hints** tab: every hint involving you (items for you, and your checks holding someone else's item),
   marked found or not, with its priority; the ones still to find come first.
 - Traps: the Lightning Strike no longer kills a new character outright (the bolt lands beside you; you take a

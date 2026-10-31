@@ -309,6 +309,9 @@ internal static class ArchipelagoConnection
         ZoneSystem.instance.RemoveGlobalKey(k);
     }
 
+    // Whether this slot's goal has been sent from this world: after that, traps no longer fire (ArchipelagoExtras).
+    public static bool GoalDone => WorldLoaded() && HasGlobal(ArchipelagoCoop.Scoped("ap_goal_sent"));
+
     // Called once the goal is done (every goal condition, or for older rooms, the goal trophy in the
     // inventory). Sends the goal once per world; if not connected yet, it is remembered in the world and
     // sent by TryFlushPendingLocations.

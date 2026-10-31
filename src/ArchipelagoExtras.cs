@@ -132,6 +132,14 @@ public static class ArchipelagoExtras
     private static readonly ConcurrentQueue<string> externalTraps = new ConcurrentQueue<string>();
     public static void QueueTrap(string trap) => externalTraps.Enqueue(trap);
 
+    // /ap clear traps: the traps waiting now are counted as done without firing.
+    private static bool clearTraps;
+    public static void ClearTraps()
+    {
+        clearTraps = true;
+        while (externalTraps.TryDequeue(out _)) { }
+    }
+
     private const float TrapSpacingSeconds = 10f;
     private const float StormSeconds = 120f;
     private const float BlizzardSeconds = 90f;
@@ -289,6 +297,7 @@ public static class ArchipelagoExtras
             }
         }
 
+        if (ArchipelagoConnection.GoalDone) ClearTraps();
         if (Time.time >= nextTrapTime && !player.IsDead() && externalTraps.TryDequeue(out var trap))
         {
             FireTrap(player, trap);
@@ -542,6 +551,13 @@ public static class ArchipelagoExtras
             else if (Traps.Contains(name))
             {
                 if (trapIndex++ < trapsDone) continue;
+                // Once the goal is done (a release then sends everything at once), or when cleared, traps
+                // are counted without firing, and not passed on to Trap Link.
+                if (clearTraps || ArchipelagoConnection.GoalDone)
+                {
+                    SetCount(player, progressKey + ":traps", ++trapsDone);
+                    continue;
+                }
                 if (Time.time < nextTrapTime || player.IsDead()) continue;
                 FireTrap(player, name);
                 SetCount(player, progressKey + ":traps", ++trapsDone);
@@ -572,6 +588,7 @@ public static class ArchipelagoExtras
                 SetCount(player, progressKey + ":maps", ++mapsDone);
             }
         }
+        clearTraps = false;  // only the traps that were waiting when it was asked
 
         if (waiting > 0 && Time.time >= nextReminderTime)
         {
