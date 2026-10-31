@@ -83,6 +83,14 @@ Valheim:
     fader: 0
     kall_fimbulbringer: 50
 
+  next_biome_checks:
+    # Off: a game only has checks from its goal boss's biome and the biomes before it (an Eikthyr game is the
+    # Meadows; The Elder's adds the Black Forest; Bonemass's the Swamp and the Ocean...). On: also checks from the
+    # next biome that don't need the goal boss (or a later one) defeated first: an Eikthyr game then has
+    # greydwarves, trolls, Burial Chambers and Haldor in the Black Forest.
+    'false': 50
+    'true': 0
+
   goal_conditions:
     # What you have to do to win, within the goal's era. Pick any combination: you win once all of
     # them are done. Leave it empty to just defeat the goal boss.

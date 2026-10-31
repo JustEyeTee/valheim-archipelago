@@ -14,6 +14,7 @@ from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, Goal
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_KIND, RESEARCH_PREREQS
 from .check_data import CHECKS
+from .biome_data import BIOME_RANKS, LOCATION_BIOMES, RESEARCH_UNLOCK_BIOMES
 from .comfort_data import COMFORT_PIECES, SHELTER
 from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CHECK_BOSSES
 
@@ -79,7 +80,7 @@ SKILL_STEPS = {SkillCheckSpacing.option_every_level: 1, SkillCheckSpacing.option
                SkillCheckSpacing.option_every_5: 5, SkillCheckSpacing.option_every_10: 10,
                SkillCheckSpacing.option_every_20: 20, SkillCheckSpacing.option_every_25: 25}
 
-TRACKER_OPTIONS = ("goal", "item_sanity", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "next_biome_checks", "item_sanity", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -121,24 +122,37 @@ LOCATION_TIERS = {location.user_friendly_name: int(location.region[len("Tier"):]
                   for location in location_data_table}
 
 
-def goal_scope(goal_tier: int, goal_boss: str) -> frozenset:
+# Each goal boss's biome: a game has checks from it and the biomes before it (next_biome_checks: one more).
+BOSS_BIOMES = {"Eikthyr": "Meadows", "The Elder": "BlackForest", "Bonemass": "Swamp", "Moder": "Mountain",
+               "Yagluth": "Plains", "The Queen": "Mistlands", "Fader": "AshLands", "Kall Fimbulbringer": "DeepNorth"}
+
+
+def goal_scope(goal_tier: int, goal_boss: str, biome_rank: int = 99, free: frozenset = frozenset()):
     """
     Locations that belong in a game ending at `goal_tier` by defeating `goal_boss`: everything
     up to that tier that doesn't need the goal boss (or a later one) defeated first, since
     defeating it ends the game, minus any location that needs a research item from outside
     the scope (repeated, since dropping one research can strand another). Each research and
-    trophy name is both a location and an item; the extra checks are locations only.
+    trophy name is both a location and an item; the extra checks are locations only. Only checks
+    from biomes up to `biome_rank` (BIOME_RANKS) are in. Researches in `free` are known from the start, so
+    needing one never strands a location. Returns the scope and the item-only researches: ones whose
+    check (crafting it) needs a later biome, but whose item unlocks something made in these biomes, so
+    the item is in the game without the check (the Stone Axe's research costs Greydwarf Eyes).
     """
     earlier = frozenset(BOSS_ORDER[:BOSS_ORDER.index(goal_boss)])
     later_bosses = {BOSS_TROPHIES[boss] for boss in BOSS_ORDER[BOSS_ORDER.index(goal_boss) + 1:]}
     region = {location.user_friendly_name: location.region for location in location_data_table}
-    scope = {name for name, tier in LOCATION_TIERS.items()
-             if tier <= goal_tier and name not in later_bosses
-             and {boss_name(b) for b in LOCATION_BOSSES[name] | REGION_BOSSES[region[name]]} <= earlier}
+    era = {name for name, tier in LOCATION_TIERS.items()
+           if tier <= goal_tier and name not in later_bosses
+           and {boss_name(b) for b in LOCATION_BOSSES[name] | REGION_BOSSES[region[name]]} <= earlier}
+    scope = {name for name in era if BIOME_RANKS[LOCATION_BIOMES.get(name, "Meadows")] <= biome_rank}
+    item_only = frozenset(name for name in era - scope if name in RESEARCH_UNLOCK_BIOMES and name not in free
+                          and BIOME_RANKS[RESEARCH_UNLOCK_BIOMES[name]] <= biome_rank)
     while True:
-        stranded = {name for name in scope if any(p not in scope for p in LOCATION_REQS.get(name, ()))}
+        stranded = {name for name in scope
+                    if any(p not in scope and p not in free and p not in item_only for p in LOCATION_REQS.get(name, ()))}
         if not stranded:
-            return frozenset(scope)
+            return frozenset(scope), item_only
         scope -= stranded
 
 
@@ -249,18 +263,19 @@ class ValheimWorld(World):
         self.goal_boss, self.goal_trophy = GOAL_BOSSES[self.options.goal.value]
         # Kall Fimbulbringer's game runs through the Deep North (tier 12); every other goal ends before it.
         scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
-        self.scope = goal_scope(scope_tier, self.goal_boss)
+        biome_rank = BIOME_RANKS[BOSS_BIOMES[self.goal_boss]] + (1 if self.options.next_biome_checks else 0)
+        # Without item_sanity, only equipment researches are locked: the rest are known from the start, so they
+        # are neither items nor checks (and not Researcher targets), and logic counts them as had.
+        self.free = frozenset() if self.options.item_sanity else frozenset(
+            name for name, kind in RESEARCH_KIND.items() if kind != "equipment")
+        self.scope, self.item_only = goal_scope(scope_tier, self.goal_boss, biome_rank, self.free)
         # Comfort: the pieces this era can build, and the levels past what they add up to are left out.
-        era = self.scope
+        era = self.scope | self.free | self.item_only
         self.comfort_pieces = [p for p in COMFORT_PIECES
                                if p[-1] <= scope_tier and all(n in era for n in p[4] + p[5])]
         shelter_ok = all(n in era for n in SHELTER[0] + SHELTER[1])
         self.max_comfort = best_comfort(self.comfort_pieces) if shelter_ok else 1
         self.scope = frozenset(n for n in self.scope if not n.startswith(COMFORT) or comfort_level(n) <= self.max_comfort)
-        # Without item_sanity, only equipment researches are locked: the rest are known from the start, so they
-        # are neither items nor checks (and not Researcher targets), and logic counts them as had.
-        self.free = frozenset() if self.options.item_sanity else frozenset(
-            name for name, kind in RESEARCH_KIND.items() if kind != "equipment")
         self.scope = self.scope - self.free
         self.era_scope = self.scope  # before the options below take checks out
         self.scope_tier = scope_tier
@@ -297,7 +312,7 @@ class ValheimWorld(World):
         if not self.options.progressive_items:
             return
         for family, members in PROGRESSIVE_FAMILIES.items():
-            members = [m for m in members if m in self.scope]
+            members = [m for m in members if m in self.scope or m in self.item_only]
             if members:
                 self.progressive[family] = members
                 for k, member in enumerate(members, 1):
@@ -439,7 +454,7 @@ class ValheimWorld(World):
         """
         Populates the item pool with items for the world.
         """
-        create_items(self, self.scope - set(self.progressive_of), self.logic_items)
+        create_items(self, (self.scope | self.item_only) - set(self.progressive_of), self.logic_items)
         for family, members in self.progressive.items():
             for _ in members:
                 self.multiworld.itempool.append(self.create_item(family))
@@ -548,7 +563,7 @@ class ValheimWorld(World):
             kinds = ("armor", "weapons", "ranged") if self.options.combat_logic == CombatLogic.option_strict \
                 else ("armor", "weapons")
             for gate, era in COMBAT_GATES.items():
-                needs = [names for names in ([n for n in COMBAT_ERAS[era][k] if n in self.scope] for k in kinds) if names]
+                needs = [names for names in ([n for n in COMBAT_ERAS[era][k] if n in self.scope or n in self.item_only] for k in kinds) if names]
                 if needs:
                     self.combat_rules[gate] = lambda state, needs=needs: \
                         all(self.has_any(state, names) for names in needs)
@@ -599,6 +614,8 @@ class ValheimWorld(World):
             "progressive": self.progressive,
             # Researches known from the start (everything but equipment, unless item_sanity is on).
             "free_researches": sorted(self.free),
+            # Researches whose item is in the game but whose check isn't (it needs a later biome): nothing to research.
+            "item_only_researches": sorted(self.item_only),
             "hint_shop_price": self.options.hint_shop_price.value,
             "boss_altar_keys": bool(self.options.boss_altar_keys.value),
             "research_cost_percent": self.options.research_cost_percent.value,

@@ -93,13 +93,14 @@ def locations(options):
     return [loc.name for loc in built.multiworld.get_locations(1) if loc.address is not None]
 
 
-def goal_info(goal):
+def goal_info(goal, extra=None):
     """What each goal condition has to work with in this goal's era: how many trophies, researches,
     skills, Hildir's quests and bosses, and the most of the map Explorer can ask for (0: none)."""
-    built = build({"goal": goal, "explorer_percent": 20})
+    extra = extra or {}
+    built = build({"goal": goal, "explorer_percent": 20, **extra})
     targets = built.goal_targets
     explore = targets["Explorer"]
-    sanity = build({"goal": goal, "item_sanity": 1}).goal_targets["Researcher"]
+    sanity = build({"goal": goal, "item_sanity": 1, **extra}).goal_targets["Researcher"]
     return {"All Bosses": len(built.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
             "Researcher": len(targets["Researcher"]), "Researcher (item-sanity)": len(sanity), "Skill Master": len(targets["Skill Master"]),
             "Hildir's Quests": len(targets["Hildir's Quests"]), "Great Hall": built.max_comfort if targets["Great Hall"] else 0,
@@ -111,13 +112,14 @@ def count_checks(goal):
     return len(locations({"goal": goal}))
 
 
-def breakdown(goal):
+def breakdown(goal, extra=None):
     """How many checks each option adds for this goal: with every kind of check on, each location is
     counted under the option that adds it. Skills: how many can be trained in this goal (every level of a
     skill comes with it); exploration: the percentages available. The rest are always there."""
     out = {"base": 0, "research": 0, "trophy": 0, "skills_available": 0, "explore": [], "comfort": []}
     every_kind = {option: 1 for option in CHECK_OPTIONS.values()}  # some are off by default (kills, raids)
-    for name in locations({**every_kind, "goal": goal, "skill_checks": 10, "skill_check_spacing": "every_10",
+    extra = extra or {}
+    for name in locations({**every_kind, **extra, "goal": goal, "skill_checks": 10, "skill_check_spacing": "every_10",
                            "exploration_checks": 20, "exploration_check_spacing": "half_percent",
                            "comfort_checks": hints["comfort_checks"].range_end}):
         option = next((o for prefix, o in CHECK_OPTIONS.items() if name.startswith(prefix)), None)
@@ -133,8 +135,11 @@ def breakdown(goal):
             out["base"] += 1
             out["trophy" if name.startswith("Trophy: ") else "research"] += 1
     # item_sanity adds the building and material researches (the other kinds of check don't change).
-    out["research_sanity"] = sum(1 for name in locations({"goal": goal, "item_sanity": 1})
+    out["research_sanity"] = sum(1 for name in locations({"goal": goal, "item_sanity": 1, **extra})
                                  if name in world.RESEARCH_PREREQS)
+    # Research items without their check (it needs a later biome): items, not checks.
+    out["item_only"] = len(build({"goal": goal, **extra}).item_only)
+    out["item_only_sanity"] = len(build({"goal": goal, "item_sanity": 1, **extra}).item_only)
     out["explore"].sort()
     out["comfort"].sort()
     out.update(pool_info(goal))
@@ -151,10 +156,13 @@ def pool_info(goal):
 
 
 goal_cls = hints["goal"]
+NEXT = {"next_biome_checks": 1}
 eras = {"eikthyr": "Meadows", "the_elder": "Black Forest", "bonemass": "Swamp", "moder": "Mountains",
         "yagluth": "Plains", "the_queen": "Mistlands", "fader": "Ashlands", "kall_fimbulbringer": "Deep North"}
 goals = [{"key": key, "boss": world.GOAL_BOSSES[value][0], "era": eras.get(key, ""), "checks": count_checks(key),
-          "breakdown": breakdown(key), "conditions": goal_info(key)}
+          "breakdown": breakdown(key), "conditions": goal_info(key),
+          # With next_biome_checks: the next biome's checks too.
+          "breakdown_next": breakdown(key, NEXT), "conditions_next": goal_info(key, NEXT)}
          for value, key in sorted(goal_cls.name_lookup.items())]
 
 data = {

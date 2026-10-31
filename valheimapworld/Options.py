@@ -37,6 +37,16 @@ GOAL_BOSSES = {
 }
 
 
+class NextBiomeChecks(Toggle):
+    """
+    Off: a game only has checks from its goal boss's biome and the biomes before it (an Eikthyr game is the
+    Meadows; The Elder's adds the Black Forest; Bonemass's the Swamp and the Ocean...). On: also checks from the
+    next biome that don't need the goal boss (or a later one) defeated first: an Eikthyr game then has
+    greydwarves, trolls, Burial Chambers and Haldor in the Black Forest.
+    """
+    display_name = "Next Biome Checks"
+
+
 class GoalConditions(OptionSet):
     """
     What you have to do to win, within the goal's era. Pick any combination: you win once all of
@@ -554,6 +564,7 @@ class TrapLink(Toggle):
 class ValheimOptions(PerGameCommonOptions):
     goal: Goal
     goal_conditions: GoalConditions
+    next_biome_checks: NextBiomeChecks
     relic_hunt_total: RelicHuntTotal
     relic_hunt_percent: RelicHuntPercent
     trophy_hunt_percent: TrophyHuntPercent
@@ -603,7 +614,7 @@ class ValheimOptions(PerGameCommonOptions):
 
 # How the options are grouped on the website and in generated templates.
 option_groups = [
-    OptionGroup("Goal", [Goal, GoalConditions, RelicHuntTotal, RelicHuntPercent, TrophyHuntPercent, ResearcherPercent,
+    OptionGroup("Goal", [Goal, NextBiomeChecks, GoalConditions, RelicHuntTotal, RelicHuntPercent, TrophyHuntPercent, ResearcherPercent,
                          ExplorerPercent, SkillMasterCount, SkillMasterLevel, GreatHallComfort, ResearchCostPercent,
                          CombatLogic]),
     OptionGroup("Checks", [BiomeChecks, ObtainChecks, ExplorationChecks, ExplorationCheckSpacing, KillChecks,

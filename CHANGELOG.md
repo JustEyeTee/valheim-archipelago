@@ -9,6 +9,12 @@ Versions are the APWorld's `world_version`; the mod is released alongside it.
   the start and are no longer items or checks, so a game is shorter (Eikthyr: 127 checks instead of 143; Fader:
   567 instead of 654). The new **`item_sanity`** option locks everything, as before. Older rooms work as before
   (everything locked).
+- **A goal's checks stay in its biomes**: an Eikthyr game is the Meadows, The Elder's adds the Black Forest, and
+  so on (each check's biome comes from the game data: tools/gen_check_biomes.py). Before, anything you could
+  reach before the boss was in, so an Eikthyr game had trolls and Burial Chambers. **`next_biome_checks`** adds the
+  next biome's checks that don't need the goal boss first. A default Eikthyr game has 74 checks. A research whose
+  bench cost needs a later biome but whose gear you can make (Axes Tier 1 costs Greydwarf Eyes; the Stone Axe
+  doesn't) is in the game as an item without its check, and its Research Bench recipe is hidden.
 - **Skill checks can be every level**: `skill_check_spacing` also takes `every_level`, `every_2` and `every_5`
   (in an Eikthyr game few skills get past 10). The mod only sends the levels the seed has.
 - **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a

@@ -176,7 +176,22 @@ internal static class ArchipelagoConnection
                 ValheimRandomizer.Log.LogWarning("[AP] Couldn't read free researches from the slot data: " + ex.Message);
             }
         }
-        RandomizerUtils.SetFreeResearches(FreeResearchIds);
+        // Researches whose item is in the seed but whose check isn't: their recipes are hidden too, not unlocked.
+        var hidden = new System.Collections.Generic.HashSet<string>(FreeResearchIds);
+        if (slotData != null && slotData.TryGetValue("item_only_researches", out var itemOnly) && itemOnly != null)
+        {
+            try
+            {
+                var names = itemOnly as Newtonsoft.Json.Linq.JArray ?? Newtonsoft.Json.Linq.JArray.FromObject(itemOnly);
+                foreach (var name in names.Values<string>())
+                    if (ValheimRandomizer.archipelagoToResearch.TryGetValue(name, out var id)) hidden.Add(id);
+            }
+            catch (Exception ex)
+            {
+                ValheimRandomizer.Log.LogWarning("[AP] Couldn't read item-only researches from the slot data: " + ex.Message);
+            }
+        }
+        RandomizerUtils.SetFreeResearches(hidden);
         ValheimRandomizer.Log.LogInfo(FreeResearchIds.Count > 0
             ? $"[AP] {FreeResearchIds.Count} researches known from the start (only equipment is locked)"
             : "[AP] Every research is locked (item-sanity)");

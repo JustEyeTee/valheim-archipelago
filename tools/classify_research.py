@@ -27,11 +27,11 @@ for i, line in enumerate(lines):
         continue
     cols = line.split("\t")
     if line.startswith("#"):
-        if cols[-1] != "kind":
+        if len(cols) < 11:
             cols.append("kind")
         lines[i] = "\t".join(cols)
         continue
-    cols = (cols + [""] * 11)[:11]
+    cols = cols + [""] * (11 - len(cols))  # the kind column is the 11th; later ones (biome) are kept
     gated = [g for g in cols[6].split("|") if g]
     unknown = [g for g in gated if g not in items and g not in pieces]
     if unknown:

@@ -1,7 +1,7 @@
 """Adds a skill check row to mod/checks.tsv for every level 1-100 of every skill that has any, copying the
 skill's tier and requirements from its existing rows; skill_check_spacing picks which levels a seed uses.
 New rows go at the end of the file, so the location ids of existing rows don't change.
-Run from the repo root (then tools/gen_apworld_data.py):  python3 tools/gen_skill_levels.py
+Run from the repo root (then tools/gen_check_biomes.py and tools/gen_apworld_data.py):  python3 tools/gen_skill_levels.py
 """
 import pathlib
 

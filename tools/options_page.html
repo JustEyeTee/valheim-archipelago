@@ -182,7 +182,11 @@ pre.yaml .k { color: var(--code-key); }
     trophy_hunt_percent: "Trophy Hunt", researcher_percent: "Researcher", explorer_percent: "Explorer",
     skill_master_count: "Skill Master", skill_master_level: "Skill Master", great_hall_comfort: "Great Hall" };
   const COUNTED = [...CHECK_OPTIONS, "skill_checks", "exploration_checks", "comfort_checks", ...Object.keys(CONDITION_OPTIONS)];
-  const goalData = () => data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
+  // With next_biome_checks, the goal's numbers with the next biome's checks in.
+  const goalData = () => {
+    const g = data.goals.find(g => g.key === values.goal) || data.goals[data.goals.length - 1];
+    return values.next_biome_checks ? { ...g, breakdown: g.breakdown_next, conditions: g.conditions_next } : g;
+  };
   // The same rules as the APWorld (ValheimWorld.wanted).
   const SKILL_STEP = { every_level: 1, every_2: 2, every_5: 5, every_10: 10, every_20: 20, every_25: 25 };
   function skillLevels() {
@@ -200,6 +204,8 @@ pre.yaml .k { color: var(--code-key); }
   const comfortLevels = b => b.comfort.filter(level => level <= values.comfort_checks);
   // item_sanity locks building and material researches too: more research items and checks.
   const research = b => values.item_sanity ? b.research_sanity : b.research;
+  // Research items: one per research check, and the ones whose check needs a later biome.
+  const researchItems = b => research(b) + (values.item_sanity ? b.item_only_sanity : b.item_only);
   function totalFor(b) {
     let t = b.base - b.research + research(b) + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length + comfortLevels(b).length;
     for (const o of CHECK_OPTIONS) if (values[o]) t += b[o] || 0;
@@ -252,7 +258,7 @@ pre.yaml .k { color: var(--code-key); }
     for (const o of CHECK_OPTIONS) kinds[o] = values[o] ? b[o] || 0 : 0;
     let boss = values.boss_items ? b.boss_drops : 0, gear = values.gear_items ? b.gear : 0, relics = 0;
     const keys = values.boss_altar_keys ? g.conditions["All Bosses"] : 0;
-    let missing = total - (research(b) + b.trophy + boss + keys + gear);
+    let missing = total - (researchItems(b) + b.trophy + boss + keys + gear);
     if (missing < 0) { gear -= Math.min(gear, -missing); missing = 0; }  // too few checks: tools go first
     const conditions = values.goal_conditions.length ? values.goal_conditions : ["Goal Boss"];
     if (conditions.includes("Relic Hunt")) {
@@ -269,7 +275,7 @@ pre.yaml .k { color: var(--code-key); }
     return {
       total,
       checks: CHECK_KINDS.map(([k, label]) => [label, kinds[k]]).filter(([, n]) => n > 0),
-      items: [["Researches", research(b)], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Altar keys", keys], ["Tools", gear],
+      items: [["Researches", researchItems(b)], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Altar keys", keys], ["Tools", gear],
               ["Forsaken Relics", relics], ["Maps", maps], ["Traps", traps], ["Boosts", boosts], ["Resource bundles", missing - traps - boosts]]
         .filter(([, n]) => n > 0),
     };

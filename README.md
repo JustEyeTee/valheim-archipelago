@@ -101,7 +101,8 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 
 | Option | Default | |
 |---|---|---|
-| `goal` | `kall_fimbulbringer` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer (the full game, through the Deep North). Checks and items past the goal are left out. |
+| `goal` | `kall_fimbulbringer` | Eikthyr, The Elder, Bonemass, Moder, Yagluth, The Queen, Fader or Kall Fimbulbringer (the full game, through the Deep North). Checks and items past the goal are left out: a game has checks from its goal boss's biome and the ones before it (an Eikthyr game is the Meadows). |
+| `next_biome_checks` | off | Also the next biome's checks that don't need the goal boss first (an Eikthyr game then has the Black Forest's greydwarves, trolls, Burial Chambers and Haldor). |
 | `goal_conditions` | Goal Boss | What you have to do to win, any combination (all of them): Goal Boss, All Bosses, Relic Hunt, Trophy Hunt, Researcher, Explorer, Skill Master, Great Hall, Hildir's Quests. Counted within the goal's era; a condition with nothing to do in it is dropped. |
 | `relic_hunt_total`, `relic_hunt_percent` | 20, 75 | Relic Hunt: Forsaken Relics placed, and the share you need. |
 | `trophy_hunt_percent`, `researcher_percent` | 50, 75 | Share of the era's trophies or researches you need. |

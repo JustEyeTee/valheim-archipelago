@@ -207,6 +207,11 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
    tools/classify_research.py from the game data) are in the seed: the rest are left out of the scope (no item,
    no check), `ValheimWorld.has` counts them as had, and slot data's `free_researches` lists them so the mod
    unlocks them when the world loads and hides their Research Bench recipes.
+   Biomes: tools/gen_check_biomes.py works out each check's earliest biome from the game data (a `biome` column
+   in checks.tsv and research.tsv, mod/trophy_biomes.tsv, and mod/research_unlock_biomes.tsv for where a
+   research's gear can be made); gen_apworld_data.py writes them to biome_data.py. `goal_scope` keeps checks up
+   to the goal boss's biome (one more with `next_biome_checks`), and returns item-only researches (check out,
+   item in); slot data's `item_only_researches` has the mod hide their recipes.
 4. **`set_rules`** adds the logic: research prerequisites, the stations some checks need, and **boss
    gates**: a location or tier that needs a boss's drop needs "<Boss> Defeated" **or** that drop as an
    item (Haldor's boss-unlocked stock needs the kill itself).
