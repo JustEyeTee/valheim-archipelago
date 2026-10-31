@@ -203,6 +203,10 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
    check gets a trap, boost or bundle. With `progressive_items`, each family's tiered researches in scope are
    replaced by as many progressive items; rules ask for the k-th tier as k copies (`ValheimWorld.has`), and
    slot data's `progressive` tells the mod which research each copy unlocks.
+   Without `item_sanity`, only equipment researches (research.tsv's `kind` column, filled by
+   tools/classify_research.py from the game data) are in the seed: the rest are left out of the scope (no item,
+   no check), `ValheimWorld.has` counts them as had, and slot data's `free_researches` lists them so the mod
+   unlocks them when the world loads and hides their Research Bench recipes.
 4. **`set_rules`** adds the logic: research prerequisites, the stations some checks need, and **boss
    gates**: a location or tier that needs a boss's drop needs "<Boss> Defeated" **or** that drop as an
    item (Haldor's boss-unlocked stock needs the kill itself).

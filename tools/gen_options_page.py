@@ -99,8 +99,9 @@ def goal_info(goal):
     built = build({"goal": goal, "explorer_percent": 20})
     targets = built.goal_targets
     explore = targets["Explorer"]
+    sanity = build({"goal": goal, "item_sanity": 1}).goal_targets["Researcher"]
     return {"All Bosses": len(built.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
-            "Researcher": len(targets["Researcher"]), "Skill Master": len(targets["Skill Master"]),
+            "Researcher": len(targets["Researcher"]), "Researcher (item-sanity)": len(sanity), "Skill Master": len(targets["Skill Master"]),
             "Hildir's Quests": len(targets["Hildir's Quests"]), "Great Hall": built.max_comfort if targets["Great Hall"] else 0,
             "Explorer": int(float(explore[0][len("Explore: "):].split("%")[0])) if explore else 0}
 
@@ -131,6 +132,9 @@ def breakdown(goal):
         else:
             out["base"] += 1
             out["trophy" if name.startswith("Trophy: ") else "research"] += 1
+    # item_sanity adds the building and material researches (the other kinds of check don't change).
+    out["research_sanity"] = sum(1 for name in locations({"goal": goal, "item_sanity": 1})
+                                 if name in world.RESEARCH_PREREQS)
     out["explore"].sort()
     out["comfort"].sort()
     out.update(pool_info(goal))

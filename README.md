@@ -53,8 +53,9 @@ kind of check, the in-game keys and commands, and co-op.
 
 ## Playing
 
-- Build the **Research Bench** (Hammer > Randomizer) and craft researches there. Recipes and pieces stay
-  locked until you receive the research item for them.
+- Build the **Research Bench** (Hammer > Randomizer) and craft researches there. Equipment (weapons, armor,
+  shields, capes, tools, ammo, trinkets) stays locked until you receive the research item for it; building
+  pieces, crafting stations and materials are yours from the start. With `item_sanity`, those are locked too.
 - Build an **Archipelago Chest** (Hammer > Randomizer, 10 Wood). Resource bundles, tools and boss drops
   sent to you are delivered into it.
 - You win by picking up the trophy of your goal boss (for Kall Fimbulbringer, who has no trophy, his
@@ -115,6 +116,7 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every 10, 20 or 25 levels; each skill starts once you can train it. |
+| `item_sanity` | off | Lock every recipe and building piece (workbench, smelter, walls, beds, boats...), not just equipment: about 95 more researches to find, each with its check. |
 | `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
 | `boss_altar_keys` | off | Boss altars stay sealed until you receive each boss's Altar Key from the multiworld. |
 | `map_items`, `map_fragments` | on, 5 | Maps to each boss of your era (they pin its altar) and Map Fragments (they uncover part of the map). |

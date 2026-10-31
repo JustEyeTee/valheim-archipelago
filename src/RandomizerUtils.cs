@@ -14,8 +14,26 @@ public static class RandomizerUtils
 
     private static int researchCostPercent = 100;
 
+    // Researches known from the start in the connected seed: their Research Bench recipes are hidden (a disabled
+    // recipe isn't listed), since there's nothing to research.
+    public static void SetFreeResearches(ICollection<string> researchIds)
+    {
+        freeResearchIds = researchIds;
+        foreach (var (recipe, _) in researchRecipes)
+        {
+            if (recipe.Recipe?.m_item == null) continue;
+            recipe.Recipe.m_enabled = !researchIds.Contains(recipe.Recipe.m_item.name);
+        }
+    }
+
     // Re-applied when a world loads, in case the recipes were rebuilt since connecting.
-    public static void ReapplyResearchCostPercent() => ApplyResearchCostPercent(researchCostPercent);
+    public static void ReapplyResearchCostPercent()
+    {
+        ApplyResearchCostPercent(researchCostPercent);
+        SetFreeResearches(freeResearchIds);
+    }
+
+    private static ICollection<string> freeResearchIds = Array.Empty<string>();
 
     private static readonly Dictionary<string, int[]> pieceCosts = new Dictionary<string, int[]>();
 

@@ -308,6 +308,11 @@ function onClear(slot_data)
     local obj = find(code)
     if obj then obj.Active = false end
   end
+  -- Researches known from the start (everything but equipment, unless item_sanity is on) count as had.
+  for _, name in ipairs((slot_data and slot_data.free_researches) or {}) do
+    local obj = find(code_of(name))
+    if obj then obj.Active = true end
+  end
   -- Checks this seed doesn't have (options, goal) are cleared; the rest are reset.
   local in_seed = {}
   for _, id in ipairs(Archipelago.MissingLocations or {}) do in_seed[id] = true end

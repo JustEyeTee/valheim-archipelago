@@ -60,6 +60,7 @@ internal static class ArchipelagoConnection
         }
         ArchipelagoGoal.Load(slotData);
         LoadProgressive(slotData);
+        LoadFreeResearches(slotData);
         ArchipelagoLogic.Load(slotData);
         altarKeys = slotData != null && slotData.TryGetValue("boss_altar_keys", out var keys) && keys is bool on && on;
         if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
@@ -150,6 +151,41 @@ internal static class ArchipelagoConnection
     }
 
     public static System.Collections.Generic.IEnumerable<string> ProgressiveNames => Progressive.Keys;
+
+    // Researches known from the start in this seed (everything but equipment, unless item_sanity is on): unlocked
+    // once the world is loaded, and their Research Bench recipes hidden. Rooms from before the option send none.
+    private static readonly System.Collections.Generic.List<string> FreeResearchIds = new System.Collections.Generic.List<string>();
+
+    private static void LoadFreeResearches(System.Collections.Generic.Dictionary<string, object> slotData)
+    {
+        FreeResearchIds.Clear();
+        if (slotData != null && slotData.TryGetValue("free_researches", out var raw) && raw != null)
+        {
+            try
+            {
+                var names = raw as Newtonsoft.Json.Linq.JArray ?? Newtonsoft.Json.Linq.JArray.FromObject(raw);
+                foreach (var name in names.Values<string>())
+                {
+                    if (ValheimRandomizer.archipelagoToResearch.TryGetValue(name, out var id)) FreeResearchIds.Add(id);
+                    else ValheimRandomizer.Log.LogWarning($"[AP] Unknown free research '{name}'");
+                }
+            }
+            catch (Exception ex)
+            {
+                ValheimRandomizer.Log.LogWarning("[AP] Couldn't read free researches from the slot data: " + ex.Message);
+            }
+        }
+        RandomizerUtils.SetFreeResearches(FreeResearchIds);
+        ValheimRandomizer.Log.LogInfo(FreeResearchIds.Count > 0
+            ? $"[AP] {FreeResearchIds.Count} researches known from the start (only equipment is locked)"
+            : "[AP] Every research is locked (item-sanity)");
+    }
+
+    private static void UnlockFreeResearches()
+    {
+        foreach (var id in FreeResearchIds)
+            if (!ValheimRandomizer.IsResearchUnlocked(id)) ValheimRandomizer.DoUnlockResearch(id);
+    }
 
     private static void LoadProgressive(System.Collections.Generic.Dictionary<string, object> slotData)
     {
@@ -242,6 +278,7 @@ internal static class ArchipelagoConnection
         if (!HasGlobal(WorldKey)) SetGlobal(WorldKey);
         ArchipelagoAltars.OnConnected(altarKeys, session.RoomState.Seed);
         ResendLost();
+        UnlockFreeResearches();
         TryGetAllItems();
         if (HasGlobal(ArchipelagoCoop.Scoped("ap_goal_pending"))) CompleteGame();
         ArchipelagoGoal.Check(ReceivedCount);

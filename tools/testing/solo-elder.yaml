@@ -8,6 +8,7 @@ Valheim:
   goal: the_elder
   goal_conditions: ["Goal Boss", "Hildir's Quests"]
   research_cost_percent: 1
+  item_sanity: true  # every recipe and piece locked (the Eikthyr test YAML covers the default, equipment only)
   combat_logic: normal
   raid_checks: true
   hint_shop_price: 10

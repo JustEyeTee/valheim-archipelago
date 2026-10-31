@@ -2,16 +2,13 @@
 
 Versions are the APWorld's `world_version`; the mod is released alongside it.
 
-## 0.21.1
+## 0.22.0
 
-From the first playtest:
-- The Research Bench and the Archipelago Chest cost scales with `research_cost_percent` too (at 1%: 1 Wood and
-  1 Stone, and 1 Wood).
-- The Starter Kit has no Raspberries any more: they were a check, and the kit sent "Obtain: Raspberries" on arrival.
-- F8 is simpler and sits below the minimap: how many checks you can do now, the best thing to get next, and how
-  many of each kind. F9 hides skill, exploration and comfort checks unless you ask (they come as you play), sorts
-  its tabs by size and drops the repeated "Obtain:" inside a tab.
-- A Map Fragment pins the spot it uncovers on your map.
+- **Only equipment is locked by default.** Weapons, armor, shields, capes, tools, ammo, trinkets and torches
+  (148 researches) come from the multiworld; building pieces, crafting stations and materials (95) are known from
+  the start and are no longer items or checks, so a game is shorter (Eikthyr: 127 checks instead of 143; Fader:
+  567 instead of 654). The new **`item_sanity`** option locks everything, as before. Older rooms work as before
+  (everything locked).
 - **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a
   window when the world loads (it was a setting in the connection window, easy to miss, that quietly made the
   world shared). The `CoopMode` config setting is gone.
@@ -22,6 +19,17 @@ From the first playtest:
 - **Traps stop once your goal is done**: a finished slot's release sends everything at once, and with Trap Link
   each trap hit both players, one every 10 seconds, for a quarter of an hour. Traps that arrive after your goal
   are counted without firing or going to Trap Link. `/ap clear traps` skips the traps waiting now.
+
+## 0.21.1
+
+From the first playtest:
+- The Research Bench and the Archipelago Chest cost scales with `research_cost_percent` too (at 1%: 1 Wood and
+  1 Stone, and 1 Wood).
+- The Starter Kit has no Raspberries any more: they were a check, and the kit sent "Obtain: Raspberries" on arrival.
+- F8 is simpler and sits below the minimap: how many checks you can do now, the best thing to get next, and how
+  many of each kind. F9 hides skill, exploration and comfort checks unless you ask (they come as you play), sorts
+  its tabs by size and drops the repeated "Obtain:" inside a tab.
+- A Map Fragment pins the spot it uncovers on your map.
 - F9 has a **Hints** tab: every hint involving you (items for you, and your checks holding someone else's item),
   marked found or not, with its priority; the ones still to find come first.
 - Traps: the Lightning Strike no longer kills a new character outright (the bolt lands beside you; you take a

@@ -198,8 +198,10 @@ pre.yaml .k { color: var(--code-key); }
     return kept && p <= values.exploration_checks;
   }
   const comfortLevels = b => b.comfort.filter(level => level <= values.comfort_checks);
+  // item_sanity locks building and material researches too: more research items and checks.
+  const research = b => values.item_sanity ? b.research_sanity : b.research;
   function totalFor(b) {
-    let t = b.base + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length + comfortLevels(b).length;
+    let t = b.base - b.research + research(b) + b.skills_available * skillLevels().length + b.explore.filter(exploreWanted).length + comfortLevels(b).length;
     for (const o of CHECK_OPTIONS) if (values[o]) t += b[o] || 0;
     return t;
   }
@@ -245,12 +247,12 @@ pre.yaml .k { color: var(--code-key); }
     ["skills", "Skills"], ["explore", "Exploration"], ["comfort", "Comfort"]];
   function summary(g) {
     const b = g.breakdown, total = totalFor(b);
-    const kinds = { research: b.research, trophy: b.trophy, skills: b.skills_available * skillLevels().length,
+    const kinds = { research: research(b), trophy: b.trophy, skills: b.skills_available * skillLevels().length,
                     explore: b.explore.filter(exploreWanted).length, comfort: comfortLevels(b).length };
     for (const o of CHECK_OPTIONS) kinds[o] = values[o] ? b[o] || 0 : 0;
     let boss = values.boss_items ? b.boss_drops : 0, gear = values.gear_items ? b.gear : 0, relics = 0;
     const keys = values.boss_altar_keys ? g.conditions["All Bosses"] : 0;
-    let missing = total - (b.research + b.trophy + boss + keys + gear);
+    let missing = total - (research(b) + b.trophy + boss + keys + gear);
     if (missing < 0) { gear -= Math.min(gear, -missing); missing = 0; }  // too few checks: tools go first
     const conditions = values.goal_conditions.length ? values.goal_conditions : ["Goal Boss"];
     if (conditions.includes("Relic Hunt")) {
@@ -267,7 +269,7 @@ pre.yaml .k { color: var(--code-key); }
     return {
       total,
       checks: CHECK_KINDS.map(([k, label]) => [label, kinds[k]]).filter(([, n]) => n > 0),
-      items: [["Researches", b.research], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Altar keys", keys], ["Tools", gear],
+      items: [["Researches", research(b)], ["Trophy boosts", b.trophy], ["Boss drops", boss], ["Altar keys", keys], ["Tools", gear],
               ["Forsaken Relics", relics], ["Maps", maps], ["Traps", traps], ["Boosts", boosts], ["Resource bundles", missing - traps - boosts]]
         .filter(([, n]) => n > 0),
     };
@@ -293,7 +295,10 @@ pre.yaml .k { color: var(--code-key); }
       case "All Bosses": return `${plural(c[key], "boss").replace("bosss", "bosses")}, any order`;
       case "Relic Hunt": return `${share(v.relic_hunt_total, v.relic_hunt_percent)} of ${plural(v.relic_hunt_total, "relic")}`;
       case "Trophy Hunt": return `${share(c[key], v.trophy_hunt_percent)} of ${plural(c[key], "trophy").replace("trophys", "trophies")}`;
-      case "Researcher": return `${share(c[key], v.researcher_percent)} of ${plural(c[key], "research").replace("researchs", "researches")}`;
+      case "Researcher": {
+        const n = v.item_sanity ? c["Researcher (item-sanity)"] : c[key];
+        return `${share(n, v.researcher_percent)} of ${plural(n, "research").replace("researchs", "researches")}`;
+      }
       case "Explorer": return c[key] ? `${Math.min(v.explorer_percent, c[key])}% of the map` +
         (v.explorer_percent > c[key] ? ` (the most in this era)` : "") : "nothing in this era";
       case "Skill Master": return `${Math.min(v.skill_master_count, c[key])} of ${plural(c[key], "skill")} to level ${v.skill_master_level}`;

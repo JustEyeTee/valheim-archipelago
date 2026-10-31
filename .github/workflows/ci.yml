@@ -51,7 +51,7 @@ jobs:
           cd valheim-archipelago
           tools/test_generate.sh kall_fimbulbringer 3
           tools/test_generate.sh eikthyr 2
-          EXTRA_OPTIONS=$'combat_logic: strict\n  progressive_items: true\n  goal_conditions: ["All Bosses", "Great Hall", "Trophy Hunt"]' tools/test_generate.sh fader 2
+          EXTRA_OPTIONS=$'combat_logic: strict\n  item_sanity: true\n  progressive_items: true\n  goal_conditions: ["All Bosses", "Great Hall", "Trophy Hunt"]' tools/test_generate.sh fader 2
           EXTRA_OPTIONS=$'goal_conditions: ["Relic Hunt", "Hildir\'s Quests"]\n  kill_checks: true\n  skill_checks: 100\n  exploration_checks: 20' tools/test_generate.sh yagluth 2
           git diff --exit-code mod/logic.tsv || { echo "::error::mod/logic.tsv is out of date: run tools/gen_mod_logic.py"; exit 1; }
       - name: Network test

@@ -374,12 +374,22 @@ class GearItems(DefaultOnToggle):
     display_name = "Gear Items"
 
 
+class ItemSanity(Toggle):
+    """
+    Off: only equipment is locked behind researches (weapons, armor, shields, capes, tools, arrows and bolts,
+    trinkets, torches); building pieces, crafting stations and materials are known from the start, and aren't
+    items or checks. On: every recipe and building piece is locked, so the workbench, the smelter, walls,
+    beds and boats come from the multiworld too, with a research check for each (about 95 more items and checks).
+    """
+    display_name = "Item-sanity"
+
+
 class ProgressiveItems(Toggle):
     """
     Tiered researches come as progressive items: instead of Axes Tier 1, Axes Tier 2..., the item pool has as
     many Progressive Axes, and each one you receive unlocks the next tier. The same goes for every family of
-    tiered researches (weapons, armor families, tools, boats, beds, capes, station upgrades...). The checks
-    don't change.
+    tiered researches (weapons, armor families, tools, capes; with item_sanity also boats, beds and station
+    upgrades...). The checks don't change.
     """
     display_name = "Progressive Items"
 
@@ -572,6 +582,7 @@ class ValheimOptions(PerGameCommonOptions):
     boss_items: BossItems
     gear_items: GearItems
     starter_kit: StarterKit
+    item_sanity: ItemSanity
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
     map_items: MapItems
@@ -595,7 +606,7 @@ option_groups = [
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
                            FarmingChecks, BrewingChecks, DungeonChecks, RaidChecks]),
-    OptionGroup("Items", [ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
+    OptionGroup("Items", [ItemSanity, ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
                           HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),

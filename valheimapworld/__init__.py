@@ -12,7 +12,7 @@ from .Items import create_items, item_table, item_data_table, PROGRESSIVE_FAMILI
 from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, GoalConditions, SkillCheckSpacing,
                       GOAL_BOSSES, option_groups, options_presets)
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
-from .research_data import RESEARCH_PREREQS
+from .research_data import RESEARCH_KIND, RESEARCH_PREREQS
 from .check_data import CHECKS
 from .comfort_data import COMFORT_PIECES, SHELTER
 from .boss_data import BOSS_ORDER, RESEARCH_COST_BOSSES, RESEARCH_USE_BOSSES, CHECK_BOSSES
@@ -74,7 +74,7 @@ LOGIC_ITEMS = frozenset(
 )
 
 
-TRACKER_OPTIONS = ("goal", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "item_sanity", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -252,6 +252,11 @@ class ValheimWorld(World):
         shelter_ok = all(n in era for n in SHELTER[0] + SHELTER[1])
         self.max_comfort = best_comfort(self.comfort_pieces) if shelter_ok else 1
         self.scope = frozenset(n for n in self.scope if not n.startswith(COMFORT) or comfort_level(n) <= self.max_comfort)
+        # Without item_sanity, only equipment researches are locked: the rest are known from the start, so they
+        # are neither items nor checks (and not Researcher targets), and logic counts them as had.
+        self.free = frozenset() if self.options.item_sanity else frozenset(
+            name for name, kind in RESEARCH_KIND.items() if kind != "equipment")
+        self.scope = self.scope - self.free
         self.era_scope = self.scope  # before the options below take checks out
         self.scope_tier = scope_tier
         # With combat logic, armor and weapons gate fights, so logic has to count them.
@@ -297,6 +302,8 @@ class ValheimWorld(World):
 
     def has(self, state, name: str) -> bool:
         """Whether this item (a research, with progressive items enough copies of its family) is received."""
+        if name in self.free:
+            return True
         progressive = self.progressive_of.get(name)
         if progressive:
             return state.has(progressive[0], self.player, progressive[1])
@@ -586,6 +593,8 @@ class ValheimWorld(World):
             "goal_trophy": self.goal_trophy,
             "goal": self.goal_slot_data(),
             "progressive": self.progressive,
+            # Researches known from the start (everything but equipment, unless item_sanity is on).
+            "free_researches": sorted(self.free),
             "hint_shop_price": self.options.hint_shop_price.value,
             "boss_altar_keys": bool(self.options.boss_altar_keys.value),
             "research_cost_percent": self.options.research_cost_percent.value,
