@@ -94,6 +94,7 @@ public class ValheimRandomizer : BaseUnityPlugin
         go.AddComponent<ArchipelagoUI>().Init();
         go.AddComponent<ArchipelagoLogicPanel>();
         go.AddComponent<ArchipelagoLogicWindow>();
+        ArchipelagoServerAdmin.Install(go);
     }
 
     void DoOnPrefabsAvailable()

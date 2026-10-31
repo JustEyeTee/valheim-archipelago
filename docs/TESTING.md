@@ -61,3 +61,19 @@ What to give to test each feature:
 
 Checks themselves (reading a rune stone, planting, brewing, opening a dungeon chest...) are tested by doing them in
 the game: the server's terminal shows each check as it arrives. [PLAYTEST.md](PLAYTEST.md) lists what to try.
+
+## 4. A dedicated test server
+
+To test on a dedicated server (and multiplayer), run Valheim's dedicated server with BepInEx, Jotunn and this
+mod (the plugin folder's DLLs **and** its `research.tsv` and `trophies.tsv`). With `-public 1` it answers the
+Steam query that joining by IP needs (`-public 0` doesn't); a `-password` keeps it private.
+
+If the server's environment has `AP_ADMIN_QUEUE=<file>`, lines appended to that file run on the server:
+
+| Line | Does |
+|---|---|
+| `spawn <player\|*> <prefab> [count]` | Drops items (or creatures) beside a player, e.g. `spawn * TrophyDeer 2` |
+| `say <text>` | Shows a message to everyone |
+| `players` | Logs who's online and where |
+
+Players' games never set it, so it does nothing there.
