@@ -141,6 +141,11 @@ public static class ArchipelagoExtras
     }
 
     private const float TrapSpacingSeconds = 10f;
+    // With traps waiting (a release, or Trap Link), they come faster, down to one a second, so they pile up.
+    private static float TrapSpacing(int waiting) => waiting <= 1 ? TrapSpacingSeconds : Mathf.Max(1f, TrapSpacingSeconds / waiting);
+    private const int MaxMeteorShowers = 10;       // at once (each drops its own meteors)
+    private const float MaxLavaSeconds = 90f;      // stacked Floor Is Lava
+    private const float MaxStormSeconds = 300f;    // stacked weather
     private const float StormSeconds = 120f;
     private const float BlizzardSeconds = 90f;
     private const float MeteorSeconds = 60f;
@@ -156,6 +161,7 @@ public static class ArchipelagoExtras
 
     private static float nextTrapTime;
     private static float stormEndTime;
+    private static string forcedEnvironment;
     private static float lavaEndTime;
     private static float nextReminderTime;
     private static float nextExploreTime;
@@ -302,7 +308,7 @@ public static class ArchipelagoExtras
         if (Time.time >= nextTrapTime && !player.IsDead() && externalTraps.TryDequeue(out var trap))
         {
             FireTrap(player, trap);
-            nextTrapTime = Time.time + TrapSpacingSeconds;
+            nextTrapTime = Time.time + TrapSpacing(externalTraps.Count);
         }
 
         ArchipelagoLinks.Tick(player);
@@ -332,13 +338,14 @@ public static class ArchipelagoExtras
             }
         }
 
-        if (meteorEndTime > 0f)
+        if (meteorShowers.Count > 0)
         {
-            if (Time.time >= meteorEndTime || player.IsDead()) meteorEndTime = 0f;
-            else if (Time.time >= nextMeteorTime)
+            if (player.IsDead()) meteorShowers.Clear();
+            else meteorShowers.RemoveAll(end => Time.time >= end);
+            if (meteorShowers.Count > 0 && Time.time >= nextMeteorTime)
             {
                 nextMeteorTime = Time.time + MeteorSpacingSeconds;
-                DropMeteor(player);
+                for (int i = 0; i < meteorShowers.Count; i++) DropMeteor(player);  // stacked showers: one meteor each
             }
         }
 
@@ -527,6 +534,7 @@ public static class ArchipelagoExtras
         int kitsDone = GetCount(player, progressKey + ":kits");
         int mapsDone = GetCount(player, progressKey + ":maps");
         int bundleIndex = 0, trapIndex = 0, boostIndex = 0, kitIndex = 0, mapIndex = 0, waiting = 0;
+        int trapsWaiting = receivedNames.Count(n => Traps.Contains(n)) - trapsDone + externalTraps.Count;
         bool bundlesBlocked = false;
         Container chest = null;
         bool chestFull = false;
@@ -562,7 +570,7 @@ public static class ArchipelagoExtras
                 if (Time.time < nextTrapTime || player.IsDead()) continue;
                 FireTrap(player, name);
                 SetCount(player, progressKey + ":traps", ++trapsDone);
-                nextTrapTime = Time.time + TrapSpacingSeconds;
+                nextTrapTime = Time.time + TrapSpacing(--trapsWaiting);
                 ArchipelagoLinks.SendTrapLink(name);
             }
             else if (name == "Starter Kit")
@@ -684,7 +692,8 @@ public static class ArchipelagoExtras
     }
 
     private const float MeteorSpacingSeconds = 4f;
-    private static float meteorEndTime, nextMeteorTime;
+    private static readonly List<float> meteorShowers = new List<float>();  // end times of the showers falling now
+    private static float nextMeteorTime;
     private static readonly string[] MeteorPrefabs = { "projectile_ashlandmeteor", "projectile_meteor" };
 
     // A meteor 12-35 m from you: a prefab that falls by itself (MeteorSmash) goes where it lands; a plain projectile
@@ -712,15 +721,18 @@ public static class ArchipelagoExtras
             }
         }
         ValheimRandomizer.Log.LogWarning("[AP] Meteor Shower Trap: no meteor prefab found");
-        meteorEndTime = 0f;
+        meteorShowers.Clear();
     }
 
     private static void ForceEnvironment(string environment, float seconds)
     {
         if (EnvMan.instance != null && EnvMan.instance.m_environments.Any(env => env.m_name == environment))
         {
+            // The same weather again lasts longer (up to MaxStormSeconds); other weather replaces it.
+            bool same = stormEndTime > Time.time && forcedEnvironment == environment;
             EnvMan.instance.SetForceEnvironment(environment);
-            stormEndTime = Time.time + seconds;
+            forcedEnvironment = environment;
+            stormEndTime = same ? Mathf.Min(stormEndTime + seconds, Time.time + MaxStormSeconds) : Time.time + seconds;
         }
         else ValheimRandomizer.Log.LogWarning($"[AP] Environment '{environment}' not found");
     }
@@ -749,7 +761,7 @@ public static class ArchipelagoExtras
                 player.Damage(shock);
                 break;
             case "Floor Is Lava Trap":
-                lavaEndTime = Time.time + LavaSeconds;
+                lavaEndTime = Mathf.Min(Mathf.Max(lavaEndTime, Time.time) + LavaSeconds, Time.time + MaxLavaSeconds);
                 break;
             case "Blizzard Trap":
                 ForceEnvironment("SnowStorm", BlizzardSeconds);
@@ -758,8 +770,10 @@ public static class ArchipelagoExtras
                 // The weather alone only darkens the sky: the game drops its meteors in the Ashlands only, so the
                 // trap drops them itself around you while it lasts.
                 ForceEnvironment("Ashlands_meteorshower", MeteorSeconds);
-                meteorEndTime = Time.time + MeteorSeconds;
-                nextMeteorTime = Time.time + 2f;
+                // Showers stack: each one adds its own meteors for its minute.
+                if (meteorShowers.Count >= MaxMeteorShowers) meteorShowers.RemoveAt(0);
+                meteorShowers.Add(Time.time + MeteorSeconds);
+                if (meteorShowers.Count == 1) nextMeteorTime = Time.time + 2f;
                 break;
             case "Fake Item Trap":
                 // Looks like a real delivery message; nothing arrives.
