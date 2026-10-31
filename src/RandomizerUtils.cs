@@ -174,7 +174,7 @@ public static class RandomizerUtils
         if (gatedItemPrefabIDs.Length > 0)
         {
             description += "\r\n\r\nUnlocks: " + string.Join(", ", gatedItemPrefabIDs) +
-                           "\r\n(In an Archipelago game: once you receive this research.)";
+                           $"\r\n(In an Archipelago game, crafting this sends a check; these unlock when you receive the '{displayName}' research item.)";
         }
         researchDrop.m_itemData.m_shared.m_description = description;
 
@@ -196,6 +196,9 @@ public static class RandomizerUtils
         {
             ValheimRandomizer.Log.LogWarning($"Icon source item '{iconFromItemPrefab}' not found; keeping cloned icon.");
         }
+
+        // Kept so the Research Bench can show a check's reward over them, and go back (ArchipelagoRewards).
+        ResearchLooks[researchItemID] = (description, researchDrop.m_itemData.m_shared.m_icons.FirstOrDefault());
 
         // Optional: make it light, non-teleport-blocking, etc.
         researchDrop.m_itemData.m_shared.m_weight = 0.1f;
@@ -231,6 +234,10 @@ public static class RandomizerUtils
         ValheimRandomizer.researchToArchipelago.Add(researchItemID, displayName);
         ValheimRandomizer.archipelagoToResearch.Add(displayName, researchItemID);
     }
+
+    // Research item id -> its description and icon as registered.
+    public static readonly Dictionary<string, (string description, UnityEngine.Sprite icon)> ResearchLooks =
+        new Dictionary<string, (string, UnityEngine.Sprite)>();
 
     public static void CreateTrophyResearch(
     string itemID,

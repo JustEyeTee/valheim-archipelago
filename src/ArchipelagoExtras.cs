@@ -61,6 +61,9 @@ public static class ArchipelagoExtras
         { "Black Metal Axe", ("AxeBlackMetal", 1) }, { "Black Metal Pickaxe", ("PickaxeBlackMetal", 1) },
     };
 
+    // The item prefab a bundle, tool or boss drop delivers (for its icon), or null.
+    public static string ItemPrefab(string apItem) => Bundles.TryGetValue(apItem, out var b) ? b.prefab : null;
+
     // Maps: AP item name -> the boss location it pins (as that boss's Vegvisir does), and Map Fragments.
     private static readonly Dictionary<string, (string location, string pin)> BossMaps = new Dictionary<string, (string, string)>
     {
@@ -312,6 +315,7 @@ public static class ArchipelagoExtras
         }
 
         ArchipelagoLinks.Tick(player);
+        ArchipelagoRewards.Apply();
         if (player.IsDead() || Time.time >= nextTrapCreatureCheck)
         {
             nextTrapCreatureCheck = Time.time + 5f;
@@ -421,6 +425,19 @@ public static class ArchipelagoExtras
 
     public static void OnFoodEaten(ItemDrop.ItemData food) => SendFrom(EatLocations, food?.m_dropPrefab?.name);
     public static void OnPiecePlaced(Piece piece) => SendFrom(BuildLocations, piece ? PrefabName(piece.gameObject) : null);
+    // A trader's list: items whose first purchase is a check still to do say so, and what it sends.
+    public static void MarkBuyCheck(Trader.TradeItem item, GameObject element)
+    {
+        var prefab = item?.m_prefab ? item.m_prefab.name : null;
+        if (prefab == null || element == null || !BuyLocations.TryGetValue(prefab, out var location)) return;
+        if (ArchipelagoConnection.IsLocationDone(location) || !ArchipelagoRewards.TryGet(location, out var reward)) return;
+        var name = element.transform.Find("name")?.GetComponent<TMPro.TMP_Text>();
+        if (name != null) name.text += " <color=#e8a33d>(check)</color>";
+        var tooltip = element.GetComponent<UITooltip>();
+        if (tooltip != null)
+            tooltip.m_text += $"\n\n<color=#e8a33d>Archipelago:</color> buying this the first time sends {ArchipelagoRewards.Describe(reward)}.";
+    }
+
     public static void OnItemBought(Trader.TradeItem item) => SendFrom(BuyLocations, item?.m_prefab ? item.m_prefab.name : null);
     // Lore checks: a rune stone, by the rune stone location it stands in; a Vegvisir, by the boss it reveals.
     public static void OnRuneStoneRead(RuneStone stone)

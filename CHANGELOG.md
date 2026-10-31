@@ -21,6 +21,13 @@ Versions are the APWorld's `world_version`; the mod is released alongside it.
   copy is an item; `boss_items: true` in an older YAML means bonus), `off` puts no drops in the pool. New check:
   **Obtain: Swamp Key**.
 - **`progressive_items` is on by default.**
+- **Checks show what they give**, like other Archipelago games' shops. When you connect, the mod looks up every
+  one of your checks (no hints are made). Each Research Bench recipe gets a "Sends:" line (e.g. "your
+  Progressive Axes (progression)" or "Mawff's Lantern (Hollow Knight, useful)") and the reward's icon: your own
+  Valheim items as themselves, anything else as the Archipelago logo, in colour for progression, blue for
+  useful, grey for filler and traps. Crafting one says what it sent. Traders' items whose first purchase is a
+  check are marked "(check)", and their tooltip says what it sends. Before, a recipe named "Bows Tier 1" showed a
+  bow and "Unlocks: Bow", but sent whatever was at that check; the bows come with the "Bows Tier 1" item.
 - **A goal's checks stay in its biomes**: an Eikthyr game is the Meadows, The Elder's adds the Black Forest, and
   so on (each check's biome comes from the game data: tools/gen_check_biomes.py). Before, anything you could
   reach before the boss was in, so an Eikthyr game had trolls and Burial Chambers. **`next_biome_checks`** adds the

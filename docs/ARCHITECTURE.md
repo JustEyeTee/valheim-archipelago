@@ -82,6 +82,12 @@ flowchart LR
    It does *not* unlock the research: in a randomized game the unlock is an item somewhere in the
    multiworld.
 
+So the bench says what each check gives: on connect, `ArchipelagoRewards.Scout` looks up every location of
+the slot (`ScoutLocationsAsync` with `HintCreationPolicy.None`, so no hints), and `Apply` (in the extras tick)
+puts a "Sends:" line and the reward's icon on each research item's shared data, going back to the registered
+look (`RandomizerUtils.ResearchLooks`) after a disconnect. Traders' buy checks get the same in their list
+(a `StoreGui.FillList` postfix).
+
 Trophies work the same way, except they're never consumed: picking one up sends its check.
 
 ### Sending checks

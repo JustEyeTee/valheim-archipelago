@@ -200,10 +200,13 @@ public class ValheimRandomizer : BaseUnityPlugin
         ArchipelagoCoop.WhenReady(() => ZoneSystem.instance.SetGlobalKey(ArchipelagoCoop.Scoped(research + "_crafted")));
         if (Randomized)
         {
-            ArchipelagoConnection.SendLocation(researchToArchipelago[research]);
-            // Crafting a research is a check; what it unlocks comes when the research itself is received.
-            Player.m_localPlayer?.Message(MessageHud.MessageType.Center,
-                $"Research sent to the multiworld: '{researchToArchipelago[research]}' unlocks when you receive it");
+            string location = researchToArchipelago[research];
+            ArchipelagoConnection.SendLocation(location);
+            // Crafting a research is a check: it sends whatever is there. What the research unlocks comes when the
+            // research item itself is received.
+            Player.m_localPlayer?.Message(MessageHud.MessageType.Center, ArchipelagoRewards.TryGet(location, out var reward)
+                ? $"Research '{location}' sent {ArchipelagoRewards.Describe(reward)}"
+                : $"Research sent to the multiworld: '{location}' unlocks when you receive it");
         }
         else
         {

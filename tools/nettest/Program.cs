@@ -110,6 +110,15 @@ a.Say("!hint Crafting");
 Thread.Sleep(2000);
 Console.WriteLine($"A: {a.Locations.AllLocations.Count} locations, {a.Locations.AllMissingLocations.Count} missing");
 
+// Rewards (ArchipelagoRewards): A looks up every one of its checks without making hints, for the Research Bench.
+var rewards = a.Locations.ScoutLocationsAsync(HintCreationPolicy.None, a.Locations.AllLocations.ToArray()).Result;
+int named = rewards.Values.Count(i => i.LocationName != null && i.ItemName != null);
+Console.WriteLine($"A looked up {rewards.Count} rewards ({named} with names; {rewards.Values.Count(i => i.Player.Slot == a.ConnectionInfo.Slot)} its own)");
+foreach (var info in rewards.Values.Where(i => i.LocationName != null && !i.LocationName.Contains(':')).Take(4))
+    Console.WriteLine($"  {info.LocationName} sends {info.Player.Name}'s {info.ItemName} ({info.Flags})");
+Thread.Sleep(1500);
+ShowHints("after looking up rewards (no new hints)");
+
 // Hint shop: A scouts one of its own locations as a hint (no hint points), announced to everyone.
 var shopLoc = a.Locations.AllMissingLocations.Last();
 Console.WriteLine($"A buys a hint for {a.Locations.GetLocationNameFromId(shopLoc, "Valheim")}");

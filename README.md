@@ -61,6 +61,9 @@ kind of check, the in-game keys and commands, and co-op.
 - **Boss drops come from the multiworld**: picking up the Hard Antler, Swamp Key, Wishbone, Dragon Tears, Torn
   Spirit or Majestic Carapace a boss drops sends a check instead, and your own copy arrives as an item
   (`boss_items`).
+- A research's name is its check, not its reward: crafting "Bows Tier 1" sends whatever is at that check, and
+  the bows unlock when the "Bows Tier 1" item reaches you. Each recipe's "Sends:" line and icon show the reward
+  (the Archipelago logo for other games' items), and so do traders' items marked "(check)".
 - Build an **Archipelago Chest** (Hammer > Randomizer, 10 Wood). Resource bundles, tools and boss drops
   sent to you are delivered into it.
 - You win by picking up the trophy of your goal boss (for Kall Fimbulbringer, who has no trophy, his

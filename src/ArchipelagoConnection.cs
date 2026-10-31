@@ -77,6 +77,7 @@ internal static class ArchipelagoConnection
 
         slotName = slot;
         ArchipelagoLinks.OnConnected(session, slot, slotData);
+        ArchipelagoRewards.Scout(session);
 
         // Hook item reception
         session.Items.ItemReceived += OnApItemReceived;
@@ -107,6 +108,7 @@ internal static class ArchipelagoConnection
             try { session.Socket?.DisconnectAsync(); } catch (Exception) { }
         }
         ArchipelagoLinks.OnDisconnected();
+        ArchipelagoRewards.Clear();
         session = null;
         connected = false;
         ValheimRandomizer.Log.LogInfo("[AP] Disconnected");
@@ -153,6 +155,9 @@ internal static class ArchipelagoConnection
     }
 
     public static System.Collections.Generic.IEnumerable<string> ProgressiveNames => Progressive.Keys;
+    // A progressive item's researches in tier order (empty if it isn't one in this seed).
+    public static System.Collections.Generic.IReadOnlyList<string> ProgressiveMembers(string family)
+        => Progressive.TryGetValue(family, out var members) ? members : (System.Collections.Generic.IReadOnlyList<string>)Array.Empty<string>();
 
     // boss_items shuffled: boss drop prefab -> its item. Picking one up sends its check instead of keeping it,
     // until the item is received (ArchipelagoExtras.AllowPickup). Empty otherwise, and for older rooms.

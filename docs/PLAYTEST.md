@@ -31,6 +31,9 @@ Generate both in one room (or one room each) and keep the server console open.
       Do something while disconnected (pick up Flint): it's sent after reconnecting.
 - [ ] **Research Bench** and **Archipelago Chest** (Hammer > Randomizer). Bundles and Map Fragments arrive
       (a fragment shows "it shows land ... km ... of here" and clears fog on the map).
+- [ ] **Rewards shown**: each Research Bench recipe says "Sends: ..." with the reward's icon (the Archipelago logo,
+  coloured by kind, for other games' items); crafting one says what it sent; at Haldor, items with a buy check say
+  "(check)" and their tooltip says what it sends.
 - [ ] **Progressive items**: receiving a "Progressive ..." unlocks the next tier (check the recipe list).
 - [ ] **Lore**: read the Meadows rune stone and Eikthyr's Vegvisir: "Read: Runestone (Meadows)" and "Vegvisir:
       Eikthyr" are sent (server console or `/ap checks`).

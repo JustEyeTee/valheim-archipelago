@@ -24,6 +24,8 @@
   <ItemGroup>
     <EmbeddedResource Include="../mod/checks.tsv" LogicalName="checks.tsv" />
     <EmbeddedResource Include="../mod/logic.tsv" LogicalName="logic.tsv" />
+    <!-- Archipelago's logo for rewards that aren't your own Valheim items (tools/make_ap_icons.py). -->
+    <EmbeddedResource Include="../mod/ap_icons/*.png" LogicalName="ap_icons/%(Filename).png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -541,6 +541,19 @@ public static class Patches
         }
     }
 
+    // ---------- Trader buy checks: what the first purchase sends ----------
+    [HarmonyPatch(typeof(StoreGui), "FillList")]
+    private static class StoreGui_FillList_Rewards_Patch
+    {
+        private static void Postfix(Trader ___m_trader, List<GameObject> ___m_itemList)
+        {
+            if (!ValheimRandomizer.Randomized || ___m_trader == null || ___m_itemList == null) return;
+            var items = ___m_trader.GetAvailableItems();
+            for (int i = 0; i < items.Count && i < ___m_itemList.Count; i++)
+                ArchipelagoExtras.MarkBuyCheck(items[i], ___m_itemList[i]);
+        }
+    }
+
     // ---------- Shuffled boss drops ----------
     [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.Pickup))]
     private static class Humanoid_Pickup_BossDrop_Patch
