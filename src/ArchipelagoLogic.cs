@@ -274,6 +274,8 @@ public class ArchipelagoLogicWindow : MonoBehaviour
     private string message = "";
     private string nextCategory, nextMessage;
     private bool showPassive, nextShowPassive;
+    private bool hintsView, nextHintsView;
+    private bool showFound, nextShowFound;
 
     // Checks that come by themselves as you play (skill levels, exploring, comfort), hidden unless asked for.
     private static readonly HashSet<string> Passive = new HashSet<string> { "Skill", "Explore", "Comfort" };
@@ -290,6 +292,8 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         if (nextCategory != null) { category = nextCategory; nextCategory = null; scroll = Vector2.zero; }
         if (nextMessage != null) { message = nextMessage; nextMessage = null; }
         if (nextShowPassive != showPassive) { showPassive = nextShowPassive; category = "All"; scroll = Vector2.zero; }
+        if (nextHintsView != hintsView) { hintsView = nextHintsView; scroll = Vector2.zero; }
+        if (nextShowFound != showFound) { showFound = nextShowFound; scroll = Vector2.zero; }
         if (IsOpen && Time.unscaledTime >= nextRefresh)
         {
             nextRefresh = Time.unscaledTime + RefreshSeconds;
@@ -320,7 +324,9 @@ public class ArchipelagoLogicWindow : MonoBehaviour
     private void OnGUI()
     {
         if (!IsOpen) return;
-        window = GUILayout.Window(GetInstanceID(), window, Draw, $"Archipelago: {inLogic.Count} checks you can do now");
+        string title = hintsView ? $"Archipelago: {ArchipelagoLinks.Hints.Count(h => !h.Found)} hints not found yet"
+            : $"Archipelago: {inLogic.Count} checks you can do now";
+        window = GUILayout.Window(GetInstanceID(), window, Draw, title);
     }
 
     private void Draw(int id)
@@ -331,33 +337,11 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         }
         else
         {
-            var shown = inLogic.Where(n => showPassive || !Passive.Contains(ArchipelagoLinks.Category(n))).ToList();
-            var categories = new[] { "All" }.Concat(shown.GroupBy(ArchipelagoLinks.Category).OrderByDescending(g => g.Count())
-                .ThenBy(g => g.Key).Select(g => g.Key)).ToArray();
-            int selected = Math.Max(0, Array.IndexOf(categories, category));
-            int clicked = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({shown.Count})" :
-                $"{c} ({shown.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 5);
-            if (clicked != selected) nextCategory = categories[clicked];
-            bool passive = GUILayout.Toggle(showPassive, $" Also show skill, exploration and comfort checks ({inLogic.Count - inLogic.Count(n => !Passive.Contains(ArchipelagoLinks.Category(n)))}; they come as you play)");
-            if (passive != showPassive) nextShowPassive = passive;
-
-            scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(420));
-            foreach (var name in shown.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
-            {
-                GUILayout.BeginHorizontal();
-                // In a kind's own tab, "Obtain: Flint" reads as "Flint".
-                GUILayout.Label(category != "All" && name.Contains(": ") ? name.Substring(name.IndexOf(": ", StringComparison.Ordinal) + 2) : name);
-                GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Hint", GUILayout.Width(60)))
-                {
-                    ArchipelagoLinks.Say("!hint_location " + name);
-                    nextMessage = $"Asked for a hint on {name} (costs hint points).";
-                }
-                GUILayout.EndHorizontal();
-            }
-            GUILayout.EndScrollView();
-            GUILayout.Label(message);  // always drawn (maybe empty), so the layout doesn't change
-            GUILayout.Label(ArchipelagoLogic.Next.Count > 0 ? ArchipelagoLogic.NextLine() : "");
+            var hints = ArchipelagoLinks.Hints;
+            int view = GUILayout.Toolbar(hintsView ? 1 : 0, new[] { $"Checks ({inLogic.Count})", $"Hints ({hints.Count(h => !h.Found)} to find)" });
+            if ((view == 1) != hintsView) nextHintsView = view == 1;
+            if (hintsView) DrawHints(hints);
+            else DrawChecks();
         }
         GUILayout.BeginHorizontal();
         GUILayout.Label($"{ValheimRandomizer.logicWindowKey.Value} or Close closes it.");
@@ -365,5 +349,57 @@ public class ArchipelagoLogicWindow : MonoBehaviour
         if (GUILayout.Button("Close", GUILayout.Width(80))) SetOpen(false);
         GUILayout.EndHorizontal();
         GUI.DragWindow(new Rect(0, 0, 10000, 22));
+    }
+
+    private void DrawChecks()
+    {
+        var shown = inLogic.Where(n => showPassive || !Passive.Contains(ArchipelagoLinks.Category(n))).ToList();
+        var categories = new[] { "All" }.Concat(shown.GroupBy(ArchipelagoLinks.Category).OrderByDescending(g => g.Count())
+            .ThenBy(g => g.Key).Select(g => g.Key)).ToArray();
+        int selected = Math.Max(0, Array.IndexOf(categories, category));
+        int clicked = GUILayout.SelectionGrid(selected, categories.Select(c => c == "All" ? $"All ({shown.Count})" :
+            $"{c} ({shown.Count(n => ArchipelagoLinks.Category(n) == c)})").ToArray(), 5);
+        if (clicked != selected) nextCategory = categories[clicked];
+        bool passive = GUILayout.Toggle(showPassive, $" Also show skill, exploration and comfort checks ({inLogic.Count - inLogic.Count(n => !Passive.Contains(ArchipelagoLinks.Category(n)))}; they come as you play)");
+        if (passive != showPassive) nextShowPassive = passive;
+
+        scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(400));
+        foreach (var name in shown.Where(n => category == "All" || ArchipelagoLinks.Category(n) == category))
+        {
+            GUILayout.BeginHorizontal();
+            // In a kind's own tab, "Obtain: Flint" reads as "Flint".
+            GUILayout.Label(category != "All" && name.Contains(": ") ? name.Substring(name.IndexOf(": ", StringComparison.Ordinal) + 2) : name);
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Hint", GUILayout.Width(60)))
+            {
+                ArchipelagoLinks.Say("!hint_location " + name);
+                nextMessage = $"Asked for a hint on {name} (costs hint points). It shows in the Hints tab.";
+            }
+            GUILayout.EndHorizontal();
+        }
+        GUILayout.EndScrollView();
+        GUILayout.Label(message);  // always drawn (maybe empty), so the layout doesn't change
+        GUILayout.Label(ArchipelagoLogic.Next.Count > 0 ? ArchipelagoLogic.NextLine() : "");
+    }
+
+    private void DrawHints(List<ArchipelagoLinks.HintRow> hints)
+    {
+        bool show = GUILayout.Toggle(showFound, $" Also show hints already found ({hints.Count(h => h.Found)})");
+        if (show != showFound) nextShowFound = show;
+        scroll = GUILayout.BeginScrollView(scroll, GUILayout.Height(440));
+        if (hints.Count == 0) GUILayout.Label("No hints yet. Ask for one with a check's Hint button, !hint <item> in chat, or /ap shop hint at a trader.");
+        // Not found first; then items for you before the ones your checks hold for others.
+        foreach (var h in hints.Where(h => showFound || !h.Found).OrderBy(h => h.Found).ThenByDescending(h => h.ForMe)
+                     .ThenByDescending(h => h.Status == "priority"))
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(h.Found ? "found" : h.ForMe ? "to find" : "to send", GUILayout.Width(55));
+            GUILayout.Label(h.Text);
+            GUILayout.FlexibleSpace();
+            GUILayout.Label(h.Status, GUILayout.Width(70));
+            GUILayout.EndHorizontal();
+        }
+        GUILayout.EndScrollView();
+        GUILayout.Label("\"Your ...\" hints are checks of yours that hold someone else's item.");
     }
 }

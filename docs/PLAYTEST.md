@@ -25,6 +25,8 @@ Generate both in one room (or one room each) and keep the server console open.
 - [ ] **Connect** from the main menu, load a **new** world. `/ap status` says connected and shows the co-op mode.
 - [ ] **F8** shows the panel; **F9** opens the window: the mouse is free, you can't walk or turn while it's open,
       tabs switch kinds, it closes with F9 or Close, and the mouse is captured again afterwards.
+- [ ] **F9 Hints tab**: after a hint (a check's Hint button, `!hint <item>` or the hint shop) it's listed as
+      "to find" or "to send"; once its check is done it moves to "found" (shown with the toggle).
 - [ ] Press **Esc** (pause menu): the Archipelago window shows there too. **Disconnect**, then **Connect** again.
       Do something while disconnected (pick up Flint): it's sent after reconnecting.
 - [ ] **Research Bench** and **Archipelago Chest** (Hammer > Randomizer). Bundles and Map Fragments arrive

@@ -77,6 +77,18 @@ public static class ArchipelagoLinks
 
     public static bool Connected => session != null;
 
+    // One hint involving this slot, as the F9 window's Hints tab shows it.
+    public class HintRow
+    {
+        public string Text;
+        public bool Found;
+        public bool ForMe;       // the item is ours (found somewhere in the multiworld)
+        public string Status;    // "", "priority", "avoid", "no priority"
+    }
+
+    // Replaced as a whole when the server's hint list changes (on the network thread), read on the main thread.
+    public static List<HintRow> Hints { get; private set; } = new List<HintRow>();
+
     public static void OnDisconnected()
     {
         if (session != null)
@@ -86,6 +98,7 @@ public static class ArchipelagoLinks
         }
         session = null;
         deathLinkService = null;
+        Hints = new List<HintRow>();
     }
 
     public static void OnConnected(ArchipelagoSession newSession, string slotName, Dictionary<string, object> slotData)
@@ -108,8 +121,36 @@ public static class ArchipelagoLinks
         // Data storage operations on a key that doesn't exist yet fail on the server (it adds to
         // a null default), so make sure the team's pool exists; this never changes a set value.
         session.DataStorage[Scope.Global, EnergyKey].Initialize(0);
+        Hints = new List<HintRow>();
+        var tracked = session;
+        session.DataStorage.TrackHints(hints =>
+        {
+            if (session != tracked || hints == null) return;  // a hint update for a session since dropped
+            try { Hints = hints.Select(h => ToRow(tracked, h)).ToList(); }
+            catch (Exception e) { ValheimRandomizer.Log.LogWarning($"[AP] Couldn't read hints: {e.Message}"); }
+        });
 
         ValheimRandomizer.Log.LogInfo($"[AP] Death Link: {(deathLink ? deathLinkMode : "off")}, amnesty {deathLinkAmnesty}; Trap Link: {(trapLink ? "on" : "off")}");
+    }
+
+    private static HintRow ToRow(ArchipelagoSession s, Hint h)
+    {
+        int me = s.ConnectionInfo.Slot;
+        string Player(int p) => p == me ? "you" : s.Players.GetPlayerAlias(p) ?? $"Player {p}";
+        string Game(int p) => s.Players.GetPlayerInfo(p)?.Game ?? "Valheim";
+        string item = s.Items.GetItemName(h.ItemId, Game(h.ReceivingPlayer)) ?? $"Item {h.ItemId}";
+        string location = s.Locations.GetLocationNameFromId(h.LocationId, Game(h.FindingPlayer)) ?? $"Location {h.LocationId}";
+        if ((h.ItemFlags & ItemFlags.Advancement) != 0) item += " (progression)";
+        else if ((h.ItemFlags & ItemFlags.NeverExclude) != 0) item += " (useful)";
+        else if ((h.ItemFlags & ItemFlags.Trap) != 0) item += " (trap)";
+        string where = string.IsNullOrEmpty(h.Entrance) || h.Entrance == "Vanilla" ? "" : $" ({h.Entrance})";
+        bool forMe = h.ReceivingPlayer == me;
+        string text = forMe
+            ? (h.FindingPlayer == me ? $"{item} is at your {location}{where}" : $"{item} is at {Player(h.FindingPlayer)}'s {location}{where}")
+            : $"Your {location}{where} has {Player(h.ReceivingPlayer)}'s {item}";
+        string status = h.Found ? "" : h.Status == HintStatus.Priority ? "priority" : h.Status == HintStatus.Avoid ? "avoid" :
+            h.Status == HintStatus.NoPriority ? "no priority" : "";
+        return new HintRow { Text = text, Found = h.Found, ForMe = forMe, Status = status };
     }
 
     // Slot data booleans and numbers arrive as bool or Int64.

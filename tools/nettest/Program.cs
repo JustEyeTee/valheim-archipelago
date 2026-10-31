@@ -90,6 +90,18 @@ Withdraw(3);
 Withdraw(10);
 Console.WriteLine($"pool now {b.DataStorage[Scope.Global, key].GetAsync().Result}");
 
+// A tracks its hints (the F9 window's Hints tab): both the ones for its items and the ones at its checks.
+Hint[] aHints = Array.Empty<Hint>();
+a.DataStorage.TrackHints(h => aHints = h);
+void ShowHints(string when)
+{
+    Console.WriteLine($"A's hints {when}: {aHints.Length}");
+    foreach (var h in aHints.OrderBy(h => h.LocationId))
+        Console.WriteLine($"  {a.Items.GetItemName(h.ItemId, "Valheim")} for {a.Players.GetPlayerAlias(h.ReceivingPlayer)} at " +
+            $"{a.Players.GetPlayerAlias(h.FindingPlayer)}'s {a.Locations.GetLocationNameFromId(h.LocationId, "Valheim")}: " +
+            $"{(h.Found ? "found" : h.Status.ToString())}");
+}
+
 // A check from B (a location in B's seed), and a hint for A
 var loc = b.Locations.AllMissingLocations.First();
 Console.WriteLine($"B checks {b.Locations.GetLocationNameFromId(loc, "Valheim")}");
@@ -104,6 +116,10 @@ Console.WriteLine($"A buys a hint for {a.Locations.GetLocationNameFromId(shopLoc
 var scouted = a.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, shopLoc).Result;
 foreach (var info in scouted.Values) Console.WriteLine($"  scouted: {info.ItemName} for {info.Player.Name}");
 Thread.Sleep(2000);
+ShowHints("after the hint shop");
+a.Locations.CompleteLocationChecks(shopLoc);
+Thread.Sleep(1500);
+ShowHints("after A checks the shop's location");
 
 // Testing: the server's item cheat (what /ap give uses) sends A an item the normal way.
 int before = a.Items.AllItemsReceived.Count;
