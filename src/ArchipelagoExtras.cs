@@ -316,6 +316,16 @@ public static class ArchipelagoExtras
             }
         }
 
+        if (meteorEndTime > 0f)
+        {
+            if (Time.time >= meteorEndTime || player.IsDead()) meteorEndTime = 0f;
+            else if (Time.time >= nextMeteorTime)
+            {
+                nextMeteorTime = Time.time + MeteorSpacingSeconds;
+                DropMeteor(player);
+            }
+        }
+
         if (stormEndTime > 0f && Time.time >= stormEndTime)
         {
             stormEndTime = 0f;
@@ -614,6 +624,38 @@ public static class ArchipelagoExtras
         return ground != null && ground.GetComponentInParent<Piece>() != null;
     }
 
+    private const float MeteorSpacingSeconds = 4f;
+    private static float meteorEndTime, nextMeteorTime;
+    private static readonly string[] MeteorPrefabs = { "projectile_ashlandmeteor", "projectile_meteor" };
+
+    // A meteor 12-35 m from you: a prefab that falls by itself (MeteorSmash) goes where it lands; a plain projectile
+    // is launched from high above at that spot.
+    private static void DropMeteor(Player player)
+    {
+        float angle = UnityEngine.Random.Range(0f, 360f), distance = UnityEngine.Random.Range(12f, 35f);
+        var target = player.transform.position + Quaternion.Euler(0f, angle, 0f) * Vector3.forward * distance;
+        target.y = ZoneSystem.instance.GetGroundHeight(target);
+        foreach (var name in MeteorPrefabs)
+        {
+            var prefab = ZNetScene.instance ? ZNetScene.instance.GetPrefab(name) : null;
+            if (!prefab) continue;
+            if (prefab.GetComponent<MeteorSmash>())
+            {
+                UnityEngine.Object.Instantiate(prefab, target, Quaternion.identity);
+                return;
+            }
+            if (prefab.GetComponent<Projectile>())
+            {
+                var start = target + Vector3.up * 80f + Quaternion.Euler(0f, angle, 0f) * Vector3.forward * 20f;
+                var meteor = UnityEngine.Object.Instantiate(prefab, start, Quaternion.LookRotation(target - start));
+                meteor.GetComponent<Projectile>().Setup(null, (target - start).normalized * 45f, -1f, null, null, null);  // null: keeps the meteor's own damage
+                return;
+            }
+        }
+        ValheimRandomizer.Log.LogWarning("[AP] Meteor Shower Trap: no meteor prefab found");
+        meteorEndTime = 0f;
+    }
+
     private static void ForceEnvironment(string environment, float seconds)
     {
         if (EnvMan.instance != null && EnvMan.instance.m_environments.Any(env => env.m_name == environment))
@@ -654,7 +696,11 @@ public static class ArchipelagoExtras
                 ForceEnvironment("SnowStorm", BlizzardSeconds);
                 break;
             case "Meteor Shower Trap":
+                // The weather alone only darkens the sky: the game drops its meteors in the Ashlands only, so the
+                // trap drops them itself around you while it lasts.
                 ForceEnvironment("Ashlands_meteorshower", MeteorSeconds);
+                meteorEndTime = Time.time + MeteorSeconds;
+                nextMeteorTime = Time.time + 2f;
                 break;
             case "Fake Item Trap":
                 // Looks like a real delivery message; nothing arrives.

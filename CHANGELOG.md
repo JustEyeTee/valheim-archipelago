@@ -16,6 +16,8 @@ From the first playtest:
   third of your health); Bat Swarm is 2 bats plus one per boss defeated (6 killed you at spawn over and over);
   the Launch Trap throws you higher; creatures a trap summons leave after 3 minutes or when you die (marked on the
   creature, so this holds across reloads); `/ap clear` removes bats around you.
+- The Meteor Shower Trap drops meteors anywhere (12-35 m from you, one every 4 seconds for a minute); before, only
+  the sky changed, since the game drops its meteors in the Ashlands only.
 - The F8 panel hides while the inventory, the menu, a store or the map is open.
 
 ## 0.21.0
