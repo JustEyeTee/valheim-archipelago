@@ -203,10 +203,18 @@ that stage: the antler pickaxe, the smelter, bronze...). Every location sits in 
    check gets a trap, boost or bundle. With `progressive_items`, each family's tiered researches in scope are
    replaced by as many progressive items; rules ask for the k-th tier as k copies (`ValheimWorld.has`), and
    slot data's `progressive` tells the mod which research each copy unlocks.
-   Without `item_sanity`, only equipment researches (research.tsv's `kind` column, filled by
-   tools/classify_research.py from the game data) are in the seed: the rest are left out of the scope (no item,
-   no check), `ValheimWorld.has` counts them as had, and slot data's `free_researches` lists them so the mod
-   unlocks them when the world loads and hides their Research Bench recipes.
+   `item_locking` decides which researches are in the seed (`free_researches`): `equipment` keeps the gear
+   (research.tsv's `kind` column, filled by tools/classify_research.py from the game data), `standard` also
+   the stations in `STANDARD_KEYS` but not the basic kit in `STANDARD_FREE_GEAR`, `item_sanity` all of them. The
+   rest are left out of the scope (no item, no check), `ValheimWorld.has` counts them as had, and slot data's
+   `free_researches` lists them so the mod unlocks them when the world loads and hides their Research Bench
+   recipes. Standard puts the Forge and Smelter in `local_early_items`.
+   `boss_items` shuffled: `boss_rule` takes a boss's drop token to mean the received drop only, and the
+   "Obtain: <drop>" checks (`DROP_CHECKS`) need the kill instead (they stay in with obtain checks off). Slot
+   data's `shuffled_boss_drops` (prefab -> item) tells the mod which pickups to turn into checks
+   (`ArchipelagoExtras.AllowPickup`, a `Humanoid.Pickup` prefix): the first one sends the check and one is taken away, the
+   rest stay on the ground until the item is received. mod/logic.tsv and the PopTracker pack use `boss:` and
+   `bossdrop:` tokens for the same rules.
    Biomes: tools/gen_check_biomes.py works out each check's earliest biome from the game data (a `biome` column
    in checks.tsv and research.tsv, mod/trophy_biomes.tsv, and mod/research_unlock_biomes.tsv for where a
    research's gear can be made); gen_apworld_data.py writes them to biome_data.py. `goal_scope` keeps checks up

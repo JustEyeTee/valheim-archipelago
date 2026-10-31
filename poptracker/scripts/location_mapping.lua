@@ -3151,6 +3151,7 @@ LOCATION_MAPPING = {
   [3149] = "@Skill - Tier 8/Skill: Ride 97",
   [3150] = "@Skill - Tier 8/Skill: Ride 98",
   [3151] = "@Skill - Tier 8/Skill: Ride 99",
+  [3152] = "@Obtain - Tier 4/Obtain: Swamp Key",
 }
 TROPHY_BOSS = {
   [233] = "boss_eikthyr",

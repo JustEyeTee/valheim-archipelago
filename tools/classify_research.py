@@ -3,7 +3,7 @@
     equipment  weapons, armor, shields, capes, tools, ammo, trinkets, torches (with any materials they bring)
     building   building pieces and crafting stations
     material   materials only (Bronze, Nails, Ceramic Plates...)
-Only equipment researches are locked unless item_sanity is on; the others are known from the start.
+item_locking (APWorld) decides which kinds are locked; standard also locks some stations (STANDARD_KEYS).
 Run after adding researches:  python3 tools/classify_research.py [path/to/gamedb.json]
 """
 import json

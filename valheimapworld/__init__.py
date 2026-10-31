@@ -9,8 +9,8 @@ from worlds.generic.Rules import add_rule
 from .Regions import create_regions, region_data_table
 from .Locations import create_locations, location_table, location_data_table
 from .Items import create_items, item_table, item_data_table, PROGRESSIVE_FAMILIES
-from .Options import (ValheimOptions, CombatLogic, ExplorationCheckSpacing, GoalConditions, SkillCheckSpacing,
-                      GOAL_BOSSES, option_groups, options_presets)
+from .Options import (ValheimOptions, BossItems, CombatLogic, ExplorationCheckSpacing, GoalConditions, ItemLocking,
+                      SkillCheckSpacing, GOAL_BOSSES, option_groups, options_presets)
 from .combat_data import COMBAT_ERAS, COMBAT_GATES, COMBAT_ITEMS
 from .research_data import RESEARCH_KIND, RESEARCH_PREREQS
 from .check_data import CHECKS
@@ -80,7 +80,7 @@ SKILL_STEPS = {SkillCheckSpacing.option_every_level: 1, SkillCheckSpacing.option
                SkillCheckSpacing.option_every_5: 5, SkillCheckSpacing.option_every_10: 10,
                SkillCheckSpacing.option_every_20: 20, SkillCheckSpacing.option_every_25: 25}
 
-TRACKER_OPTIONS = ("goal", "next_biome_checks", "item_sanity", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
+TRACKER_OPTIONS = ("goal", "next_biome_checks", "item_locking", "progressive_items", "boss_altar_keys", "goal_conditions", "explorer_percent", "great_hall_comfort", "comfort_checks", "combat_logic", "boss_items", "biome_checks",
                    "obtain_checks", "exploration_checks",
                    "exploration_check_spacing", "skill_check_spacing",
                    "kill_checks", "skill_checks", "discovery_checks", "build_checks", "eat_checks",
@@ -91,9 +91,28 @@ TRACKER_OPTIONS = ("goal", "next_biome_checks", "item_sanity", "progressive_item
 FILLER_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("filler:"))
 GEAR_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("gear:"))
 
-# Boss -> its drop as an item, which works in place of defeating it.
+# Boss -> its drop as an item (boss_items): with bonus it works in place of defeating the boss, shuffled it's
+# the only way to get the drop.
 BOSS_DROP_ITEMS = {"Eikthyr": "Hard Antler", "The Elder": "Swamp Key", "Bonemass": "Wishbone",
                    "Moder": "3 Dragon Tears", "Yagluth": "Torn Spirit", "The Queen": "Majestic Carapace"}
+# Boss -> its drop's prefab and the check for picking it up: shuffled, that pickup is the check, not the item.
+BOSS_DROP_PREFABS = {"Eikthyr": "HardAntler", "The Elder": "CryptKey", "Bonemass": "Wishbone",
+                     "Moder": "DragonTear", "Yagluth": "YagluthDrop", "The Queen": "QueenDrop"}
+DROP_CHECKS = {"Obtain: Hard Antler": "Eikthyr", "Obtain: Swamp Key": "The Elder", "Obtain: Wishbone": "Bonemass",
+               "Obtain: Dragon Tear": "Moder", "Obtain: Torn Spirit": "Yagluth", "Obtain: Majestic Carapace": "The Queen"}
+
+# item_locking standard: the researches besides gear that stay locked, the stations and boats that open the way
+# on, and the gear known from the start: a basic kit, and the tools whose boss drops already gate them (the
+# Antler Pickaxe's Hard Antler, the Artisan Table's Dragon Tears, the Wisplight's Torn Spirit).
+STANDARD_KEYS = frozenset({
+    "Charcoal Kiln", "Forge", "Smelter", "Cauldron", "Mead ketill", "Fermenter", "Boat Tier 2", "Boat Tier 3",
+    "Boat Tier 4", "Stonecutter", "Windmill", "Blast Furnace", "Spinning Wheel", "Black Forge", "Sap Extractor",
+    "Eitr Refinery", "Galdr Table", "Frost Foundry"})
+STANDARD_FREE_GEAR = frozenset({"Clubs Tier 1", "Lighting Tier 1", "Axes Tier 1", "Hoe", "Rag Armor", "Bows Tier 1",
+                                "Shields Tier 1", "Pickaxes Tier 1", "Wisplight"})
+assert STANDARD_KEYS | STANDARD_FREE_GEAR <= set(RESEARCH_KIND)
+# Standard puts the first stations in your own world's early checks, so the Bronze Age doesn't wait on others.
+STANDARD_EARLY = ("Forge", "Smelter")
 
 # Bundles and gear from later in the game: the earliest tier (goal scope) they're placed in.
 # Anything not listed is available from the start.
@@ -109,10 +128,29 @@ def boss_name(token: str) -> str:
     return token[len("kill:"):] if token.startswith("kill:") else token
 
 
-def boss_rule(tokens, player):
-    """Every boss in `tokens` defeated, or its drop received (not for "kill:" ones)."""
-    needs = [[f"{boss_name(t)} Defeated"] if t.startswith("kill:") or t not in BOSS_DROP_ITEMS
-             else [f"{t} Defeated", BOSS_DROP_ITEMS[t]] for t in tokens]
+def free_researches(item_locking: int) -> frozenset:
+    """The researches known from the start with this item_locking: neither items nor checks, and had in logic."""
+    if item_locking == ItemLocking.option_item_sanity:
+        return frozenset()
+    free = frozenset(name for name, kind in RESEARCH_KIND.items() if kind != "equipment")
+    if item_locking == ItemLocking.option_standard:
+        free = (free - STANDARD_KEYS) | STANDARD_FREE_GEAR
+    return free
+
+
+def boss_rule(tokens, player, boss_items: int = BossItems.option_bonus):
+    """
+    Every boss in `tokens` defeated, or its drop received: with boss_items bonus either works; shuffled, only the
+    received drop; off, only the kill. "kill:" ones (Haldor's stock, raids) always need the kill.
+    """
+    def options(token):
+        boss = boss_name(token)
+        if token.startswith("kill:") or boss not in BOSS_DROP_ITEMS or boss_items == BossItems.option_off:
+            return [f"{boss} Defeated"]
+        if boss_items == BossItems.option_shuffled:
+            return [BOSS_DROP_ITEMS[boss]]
+        return [f"{boss} Defeated", BOSS_DROP_ITEMS[boss]]
+    needs = [options(t) for t in tokens]
     return lambda state: all(state.has_any(options, player) for options in needs)
 TRAP_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("trap:"))
 BOOST_ITEMS = tuple(item.item_name for item in item_data_table if item.game_id.startswith("boost:"))
@@ -264,10 +302,9 @@ class ValheimWorld(World):
         # Kall Fimbulbringer's game runs through the Deep North (tier 12); every other goal ends before it.
         scope_tier = LOCATION_TIERS[BOSS_TROPHIES[self.goal_boss]]
         biome_rank = BIOME_RANKS[BOSS_BIOMES[self.goal_boss]] + (1 if self.options.next_biome_checks else 0)
-        # Without item_sanity, only equipment researches are locked: the rest are known from the start, so they
-        # are neither items nor checks (and not Researcher targets), and logic counts them as had.
-        self.free = frozenset() if self.options.item_sanity else frozenset(
-            name for name, kind in RESEARCH_KIND.items() if kind != "equipment")
+        # Researches known from the start (item_locking) are neither items nor checks (and not Researcher
+        # targets), and logic counts them as had.
+        self.free = free_researches(self.options.item_locking.value)
         self.scope, self.item_only = goal_scope(scope_tier, self.goal_boss, biome_rank, self.free)
         # Comfort: the pieces this era can build, and the levels past what they add up to are left out.
         era = self.scope | self.free | self.item_only
@@ -296,11 +333,19 @@ class ValheimWorld(World):
                                                   ("Brew: ", self.options.brewing_checks),
                                                   ("Loot: ", self.options.dungeon_checks),
                                                   ("Survive: ", self.options.raid_checks)) if not option)
+        # With shuffled boss drops, picking up a boss's drop is a check even without obtain_checks: it never
+        # goes into your inventory.
+        shuffled = self.options.boss_items == BossItems.option_shuffled
         if off:
-            self.scope = frozenset(name for name in self.scope if not name.startswith(off))
+            self.scope = frozenset(name for name in self.scope
+                                   if not name.startswith(off) or (shuffled and name in DROP_CHECKS))
         self.scope = frozenset(name for name in self.scope if self.wanted(name))
         self.setup_goal()
         self.setup_progressive()
+        if self.options.item_locking == ItemLocking.option_standard:
+            for name in STANDARD_EARLY:
+                if name in self.scope:
+                    self.multiworld.local_early_items[self.player][name] = 1
 
     def setup_progressive(self):
         """
@@ -459,7 +504,7 @@ class ValheimWorld(World):
             for _ in members:
                 self.multiworld.itempool.append(self.create_item(family))
         earlier = BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss)]
-        if self.options.boss_items:
+        if self.options.boss_items != BossItems.option_off:
             for boss in earlier:
                 if boss in BOSS_DROP_ITEMS:
                     self.multiworld.itempool.append(self.create_item(BOSS_DROP_ITEMS[boss]))
@@ -535,8 +580,12 @@ class ValheimWorld(World):
         if prereqs:
             rules.append(lambda state, reqs=prereqs: self.has_all(state, reqs))
         bosses = LOCATION_BOSSES[name]
+        if name in DROP_CHECKS:
+            # Picking up the drop itself: the kill, or (bonus) the received drop out of your Archipelago Chest.
+            bosses = {f"kill:{b}" if b == DROP_CHECKS[name] and self.options.boss_items != BossItems.option_bonus
+                      else b for b in bosses}
         if bosses:
-            rules.append(boss_rule(bosses, self.player))
+            rules.append(boss_rule(bosses, self.player, self.options.boss_items.value))
         if name in self.combat_rules:
             rules.append(self.combat_rules[name])
         if name.startswith(COMFORT):
@@ -579,7 +628,8 @@ class ValheimWorld(World):
         # Boss drops and combat on tier entrances.
         for region_name, bosses in ENTRANCE_BOSSES.items():
             if bosses:
-                add_rule(self.get_region(region_name).entrances[0], boss_rule(bosses, self.player))
+                add_rule(self.get_region(region_name).entrances[0],
+                         boss_rule(bosses, self.player, self.options.boss_items.value))
         for gate, rule in self.combat_rules.items():
             if gate.startswith("Tier"):
                 add_rule(self.get_region(gate).entrances[0], rule)
@@ -612,12 +662,16 @@ class ValheimWorld(World):
             "goal_trophy": self.goal_trophy,
             "goal": self.goal_slot_data(),
             "progressive": self.progressive,
-            # Researches known from the start (everything but equipment, unless item_sanity is on).
+            # Researches known from the start (item_locking).
             "free_researches": sorted(self.free),
             # Researches whose item is in the game but whose check isn't (it needs a later biome): nothing to research.
             "item_only_researches": sorted(self.item_only),
             "hint_shop_price": self.options.hint_shop_price.value,
             "boss_altar_keys": bool(self.options.boss_altar_keys.value),
+            # Boss drops (prefab -> item) that picking up sends a check for instead of keeping, until received.
+            "shuffled_boss_drops": {BOSS_DROP_PREFABS[boss]: BOSS_DROP_ITEMS[boss]
+                                    for boss in BOSS_ORDER[:BOSS_ORDER.index(self.goal_boss)] if boss in BOSS_DROP_ITEMS}
+            if self.options.boss_items == BossItems.option_shuffled else {},
             "research_cost_percent": self.options.research_cost_percent.value,
             "death_link": bool(self.options.death_link.value),
             "death_link_mode": self.options.death_link_mode.current_key,

@@ -12,9 +12,21 @@ function has(item)
   return Tracker:ProviderCountForCode(item) > 0
 end
 
--- A boss's drop: defeated (its trophy check done) or the drop received as an item.
+-- boss_items (the seed's setting, read when autotracking connects): 0 off, 1 bonus, 2 shuffled.
+BOSS_ITEMS = 2
+
+-- A boss's drop: the drop received as an item; with bonus (or a boss without a drop item) defeating it
+-- (its trophy check done) works too, and with off only that.
 function boss(name)
-  return has("boss_" .. name) or (BOSS_DROP[name] ~= nil and has(BOSS_DROP[name]))
+  local drop = BOSS_DROP[name]
+  if drop == nil or BOSS_ITEMS == 0 then return has("boss_" .. name) end
+  if BOSS_ITEMS == 2 then return has(drop) end
+  return has("boss_" .. name) or has(drop)
+end
+
+-- Picking up a boss's own drop: defeating it, or with bonus the received drop out of the Archipelago Chest.
+function bossdrop(name)
+  return has("boss_" .. name) or (BOSS_ITEMS == 1 and BOSS_DROP[name] ~= nil and has(BOSS_DROP[name]))
 end
 
 -- Only defeating it works (Haldor's boss-unlocked stock, Hens).

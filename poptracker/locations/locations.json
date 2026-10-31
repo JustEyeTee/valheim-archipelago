@@ -2903,7 +2903,7 @@
     "name": "Obtain: Hard Antler",
     "item_count": 1,
     "access_rules": [
-     "crafting,$boss|eikthyr"
+     "crafting,$bossdrop|eikthyr"
     ]
    },
    {
@@ -3142,7 +3142,7 @@
     "name": "Obtain: Wishbone",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$boss|bonemass,$boss|eikthyr,$combat|black_forest"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$bossdrop|bonemass,$boss|eikthyr,$combat|black_forest"
     ]
    },
    {
@@ -3164,6 +3164,13 @@
     "item_count": 1,
     "access_rules": [
      "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,cultivator,$boss|eikthyr,$combat|black_forest"
+    ]
+   },
+   {
+    "name": "Obtain: Swamp Key",
+    "item_count": 1,
+    "access_rules": [
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,$bossdrop|the_elder,$boss|eikthyr,$combat|black_forest"
     ]
    }
   ],
@@ -3292,7 +3299,7 @@
     "name": "Obtain: Dragon Tear",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,$bossdrop|moder,$boss|eikthyr,$boss|the_elder,$combat|black_forest,$combat|iron"
     ]
    },
    {
@@ -3381,7 +3388,7 @@
     "name": "Obtain: Torn Spirit",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,$bossdrop|yagluth,$boss|eikthyr,$boss|moder,$boss|the_elder,$combat|black_forest,$combat|iron,$combat|silver"
     ]
    }
   ],
@@ -3510,7 +3517,7 @@
     "name": "Obtain: Majestic Carapace",
     "item_count": 1,
     "access_rules": [
-     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|the_queen,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
+     "crafting,axes_tier_1,bed_tier_1,cooking_station,troll_armor,warmth_tier_1,boat_tier_1,forge,pickaxes_tier_1,smelter,bronze,axes_tier_2,pickaxes_tier_2,forge_upgrade_1,nails_tier_2,pickaxes_tier_3,artisan_table,blast_furnace,axes_tier_4,forge_upgrade_2,forge_upgrade_3,spinning_wheel,wisp_fountain,wisplight,pickaxes_tier_4,$bossdrop|the_queen,$boss|bonemass,$boss|eikthyr,$boss|moder,$boss|the_elder,$boss|yagluth,$combat|black_forest,$combat|iron,$combat|silver,$combat|black_metal"
     ]
    }
   ],

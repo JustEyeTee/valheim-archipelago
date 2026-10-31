@@ -53,9 +53,14 @@ kind of check, the in-game keys and commands, and co-op.
 
 ## Playing
 
-- Build the **Research Bench** (Hammer > Randomizer) and craft researches there. Equipment (weapons, armor,
-  shields, capes, tools, ammo, trinkets) stays locked until you receive the research item for it; building
-  pieces, crafting stations and materials are yours from the start. With `item_sanity`, those are locked too.
+- Build the **Research Bench** (Hammer > Randomizer) and craft researches there. Gear (weapons, armor, shields,
+  capes, tools, ammo, trinkets) and the stations and boats that open the way on (Forge, Smelter, Karve, Blast
+  Furnace, Galdr Table...) stay locked until you receive the research item for them; building pieces,
+  furniture, food stations, materials and a basic kit (club, stone axe, torch, hoe, crude bow, wood shield,
+  rag armor) are yours from the start. `item_locking` can lock only gear, or everything.
+- **Boss drops come from the multiworld**: picking up the Hard Antler, Swamp Key, Wishbone, Dragon Tears, Torn
+  Spirit or Majestic Carapace a boss drops sends a check instead, and your own copy arrives as an item
+  (`boss_items`).
 - Build an **Archipelago Chest** (Hammer > Randomizer, 10 Wood). Resource bundles, tools and boss drops
   sent to you are delivered into it.
 - You win by picking up the trophy of your goal boss (for Kall Fimbulbringer, who has no trophy, his
@@ -117,12 +122,12 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `comfort_checks` | 14 | Checks for each comfort level you reach, up to this level (0 turns them off); capped at what your era allows. |
 | `kill_checks` | off | First kill of each creature. |
 | `skill_checks`, `skill_check_spacing` | 20, every_10 | Checks for raising skills up to this level (0-100), every level or every 2, 5, 10, 20 or 25 levels; each skill starts once you can train it. Dense spacing suits short games. |
-| `item_sanity` | off | Lock every recipe and building piece (workbench, smelter, walls, beds, boats...), not just equipment: about 95 more researches to find, each with its check. |
-| `progressive_items` | off | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
+| `item_locking` | standard | What's locked behind researches: `standard` gear and the key stations and boats (Forge, Smelter, Charcoal Kiln, Cauldron, Mead Ketill, Fermenter, Karve, Longship, Stonecutter, Windmill, Blast Furnace, Spinning Wheel, Black Forge, Sap Extractor, Eitr Refinery, Galdr Table, Drakkar, Frost Foundry), with the Forge and Smelter among your own early checks; `equipment` only gear; `item_sanity` every recipe and building piece, the workbench too. |
+| `progressive_items` | on | Tiered researches come as progressive items (Progressive Axes, Progressive Bows...): each copy unlocks the next tier. |
 | `boss_altar_keys` | off | Boss altars stay sealed until you receive each boss's Altar Key from the multiworld. |
 | `map_items`, `map_fragments` | on, 5 | Maps to each boss of your era (they pin its altar) and Map Fragments (they uncover part of the map). |
 | `hint_shop_price` | 100 | Coins per hint in the hint shop (0 closes it). |
-| `boss_items` | on | The drops of the bosses before your goal are items (Hard Antler, Swamp Key, Wishbone...). |
+| `boss_items` | shuffled | The drops of the bosses before your goal (Hard Antler, Swamp Key, Wishbone...): `shuffled` they're items in the multiworld and picking up the boss's drop is a check instead; `bonus` the boss drops them as usual and a second copy is an item; `off` neither. |
 | `gear_items` | on | Tools from your goal's era. |
 | `starter_kit` | on | Start with a Club, Stone Axe and Torch. |
 | `trap_percentage`, `boost_percentage`, `excluded_traps` | 20, 20, none | Traps and boosts among the extra items; 21 traps. |
@@ -130,9 +135,10 @@ Every option is described in [docs/Valheim.yaml](docs/Valheim.yaml). In short:
 | `trap_link` | off | Share traps with other Trap Link games. |
 
 Each boss's drops gate the next part of the game in logic (copper needs Eikthyr's antler, iron The Elder's
-Swamp Key, silver Bonemass's Wishbone, and so on). With `boss_items`, receiving the drop works too.
-Default check counts: Eikthyr 114, The Elder 227, Bonemass 284, Moder 327, Yagluth 400, The Queen 490,
-Fader 566, Kall Fimbulbringer 611.
+Swamp Key, silver Bonemass's Wishbone, and so on). With `boss_items` shuffled that means receiving the drop;
+with bonus, the kill or the received drop.
+Default check counts: Eikthyr 72, The Elder 173, Bonemass 293, Moder 349, Yagluth 416, The Queen 508,
+Fader 576, Kall Fimbulbringer 622.
 
 ## Trackers
 

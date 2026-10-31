@@ -100,9 +100,11 @@ def goal_info(goal, extra=None):
     built = build({"goal": goal, "explorer_percent": 20, **extra})
     targets = built.goal_targets
     explore = targets["Explorer"]
-    sanity = build({"goal": goal, "item_sanity": 1, **extra}).goal_targets["Researcher"]
+    equipment = build({"goal": goal, "item_locking": "equipment", **extra}).goal_targets["Researcher"]
+    sanity = build({"goal": goal, "item_locking": "item_sanity", **extra}).goal_targets["Researcher"]
     return {"All Bosses": len(built.era_bosses), "Trophy Hunt": len(targets["Trophy Hunt"]),
-            "Researcher": len(targets["Researcher"]), "Researcher (item-sanity)": len(sanity), "Skill Master": len(targets["Skill Master"]),
+            "Researcher": len(targets["Researcher"]), "Researcher (equipment)": len(equipment),
+            "Researcher (item-sanity)": len(sanity), "Skill Master": len(targets["Skill Master"]),
             "Hildir's Quests": len(targets["Hildir's Quests"]), "Great Hall": built.max_comfort if targets["Great Hall"] else 0,
             "Explorer": int(float(explore[0][len("Explore: "):].split("%")[0])) if explore else 0}
 
@@ -134,12 +136,15 @@ def breakdown(goal, extra=None):
         else:
             out["base"] += 1
             out["trophy" if name.startswith("Trophy: ") else "research"] += 1
-    # item_sanity adds the building and material researches (the other kinds of check don't change).
-    out["research_sanity"] = sum(1 for name in locations({"goal": goal, "item_sanity": 1, **extra})
-                                 if name in world.RESEARCH_PREREQS)
-    # Research items without their check (it needs a later biome): items, not checks.
-    out["item_only"] = len(build({"goal": goal, **extra}).item_only)
-    out["item_only_sanity"] = len(build({"goal": goal, "item_sanity": 1, **extra}).item_only)
+    # item_locking decides which researches are locked, so their checks (the other kinds of check don't change),
+    # and the research items without their check (it needs a later biome): items, not checks.
+    out["research_locking"], out["item_only_locking"] = {}, {}
+    for mode in hints["item_locking"].options:
+        out["research_locking"][mode] = sum(1 for name in locations({"goal": goal, "item_locking": mode, **extra})
+                                            if name in world.RESEARCH_PREREQS)
+        out["item_only_locking"][mode] = len(build({"goal": goal, "item_locking": mode, **extra}).item_only)
+    # Picking up a boss's drop, a check with boss_items shuffled even when obtain checks are off.
+    out["drop_checks"] = sum(1 for name in locations({"goal": goal, **extra}) if name in world.DROP_CHECKS)
     out["explore"].sort()
     out["comfort"].sort()
     out.update(pool_info(goal))
@@ -148,7 +153,7 @@ def breakdown(goal, extra=None):
 
 def pool_info(goal):
     """The items a goal's pool starts from, before filler (the same rules as ValheimWorld.create_items):
-    the earlier bosses' drops (boss_items) and the era's tools (gear_items)."""
+    the earlier bosses' drops (boss_items bonus or shuffled) and the era's tools (gear_items)."""
     built = build({"goal": goal})
     earlier = world.BOSS_ORDER[:world.BOSS_ORDER.index(built.goal_boss)]
     return {"boss_drops": sum(1 for boss in earlier if boss in world.BOSS_DROP_ITEMS),

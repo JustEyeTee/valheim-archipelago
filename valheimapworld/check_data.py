@@ -2836,4 +2836,5 @@ CHECKS = (
     ('Skill', 'Skill: Ride 97', 8, ()),
     ('Skill', 'Skill: Ride 98', 8, ()),
     ('Skill', 'Skill: Ride 99', 8, ()),
+    ('Obtain', 'Obtain: Swamp Key', 4, ()),
 )

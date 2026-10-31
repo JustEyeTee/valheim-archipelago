@@ -25,6 +25,8 @@ public static class ArchipelagoLogic
 
     // The seed's combat_logic: 0 off, 1 armor and a weapon, 2 also a bow or crossbow.
     private static int combatMode = 1;
+    // The seed's boss_items: 0 off, 1 bonus (the kill or the received drop), 2 shuffled (only the received drop).
+    private static int bossItems = 1;
 
     // Token -> in logic, for one evaluation (the same tier and boss tokens come up for many checks).
     private static readonly Dictionary<string, bool> cache = new Dictionary<string, bool>();
@@ -61,12 +63,16 @@ public static class ArchipelagoLogic
     public static void Load(Dictionary<string, object> slotData)
     {
         combatMode = 1;
+        bossItems = 1;
         try
         {
             if (slotData != null && slotData.TryGetValue("options", out var raw) && raw != null)
             {
                 var options = raw as JObject ?? JObject.FromObject(raw);
                 combatMode = options["combat_logic"]?.Value<int>() ?? 1;
+                // Rooms from before the choice sent it as on/off: on was bonus.
+                var boss = options["boss_items"];
+                if (boss != null) bossItems = boss.Type == JTokenType.Boolean ? (boss.Value<bool>() ? 1 : 0) : boss.ToObject<int>();
             }
         }
         catch (Exception ex)
@@ -95,7 +101,15 @@ public static class ArchipelagoLogic
         {
             case "tier": result = !Tiers.TryGetValue(int.Parse(arg), out var tierNeeds) || All(tierNeeds); break;
             case "boss":
-                result = Defeated(arg) || (Bosses.TryGetValue(arg, out var b) && b.drop.Length > 0 && Has(b.drop));
+            {
+                bool hasDrop = Bosses.TryGetValue(arg, out var b) && b.drop.Length > 0;
+                result = !hasDrop || bossItems == 0 ? Defeated(arg)
+                    : bossItems == 2 ? Has(b.drop) : Defeated(arg) || Has(b.drop);
+                break;
+            }
+            // Picking up the boss's own drop: the kill, or with bonus the received drop.
+            case "bossdrop":
+                result = Defeated(arg) || (bossItems == 1 && Bosses.TryGetValue(arg, out var own) && own.drop.Length > 0 && Has(own.drop));
                 break;
             case "kill": result = Defeated(arg); break;
             case "combat": result = CombatReady(arg); break;
@@ -159,8 +173,14 @@ public static class ArchipelagoLogic
         string arg = colon > 0 ? token.Substring(colon + 1) : token;
         switch (colon > 0 ? token.Substring(0, colon) : "")
         {
-            case "boss": return $"defeat {arg} (or receive its drop)";
-            case "kill": return $"defeat {arg}";
+            case "boss":
+            {
+                string drop = Bosses.TryGetValue(arg, out var b) ? b.drop : "";
+                if (drop.Length == 0 || bossItems == 0) return $"defeat {arg}";
+                return bossItems == 2 ? $"{drop} (from Archipelago)" : $"defeat {arg} (or receive its drop)";
+            }
+            case "kill":
+            case "bossdrop": return $"defeat {arg}";
             case "combat": return $"{arg} gear (armor and a weapon)";
             case "comfort": return $"comfort {arg}";
             case "altarkey": return $"{arg}'s Altar Key";

@@ -367,15 +367,26 @@ class DungeonChecks(DefaultOnToggle):
     display_name = "Dungeon Checks"
 
 
-class BossItems(DefaultOnToggle):
+class BossItems(Choice):
     """
-    Puts the drops of the bosses before your goal into the item pool, delivered to your
-    Archipelago Chest: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),
-    3 Dragon Tears (Moder), Torn Spirit (Yagluth) and Majestic Carapace (The Queen). Logic
-    then lets you use either the boss kill or the received drop, so another player can
-    open the Sunken Crypts for you. Haldor's boss-unlocked stock still needs the kill.
+    The drops of the bosses before your goal: Hard Antler (Eikthyr), Swamp Key (The Elder), Wishbone (Bonemass),
+    3 Dragon Tears (Moder), Torn Spirit (Yagluth) and Majestic Carapace (The Queen).
+    Shuffled: each drop is an item somewhere in the multiworld, delivered to your Archipelago Chest when found.
+    Picking up the boss's own drop sends a check instead of going into your inventory, until you've received
+    the item; so opening the Sunken Crypts means finding the Swamp Key, not just killing The Elder.
+    Bonus: the boss drops as usual, and a second copy is in the item pool; either one works, so another player
+    can open the crypts for you.
+    Off: the boss drops as usual and nothing goes into the pool.
+    Defeating a boss still counts as defeated either way (Haldor's stock, raids, the goal).
     """
     display_name = "Boss Items"
+    option_off = 0
+    option_bonus = 1
+    option_shuffled = 2
+    # YAMLs from before the choice: on was today's bonus.
+    alias_true = 1
+    alias_false = 0
+    default = 2
 
 
 class GearItems(DefaultOnToggle):
@@ -388,22 +399,31 @@ class GearItems(DefaultOnToggle):
     display_name = "Gear Items"
 
 
-class ItemSanity(Toggle):
+class ItemLocking(Choice):
     """
-    Off: only equipment is locked behind researches (weapons, armor, shields, capes, tools, arrows and bolts,
-    trinkets, torches); building pieces, crafting stations and materials are known from the start, and aren't
-    items or checks. On: every recipe and building piece is locked, so the workbench, the smelter, walls,
-    beds and boats come from the multiworld too, with a research check for each (about 95 more items and checks).
+    Which recipes are locked behind researches, each found as an item with a research check for it.
+    Standard: the gear (weapons, armor, shields, capes, tools, arrows, trinkets) and the stations, tools and
+    boats that open the way on (Forge, Smelter, Charcoal Kiln, Cauldron, Mead Ketill, Fermenter, Karve,
+    Longship, Stonecutter, Windmill, Blast Furnace, Spinning Wheel, Black Forge, Sap Extractor, Eitr Refinery,
+    Galdr Table, Drakkar, Frost Foundry). Building pieces, furniture, food stations, materials and a basic kit
+    (club, stone axe, torch, hoe, crude bow, wood shield, rag armor) are known from the start, as are the
+    Antler Pickaxe, Artisan Table and Wisplight, whose boss drops already gate them.
+    Equipment: only gear is locked; every building piece and station is known from the start.
+    Item-sanity: every recipe and building piece is locked, the workbench too.
     """
-    display_name = "Item-sanity"
+    display_name = "Item Locking"
+    option_standard = 0
+    option_equipment = 1
+    option_item_sanity = 2
+    default = 0
 
 
-class ProgressiveItems(Toggle):
+class ProgressiveItems(DefaultOnToggle):
     """
     Tiered researches come as progressive items: instead of Axes Tier 1, Axes Tier 2..., the item pool has as
     many Progressive Axes, and each one you receive unlocks the next tier. The same goes for every family of
-    tiered researches (weapons, armor families, tools, capes; with item_sanity also boats, beds and station
-    upgrades...). The checks don't change.
+    locked tiered researches (weapons, armor families, tools, capes, boats; with item_sanity also beds and
+    station upgrades...). The checks don't change.
     """
     display_name = "Progressive Items"
 
@@ -597,7 +617,7 @@ class ValheimOptions(PerGameCommonOptions):
     boss_items: BossItems
     gear_items: GearItems
     starter_kit: StarterKit
-    item_sanity: ItemSanity
+    item_locking: ItemLocking
     progressive_items: ProgressiveItems
     hint_shop_price: HintShopPrice
     map_items: MapItems
@@ -621,7 +641,7 @@ option_groups = [
                            SkillChecks, SkillCheckSpacing, ComfortChecks, DiscoveryChecks,
                            BuildChecks, EatChecks, FishingChecks, TamingChecks, TraderChecks, LoreChecks,
                            FarmingChecks, BrewingChecks, DungeonChecks, RaidChecks]),
-    OptionGroup("Items", [ItemSanity, ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
+    OptionGroup("Items", [ItemLocking, ProgressiveItems, BossItems, BossAltarKeys, GearItems, MapItems, MapFragments, StarterKit, BoostPercentage,
                           HintShopPrice]),
     OptionGroup("Traps", [TrapPercentage, ExcludedTraps]),
     OptionGroup("Links", [DeathLink, DeathLinkMode, DeathLinkAmnesty, TrapLink]),

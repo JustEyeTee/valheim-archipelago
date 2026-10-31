@@ -356,17 +356,55 @@ public static class ArchipelagoExtras
         }
     }
 
-    // Obtain checks: anything entering the inventory, picked up or crafted.
+    // Obtain checks: anything entering the inventory, picked up or crafted. A shuffled boss drop's check is
+    // picking up the boss's own drop (AllowPickup), not the received one coming out of the Archipelago Chest.
     public static void OnInventoryChanged(Inventory inventory)
     {
         foreach (var item in inventory.GetAllItems())
         {
             var prefab = item?.m_dropPrefab?.name;
-            if (prefab != null && ObtainLocations.TryGetValue(prefab, out var location))
+            if (prefab != null && !ArchipelagoConnection.ShuffledBossDrops.ContainsKey(prefab)
+                && ObtainLocations.TryGetValue(prefab, out var location))
             {
                 ArchipelagoConnection.SendLocationOnce(location);
             }
         }
+    }
+
+    private static float nextDropMessage;
+
+    // boss_items shuffled: picking up a boss's drop (Hard Antler, Swamp Key...) before receiving its item sends
+    // the drop's check and takes one of it away (drops on the ground stack); the item comes from the multiworld.
+    // Once the check is sent, the rest stay on the ground for other players (a slot each) and you can't pick
+    // them up. Once the item is received, drops are picked up as usual. Returns whether the game's own pickup
+    // goes ahead.
+    public static bool AllowPickup(Humanoid who, ItemDrop drop, bool autoPickupDelay)
+    {
+        if (who != Player.m_localPlayer || drop == null || !ArchipelagoConnection.IsConnected) return true;
+        var prefab = drop.m_itemData?.m_dropPrefab ? drop.m_itemData.m_dropPrefab.name : PrefabName(drop.gameObject);
+        if (!ArchipelagoConnection.ShuffledBossDrops.TryGetValue(prefab, out var item)) return true;
+        ObtainLocations.TryGetValue(prefab, out var location);
+        if (!drop.CanPickup(autoPickupDelay)) return true;  // the game asks for ownership and tries again
+        if (ArchipelagoConnection.ReceivedCount(item) > 0)
+        {
+            if (location != null) ArchipelagoConnection.SendLocationOnce(location);
+            return true;
+        }
+        if (location != null && !ArchipelagoConnection.IsLocationDone(location))
+        {
+            ArchipelagoConnection.SendLocation(location);
+            drop.RemoveOne();  // ours: CanPickup said so
+            Player.m_localPlayer.Message(MessageHud.MessageType.Center,
+                $"{Localization.instance.Localize(drop.m_itemData.m_shared.m_name)} sent off as a check: your {item} comes from Archipelago");
+            return false;
+        }
+        drop.m_autoPickup = false;  // left for other players; walking past it shouldn't keep trying
+        if (Time.time >= nextDropMessage)
+        {
+            nextDropMessage = Time.time + 3f;
+            Player.m_localPlayer.Message(MessageHud.MessageType.Center, $"Your {item} comes from Archipelago");
+        }
+        return false;
     }
 
     private static string PrefabName(GameObject go)

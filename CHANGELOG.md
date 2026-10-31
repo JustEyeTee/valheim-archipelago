@@ -4,15 +4,27 @@ Versions are the APWorld's `world_version`; the mod is released alongside it.
 
 ## 0.22.0
 
-- **Only equipment is locked by default.** Weapons, armor, shields, capes, tools, ammo, trinkets and torches
-  (148 researches) come from the multiworld; building pieces, crafting stations and materials (95) are known from
-  the start and are no longer items or checks, so a game is shorter (Eikthyr: 127 checks instead of 143; Fader:
-  567 instead of 654). The new **`item_sanity`** option locks everything, as before. Older rooms work as before
+- **Standard item locking by default** (new **`item_locking`** option). Locked: gear (weapons, armor, shields,
+  capes, tools, ammo, trinkets) and the 18 stations and boats that open the way on (Forge, Smelter, Charcoal Kiln,
+  Cauldron, Mead Ketill, Fermenter, Karve, Longship, Stonecutter, Windmill, Blast Furnace, Spinning Wheel, Black
+  Forge, Sap Extractor, Eitr Refinery, Galdr Table, Drakkar, Frost Foundry). Known from the start, and no longer
+  items or checks: building pieces, furniture, food stations, materials, a basic kit (club, stone axe, torch, hoe,
+  crude bow, wood shield, rag armor), and the Antler Pickaxe, Artisan Table and Wisplight, whose boss drops already
+  gate them. The Forge and Smelter are among your own early checks, so the Bronze Age doesn't wait on other
+  players. `equipment` locks only gear; `item_sanity` locks everything, as before. Older rooms work as before
   (everything locked).
+- **Boss drops are shuffled** (`boss_items` is now a choice; `shuffled` is the default). The drops of the bosses
+  before your goal are items in the multiworld, and picking up the boss's own drop sends a check ("Obtain: Hard
+  Antler") instead of going into your inventory, until you've received the item: the Swamp Key opens the Sunken
+  Crypts, not the kill. Picking it up is a check even with obtain checks off. With a slot each, the drops one
+  player can't take stay on the ground for the others. `bonus` is the old behaviour (the boss drops it and a second
+  copy is an item; `boss_items: true` in an older YAML means bonus), `off` puts no drops in the pool. New check:
+  **Obtain: Swamp Key**.
+- **`progressive_items` is on by default.**
 - **A goal's checks stay in its biomes**: an Eikthyr game is the Meadows, The Elder's adds the Black Forest, and
   so on (each check's biome comes from the game data: tools/gen_check_biomes.py). Before, anything you could
   reach before the boss was in, so an Eikthyr game had trolls and Burial Chambers. **`next_biome_checks`** adds the
-  next biome's checks that don't need the goal boss first. A default Eikthyr game has 74 checks. A research whose
+  next biome's checks that don't need the goal boss first. A default Eikthyr game has 72 checks. A research whose
   bench cost needs a later biome but whose gear you can make (Axes Tier 1 costs Greydwarf Eyes; the Stone Axe
   doesn't) is in the game as an item without its check, and its Research Bench recipe is hidden.
 - **Skill checks can be every level**: `skill_check_spacing` also takes `every_level`, `every_2` and `every_5`

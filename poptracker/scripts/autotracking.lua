@@ -22,6 +22,10 @@ function onClear(slot_data)
   if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
     COMBAT_MODE = slot_data.options.combat_logic
   end
+  -- Rooms from before the choice sent boss_items as on/off: on was bonus.
+  local boss_items = slot_data and slot_data.options and slot_data.options.boss_items
+  if boss_items == true then boss_items = 1 elseif boss_items == false then boss_items = 0 end
+  BOSS_ITEMS = boss_items or 1
   for _, code in pairs(ITEM_MAPPING) do
     local obj = find(code)
     if obj then obj.Active = false end
@@ -30,7 +34,7 @@ function onClear(slot_data)
     local obj = find(code)
     if obj then obj.Active = false end
   end
-  -- Researches known from the start (everything but equipment, unless item_sanity is on) count as had.
+  -- Researches known from the start (item_locking) count as had.
   for _, name in ipairs((slot_data and slot_data.free_researches) or {}) do
     local obj = find(code_of(name))
     if obj then obj.Active = true end

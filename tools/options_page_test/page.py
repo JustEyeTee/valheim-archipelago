@@ -9,15 +9,17 @@ cases = [
     ("eikthyr", [("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "50"),
                  ("select", "#opt-skill_check_spacing", "every_level"), ("num", "#opt-skill_checks", "30"),
                  ("num", "#opt-trap_percentage", "33"), ("num", "#opt-boost_percentage", "50")]),
-    ("the_elder", [("check", "#opt-item_sanity"), ("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",), ("num", "#opt-comfort_checks", "3"),
+    ("the_elder", [("click", "label[for=opt-item_locking-item_sanity]"), ("check", "#opt-kill_checks"), ("num", "#opt-skill_checks", "100"), ("all_traps",), ("num", "#opt-comfort_checks", "3"),
                    ("uncheck", "#opt-starter_kit")]),
-    ("yagluth", [("check", "#opt-next_biome_checks"), ("check", "#opt-raid_checks"), ("check", "#opt-boss_altar_keys"), ("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
+    ("yagluth", [("check", "#opt-next_biome_checks"), ("click", "label[for=opt-boss_items-bonus]"), ("check", "#opt-raid_checks"), ("check", "#opt-boss_altar_keys"), ("check", "#opt-goal_conditions-Relic-Hunt"), ("num", "#opt-relic_hunt_total", "37"),
                  ("num", "#opt-exploration_checks", "20"), ("click", "label[for=opt-exploration_check_spacing-half_percent]")]),
-    ("moder", [("check", "#opt-item_sanity"), ("check", "#opt-progressive_items"), ("uncheck", "#opt-map_items"), ("num", "#opt-map_fragments", "12"), ("uncheck", "#opt-gear_items"), ("uncheck", "#opt-boss_items"), ("num", "#opt-trap_percentage", "50"),
+    ("moder", [("click", "label[for=opt-item_locking-equipment]"), ("uncheck", "#opt-progressive_items"), ("uncheck", "#opt-map_items"), ("num", "#opt-map_fragments", "12"), ("uncheck", "#opt-gear_items"), ("click", "label[for=opt-boss_items-off]"), ("num", "#opt-trap_percentage", "50"),
                ("num", "#opt-boost_percentage", "50")]),
     ("eikthyr", [("uncheck", "#opt-obtain_checks"), ("uncheck", "#opt-discovery_checks"),
                  ("uncheck", "#opt-build_checks"), ("uncheck", "#opt-eat_checks"), ("num", "#opt-skill_checks", "0"),
                  ("num", "#opt-exploration_checks", "0")]),
+    # Shuffled boss drops: picking one up stays a check with obtain checks off.
+    ("bonemass", [("uncheck", "#opt-obtain_checks")]),
 ]
 results, errors = [], []
 with sync_playwright() as p:

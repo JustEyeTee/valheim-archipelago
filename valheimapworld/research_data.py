@@ -247,8 +247,8 @@ RESEARCH_PREREQS = {
     'Northern Crops': ('Frost Foundry',),
 }
 
-# Research -> what it unlocks: equipment, building or material (tools/classify_research.py). Only
-# equipment is locked unless item_sanity is on.
+# Research -> what it unlocks: equipment, building or material (tools/classify_research.py).
+# item_locking decides which kinds are locked (ValheimWorld.free_researches).
 RESEARCH_KIND = {
     'Crafting': 'building',
     'Clubs Tier 1': 'equipment',

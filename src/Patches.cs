@@ -541,6 +541,19 @@ public static class Patches
         }
     }
 
+    // ---------- Shuffled boss drops ----------
+    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.Pickup))]
+    private static class Humanoid_Pickup_BossDrop_Patch
+    {
+        private static bool Prefix(Humanoid __instance, GameObject go, bool autoPickupDelay, ref bool __result)
+        {
+            if (!ValheimRandomizer.Randomized || go == null) return true;
+            if (ArchipelagoExtras.AllowPickup(__instance, go.GetComponent<ItemDrop>(), autoPickupDelay)) return true;
+            __result = false;
+            return false;
+        }
+    }
+
     // ---------- Kill checks ----------
     [HarmonyPatch(typeof(Character), nameof(Character.OnDeath))]
     private static class Character_OnDeath_KillCheck_Patch

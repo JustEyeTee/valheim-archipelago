@@ -47,6 +47,13 @@ Generate both in one room (or one room each) and keep the server console open.
 - [ ] **Co-op, a slot each** (if two players): the first to connect is asked for the world's co-op mode when it loads: pick "A slot each".
       Each player has their own unlocks (one's research doesn't unlock the other's recipes); bundles go to the
       Archipelago Chest each one built. Pass The Elder's trophy around.
+- [ ] **Standard item locking**: walls, beds, the workbench, the club, stone axe, hoe, crude bow and Antler Pickaxe
+  are known from the start; the Forge, Smelter and Charcoal Kiln aren't until their research items arrive (the
+  Forge and Smelter should come from your own early checks).
+- [ ] **Shuffled boss drops**: kill Eikthyr before your Hard Antler arrives. Picking up an antler sends "Obtain:
+  Hard Antler" and says your Hard Antler comes from Archipelago; the other antlers stay on the ground and can't
+  be picked up (with a slot each, the other player can take one for their own check). Once your Hard Antler
+  arrives in the chest, the ones on the ground pick up as usual.
 - [ ] **Farming**: plant carrot seeds with the Cultivator: "Plant: Carrot" is sent.
 - [ ] **Brewing**: brew a Minor Healing Mead and tap it from the Fermenter: "Brew: Minor Healing Mead".
 - [ ] **Dungeons**: open the chest in a Burial Chamber: "Loot: Burial Chamber".

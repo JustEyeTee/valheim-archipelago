@@ -101,14 +101,17 @@ while True:
         _combat.append(world.COMBAT_GATES[_region])
 
 
-def boss_token(token):
-    return f"$kill|{code(world.boss_name(token))}" if token.startswith("kill:") else f"$boss|{code(token)}"
+def boss_token(token, location=None):
+    if token.startswith("kill:"):
+        return f"$kill|{code(world.boss_name(token))}"
+    # Picking up a boss's own drop (Obtain: Hard Antler): see bossdrop() in logic.lua.
+    return f"$bossdrop|{code(token)}" if world.DROP_CHECKS.get(location) == token else f"$boss|{code(token)}"
 
 
 def rule(location):
     name = location.user_friendly_name
     codes = [code(i) for i in region_items[location.region] + list(world.LOCATION_REQS.get(name, ()))]
-    tokens = sorted({boss_token(b) for b in world.LOCATION_BOSSES[name] | region_bosses[location.region]})
+    tokens = sorted({boss_token(b, name) for b in world.LOCATION_BOSSES[name] | region_bosses[location.region]})
     eras = region_combat[location.region] + ([world.COMBAT_GATES[name]] if name in world.COMBAT_GATES else [])
     combat = [f"$combat|{code(era)}" for era in dict.fromkeys(eras)]
     comfort = [f"$comfort|{world.comfort_level(name)}"] if name.startswith(world.COMFORT) else []
@@ -211,9 +214,21 @@ function has(item)
   return Tracker:ProviderCountForCode(item) > 0
 end
 
--- A boss's drop: defeated (its trophy check done) or the drop received as an item.
+-- boss_items (the seed's setting, read when autotracking connects): 0 off, 1 bonus, 2 shuffled.
+BOSS_ITEMS = 2
+
+-- A boss's drop: the drop received as an item; with bonus (or a boss without a drop item) defeating it
+-- (its trophy check done) works too, and with off only that.
 function boss(name)
-  return has("boss_" .. name) or (BOSS_DROP[name] ~= nil and has(BOSS_DROP[name]))
+  local drop = BOSS_DROP[name]
+  if drop == nil or BOSS_ITEMS == 0 then return has("boss_" .. name) end
+  if BOSS_ITEMS == 2 then return has(drop) end
+  return has("boss_" .. name) or has(drop)
+end
+
+-- Picking up a boss's own drop: defeating it, or with bonus the received drop out of the Archipelago Chest.
+function bossdrop(name)
+  return has("boss_" .. name) or (BOSS_ITEMS == 1 and BOSS_DROP[name] ~= nil and has(BOSS_DROP[name]))
 end
 
 -- Only defeating it works (Haldor's boss-unlocked stock, Hens).
@@ -300,6 +315,10 @@ function onClear(slot_data)
   if slot_data and slot_data.options and slot_data.options.combat_logic ~= nil then
     COMBAT_MODE = slot_data.options.combat_logic
   end
+  -- Rooms from before the choice sent boss_items as on/off: on was bonus.
+  local boss_items = slot_data and slot_data.options and slot_data.options.boss_items
+  if boss_items == true then boss_items = 1 elseif boss_items == false then boss_items = 0 end
+  BOSS_ITEMS = boss_items or 1
   for _, code in pairs(ITEM_MAPPING) do
     local obj = find(code)
     if obj then obj.Active = false end
@@ -308,7 +327,7 @@ function onClear(slot_data)
     local obj = find(code)
     if obj then obj.Active = false end
   end
-  -- Researches known from the start (everything but equipment, unless item_sanity is on) count as had.
+  -- Researches known from the start (item_locking) count as had.
   for _, name in ipairs((slot_data and slot_data.free_researches) or {}) do
     local obj = find(code_of(name))
     if obj then obj.Active = true end

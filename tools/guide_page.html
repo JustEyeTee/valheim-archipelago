@@ -114,12 +114,15 @@ footer { color: var(--muted); font-size: 0.9rem; }
   <section>
     <h2>Items</h2>
     <ul>
-      <li><strong>Researches</strong> unlock equipment: weapons, armor, shields, capes, tools, ammo and trinkets. Building
-        pieces, crafting stations and materials are yours from the start, unless <code>item_sanity</code> locks them
-        too. With <code>progressive_items</code>, tiered researches come as progressive items (each Progressive Axes
-        unlocks the next axe tier).</li>
+      <li><strong>Researches</strong> unlock gear (weapons, armor, shields, capes, tools, ammo and trinkets) and the
+        stations and boats that open the way on: Forge, Smelter, Karve, Blast Furnace, Galdr Table and so on. Building
+        pieces, furniture, food stations, materials and a basic kit are yours from the start; <code>item_locking</code>
+        can lock only gear (<code>equipment</code>) or everything (<code>item_sanity</code>). Tiered researches come
+        as progressive items (each Progressive Axes unlocks the next axe tier).</li>
       <li><strong>Trophy researches</strong> give permanent boosts.</li>
-      <li><strong>Boss drops</strong> (Hard Antler, Swamp Key, Wishbone...) open the next part of the game without the fight.</li>
+      <li><strong>Boss drops</strong> (Hard Antler, Swamp Key, Wishbone...) are items in the multiworld: picking up the
+        drop a boss leaves sends a check instead, and your own copy comes from Archipelago. With
+        <code>boss_items: bonus</code> the boss drops them as usual too.</li>
       <li><strong>Altar keys</strong>, with <code>boss_altar_keys</code>: a boss's altar takes offerings only once you have its key.</li>
       <li><strong>Maps</strong>: a Map to each boss pins its altar; a Map Fragment uncovers part of the map.</li>
       <li><strong>Tools, resource bundles and boosts</strong> (skill training, blessings), and <strong>Forsaken Relics</strong> in a Relic Hunt.</li>

@@ -42,7 +42,7 @@ What to give to test each feature:
 | Feature | Give | Look for |
 |---|---|---|
 | Traps | `Burning Trap`, `Floor Is Lava Trap`, `Raid Trap`... (`/ap items trap`) | the trap's effect, one every 10 s |
-| Researches | a research's name, e.g. `Bows Tier 1`, `Leather Armor` (with `item_sanity`, also `Smelter`, `Wooden Roofs`) | its recipes and pieces unlocked |
+| Researches | a research's name, e.g. `Bows Tier 2`, `Leather Armor` (standard also `Smelter`, `Forge`; with `item_sanity`, also `Wooden Roofs`) | its recipes and pieces unlocked |
 | Progressive items | `Progressive Axes` (several times) | each copy unlocks the next tier |
 | Altar keys | `Eikthyr's Altar Key` | the altar takes offerings only after |
 | Maps | `Map to Eikthyr`, `Map Fragment` | the altar pinned; fog cleared on the map |

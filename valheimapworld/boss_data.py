@@ -315,4 +315,5 @@ CHECK_BOSSES = {
     'Brew: Mead of Troll Endurance': ('Eikthyr',),
     'Brew: Draught of Vananidir': ('Eikthyr',),
     'Brew: Brew of Animal Whispers': ('Eikthyr',),
+    'Obtain: Swamp Key': ('The Elder',),
 }

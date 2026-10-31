@@ -62,6 +62,7 @@ internal static class ArchipelagoConnection
         LoadProgressive(slotData);
         LoadFreeResearches(slotData);
         LoadSkillChecks(slotData);
+        LoadBossDrops(slotData);
         ArchipelagoLogic.Load(slotData);
         altarKeys = slotData != null && slotData.TryGetValue("boss_altar_keys", out var keys) && keys is bool on && on;
         if (!ArchipelagoGoal.HasConditions) ValheimRandomizer.Log.LogInfo("[AP] Goal: pick up " + GoalTrophy);
@@ -153,7 +154,29 @@ internal static class ArchipelagoConnection
 
     public static System.Collections.Generic.IEnumerable<string> ProgressiveNames => Progressive.Keys;
 
-    // Researches known from the start in this seed (everything but equipment, unless item_sanity is on): unlocked
+    // boss_items shuffled: boss drop prefab -> its item. Picking one up sends its check instead of keeping it,
+    // until the item is received (ArchipelagoExtras.AllowPickup). Empty otherwise, and for older rooms.
+    public static readonly System.Collections.Generic.Dictionary<string, string> ShuffledBossDrops =
+        new System.Collections.Generic.Dictionary<string, string>();
+
+    private static void LoadBossDrops(System.Collections.Generic.Dictionary<string, object> slotData)
+    {
+        ShuffledBossDrops.Clear();
+        if (slotData == null || !slotData.TryGetValue("shuffled_boss_drops", out var raw) || raw == null) return;
+        try
+        {
+            var drops = raw as Newtonsoft.Json.Linq.JObject ?? Newtonsoft.Json.Linq.JObject.FromObject(raw);
+            foreach (var drop in drops.Properties()) ShuffledBossDrops[drop.Name] = drop.Value.ToObject<string>();
+        }
+        catch (Exception ex)
+        {
+            ValheimRandomizer.Log.LogWarning("[AP] Couldn't read the shuffled boss drops from the slot data: " + ex.Message);
+        }
+        if (ShuffledBossDrops.Count > 0)
+            ValheimRandomizer.Log.LogInfo("[AP] Boss drops come from Archipelago: " + string.Join(", ", ShuffledBossDrops.Values));
+    }
+
+    // Researches known from the start in this seed (item_locking): unlocked
     // once the world is loaded, and their Research Bench recipes hidden. Rooms from before the option send none.
     private static readonly System.Collections.Generic.List<string> FreeResearchIds = new System.Collections.Generic.List<string>();
 
@@ -193,7 +216,7 @@ internal static class ArchipelagoConnection
         }
         RandomizerUtils.SetFreeResearches(hidden);
         ValheimRandomizer.Log.LogInfo(FreeResearchIds.Count > 0
-            ? $"[AP] {FreeResearchIds.Count} researches known from the start (only equipment is locked)"
+            ? $"[AP] {FreeResearchIds.Count} researches known from the start"
             : "[AP] Every research is locked (item-sanity)");
     }
 

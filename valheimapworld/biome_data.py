@@ -542,6 +542,7 @@ LOCATION_BIOMES = {
     'Obtain: Stone': 'Meadows',
     'Obtain: Sulfur': 'AshLands',
     'Obtain: Surtling Core': 'BlackForest',
+    'Obtain: Swamp Key': 'BlackForest',
     'Obtain: Tar': 'Plains',
     'Obtain: Thistle': 'BlackForest',
     'Obtain: Tin': 'BlackForest',
