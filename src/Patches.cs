@@ -405,6 +405,24 @@ public static class Patches
     }
 
     // ---------- Lore and dungeon checks ----------
+    // An Archipelago Chest is marked with its builder's slot, and its hover text says whose it is.
+    [HarmonyPatch(typeof(Piece), nameof(Piece.SetCreator))]
+    private static class Piece_SetCreator_ChestSlot_Patch
+    {
+        private static void Postfix(Piece __instance) => ArchipelagoExtras.OnChestBuilt(__instance);
+    }
+
+    [HarmonyPatch(typeof(Container), nameof(Container.GetHoverText))]
+    private static class Container_GetHoverText_ChestSlot_Patch
+    {
+        private static void Postfix(Container __instance, ref string __result)
+        {
+            if (__result == null || !__instance.name.StartsWith(ArchipelagoExtras.ChestPrefabName, StringComparison.Ordinal)) return;
+            string owner = ArchipelagoExtras.ChestSlot(__instance);
+            if (!string.IsNullOrEmpty(owner)) __result = __result.Replace("Archipelago Chest", $"Archipelago Chest ({owner})");
+        }
+    }
+
     [HarmonyPatch(typeof(RuneStone), nameof(RuneStone.Interact))]
     private static class RuneStone_Interact_Check_Patch
     {

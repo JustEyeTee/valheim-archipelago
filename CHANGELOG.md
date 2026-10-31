@@ -15,6 +15,10 @@ From the first playtest:
 - **Co-op mode is asked for**: the first player connected in a new world picks Shared slot or A slot each in a
   window when the world loads (it was a setting in the connection window, easy to miss, that quietly made the
   world shared). The `CoopMode` config setting is gone.
+- **Archipelago Chests show whose they are** with A slot each: a chest belongs to the slot of whoever built it
+  (its hover text says so, e.g. "Archipelago Chest (Mawff)"), and each player's deliveries go only to their own.
+  Near someone else's chest, the waiting message says to build your own. (Two games adding to one chest could
+  overwrite each other's items, so a chest isn't shared.)
 - **Traps stop once your goal is done**: a finished slot's release sends everything at once, and with Trap Link
   each trap hit both players, one every 10 seconds, for a quarter of an hour. Traps that arrive after your goal
   are counted without firing or going to Trap Link. `/ap clear traps` skips the traps waiting now.

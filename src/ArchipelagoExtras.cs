@@ -593,21 +593,56 @@ public static class ArchipelagoExtras
         if (waiting > 0 && Time.time >= nextReminderTime)
         {
             nextReminderTime = Time.time + ReminderSeconds;
+            string others = chestFull ? null : OthersChestNearby();
             player.Message(MessageHud.MessageType.Center, chestFull
                 ? $"{waiting} Archipelago deliveries waiting: your Archipelago Chest is full"
-                : $"{waiting} Archipelago deliveries waiting: build an Archipelago Chest (Hammer > Randomizer)");
+                : others != null
+                    ? $"{waiting} Archipelago deliveries waiting: that chest is {others}; build your own Archipelago Chest (each slot has its own)"
+                    : $"{waiting} Archipelago deliveries waiting: build an Archipelago Chest (Hammer > Randomizer)");
         }
     }
 
-    // An Archipelago Chest that's loaded; with separate co-op slots, one this player built.
-    private static Container FindChest()
+    // The slot an Archipelago Chest belongs to, kept on the chest when it's built (see OnChestBuilt).
+    public const string ChestSlotKey = "ap_slot";
+
+    // An Archipelago Chest that's loaded; with separate co-op slots, one of this player's slot. Only that
+    // player's game writes to it: two games adding to one chest could overwrite each other's items.
+    private static Container FindChest() => LoadedChests().FirstOrDefault(IsMyChest);
+
+    private static IEnumerable<Container> LoadedChests() =>
+        UnityEngine.Object.FindObjectsByType<Container>(FindObjectsSortMode.None)
+            .Where(c => c && c.name.StartsWith(ChestPrefabName, StringComparison.Ordinal)
+                        && c.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid());
+
+    private static bool IsMyChest(Container chest)
     {
-        long me = Player.m_localPlayer ? Player.m_localPlayer.GetPlayerID() : 0;
-        bool separate = ArchipelagoCoop.IsSeparate;
-        return UnityEngine.Object.FindObjectsByType<Container>(FindObjectsSortMode.None)
-            .FirstOrDefault(c => c && c.name.StartsWith(ChestPrefabName, StringComparison.Ordinal)
-                                 && c.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid()
-                                 && (!separate || (c.GetComponent<Piece>() is Piece piece && piece.GetCreator() == me)));
+        if (!ArchipelagoCoop.IsSeparate) return true;
+        string owner = ChestSlot(chest);
+        // Chests built before they were marked with a slot belong to whoever built them.
+        if (string.IsNullOrEmpty(owner))
+            return chest.GetComponent<Piece>() is Piece piece && Player.m_localPlayer && piece.GetCreator() == Player.m_localPlayer.GetPlayerID();
+        return string.Equals(owner, ArchipelagoCoop.Slot, StringComparison.OrdinalIgnoreCase);
+    }
+
+    public static string ChestSlot(Container chest) =>
+        chest.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid() ? nview.GetZDO().GetString(ChestSlotKey) : "";
+
+    // A new Archipelago Chest belongs to the slot of the player who built it (with separate co-op slots).
+    public static void OnChestBuilt(Piece piece)
+    {
+        if (!piece.name.StartsWith(ChestPrefabName, StringComparison.Ordinal) || !ArchipelagoCoop.IsSeparate) return;
+        if (piece.GetComponent<ZNetView>() is ZNetView nview && nview.IsValid() && nview.IsOwner() && !string.IsNullOrEmpty(ArchipelagoCoop.Slot))
+            nview.GetZDO().Set(ChestSlotKey, ArchipelagoCoop.Slot);
+    }
+
+    // Shown when deliveries wait and the only chest nearby is someone else's.
+    private static string OthersChestNearby()
+    {
+        if (!ArchipelagoCoop.IsSeparate) return null;
+        var other = LoadedChests().FirstOrDefault(c => !IsMyChest(c));
+        if (other == null) return null;
+        string owner = ChestSlot(other);
+        return string.IsNullOrEmpty(owner) ? "another player's" : owner + "'s";
     }
 
     private static bool Deliver(Container chest, string prefabName, int amount, out bool full)

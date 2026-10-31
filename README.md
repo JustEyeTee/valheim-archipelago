@@ -89,7 +89,8 @@ Each world has a co-op mode: the first player connected in a new world is asked 
   installed and without connecting. Their researches, pickups, kills and other checks are sent by the
   connected player. Traps, boss items and Death Link reach only the connected player.
 - **A slot each**: every player connects to their own slot. Each has their own researches, checks, goal and
-  Archipelago Chest in the same world. Pass boss trophies around so everyone picks them up.
+  Archipelago Chest in the same world: everyone builds their own chest (its hover text shows whose it is).
+  Pass boss trophies around so everyone picks them up.
 
 `/ap status` shows the world's mode.
 
