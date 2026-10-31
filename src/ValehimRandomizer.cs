@@ -129,6 +129,7 @@ public class ValheimRandomizer : BaseUnityPlugin
             time = 0.0f;
             ArchipelagoConnection.TryFlushPendingLocations();
             if (Randomized) ArchipelagoExtras.Tick();
+            RefreshKnown();
         }
     }
 
@@ -177,6 +178,24 @@ public class ValheimRandomizer : BaseUnityPlugin
     {
         Log.LogInfo("Research unlocked: " + research);
         ZoneSystem.instance.SetGlobalKey(ArchipelagoCoop.Scoped(research));
+        refreshKnown = true;
+    }
+
+    // The game only works out which recipes and pieces you know when your inventory changes, so a research that
+    // arrives would stay hidden until you picked something up. On the next tick (once the unlock is in the world),
+    // the lists are rebuilt.
+    private static bool refreshKnown;
+    private static readonly System.Reflection.MethodInfo UpdateKnownRecipes =
+        HarmonyLib.AccessTools.Method(typeof(Player), "UpdateKnownRecipesList");
+    private static readonly System.Reflection.MethodInfo UpdateAvailablePieces =
+        HarmonyLib.AccessTools.Method(typeof(Player), "UpdateAvailablePiecesList");
+
+    private static void RefreshKnown()
+    {
+        if (!refreshKnown || Player.m_localPlayer == null) return;
+        refreshKnown = false;
+        UpdateKnownRecipes?.Invoke(Player.m_localPlayer, null);
+        UpdateAvailablePieces?.Invoke(Player.m_localPlayer, null);
     }
 
     public static void UnlockResearch(string research)
@@ -185,6 +204,9 @@ public class ValheimRandomizer : BaseUnityPlugin
         if (Randomized)
         {
             ArchipelagoConnection.SendLocation(researchToArchipelago[research]);
+            // Crafting a research is a check; what it unlocks comes when the research itself is received.
+            Player.m_localPlayer?.Message(MessageHud.MessageType.Center,
+                $"Research sent to the multiworld: '{researchToArchipelago[research]}' unlocks when you receive it");
         }
         else
         {

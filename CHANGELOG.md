@@ -16,6 +16,9 @@ From the first playtest:
   third of your health); Bat Swarm is 2 bats plus one per boss defeated (6 killed you at spawn over and over);
   the Launch Trap throws you higher; creatures a trap summons leave after 3 minutes or when you die (marked on the
   creature, so this holds across reloads); `/ap clear` removes bats around you.
+- A research you receive shows up in the build and craft menus straight away (the game only refreshed them when
+  your inventory changed, so a workbench stayed hidden until you picked something up). Crafting a research says
+  that it was sent and that the research itself unlocks when you receive it.
 - The Meteor Shower Trap drops meteors anywhere (12-35 m from you, one every 4 seconds for a minute); before, only
   the sky changed, since the game drops its meteors in the Ashlands only.
 - The F8 panel hides while the inventory, the menu, a store or the map is open.
