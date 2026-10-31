@@ -228,7 +228,13 @@ public static class ArchipelagoExtras
             return;
         }
         var container = clone.GetComponent<Container>();
-        if (container) container.m_name = "Archipelago Chest";
+        if (container)
+        {
+            container.m_name = "Archipelago Chest";
+            // 32 stacks (a Black Metal Chest's size) instead of the wooden chest's 10: deliveries pile up fast.
+            container.m_width = 8;
+            container.m_height = 4;
+        }
 
         var pieceCfg = new PieceConfig
         {
