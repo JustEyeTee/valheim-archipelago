@@ -57,8 +57,8 @@ jobs:
       - name: Network test
         run: AP_DIR="$GITHUB_WORKSPACE/archipelago" valheim-archipelago/tools/net_test.sh
 
-  # A tag like v0.15.0 drafts a GitHub Release with the APWorld and the PopTracker pack. The mod zip (built
-  # locally with ./build.sh) is added to the draft by hand before publishing.
+  # A tag like v0.15.0 drafts a GitHub Release with the APWorld and the PopTracker pack. The mod zips (built
+  # locally with ./build.sh and tools/make_client_pack.sh) are added to the draft by hand before publishing.
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: test
@@ -69,9 +69,16 @@ jobs:
       - uses: actions/checkout@v7
       - name: Package the APWorld and the PopTracker pack
         run: APWORLD_ONLY=1 ./build.sh
+      # Notes from docs/releases/<tag>.md when there is one; a tag with a hyphen (v0.21.1-playtest1) is a pre-release.
+      - name: Release notes
+        run: |
+          notes="docs/releases/${GITHUB_REF_NAME}.md"
+          if [ -f "$notes" ]; then cp "$notes" release-notes.md; else echo "See [CHANGELOG.md](CHANGELOG.md)." > release-notes.md; fi
       - uses: softprops/action-gh-release@v3
         with:
           draft: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          body_path: release-notes.md
           files: |
             dist/valheimapworld-*.apworld
             dist/ValheimArchipelagoPopTracker-*.zip
